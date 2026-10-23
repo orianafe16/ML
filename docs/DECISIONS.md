@@ -60,6 +60,44 @@ can be defended orally. Decisions taken in later stages are appended to the corr
 | Hierarchical clustering with Jaccard reported as a negative result; Ward on Euclidean used for the comparison with k-means | With Jaccard, the 67 patients without mutations are at distance 1 from all others; complete linkage ties at 1 and gives a single cluster, average/single linkage chain and isolate the 67 | Notebook 03, section 5 |
 | Clusters compared with the grade by ARI and NMI; diagnosis shown only descriptively | ARI is corrected for chance; NMI is a complementary information-based measure | — |
 
+## Stage 4 — Regression (age at diagnosis)
+
+| Decision | Justification | Source |
+|---|---|---|
+| Predictors: gender, race (one-hot) and the 20 genes; no grade | Decision taken at the start; the question is what the clinical/mutation profile alone explains | Problem definition |
+| Models from simple to flexible: mean baseline, OLS, Ridge, Lasso, tree, random forest, XGBoost, SVR | Covers the course chapters (3, 6, 8, 9) and gives a trivial reference | Chap3, Chap6, Chap8, Chap9 |
+| Inner selection criterion RMSE; reported MAE, RMSE, R² | RMSE matches the squared-error loss of most models; MAE is easier to interpret in years; R² compares with the mean baseline | Chap3 (RSE, R², MAE) |
+| Plain shuffled `KFold` (10 outer, 3 inner) | Stratification by class does not apply to a continuous target | — |
+| Metrics on pooled out-of-fold predictions with bootstrap CIs (same resamples for every model); fold mean ± SD also reported | Pooled predictions use all 839 patients for one estimate; fold SD shows the variability between test sets | Chap5 (bootstrap) |
+| Overlapping 95% intervals → no winner; paired bootstrap difference reported as a complement | Rule decided before the analysis; the paired difference is more sensitive because both models are evaluated on the same resampled patients | — |
+| Small grids (11 to 27 configurations per model) | 839 patients; the goal is a sound comparison; nested CV multiplies the cost by 30 | — |
+| Linear models and SVR on standardised inputs; trees unscaled | Penalties and kernels depend on the scale of the inputs; trees do not | Weekly summary 23 Oct 2026 (trees work with any predictors) |
+| Regression tree limited by `max_depth` / `min_samples_leaf` (pre-pruning); classification tree pruned by `ccp_alpha` | Both control tree size; using the two approaches shows both | Chap8; weekly summary 23 Oct 2026 |
+| Final models = the same GridSearchCV (3 folds) applied once to all patients | The nested CV estimates the performance of the procedure; the final model applies that procedure | Example_ExtrOSA_ModelTuning_NestedLoop.ipynb |
+| OLS interpreted with statsmodels on unscaled 0/1 predictors (coefficients in years), white as race reference | Coefficient = difference in mean age, other predictors fixed; p-values adjusted with BH | Chap3 |
+| Residual diagnostics: residuals vs fitted, Q–Q, scale-location, Cook's distance, Breusch–Pagan, Shapiro | The six "potential problems" of Chapter 3 | Chap3 |
+| One patient with leverage 1 (the only American Indian / Alaska Native) reported and excluded from the diagnostic plots | Its fit is exact, so Cook's distance is undefined (0/0); keeping the category keeps the same predictors as the CV models | Chap3 (high-leverage points) |
+| Permutation importance on the outer test folds | Importance on unseen patients, comparable between models | — |
+| Out-of-fold predictions coloured by grade (not an input) | Shows that the models mostly recover the grade through IDH1/IDH2/ATRX | — |
+
+## Stage 5 — Classification (LGG vs GBM)
+
+| Decision | Justification | Source |
+|---|---|---|
+| Predictors: age, gender, race and the 20 genes; `Project` and `Primary_Diagnosis` excluded (asserted in the notebook) | Both encode the grade (leakage demonstrated in notebook 02: AUC = 1.000 with the diagnosis) | EDA notebook, section 3.2 |
+| GBM as positive class | Sensitivity = share of GBM (the more aggressive tumour) detected | — |
+| Stratified outer (10) and inner (3) folds | Same class proportions in every fold | EDA notebook (stratified CV) |
+| Inner selection criterion ROC-AUC; also reported: balanced accuracy, sensitivity, specificity, accuracy at threshold 0.5 | AUC does not depend on the threshold; accuracy alone hides the trade-off and the class imbalance | EDA notebook, section 9.2 |
+| Bootstrap CIs stratified by class | Each resample keeps the class sizes, as the folds do | — |
+| Logistic regression with the penalty type (L1/L2) as a hyperparameter | Both regularisations of Chapter 6 compared inside the same nested CV | Chap6 |
+| Naive Bayes as BernoulliNB with age cut into quantile bins (bins tuned) | All predictors become binary, so the Bernoulli model applies to every column; Gaussian NB would treat 0/1 mutations as normal variables | — |
+| Classification tree post-pruned with cost-complexity pruning (`ccp_alpha` and Gini/entropy tuned) | "A tree must be pruned to avoid overfitting"; impurity measures Gini or deviance | Weekly summary 23 Oct 2026 (Chap8) |
+| SVM with linear and RBF kernels in the same grid; `probability=True` (Platt scaling) | AUC needs a score; kernels and C/gamma are the hyperparameters highlighted in the course | Weekly summary 23 Oct 2026 (Chap9) |
+| Threshold kept at 0.5; trade-off curve shown but no threshold tuned | Tuning the threshold on the same out-of-fold predictions would bias the reported metrics | — |
+| Logistic coefficients read from the penalised final model, no unpenalised p-values | Mutations present only in LGG (e.g. NOTCH1) cause quasi-complete separation, with infinite maximum-likelihood coefficients | Notebook 02, section 4.2 |
+| Flatness of the final inner-CV surface reported | Explains why the final hyperparameters may differ from those chosen in the outer folds | — |
+| Tree nodes recoloured with the project colours | sklearn's default paints class 0 (LGG) orange, the opposite of the project convention | — |
+
 ## Validation protocol
 
 | Decision | Justification | Source |

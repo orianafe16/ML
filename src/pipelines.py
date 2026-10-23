@@ -33,3 +33,26 @@ def make_preprocessor(columns, scale=True):
         onehot = OneHotEncoder(handle_unknown="ignore", sparse_output=False)
         transformers.append(("nominal", make_pipeline(onehot, StandardScaler()) if scale else onehot, nominal))
     return ColumnTransformer(transformers, verbose_feature_names_out=False)
+
+
+RACE_NAMES = {"Race_0": "Race_white", "Race_1": "Race_black", "Race_2": "Race_asian", "Race_3": "Race_native"}
+
+
+def readable_names(names):
+    """Replace encoder names by readable ones: Race_0 ... Race_3 -> race labels, and the age bins
+    of the Naive Bayes discretiser (Age_at_diagnosis_0.0 ...) -> 'Age bin 1 (youngest)' ..."""
+    import re
+    out = []
+    for n in names:
+        m = re.fullmatch(r"Age_at_diagnosis_(\d+)\.0", n)
+        out.append(f"Age bin {int(m.group(1)) + 1}" if m else RACE_NAMES.get(n, n))
+    return out
+
+
+def format_value(v):
+    """Short, readable representation of a hyperparameter value (for tables)."""
+    if hasattr(v, "item"):
+        v = v.item()
+    if isinstance(v, float):
+        return f"{v:.4g}"
+    return str(v)

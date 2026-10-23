@@ -127,3 +127,65 @@ Entry format:
 - **Negative result reported, not hidden:** hierarchical clustering with Jaccard distance
   degenerates (one cluster with complete linkage; a cluster of the 67 patients without mutations
   with average/single linkage).
+
+## Stage 4 — Regression (2026-10-23)
+
+- **Request:** notebook `04_regression` with nested CV (10 outer / 3 inner folds, GridSearchCV),
+  mean baseline, linear regression (VIF, residuals), Ridge, Lasso, visualised tree, random forest,
+  XGBoost and SVR; bootstrap intervals and the overlap rule; final models refitted on all data.
+- **What the AI produced:** `src/models.py` (pipelines and grids), nested CV, final-model fitting,
+  bootstrap comparison and paired differences in `src/evaluation.py`, `notebooks/04_regression.ipynb`.
+- **Verification:** grids timed before fixing them; full run in a clean copy; every figure
+  inspected; the author's run is compared value by value with the AI's run.
+- **Errors found by the AI in its own first version (fixed before delivery):**
+  1. **Cook's distance = NaN**, so the summary reported "max Cook's distance = nan". Cause: the only
+     American Indian / Alaska Native patient has leverage exactly 1 (a one-hot column that is 1
+     for a single patient), so the model fits that patient exactly and the standardised residual is
+     0/0 (statsmodels warned "invalid value encountered in sqrt"). Fixed by detecting leverage-1
+     patients, reporting them and excluding them from the diagnostics. **Bounty candidate:** a good
+     example of a silent statistical problem (a NaN that `max()` propagated and the plot dropped
+     without warning) linked to course theory on high-leverage points.
+  2. Hyperparameter grids printed as `np.float64(0.0316)` and chosen values with 16 decimals
+     (NumPy 2 representation); fixed with a formatting helper.
+  3. The Lasso path used matplotlib's default colours instead of the project palette, and the
+     tree figure had unreadable text; both fixed.
+- **Point for the defense:** with the grade excluded, the models still reach R² ≈ 0.4 mainly
+  through IDH1/IDH2/ATRX, and their predictions correlate strongly with the grade: the regression
+  partly recovers the grade through the mutations. This is not leakage, but it limits what the
+  coefficients mean.
+
+## Stage 5 — Classification (2026-10-23)
+
+- **Request:** notebook `05_classification` with the same nested CV (stratified), logistic
+  regression (L1/L2), Naive Bayes, pruned and visualised tree, random forest, XGBoost and SVM;
+  AUC, sensitivity and specificity with bootstrap intervals.
+- **What the AI produced:** classification pipelines and grids in `src/models.py`,
+  `classification_metrics` and `search_flatness` in `src/evaluation.py`, `recolor_tree` in
+  `src/plotting.py`, `notebooks/05_classification.ipynb`.
+- **Verification:** full run in a clean copy; every figure inspected; the order of the tree node
+  boxes was checked against the node sample counts before recolouring them.
+- **Errors and issues found by the AI (fixed or documented before delivery):**
+  1. **Inverted class colours in the tree plot.** `plot_tree(filled=True)` paints class 0 (LGG) in
+     orange and class 1 (GBM) in blue, the opposite of every other figure, so a reader would
+     misread the leaves. Fixed by recolouring the boxes. **Bounty candidate:** a silent,
+     convention-level error that only visual cross-checking reveals.
+  2. Grid table showed `age` instead of `age__n_bins` (the parameter name was split at the first
+     `__`); fixed.
+  3. Pruning-path plot showed a negative range of `ccp_alpha` (symmetric log axis); fixed.
+  4. **Documented, not an error:** the final logistic search on all patients chose C = 100 (almost
+     no penalty), a value no outer fold chose; the inner-CV surface is flat (see the flatness table),
+     and with weak penalty NOTCH1, mutated only in LGG patients, gets a large coefficient
+     (quasi-separation). The interpretation must not rely on that coefficient's size.
+  5. **Documented:** the pooled AUC of the constant baseline is 0.496, not 0.5, because the
+     constant probability differs slightly between folds.
+  6. **Non-reproducible logistic regression.** Two runs of the notebook chose different
+     penalties/C in the outer folds. Cause: `LogisticRegression(solver="liblinear")` shuffles the
+     data internally and its `random_state` had not been set, although the project fixes seed 42
+     everywhere. Detected by comparing two runs of the AI's own notebook; fixed by passing
+     `random_state=42` and checked by running the nested CV twice (identical out-of-fold
+     probabilities). **Bounty candidate:** strong — a reproducibility failure that a single run
+     cannot reveal.
+  7. **Wrong rule in the tree figure.** With `precision=0`, `plot_tree` rounded the split threshold
+     0.5 to "IDH1 <= 0.0", a rule that reads as false (IDH1 takes values 0 or 1, and the split is
+     0 vs 1). Detected by reading the figure against `export_text`; fixed with one decimal.
+     **Bounty candidate:** a visualisation that silently states a wrong rule.

@@ -1,0 +1,14 @@
+\begin{tabular}{p{4.5cm}p{10.5cm}}
+\toprule
+\textbf{Topic} & \textbf{Finding} \\
+\midrule
+Majority baseline & AUC 0.496 [0.464, 0.528], accuracy 0.580 [0.580, 0.580] \\
+Highest AUC & Random forest: AUC 0.916 [0.896, 0.934], balanced accuracy 0.877 [0.855, 0.899], sensitivity 0.915 [0.886, 0.943], specificity 0.840 [0.807, 0.873] \\
+Models tied with it (overlapping AUC intervals) & Logistic regression, Naive Bayes, Decision tree (pruned), XGBoost, SVM \\
+Paired AUC differences vs the best & Logistic regression: -0.003 [-0.013, +0.008]; Naive Bayes: -0.016 [-0.028, -0.005]; Decision tree (pruned): -0.026 [-0.042, -0.010]; XGBoost: -0.003 [-0.010, +0.005]; SVM: -0.015 [-0.028, -0.002] \\
+Logistic regression (final) & \{'C': 100.0, 'penalty': 'l1'\}; 0 coefficients set to 0; strongest: IDH1 -2.05, NOTCH1 -2.01, Age\_at\_diagnosis +0.61 \\
+Pruned tree (final) & \{'ccp\_alpha': 0.01, 'criterion': 'entropy'\}; depth 3, 6 leaves \\
+Most important predictors (permutation) & IDH1 (0.262), Age\_at\_diagnosis (0.016), TP53 (0.007) \\
+Extreme probabilities (< 0.02 or > 0.98) & Naive Bayes 0.66, logistic regression 0.10 \\
+\bottomrule
+\end{tabular}

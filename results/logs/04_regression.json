@@ -1,0 +1,1715 @@
+{
+  "stage": "04_regression",
+  "timestamp": "2026-10-23T20:37:22",
+  "seed": 42,
+  "features": [
+    "Gender",
+    "Race",
+    "IDH1",
+    "TP53",
+    "ATRX",
+    "PTEN",
+    "EGFR",
+    "CIC",
+    "MUC16",
+    "PIK3CA",
+    "NF1",
+    "PIK3R1",
+    "FUBP1",
+    "RB1",
+    "NOTCH1",
+    "BCOR",
+    "CSMD3",
+    "SMARCA4",
+    "GRIN2A",
+    "IDH2",
+    "FAT4",
+    "PDGFRA"
+  ],
+  "n": 839,
+  "summary": [
+    {
+      "Model": "Mean baseline",
+      "MAE": 13.225507991009605,
+      "MAE CI low": 12.642575162668688,
+      "MAE CI high": 13.801417634547393,
+      "RMSE": 15.71021391857283,
+      "RMSE CI low": 15.1285414996407,
+      "RMSE CI high": 16.264321680688216,
+      "R2": -0.002197835339871279,
+      "R2 CI low": -0.007927277833205914,
+      "R2 CI high": -0.0010164475889093306,
+      "MAE fold mean": 13.226477203167764,
+      "MAE fold SD": 1.1410309118713264,
+      "RMSE fold mean": 15.675927878830759,
+      "RMSE fold SD": 1.0956909471292198,
+      "R2 fold mean": -0.011547829430216861,
+      "R2 fold SD": 0.01054506074581686
+    },
+    {
+      "Model": "Linear regression",
+      "MAE": 9.824254529842682,
+      "MAE CI low": 9.289414462128379,
+      "MAE CI high": 10.349439709368665,
+      "RMSE": 12.412468803713463,
+      "RMSE CI low": 11.78460097566068,
+      "RMSE CI high": 13.043278943305479,
+      "R2": 0.3743872327806922,
+      "R2 CI low": 0.3125357396477484,
+      "R2 CI high": 0.42849484535243193,
+      "MAE fold mean": 9.822845387653581,
+      "MAE fold SD": 0.9207054748425294,
+      "RMSE fold mean": 12.379318877624922,
+      "RMSE fold SD": 0.9379549453968492,
+      "R2 fold mean": 0.36340869240560547,
+      "R2 fold SD": 0.09213383085057124
+    },
+    {
+      "Model": "Ridge",
+      "MAE": 9.835032900957103,
+      "MAE CI low": 9.305132879471534,
+      "MAE CI high": 10.349480117181571,
+      "RMSE": 12.384940030116825,
+      "RMSE CI low": 11.764081164936874,
+      "RMSE CI high": 12.994962477033003,
+      "R2": 0.37715916386964954,
+      "R2 CI low": 0.319064054592165,
+      "R2 CI high": 0.42878843885262835,
+      "MAE fold mean": 9.833809510025668,
+      "MAE fold SD": 0.9294872282329009,
+      "RMSE fold mean": 12.351688505084315,
+      "RMSE fold SD": 0.9404194220013747,
+      "R2 fold mean": 0.36715849816668344,
+      "R2 fold SD": 0.0847245012404667
+    },
+    {
+      "Model": "Lasso",
+      "MAE": 9.833548577439622,
+      "MAE CI low": 9.304506784066335,
+      "MAE CI high": 10.339004875707449,
+      "RMSE": 12.34599597554201,
+      "RMSE CI low": 11.733358814651467,
+      "RMSE CI high": 12.943923154923862,
+      "R2": 0.38107001227466175,
+      "R2 CI low": 0.32813347738963367,
+      "R2 CI high": 0.42695676740490374,
+      "MAE fold mean": 9.832331888023385,
+      "MAE fold SD": 0.8872277316314416,
+      "RMSE fold mean": 12.314565604844919,
+      "RMSE fold SD": 0.9107694801359826,
+      "R2 fold mean": 0.37257708398821554,
+      "R2 fold SD": 0.06753564992369601
+    },
+    {
+      "Model": "Decision tree",
+      "MAE": 9.789120093805163,
+      "MAE CI low": 9.244929949281778,
+      "MAE CI high": 10.319859702695908,
+      "RMSE": 12.33348264038331,
+      "RMSE CI low": 11.6946372425263,
+      "RMSE CI high": 12.969668954805886,
+      "R2": 0.3823240145381963,
+      "R2 CI low": 0.3221342879252162,
+      "R2 CI high": 0.4360948024663648,
+      "MAE fold mean": 9.787989912890229,
+      "MAE fold SD": 0.681933284878897,
+      "RMSE fold mean": 12.310346378624098,
+      "RMSE fold SD": 0.7725920780041097,
+      "R2 fold mean": 0.3700960367088577,
+      "R2 fold SD": 0.08654538110318774
+    },
+    {
+      "Model": "Random forest",
+      "MAE": 9.678334675483251,
+      "MAE CI low": 9.154294011662536,
+      "MAE CI high": 10.183035618101206,
+      "RMSE": 12.183148008868088,
+      "RMSE CI low": 11.58111965829769,
+      "RMSE CI high": 12.774909418509377,
+      "R2": 0.3972901297713045,
+      "R2 CI low": 0.3443934969769695,
+      "R2 CI high": 0.4456002768531579,
+      "MAE fold mean": 9.677369376504988,
+      "MAE fold SD": 0.7547196588340119,
+      "RMSE fold mean": 12.160610108639062,
+      "RMSE fold SD": 0.7646970942909488,
+      "R2 fold mean": 0.3869841418402061,
+      "R2 fold SD": 0.07096543688061838
+    },
+    {
+      "Model": "XGBoost",
+      "MAE": 9.750295259023309,
+      "MAE CI low": 9.23011511447802,
+      "MAE CI high": 10.25834684560637,
+      "RMSE": 12.21813188835104,
+      "RMSE CI low": 11.61553995057897,
+      "RMSE CI high": 12.80244623003615,
+      "R2": 0.3938238003141654,
+      "R2 CI low": 0.34362668576016386,
+      "R2 CI high": 0.44015703629173486,
+      "MAE fold mean": 9.749417610606175,
+      "MAE fold SD": 0.8694996091091605,
+      "RMSE fold mean": 12.189486175505543,
+      "RMSE fold SD": 0.8665457390591653,
+      "R2 fold mean": 0.3845042486240844,
+      "R2 fold SD": 0.07101572247475288
+    },
+    {
+      "Model": "SVR",
+      "MAE": 9.804702901911597,
+      "MAE CI low": 9.287505173139321,
+      "MAE CI high": 10.327456178325997,
+      "RMSE": 12.468166252973205,
+      "RMSE CI low": 11.844667452448487,
+      "RMSE CI high": 13.087376914131982,
+      "R2": 0.3687601146723165,
+      "R2 CI low": 0.31097023742303237,
+      "R2 CI high": 0.42012561413506916,
+      "MAE fold mean": 9.80383516248728,
+      "MAE fold SD": 0.8642275832004446,
+      "RMSE fold mean": 12.439232014461643,
+      "RMSE fold SD": 0.8835006314176181,
+      "R2 fold mean": 0.3581010923373543,
+      "R2 fold SD": 0.08237905858734326
+    }
+  ],
+  "best_mae": "Random forest",
+  "ties_mae": [
+    "Linear regression",
+    "Ridge",
+    "Lasso",
+    "Decision tree",
+    "XGBoost",
+    "SVR"
+  ],
+  "best_r2": "Random forest",
+  "ties_r2": [
+    "Linear regression",
+    "Ridge",
+    "Lasso",
+    "Decision tree",
+    "XGBoost",
+    "SVR"
+  ],
+  "paired_mae_differences": [
+    {
+      "Model": "Linear regression",
+      "MAE - baseline": -3.401253461166924,
+      "CI low (baseline)": -3.973187835213736,
+      "CI high (baseline)": -2.8174794020458105,
+      "MAE - Random forest": 0.14591985435943045,
+      "CI low (best)": -0.0273961676579982,
+      "CI high (best)": 0.31936453900653006
+    },
+    {
+      "Model": "Ridge",
+      "MAE - baseline": -3.3904750900525027,
+      "CI low (baseline)": -3.941218842193589,
+      "CI high (baseline)": -2.8248430677833967,
+      "MAE - Random forest": 0.1566982254738516,
+      "CI low (best)": -0.015536858067080623,
+      "CI high (best)": 0.3239887676718536
+    },
+    {
+      "Model": "Lasso",
+      "MAE - baseline": -3.3919594135699835,
+      "CI low (baseline)": -3.887170550165515,
+      "CI high (baseline)": -2.8756408232459445,
+      "MAE - Random forest": 0.15521390195637075,
+      "CI low (best)": -0.01608195525519186,
+      "CI high (best)": 0.32049648132435055
+    },
+    {
+      "Model": "Decision tree",
+      "MAE - baseline": -3.436387897204442,
+      "CI low (baseline)": -4.00093749974778,
+      "CI high (baseline)": -2.8553703527702754,
+      "MAE - Random forest": 0.11078541832191213,
+      "CI low (best)": -0.04332155672089639,
+      "CI high (best)": 0.26482460731359037
+    },
+    {
+      "Model": "Random forest",
+      "MAE - baseline": -3.5471733155263543,
+      "CI low (baseline)": -4.0909537246512535,
+      "CI high (baseline)": -3.0013749482111933,
+      "MAE - Random forest": 0.0,
+      "CI low (best)": 0.0,
+      "CI high (best)": 0.0
+    },
+    {
+      "Model": "XGBoost",
+      "MAE - baseline": -3.4752127319862964,
+      "CI low (baseline)": -3.9911937047369093,
+      "CI high (baseline)": -2.9497736463538984,
+      "MAE - Random forest": 0.07196058354005785,
+      "CI low (best)": -0.05667641308287247,
+      "CI high (best)": 0.19594999243772454
+    },
+    {
+      "Model": "SVR",
+      "MAE - baseline": -3.4208050890980086,
+      "CI low (baseline)": -3.999945782911106,
+      "CI high (baseline)": -2.852475925263485,
+      "MAE - Random forest": 0.12636822642834566,
+      "CI low (best)": -0.05465896568638224,
+      "CI high (best)": 0.3102614627066156
+    }
+  ],
+  "hyperparameters": [
+    {
+      "Model": "Ridge",
+      "Hyperparameter": "alpha",
+      "Values chosen in the 10 outer folds": "31.62 (9), 100 (1)",
+      "Final model (all data)": "31.62"
+    },
+    {
+      "Model": "Lasso",
+      "Hyperparameter": "alpha",
+      "Values chosen in the 10 outer folds": "1 (6), 0.3162 (4)",
+      "Final model (all data)": "0.3162"
+    },
+    {
+      "Model": "Decision tree",
+      "Hyperparameter": "max_depth",
+      "Values chosen in the 10 outer folds": "3 (5), 2 (2), 4 (2), 8 (1)",
+      "Final model (all data)": "3"
+    },
+    {
+      "Model": "Decision tree",
+      "Hyperparameter": "min_samples_leaf",
+      "Values chosen in the 10 outer folds": "5 (5), 10 (5)",
+      "Final model (all data)": "5"
+    },
+    {
+      "Model": "Random forest",
+      "Hyperparameter": "max_features",
+      "Values chosen in the 10 outer folds": "0.33 (8), 0.66 (2)",
+      "Final model (all data)": "0.33"
+    },
+    {
+      "Model": "Random forest",
+      "Hyperparameter": "min_samples_leaf",
+      "Values chosen in the 10 outer folds": "5 (10)",
+      "Final model (all data)": "5"
+    },
+    {
+      "Model": "XGBoost",
+      "Hyperparameter": "n_estimators",
+      "Values chosen in the 10 outer folds": "100 (10)",
+      "Final model (all data)": "100"
+    },
+    {
+      "Model": "XGBoost",
+      "Hyperparameter": "learning_rate",
+      "Values chosen in the 10 outer folds": "0.03 (10)",
+      "Final model (all data)": "0.03"
+    },
+    {
+      "Model": "XGBoost",
+      "Hyperparameter": "max_depth",
+      "Values chosen in the 10 outer folds": "2 (8), 3 (2)",
+      "Final model (all data)": "2"
+    },
+    {
+      "Model": "SVR",
+      "Hyperparameter": "C",
+      "Values chosen in the 10 outer folds": "10 (10)",
+      "Final model (all data)": "10"
+    },
+    {
+      "Model": "SVR",
+      "Hyperparameter": "epsilon",
+      "Values chosen in the 10 outer folds": "5 (4), 2 (3), 0.5 (3)",
+      "Final model (all data)": "5"
+    },
+    {
+      "Model": "SVR",
+      "Hyperparameter": "gamma",
+      "Values chosen in the 10 outer folds": "0.01 (10)",
+      "Final model (all data)": "0.01"
+    }
+  ],
+  "final_hyperparameters": {
+    "Mean baseline": {},
+    "Linear regression": {},
+    "Ridge": {
+      "alpha": 31.622776601683793
+    },
+    "Lasso": {
+      "alpha": 0.31622776601683794
+    },
+    "Decision tree": {
+      "max_depth": 3,
+      "min_samples_leaf": 5
+    },
+    "Random forest": {
+      "max_features": 0.33,
+      "min_samples_leaf": 5
+    },
+    "XGBoost": {
+      "learning_rate": 0.03,
+      "max_depth": 2,
+      "n_estimators": 100
+    },
+    "SVR": {
+      "C": 10,
+      "epsilon": 5,
+      "gamma": 0.01
+    }
+  },
+  "oof_by_grade_best_model": {
+    "LGG": {
+      "Observed": 43.87492813141684,
+      "Predicted": 45.03885853999528,
+      "Absolute error": 9.41376955375382
+    },
+    "GBM": {
+      "Observed": 60.70375000000001,
+      "Predicted": 58.9439335867437,
+      "Absolute error": 10.044366534239595
+    }
+  },
+  "corr_prediction_grade": 0.7052486843099834,
+  "ols": {
+    "r2_in_sample": 0.41423261358238694,
+    "adj_r2_in_sample": 0.3969618306904671,
+    "f_pvalue": 2.7849149404266907e-78,
+    "intercept": 60.9199025700397,
+    "coefficients": {
+      "IDH1": {
+        "Coefficient (years)": -16.72596881167885,
+        "CI low": -19.397102878197654,
+        "CI high": -14.054834745160047,
+        "p-value": 5.687933779552556e-32,
+        "p BH": 1.3651041070926134e-30
+      },
+      "IDH2": {
+        "Coefficient (years)": -21.043405719196542,
+        "CI low": -26.474805293106083,
+        "CI high": -15.612006145287001,
+        "p-value": 7.86355144075232e-14,
+        "p BH": 9.436261728902786e-13
+      },
+      "ATRX": {
+        "Coefficient (years)": -4.939545692615654,
+        "CI low": -7.455413995348099,
+        "CI high": -2.423677389883208,
+        "p-value": 0.00012543459778908316,
+        "p BH": 0.0010034767823126653
+      },
+      "TP53": {
+        "Coefficient (years)": -2.1195480693497544,
+        "CI low": -4.348183848633321,
+        "CI high": 0.1090877099338119,
+        "p-value": 0.06228841159226765,
+        "p BH": 0.37373046955360595
+      },
+      "PIK3R1": {
+        "Coefficient (years)": 2.909632441945515,
+        "CI low": -0.5395607084070355,
+        "CI high": 6.358825592298066,
+        "p-value": 0.09814229678328627,
+        "p BH": 0.4710830245597741
+      },
+      "MUC16": {
+        "Coefficient (years)": 1.88424771913845,
+        "CI low": -0.7655931951508279,
+        "CI high": 4.534088633427728,
+        "p-value": 0.16316565036286912,
+        "p BH": 0.6526626014514765
+      },
+      "Race_native": {
+        "Coefficient (years)": -13.469902570039553,
+        "CI low": -37.486093563525344,
+        "CI high": 10.546288423446237,
+        "p-value": 0.2712581458672457,
+        "p BH": 0.665659677944979
+      },
+      "GRIN2A": {
+        "Coefficient (years)": -2.668869074659481,
+        "CI low": -7.565500215145083,
+        "CI high": 2.227762065826121,
+        "p-value": 0.2850025111997051,
+        "p BH": 0.665659677944979
+      },
+      "NF1": {
+        "Coefficient (years)": -1.7075690595599489,
+        "CI low": -4.925245112347175,
+        "CI high": 1.5101069932272773,
+        "p-value": 0.29787384257501104,
+        "p BH": 0.665659677944979
+      },
+      "BCOR": {
+        "Coefficient (years)": 2.4347189984084974,
+        "CI low": -2.249003340169047,
+        "CI high": 7.1184413369860415,
+        "p-value": 0.3078624707252514,
+        "p BH": 0.665659677944979
+      },
+      "FUBP1": {
+        "Coefficient (years)": 2.1548693483454358,
+        "CI low": -2.0808235132014357,
+        "CI high": 6.390562209892307,
+        "p-value": 0.31828609664318663,
+        "p BH": 0.665659677944979
+      },
+      "Race_black": {
+        "Coefficient (years)": -1.6138651318767983,
+        "CI low": -4.907598895014127,
+        "CI high": 1.6798686312605307,
+        "p-value": 0.336448706836439,
+        "p BH": 0.665659677944979
+      },
+      "NOTCH1": {
+        "Coefficient (years)": 1.9090005623235815,
+        "CI low": -2.3040989153459464,
+        "CI high": 6.122100039993109,
+        "p-value": 0.37404921415932146,
+        "p BH": 0.665659677944979
+      },
+      "CSMD3": {
+        "Coefficient (years)": -1.9703840068513385,
+        "CI low": -6.939386954305157,
+        "CI high": 2.998618940602481,
+        "p-value": 0.43658782426460085,
+        "p BH": 0.665659677944979
+      },
+      "FAT4": {
+        "Coefficient (years)": 2.059661200627925,
+        "CI low": -3.2256836068086896,
+        "CI high": 7.34500600806454,
+        "p-value": 0.444540078688088,
+        "p BH": 0.665659677944979
+      },
+      "Gender": {
+        "Coefficient (years)": 0.62699710233488,
+        "CI low": -1.0721839047214945,
+        "CI high": 2.3261781093912544,
+        "p-value": 0.4690879300874865,
+        "p BH": 0.665659677944979
+      },
+      "Race_asian": {
+        "Coefficient (years)": -2.3850741784361893,
+        "CI low": -8.884057367354119,
+        "CI high": 4.113909010481741,
+        "p-value": 0.47150893854436016,
+        "p BH": 0.665659677944979
+      },
+      "PTEN": {
+        "Coefficient (years)": 0.8494192330208097,
+        "CI low": -1.639023506074354,
+        "CI high": 3.3378619721159737,
+        "p-value": 0.5030340874100871,
+        "p BH": 0.6707121165467829
+      },
+      "PIK3CA": {
+        "Coefficient (years)": 0.8058377470074282,
+        "CI low": -2.2049467394741447,
+        "CI high": 3.816622233489001,
+        "p-value": 0.599471606635064,
+        "p BH": 0.7572272925916599
+      },
+      "RB1": {
+        "Coefficient (years)": -0.5854961609693965,
+        "CI low": -4.757498295066229,
+        "CI high": 3.5865059731274367,
+        "p-value": 0.783025304724227,
+        "p BH": 0.9184224550184715
+      },
+      "CIC": {
+        "Coefficient (years)": 0.41144185051705695,
+        "CI low": -2.8352858506143006,
+        "CI high": 3.658169551648415,
+        "p-value": 0.8036196481411626,
+        "p BH": 0.9184224550184715
+      },
+      "PDGFRA": {
+        "Coefficient (years)": 0.48516020277177624,
+        "CI low": -4.915844501512355,
+        "CI high": 5.886164907055907,
+        "p-value": 0.8600853361428449,
+        "p BH": 0.9382749121558308
+      },
+      "SMARCA4": {
+        "Coefficient (years)": -0.10943755486588923,
+        "CI low": -4.96347640996911,
+        "CI high": 4.744601300237332,
+        "p-value": 0.9647123920110167,
+        "p BH": 0.9877867984070798
+      },
+      "EGFR": {
+        "Coefficient (years)": -0.021198446787326075,
+        "CI low": -2.7386294432449905,
+        "CI high": 2.696232549670338,
+        "p-value": 0.9877867984070798,
+        "p BH": 0.9877867984070798
+      }
+    },
+    "vif": [
+      {
+        "Feature": "IDH1",
+        "VIF": 2.6087827131103545
+      },
+      {
+        "Feature": "ATRX",
+        "VIF": 1.7774681977112914
+      },
+      {
+        "Feature": "CIC",
+        "VIF": 1.7722378373671734
+      },
+      {
+        "Feature": "TP53",
+        "VIF": 1.7656915829216435
+      },
+      {
+        "Feature": "FUBP1",
+        "VIF": 1.3336990806893878
+      },
+      {
+        "Feature": "PTEN",
+        "VIF": 1.267960581484464
+      },
+      {
+        "Feature": "EGFR",
+        "VIF": 1.2509656851628093
+      },
+      {
+        "Feature": "RB1",
+        "VIF": 1.1573686865089712
+      },
+      {
+        "Feature": "IDH2",
+        "VIF": 1.1519069964268034
+      },
+      {
+        "Feature": "CSMD3",
+        "VIF": 1.1262484743272225
+      },
+      {
+        "Feature": "NOTCH1",
+        "VIF": 1.12407542569177
+      },
+      {
+        "Feature": "NF1",
+        "VIF": 1.11417305993214
+      },
+      {
+        "Feature": "GRIN2A",
+        "VIF": 1.093680546514554
+      },
+      {
+        "Feature": "PDGFRA",
+        "VIF": 1.0908618708429458
+      },
+      {
+        "Feature": "FAT4",
+        "VIF": 1.0907885206470633
+      },
+      {
+        "Feature": "SMARCA4",
+        "VIF": 1.0747370078384693
+      },
+      {
+        "Feature": "BCOR",
+        "VIF": 1.0721146062629
+      },
+      {
+        "Feature": "MUC16",
+        "VIF": 1.0608642151063108
+      },
+      {
+        "Feature": "PIK3CA",
+        "VIF": 1.0545978522103543
+      },
+      {
+        "Feature": "PIK3R1",
+        "VIF": 1.049238843510375
+      },
+      {
+        "Feature": "Race_black",
+        "VIF": 1.03872243333822
+      },
+      {
+        "Feature": "Gender",
+        "VIF": 1.0289212627612851
+      },
+      {
+        "Feature": "Race_asian",
+        "VIF": 1.014959528073305
+      },
+      {
+        "Feature": "Race_native",
+        "VIF": 1.0056067727141966
+      }
+    ],
+    "patients_leverage_1": [
+      "TCGA-HT-A617"
+    ],
+    "max_cooks_distance": 0.06245361205246913,
+    "n_cooks_above_1": 0,
+    "shapiro_residuals_p": 0.02839661322734883,
+    "breusch_pagan_p": 0.02998815596435387
+  },
+  "penalised_coefficients": {
+    "IDH1": {
+      "OLS (standardised)": -8.357273841104462,
+      "Ridge (alpha = 31.6)": -7.6492119561081635,
+      "Lasso (alpha = 0.316)": -7.772380603026977
+    },
+    "IDH2": {
+      "OLS (standardised)": -3.436078404953665,
+      "Ridge (alpha = 31.6)": -3.1690862107768423,
+      "Lasso (alpha = 0.316)": -2.972747717039778
+    },
+    "ATRX": {
+      "OLS (standardised)": -2.1629680562189475,
+      "Ridge (alpha = 31.6)": -2.294692222211777,
+      "Lasso (alpha = 0.316)": -2.210817273326383
+    },
+    "TP53": {
+      "OLS (standardised)": -1.0442672971483111,
+      "Ridge (alpha = 31.6)": -1.187443324270282,
+      "Lasso (alpha = 0.316)": -0.9403626158436093
+    },
+    "PIK3R1": {
+      "OLS (standardised)": 0.7140158916353709,
+      "Ridge (alpha = 31.6)": 0.7149872968805688,
+      "Lasso (alpha = 0.316)": 0.458556582057695
+    },
+    "MUC16": {
+      "OLS (standardised)": 0.6051989686414486,
+      "Ridge (alpha = 31.6)": 0.6163809899797348,
+      "Lasso (alpha = 0.316)": 0.30984411175480825
+    },
+    "FUBP1": {
+      "OLS (standardised)": 0.4854846364946905,
+      "Ridge (alpha = 31.6)": 0.41493554263469556,
+      "Lasso (alpha = 0.316)": 0.21285411643065894
+    },
+    "GRIN2A": {
+      "OLS (standardised)": -0.4710046613783445,
+      "Ridge (alpha = 31.6)": -0.4541533986128076,
+      "Lasso (alpha = 0.316)": -0.07954338663519178
+    },
+    "NF1": {
+      "OLS (standardised)": -0.4628735532732166,
+      "Ridge (alpha = 31.6)": -0.35290064816910816,
+      "Lasso (alpha = 0.316)": -0.0
+    },
+    "BCOR": {
+      "OLS (standardised)": 0.44476273497883245,
+      "Ridge (alpha = 31.6)": 0.42353954066823385,
+      "Lasso (alpha = 0.316)": 0.15762018978773226
+    },
+    "Race_native": {
+      "OLS (standardised)": -0.43082593574730627,
+      "Ridge (alpha = 31.6)": -0.39807692680381557,
+      "Lasso (alpha = 0.316)": -0.12793745758464964
+    },
+    "NOTCH1": {
+      "OLS (standardised)": 0.39696494030784113,
+      "Ridge (alpha = 31.6)": 0.3370081233692924,
+      "Lasso (alpha = 0.316)": 0.08634793958714668
+    },
+    "CSMD3": {
+      "OLS (standardised)": -0.34773532382840194,
+      "Ridge (alpha = 31.6)": -0.3388291787192925,
+      "Lasso (alpha = 0.316)": -0.0
+    },
+    "FAT4": {
+      "OLS (standardised)": 0.3363123568226696,
+      "Ridge (alpha = 31.6)": 0.32404187762629294,
+      "Lasso (alpha = 0.316)": 0.01909195865216636
+    },
+    "PTEN": {
+      "OLS (standardised)": 0.31761236168342133,
+      "Ridge (alpha = 31.6)": 0.45906691322766974,
+      "Lasso (alpha = 0.316)": 0.04941543543740505
+    },
+    "Gender": {
+      "OLS (standardised)": 0.3092908286635232,
+      "Ridge (alpha = 31.6)": 0.28964158802997936,
+      "Lasso (alpha = 0.316)": 0.0
+    },
+    "Race_white": {
+      "OLS (standardised)": 0.27887036787882347,
+      "Ridge (alpha = 31.6)": 0.2580120462410918,
+      "Lasso (alpha = 0.316)": 0.11549822379868557
+    },
+    "PIK3CA": {
+      "OLS (standardised)": 0.2271231802954973,
+      "Ridge (alpha = 31.6)": 0.2501347979137807,
+      "Lasso (alpha = 0.316)": 0.0
+    },
+    "Race_asian": {
+      "OLS (standardised)": -0.17954976432611433,
+      "Ridge (alpha = 31.6)": -0.18709928476264073,
+      "Lasso (alpha = 0.316)": -0.0
+    },
+    "Race_black": {
+      "OLS (standardised)": -0.1612099485658363,
+      "Ridge (alpha = 31.6)": -0.138712944835233,
+      "Lasso (alpha = 0.316)": -0.0
+    },
+    "CIC": {
+      "OLS (standardised)": 0.13940350164333748,
+      "Ridge (alpha = 31.6)": -0.09065553961357088,
+      "Lasso (alpha = 0.316)": 0.0
+    },
+    "RB1": {
+      "OLS (standardised)": -0.12475715898617912,
+      "Ridge (alpha = 31.6)": -0.029633587204947066,
+      "Lasso (alpha = 0.316)": 0.0
+    },
+    "PDGFRA": {
+      "OLS (standardised)": 0.07752567866025852,
+      "Ridge (alpha = 31.6)": 0.1416203283473189,
+      "Lasso (alpha = 0.316)": 0.0
+    },
+    "SMARCA4": {
+      "OLS (standardised)": -0.019313648226922345,
+      "Ridge (alpha = 31.6)": -0.059697892869581916,
+      "Lasso (alpha = 0.316)": -0.0
+    },
+    "EGFR": {
+      "OLS (standardised)": -0.007209718317254982,
+      "Ridge (alpha = 31.6)": 0.1267843043556292,
+      "Lasso (alpha = 0.316)": 0.0
+    }
+  },
+  "lasso_n_zero": 11,
+  "tree": {
+    "params": {
+      "max_depth": 3,
+      "min_samples_leaf": 5
+    },
+    "n_leaves": 8,
+    "depth": 3
+  },
+  "permutation_importance_mean": {
+    "IDH1": {
+      "Lasso": 4.171333566233742,
+      "Random forest": 3.015976089447231,
+      "XGBoost": 4.09942417053471,
+      "SVR": 3.2244044362963526
+    },
+    "IDH2": {
+      "Lasso": 0.5851240024347206,
+      "Random forest": 0.33579605064559653,
+      "XGBoost": 0.5124811048079482,
+      "SVR": 0.47903418700197653
+    },
+    "ATRX": {
+      "Lasso": 0.42272523601313383,
+      "Random forest": 0.6260789606378869,
+      "XGBoost": 0.5456797849973114,
+      "SVR": 0.25879264798256674
+    },
+    "TP53": {
+      "Lasso": 0.051952544615961924,
+      "Random forest": 0.21223446886657588,
+      "XGBoost": 0.16006439857430715,
+      "SVR": 0.13635518728424056
+    },
+    "CIC": {
+      "Lasso": 0.0,
+      "Random forest": 0.18096443437143622,
+      "XGBoost": 0.003732802068119749,
+      "SVR": 0.031021088095086784
+    },
+    "PTEN": {
+      "Lasso": -0.00988612237317474,
+      "Random forest": 0.09859132092710757,
+      "XGBoost": 0.01007241049921925,
+      "SVR": 0.0639838245976049
+    },
+    "PIK3R1": {
+      "Lasso": 0.00799193803091585,
+      "Random forest": 0.015125559172051837,
+      "XGBoost": 0.008010980483168364,
+      "SVR": 0.0341093290056851
+    },
+    "FUBP1": {
+      "Lasso": -0.003234294319352706,
+      "Random forest": 0.02151620953496453,
+      "XGBoost": 0.006786705053347807,
+      "SVR": 0.03110208981252486
+    },
+    "RB1": {
+      "Lasso": -8.261600665631974e-05,
+      "Random forest": 0.0004693239984079868,
+      "XGBoost": 0.012657809872745462,
+      "SVR": 0.041153245833465045
+    },
+    "Gender": {
+      "Lasso": -0.0012411852105511656,
+      "Random forest": 0.03970575684387133,
+      "XGBoost": 0.0013580464394153673,
+      "SVR": 0.009759086294498598
+    },
+    "EGFR": {
+      "Lasso": 0.0,
+      "Random forest": 0.032396283464956696,
+      "XGBoost": 9.289694324644826e-05,
+      "SVR": 0.013111705283959874
+    },
+    "PDGFRA": {
+      "Lasso": -0.004901165385382935,
+      "Random forest": 0.01329278403242384,
+      "XGBoost": 0.0140169746695552,
+      "SVR": 0.017385835525309794
+    },
+    "MUC16": {
+      "Lasso": -0.00021158362561855826,
+      "Random forest": 0.025646728515042787,
+      "XGBoost": -0.003531113151041367,
+      "SVR": 0.01340622518081686
+    },
+    "NOTCH1": {
+      "Lasso": -0.0027061053339789963,
+      "Random forest": 0.00706281024301438,
+      "XGBoost": 0.004592916704446227,
+      "SVR": 0.016895826361710376
+    },
+    "SMARCA4": {
+      "Lasso": 0.0,
+      "Random forest": 0.003746739500935234,
+      "XGBoost": -0.005402532291048434,
+      "SVR": 0.026225190005617537
+    },
+    "PIK3CA": {
+      "Lasso": -0.00025743058690189,
+      "Random forest": 0.011215571708605604,
+      "XGBoost": -0.0021293559598607637,
+      "SVR": 0.011016577280142988
+    },
+    "FAT4": {
+      "Lasso": -0.002388893023540124,
+      "Random forest": 0.0034262804746470013,
+      "XGBoost": 0.0023772390559066636,
+      "SVR": 0.010029044732790275
+    },
+    "BCOR": {
+      "Lasso": -0.0034057061469879462,
+      "Random forest": 0.0002319052609188436,
+      "XGBoost": 0.0020853638476946482,
+      "SVR": 0.01203555359020921
+    },
+    "CSMD3": {
+      "Lasso": -0.0019536820529786067,
+      "Random forest": 0.0013240412206794083,
+      "XGBoost": 0.0005041757909545553,
+      "SVR": -0.003734270993587325
+    },
+    "Race": {
+      "Lasso": 0.000642256514722117,
+      "Random forest": -0.007942140274954318,
+      "XGBoost": -0.0018922155218775497,
+      "SVR": 0.004623124620238739
+    },
+    "GRIN2A": {
+      "Lasso": -0.008519776329964,
+      "Random forest": -0.007403177837521628,
+      "XGBoost": -0.0013764443309774244,
+      "SVR": -0.007220380177999137
+    },
+    "NF1": {
+      "Lasso": -0.0027202458850050172,
+      "Random forest": -0.025177084313685184,
+      "XGBoost": 0.0010148110429037337,
+      "SVR": 6.651899381866361e-05
+    }
+  },
+  "findings": {
+    "Mean baseline": "MAE 13.23 [12.64, 13.80] years, R2 -0.002 [-0.008, -0.001]",
+    "Lowest MAE": "Random forest: MAE 9.68 [9.15, 10.18] years, R2 0.397 [0.344, 0.446]",
+    "Models tied with it (overlapping MAE intervals)": "Linear regression, Ridge, Lasso, Decision tree, XGBoost, SVR",
+    "Improvement over the baseline": "every model: MAE difference CI entirely below 0: True",
+    "Linear regression (in-sample, all data)": "R2 = 0.414; max VIF = 2.61; max Cook's distance = 0.062 (1 patient with leverage 1 excluded)",
+    "Strongest linear effects": "IDH1 -16.7 y, IDH2 -21.0 y, ATRX -4.9 y, TP53 -2.1 y",
+    "Lasso": "alpha = 0.316; 11 of 25 coefficients set to 0",
+    "Decision tree": "depth 3, 8 leaves",
+    "Most important predictor (permutation)": "IDH1 (mean increase in RMSE 3.63 years)",
+    "Link with the grade": "correlation between predicted age (Random forest) and grade = 0.705"
+  },
+  "folds": {
+    "Mean baseline": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 12.035114159571114,
+        "RMSE": 15.166667801105746,
+        "R2": -0.01262397967580231
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 14.710417691579943,
+        "RMSE": 16.967964968737075,
+        "R2": -0.027120210826915736
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 11.100850520340586,
+        "RMSE": 13.442203189311005,
+        "R2": -0.02156616847005699
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 13.083164932198045,
+        "RMSE": 15.830658988154987,
+        "R2": -0.016435597046622563
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 14.39330715862504,
+        "RMSE": 16.83181226673513,
+        "R2": -0.024200213129083714
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 12.226617628508357,
+        "RMSE": 14.331442661076887,
+        "R2": -2.3001144072942736e-05
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 13.273774834437088,
+        "RMSE": 15.899969247938598,
+        "R2": -0.010708939915781812
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 13.497973509933777,
+        "RMSE": 16.108206286592743,
+        "R2": -0.00014925505539475914
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 13.903905392620624,
+        "RMSE": 16.35352243309669,
+        "R2": -0.0009125470572650674
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": NaN,
+        "MAE": 14.03964620386307,
+        "RMSE": 15.826830945558735,
+        "R2": -0.0017383819811727097
+      }
+    ],
+    "Linear regression": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 9.916850881174868,
+        "RMSE": 12.760876161834911,
+        "R2": 0.28314908010839634
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 11.528656562891982,
+        "RMSE": 13.78059265651561,
+        "R2": 0.3225183318190974
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 9.286313332755393,
+        "RMSE": 11.921070530459797,
+        "R2": 0.1965550874264469
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 9.934225299474646,
+        "RMSE": 12.234572377716706,
+        "R2": 0.3929010695440276
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 10.661433814812678,
+        "RMSE": 13.564707514415598,
+        "R2": 0.33481266414524724
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 8.766732669655163,
+        "RMSE": 11.319137857001424,
+        "R2": 0.37618348689944825
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 9.821744810158163,
+        "RMSE": 12.566756414852405,
+        "R2": 0.36863582905449266
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 9.063408669756818,
+        "RMSE": 11.187044941001714,
+        "R2": 0.5176067569516496
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "MAE": 10.608512744857975,
+        "RMSE": 13.108674033630772,
+        "R2": 0.35688144503862496
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": NaN,
+        "MAE": 8.640575090998121,
+        "RMSE": 11.349756288820261,
+        "R2": 0.4848431730686241
+      }
+    ],
+    "Ridge": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": -12.808624496894145,
+        "MAE": 9.711849353287928,
+        "RMSE": 12.52045596841944,
+        "R2": 0.3099061624483904,
+        "alpha": 100.0
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": -12.41957192986237,
+        "MAE": 11.67221651183583,
+        "RMSE": 13.868584388701171,
+        "R2": 0.3138390091595974,
+        "alpha": 31.622776601683793
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": -12.50658656888192,
+        "MAE": 9.216665611975934,
+        "RMSE": 11.799666146697206,
+        "R2": 0.21283635191756256,
+        "alpha": 31.622776601683793
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": -12.707923430485886,
+        "MAE": 9.936328328076199,
+        "RMSE": 12.178364023490994,
+        "R2": 0.39846655135667064,
+        "alpha": 31.622776601683793
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": -12.187800300884192,
+        "MAE": 10.639983813564728,
+        "RMSE": 13.520981309160236,
+        "R2": 0.33909425119782854,
+        "alpha": 31.622776601683793
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": -12.60671831479911,
+        "MAE": 8.781266904235629,
+        "RMSE": 11.229317518571346,
+        "R2": 0.38604450264728785,
+        "alpha": 31.622776601683793
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": -12.560639049031119,
+        "MAE": 9.805607510291841,
+        "RMSE": 12.507852058654167,
+        "R2": 0.3745407639349332,
+        "alpha": 31.622776601683793
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": -12.691934682553203,
+        "MAE": 9.11772564366708,
+        "RMSE": 11.274765382926233,
+        "R2": 0.5100119626309484,
+        "alpha": 31.622776601683793
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": -12.2890037262485,
+        "MAE": 10.649066904768931,
+        "RMSE": 13.168803855655254,
+        "R2": 0.3509679108894238,
+        "alpha": 31.622776601683793
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": -12.57611570627124,
+        "MAE": 8.807384518552588,
+        "RMSE": 11.448094398567106,
+        "R2": 0.47587751548419155,
+        "alpha": 31.622776601683793
+      }
+    ],
+    "Lasso": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": -12.385625795726378,
+        "MAE": 9.64680356355459,
+        "RMSE": 12.573541988983678,
+        "R2": 0.30404183937693485,
+        "alpha": 1.0
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": -12.224412089406338,
+        "MAE": 11.463526050732455,
+        "RMSE": 13.733882384771414,
+        "R2": 0.32710329003592153,
+        "alpha": 0.31622776601683794
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": -12.357567553845959,
+        "MAE": 8.845222556490484,
+        "RMSE": 11.328537504212877,
+        "R2": 0.27444008084059157,
+        "alpha": 1.0
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": -12.417054975710286,
+        "MAE": 10.284879048188937,
+        "RMSE": 12.524289476043792,
+        "R2": 0.3638081917813014,
+        "alpha": 1.0
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": -12.162590714724471,
+        "MAE": 10.676930333616033,
+        "RMSE": 13.391751587949882,
+        "R2": 0.3516673785125386,
+        "alpha": 0.31622776601683794
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": -12.426922650126642,
+        "MAE": 8.874856136815637,
+        "RMSE": 11.143526472284128,
+        "R2": 0.395389804355903,
+        "alpha": 1.0
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": -12.295840830955918,
+        "MAE": 9.724550632554072,
+        "RMSE": 12.499533919384776,
+        "R2": 0.37537238986690014,
+        "alpha": 1.0
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": -12.446526387758366,
+        "MAE": 9.511799827037056,
+        "RMSE": 11.660624214365814,
+        "R2": 0.47590013276545473,
+        "alpha": 1.0
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": -12.182599891594672,
+        "MAE": 10.48322126344581,
+        "RMSE": 12.956376394443643,
+        "R2": 0.3717382441878,
+        "alpha": 0.31622776601683794
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": -12.399336581356616,
+        "MAE": 8.811529467798763,
+        "RMSE": 11.333592106009194,
+        "R2": 0.4863094881588098,
+        "alpha": 0.31622776601683794
+      }
+    ],
+    "Decision tree": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": -12.27043015308451,
+        "MAE": 9.966542713229574,
+        "RMSE": 12.939683667867525,
+        "R2": 0.26291906588592273,
+        "max_depth": 2,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": -12.109341338191621,
+        "MAE": 10.878623596977143,
+        "RMSE": 13.387666586772129,
+        "R2": 0.3606016178078817,
+        "max_depth": 3,
+        "min_samples_leaf": 10
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": -12.337538931654139,
+        "MAE": 9.18626532381089,
+        "RMSE": 11.636778342773296,
+        "R2": 0.2344190574031354,
+        "max_depth": 4,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": -12.257825585523989,
+        "MAE": 9.879291849624561,
+        "RMSE": 12.147423594042154,
+        "R2": 0.40151918809621023,
+        "max_depth": 3,
+        "min_samples_leaf": 10
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": -11.999775069787587,
+        "MAE": 10.521563432149389,
+        "RMSE": 13.088341097146433,
+        "R2": 0.3807125000793832,
+        "max_depth": 8,
+        "min_samples_leaf": 10
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": -12.28977938709582,
+        "MAE": 9.05101951664032,
+        "RMSE": 11.848008797820416,
+        "R2": 0.3165277216328174,
+        "max_depth": 2,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": -12.086245929122134,
+        "MAE": 9.839692585869654,
+        "RMSE": 12.572297075497614,
+        "R2": 0.3680789716334141,
+        "max_depth": 3,
+        "min_samples_leaf": 10
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": -12.34016680200991,
+        "MAE": 9.31061051044792,
+        "RMSE": 11.432902885276977,
+        "R2": 0.4961706312392147,
+        "max_depth": 4,
+        "min_samples_leaf": 10
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": -12.137221573303554,
+        "MAE": 10.406521474891846,
+        "RMSE": 12.895516688713787,
+        "R2": 0.3776266225833912,
+        "max_depth": 3,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": -12.291953136043754,
+        "MAE": 8.839768125260994,
+        "RMSE": 11.154845050330652,
+        "R2": 0.5023849907272068,
+        "max_depth": 3,
+        "min_samples_leaf": 5
+      }
+    ],
+    "Random forest": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": -12.250692568118852,
+        "MAE": 9.763068051051386,
+        "RMSE": 12.612390692583801,
+        "R2": 0.2997345660893801,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": -12.086656604587446,
+        "MAE": 11.133276373715237,
+        "RMSE": 13.335062568198484,
+        "R2": 0.3656165087116243,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": -12.282274975052323,
+        "MAE": 8.92329146190921,
+        "RMSE": 11.445694757103324,
+        "R2": 0.2593553170014887,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": -12.305930565786918,
+        "MAE": 9.541456805637786,
+        "RMSE": 11.83588145743187,
+        "R2": 0.43182372865962726,
+        "max_features": 0.66,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": -12.016396954832578,
+        "MAE": 10.465652708235865,
+        "RMSE": 13.077027077978906,
+        "R2": 0.38178270480650733,
+        "max_features": 0.66,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": -12.338856020408883,
+        "MAE": 8.87285512048554,
+        "RMSE": 11.235717602554399,
+        "R2": 0.3853444625071394,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": -12.191466183166911,
+        "MAE": 9.779032180843505,
+        "RMSE": 12.411009741636732,
+        "R2": 0.3841885332717523,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": -12.342480545181408,
+        "MAE": 9.226570257095025,
+        "RMSE": 11.540804922942797,
+        "R2": 0.4866156202739198,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": -12.137252122842957,
+        "MAE": 10.201007272335298,
+        "RMSE": 12.726693946346792,
+        "R2": 0.393815661206364,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": -12.330222493279615,
+        "MAE": 8.867483533741021,
+        "RMSE": 11.385818319613525,
+        "R2": 0.48156431587425774,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      }
+    ],
+    "XGBoost": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": -12.28136927428926,
+        "MAE": 9.74153689611526,
+        "RMSE": 12.609495956424338,
+        "R2": 0.3000559724109645,
+        "learning_rate": 0.03,
+        "max_depth": 3,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": -12.139322946836137,
+        "MAE": 11.39432296389625,
+        "RMSE": 13.588017643665115,
+        "R2": 0.34132078164634294,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": -12.336237499126907,
+        "MAE": 8.719262235732307,
+        "RMSE": 11.256381956648767,
+        "R2": 0.28365335220984333,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": -12.374482395119722,
+        "MAE": 10.110418604896184,
+        "RMSE": 12.28518563399572,
+        "R2": 0.387867659195242,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": -12.112822374703164,
+        "MAE": 10.675043233235678,
+        "RMSE": 13.108403774847982,
+        "R2": 0.3788124750078422,
+        "learning_rate": 0.03,
+        "max_depth": 3,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": -12.356661066212551,
+        "MAE": 8.887098054431734,
+        "RMSE": 11.253145990808793,
+        "R2": 0.383436126236697,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": -12.262094632515563,
+        "MAE": 9.518667551676433,
+        "RMSE": 12.31415259624574,
+        "R2": 0.39376277427502737,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": -12.410891371550598,
+        "MAE": 9.121951595488047,
+        "RMSE": 11.232982179237306,
+        "R2": 0.5136369310067677,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": -12.175081931459992,
+        "MAE": 10.312804381960913,
+        "RMSE": 12.860329362370468,
+        "R2": 0.381018464483321,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": -12.286186708893673,
+        "MAE": 9.01307058862893,
+        "RMSE": 11.3867666608112,
+        "R2": 0.48147794976879554,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "n_estimators": 100
+      }
+    ],
+    "SVR": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": -12.644133651650614,
+        "MAE": 10.002253473941739,
+        "RMSE": 12.930629425888664,
+        "R2": 0.26395021539784636,
+        "C": 10,
+        "epsilon": 5.0,
+        "gamma": 0.01
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": -12.41699494942349,
+        "MAE": 11.705799908516738,
+        "RMSE": 14.00531898355306,
+        "R2": 0.3002421701455509,
+        "C": 10,
+        "epsilon": 5.0,
+        "gamma": 0.01
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": -12.510195204788431,
+        "MAE": 9.053822131310547,
+        "RMSE": 11.673783772388047,
+        "R2": 0.22954215811647827,
+        "C": 10,
+        "epsilon": 5.0,
+        "gamma": 0.01
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": -12.614458755899834,
+        "MAE": 10.073816575651302,
+        "RMSE": 12.440209456633752,
+        "R2": 0.3723214838998059,
+        "C": 10,
+        "epsilon": 5.0,
+        "gamma": 0.01
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": -12.323875695457504,
+        "MAE": 10.085604152973948,
+        "RMSE": 13.108553590562662,
+        "R2": 0.37879827584424963,
+        "C": 10,
+        "epsilon": 2.0,
+        "gamma": 0.01
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": -12.64195444376965,
+        "MAE": 8.997115678877801,
+        "RMSE": 11.53941686645619,
+        "R2": 0.35166734925665655,
+        "C": 10,
+        "epsilon": 0.5,
+        "gamma": 0.01
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": -12.486502739744651,
+        "MAE": 9.427013191278087,
+        "RMSE": 12.281026070122323,
+        "R2": 0.3970200866956701,
+        "C": 10,
+        "epsilon": 0.5,
+        "gamma": 0.01
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": -12.811395193086865,
+        "MAE": 9.091801444379534,
+        "RMSE": 11.272132920250007,
+        "R2": 0.5102407433806303,
+        "C": 10,
+        "epsilon": 2.0,
+        "gamma": 0.01
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": -12.28192822686674,
+        "MAE": 10.525323282458217,
+        "RMSE": 13.300628789208895,
+        "R2": 0.3379087369914995,
+        "C": 10,
+        "epsilon": 2.0,
+        "gamma": 0.01
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": -12.559070669579027,
+        "MAE": 9.075801785484893,
+        "RMSE": 11.840620269552828,
+        "R2": 0.4393197036451555,
+        "C": 10,
+        "epsilon": 0.5,
+        "gamma": 0.01
+      }
+    ]
+  }
+}

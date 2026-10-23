@@ -79,3 +79,34 @@ def class_legend_handles():
     """Legend handles for the two classes (used when a plot has no automatic legend)."""
     from matplotlib.patches import Patch
     return [Patch(color=LGG_COLOR, label="LGG"), Patch(color=GBM_COLOR, label="GBM")]
+
+
+def recolor_tree(annotations, tree, kind):
+    """Repaint the node boxes drawn by sklearn.tree.plot_tree with the project colours.
+
+    sklearn's default colours do not follow the project convention (for a classifier it paints
+    class 0 in orange). Node ids are assigned in depth-first pre-order, which is also the order in
+    which plot_tree returns its annotations, so annotation i belongs to node i.
+    - kind="classifier": blue (LGG) or orange (GBM) for the majority class, more opaque when the
+      node is purer.
+    - kind="regressor": single-hue blue ramp, darker for a higher predicted value.
+    """
+    import numpy as np
+    from matplotlib.colors import Normalize, to_rgb
+
+    def tint(color, strength):
+        # opaque mix of the colour with white (opaque, so that the arrows do not show through)
+        c = np.array(to_rgb(color))
+        return tuple(1 - strength * (1 - c))
+
+    values = tree.tree_.value[:, 0, :]
+    boxes = [a for a in annotations if a.get_bbox_patch() is not None]
+    if kind == "classifier":
+        p_gbm = values[:, 1] / values.sum(axis=1)
+        for box, p in zip(boxes, p_gbm):
+            base = GBM_COLOR if p >= 0.5 else LGG_COLOR
+            box.get_bbox_patch().set_facecolor(tint(base, 0.15 + 0.6 * abs(p - 0.5) * 2))
+    else:
+        norm = Normalize(values[:, 0].min(), values[:, 0].max())
+        for box, v in zip(boxes, values[:, 0]):
+            box.get_bbox_patch().set_facecolor(tint(SEQUENTIAL(0.15 + 0.55 * norm(v)), 1.0))

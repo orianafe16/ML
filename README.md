@@ -40,7 +40,8 @@ ML/
 │   ├── data.py          loading, cleaning, encoding, feature sets
 │   ├── reporting.py     LaTeX tables and JSON summaries in results/
 │   ├── eda.py           statistical tests and effect sizes for the EDA
-│   ├── evaluation.py    AUC, bootstrap confidence intervals (nested CV in later stages)
+│   ├── evaluation.py    nested CV, final models, metrics, bootstrap CIs, model comparison
+│   ├── models.py        model pipelines and hyperparameter grids (regression, classification)
 │   ├── pipelines.py     preprocessing inside scikit-learn Pipelines
 │   ├── unsupervised.py  PCA, Jaccard MDS / t-SNE, k-means, hierarchical clustering
 │   ├── plotting.py      common figure style and class colours
@@ -72,6 +73,7 @@ Without conda: create a Python 3.11 virtual environment and run `pip install -r 
 
 Open the notebooks in `notebooks/` with the `Python (glioma-ml)` kernel and run them in order
 (01 → 05). All random processes use the seed defined in `src/config.py` (`SEED = 42`).
+Notebooks 04 and 05 run nested cross-validation and take a few minutes each.
 
 ## Methodology in brief
 

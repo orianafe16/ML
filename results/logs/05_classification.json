@@ -1,0 +1,2048 @@
+{
+  "stage": "05_classification",
+  "timestamp": "2026-10-23T20:40:32",
+  "seed": 42,
+  "features": [
+    "Gender",
+    "Age_at_diagnosis",
+    "Race",
+    "IDH1",
+    "TP53",
+    "ATRX",
+    "PTEN",
+    "EGFR",
+    "CIC",
+    "MUC16",
+    "PIK3CA",
+    "NF1",
+    "PIK3R1",
+    "FUBP1",
+    "RB1",
+    "NOTCH1",
+    "BCOR",
+    "CSMD3",
+    "SMARCA4",
+    "GRIN2A",
+    "IDH2",
+    "FAT4",
+    "PDGFRA"
+  ],
+  "n": 839,
+  "n_gbm": 352,
+  "summary": [
+    {
+      "Model": "Majority baseline",
+      "AUC": 0.49557529867463135,
+      "AUC CI low": 0.4637046154564122,
+      "AUC CI high": 0.5278083144717193,
+      "AUC fold mean": 0.5,
+      "AUC fold SD": 0.0,
+      "Balanced accuracy": 0.5,
+      "Balanced accuracy CI low": 0.5,
+      "Balanced accuracy CI high": 0.5,
+      "Balanced accuracy fold mean": 0.5,
+      "Balanced accuracy fold SD": 0.0,
+      "Sensitivity": 0.0,
+      "Sensitivity CI low": 0.0,
+      "Sensitivity CI high": 0.0,
+      "Sensitivity fold mean": 0.0,
+      "Sensitivity fold SD": 0.0,
+      "Specificity": 1.0,
+      "Specificity CI low": 1.0,
+      "Specificity CI high": 1.0,
+      "Specificity fold mean": 1.0,
+      "Specificity fold SD": 0.0,
+      "Accuracy": 0.5804529201430274,
+      "Accuracy CI low": 0.5804529201430274,
+      "Accuracy CI high": 0.5804529201430274,
+      "Accuracy fold mean": 0.5804503729202525,
+      "Accuracy fold SD": 0.0050059221707491625
+    },
+    {
+      "Model": "Logistic regression",
+      "AUC": 0.9131218499159978,
+      "AUC CI low": 0.8931724845995893,
+      "AUC CI high": 0.9324444068508493,
+      "AUC fold mean": 0.9159938181621856,
+      "AUC fold SD": 0.02910788710323606,
+      "Balanced accuracy": 0.8765167071121897,
+      "Balanced accuracy CI low": 0.8548140137903677,
+      "Balanced accuracy CI high": 0.897361877566735,
+      "Balanced accuracy fold mean": 0.8765447845804989,
+      "Balanced accuracy fold SD": 0.036149255904982774,
+      "Sensitivity": 0.9090909090909091,
+      "Sensitivity CI low": 0.8778409090909091,
+      "Sensitivity CI high": 0.9375,
+      "Sensitivity fold mean": 0.9091269841269842,
+      "Sensitivity fold SD": 0.039557563340609336,
+      "Specificity": 0.8439425051334702,
+      "Specificity CI low": 0.8090349075975359,
+      "Specificity CI high": 0.8767967145790554,
+      "Specificity fold mean": 0.8439625850340136,
+      "Specificity fold SD": 0.06249662554328507,
+      "Accuracy": 0.8712753277711561,
+      "Accuracy CI low": 0.8486293206197855,
+      "Accuracy CI high": 0.8927294398092968,
+      "Accuracy fold mean": 0.8712564543889844,
+      "Accuracy fold SD": 0.03927685497180884
+    },
+    {
+      "Model": "Naive Bayes",
+      "AUC": 0.8994248179951465,
+      "AUC CI low": 0.8768689769227179,
+      "AUC CI high": 0.9216043990339742,
+      "AUC fold mean": 0.9037355577151496,
+      "AUC fold SD": 0.03396114051507303,
+      "Balanced accuracy": 0.8740695585215605,
+      "Balanced accuracy CI low": 0.8517356817015119,
+      "Balanced accuracy CI high": 0.8957864709725593,
+      "Balanced accuracy fold mean": 0.8740320294784579,
+      "Balanced accuracy fold SD": 0.034204180285615275,
+      "Sensitivity": 0.90625,
+      "Sensitivity CI low": 0.875,
+      "Sensitivity CI high": 0.9375,
+      "Sensitivity fold mean": 0.9062698412698413,
+      "Sensitivity fold SD": 0.038107085900141835,
+      "Specificity": 0.8418891170431212,
+      "Specificity CI low": 0.8090349075975359,
+      "Specificity CI high": 0.8726899383983573,
+      "Specificity fold mean": 0.841794217687075,
+      "Specificity fold SD": 0.05492450218782428,
+      "Accuracy": 0.8688915375446961,
+      "Accuracy CI low": 0.8462455303933254,
+      "Accuracy CI high": 0.8915375446960667,
+      "Accuracy fold mean": 0.8688898450946644,
+      "Accuracy fold SD": 0.03637307038117117
+    },
+    {
+      "Model": "Decision tree (pruned)",
+      "AUC": 0.8893270487212992,
+      "AUC CI low": 0.8660926999719992,
+      "AUC CI high": 0.9127173703798769,
+      "AUC fold mean": 0.8975283277993737,
+      "AUC fold SD": 0.04048754551877899,
+      "Balanced accuracy": 0.874139560388277,
+      "Balanced accuracy CI low": 0.8526635710285608,
+      "Balanced accuracy CI high": 0.8954627123389957,
+      "Balanced accuracy fold mean": 0.8741751700680271,
+      "Balanced accuracy fold SD": 0.029696940159207035,
+      "Sensitivity": 0.9289772727272727,
+      "Sensitivity CI low": 0.9034090909090909,
+      "Sensitivity CI high": 0.9573863636363636,
+      "Sensitivity fold mean": 0.9290476190476191,
+      "Sensitivity fold SD": 0.03331275084706499,
+      "Specificity": 0.8193018480492813,
+      "Specificity CI low": 0.7863963039014376,
+      "Specificity CI high": 0.8542094455852156,
+      "Specificity fold mean": 0.8193027210884354,
+      "Specificity fold SD": 0.04796786051248263,
+      "Accuracy": 0.865315852205006,
+      "Accuracy CI low": 0.8426698450536353,
+      "Accuracy CI high": 0.8879618593563766,
+      "Accuracy fold mean": 0.8653327596098681,
+      "Accuracy fold SD": 0.0316963428827036
+    },
+    {
+      "Model": "Random forest",
+      "AUC": 0.9157556701512041,
+      "AUC CI low": 0.8955618816501774,
+      "AUC CI high": 0.9342079434618257,
+      "AUC fold mean": 0.9214125263200519,
+      "AUC fold SD": 0.03386536559939785,
+      "Balanced accuracy": 0.8773042281127497,
+      "Balanced accuracy CI low": 0.8554323636130297,
+      "Balanced accuracy CI high": 0.898780217472466,
+      "Balanced accuracy fold mean": 0.8773185941043083,
+      "Balanced accuracy fold SD": 0.030982673556139463,
+      "Sensitivity": 0.9147727272727273,
+      "Sensitivity CI low": 0.8863636363636364,
+      "Sensitivity CI high": 0.9431818181818182,
+      "Sensitivity fold mean": 0.9148412698412699,
+      "Sensitivity fold SD": 0.04017341890013604,
+      "Specificity": 0.839835728952772,
+      "Specificity CI low": 0.8069815195071869,
+      "Specificity CI high": 0.8726899383983573,
+      "Specificity fold mean": 0.8397959183673469,
+      "Specificity fold SD": 0.05361258002652252,
+      "Accuracy": 0.8712753277711561,
+      "Accuracy CI low": 0.8486293206197855,
+      "Accuracy CI high": 0.8939213349225268,
+      "Accuracy fold mean": 0.8712707974756168,
+      "Accuracy fold SD": 0.03312216270352808
+    },
+    {
+      "Model": "XGBoost",
+      "AUC": 0.9130518480492813,
+      "AUC CI low": 0.8927160870123204,
+      "AUC CI high": 0.9319328827935413,
+      "AUC fold mean": 0.917302211559227,
+      "AUC fold SD": 0.033598735447330184,
+      "Balanced accuracy": 0.8783309221579243,
+      "Balanced accuracy CI low": 0.8574878663431025,
+      "Balanced accuracy CI high": 0.899483152884077,
+      "Balanced accuracy fold mean": 0.8783815192743762,
+      "Balanced accuracy fold SD": 0.03604391552651535,
+      "Sensitivity": 0.9147727272727273,
+      "Sensitivity CI low": 0.8835227272727273,
+      "Sensitivity CI high": 0.9431818181818182,
+      "Sensitivity fold mean": 0.9148412698412699,
+      "Sensitivity fold SD": 0.03240076597533569,
+      "Specificity": 0.8418891170431212,
+      "Specificity CI low": 0.8090349075975359,
+      "Specificity CI high": 0.8747433264887063,
+      "Specificity fold mean": 0.841921768707483,
+      "Specificity fold SD": 0.057726760431495834,
+      "Accuracy": 0.8724672228843862,
+      "Accuracy CI low": 0.8510131108462455,
+      "Accuracy CI high": 0.8951132300357568,
+      "Accuracy fold mean": 0.8724612736660928,
+      "Accuracy fold SD": 0.038920323763014186
+    },
+    {
+      "Model": "SVM",
+      "AUC": 0.9008131883516893,
+      "AUC CI low": 0.8777707613869703,
+      "AUC CI high": 0.9215543039481052,
+      "AUC fold mean": 0.9063105698628657,
+      "AUC fold SD": 0.031136075830209924,
+      "Balanced accuracy": 0.8752508400224006,
+      "Balanced accuracy CI low": 0.8531363023847304,
+      "Balanced accuracy CI high": 0.8974318794334515,
+      "Balanced accuracy fold mean": 0.8753571428571428,
+      "Balanced accuracy fold SD": 0.03341668628481095,
+      "Sensitivity": 0.9147727272727273,
+      "Sensitivity CI low": 0.8835227272727273,
+      "Sensitivity CI high": 0.9431818181818182,
+      "Sensitivity fold mean": 0.915,
+      "Sensitivity fold SD": 0.034664060635552316,
+      "Specificity": 0.8357289527720739,
+      "Specificity CI low": 0.8008213552361396,
+      "Specificity CI high": 0.8685831622176592,
+      "Specificity fold mean": 0.8357142857142857,
+      "Specificity fold SD": 0.060995466917946745,
+      "Accuracy": 0.8688915375446961,
+      "Accuracy CI low": 0.8462455303933254,
+      "Accuracy CI high": 0.8915375446960667,
+      "Accuracy fold mean": 0.8688898450946644,
+      "Accuracy fold SD": 0.03680345538216157
+    }
+  ],
+  "best_auc": "Random forest",
+  "ties_auc": [
+    "Logistic regression",
+    "Naive Bayes",
+    "Decision tree (pruned)",
+    "XGBoost",
+    "SVM"
+  ],
+  "best_bacc": "XGBoost",
+  "ties_bacc": [
+    "Logistic regression",
+    "Naive Bayes",
+    "Decision tree (pruned)",
+    "Random forest",
+    "SVM"
+  ],
+  "paired_auc_differences": [
+    {
+      "Model": "Logistic regression",
+      "AUC - Random forest": -0.002633820235206308,
+      "CI low": -0.012874655824155284,
+      "CI high": 0.0076838715699084565
+    },
+    {
+      "Model": "Naive Bayes",
+      "AUC - Random forest": -0.016330852156057563,
+      "CI low": -0.027913317271793928,
+      "CI high": -0.004560986209632266
+    },
+    {
+      "Model": "Decision tree (pruned)",
+      "AUC - Random forest": -0.026428621429904875,
+      "CI low": -0.04229359657924217,
+      "CI high": -0.010357724122643353
+    },
+    {
+      "Model": "Random forest",
+      "AUC - Random forest": 0.0,
+      "CI low": 0.0,
+      "CI high": 0.0
+    },
+    {
+      "Model": "XGBoost",
+      "AUC - Random forest": -0.0027038221019227704,
+      "CI low": -0.010071956085495683,
+      "CI high": 0.005073968639163747
+    },
+    {
+      "Model": "SVM",
+      "AUC - Random forest": -0.01494248179951474,
+      "CI low": -0.028015403327422042,
+      "CI high": -0.0022833004713459643
+    }
+  ],
+  "hyperparameters": [
+    {
+      "Model": "Logistic regression",
+      "Hyperparameter": "penalty",
+      "Values chosen in the 10 outer folds": "l1 (6), l2 (4)",
+      "Final model (all data)": "l1"
+    },
+    {
+      "Model": "Logistic regression",
+      "Hyperparameter": "C",
+      "Values chosen in the 10 outer folds": "0.3162 (3), 1 (3), 0.1 (2), 3.162 (2)",
+      "Final model (all data)": "100"
+    },
+    {
+      "Model": "Naive Bayes",
+      "Hyperparameter": "age__n_bins",
+      "Values chosen in the 10 outer folds": "8 (6), 3 (2), 5 (2)",
+      "Final model (all data)": "8"
+    },
+    {
+      "Model": "Naive Bayes",
+      "Hyperparameter": "alpha",
+      "Values chosen in the 10 outer folds": "0.1 (6), 0.5 (4)",
+      "Final model (all data)": "0.1"
+    },
+    {
+      "Model": "Decision tree (pruned)",
+      "Hyperparameter": "ccp_alpha",
+      "Values chosen in the 10 outer folds": "0.01 (7), 0.02 (3)",
+      "Final model (all data)": "0.01"
+    },
+    {
+      "Model": "Decision tree (pruned)",
+      "Hyperparameter": "criterion",
+      "Values chosen in the 10 outer folds": "entropy (9), gini (1)",
+      "Final model (all data)": "entropy"
+    },
+    {
+      "Model": "Random forest",
+      "Hyperparameter": "max_features",
+      "Values chosen in the 10 outer folds": "0.33 (7), sqrt (3)",
+      "Final model (all data)": "sqrt"
+    },
+    {
+      "Model": "Random forest",
+      "Hyperparameter": "min_samples_leaf",
+      "Values chosen in the 10 outer folds": "5 (9), 10 (1)",
+      "Final model (all data)": "5"
+    },
+    {
+      "Model": "XGBoost",
+      "Hyperparameter": "n_estimators",
+      "Values chosen in the 10 outer folds": "100 (9), 300 (1)",
+      "Final model (all data)": "100"
+    },
+    {
+      "Model": "XGBoost",
+      "Hyperparameter": "learning_rate",
+      "Values chosen in the 10 outer folds": "0.1 (5), 0.03 (5)",
+      "Final model (all data)": "0.03"
+    },
+    {
+      "Model": "XGBoost",
+      "Hyperparameter": "max_depth",
+      "Values chosen in the 10 outer folds": "2 (6), 3 (3), 5 (1)",
+      "Final model (all data)": "5"
+    },
+    {
+      "Model": "SVM",
+      "Hyperparameter": "kernel",
+      "Values chosen in the 10 outer folds": "rbf (7), linear (3)",
+      "Final model (all data)": "rbf"
+    },
+    {
+      "Model": "SVM",
+      "Hyperparameter": "C",
+      "Values chosen in the 10 outer folds": "1 (4), 10 (3), 0.01 (2), 0.1 (1)",
+      "Final model (all data)": "10"
+    },
+    {
+      "Model": "SVM",
+      "Hyperparameter": "gamma",
+      "Values chosen in the 10 outer folds": "0.01 (7)",
+      "Final model (all data)": "0.01"
+    }
+  ],
+  "final_hyperparameters": {
+    "Majority baseline": {},
+    "Logistic regression": {
+      "C": 100.0,
+      "penalty": "l1"
+    },
+    "Naive Bayes": {
+      "alpha": 0.1,
+      "age__n_bins": 8
+    },
+    "Decision tree (pruned)": {
+      "ccp_alpha": 0.01,
+      "criterion": "entropy"
+    },
+    "Random forest": {
+      "max_features": "sqrt",
+      "min_samples_leaf": 5
+    },
+    "XGBoost": {
+      "learning_rate": 0.03,
+      "max_depth": 5,
+      "n_estimators": 100
+    },
+    "SVM": {
+      "C": 10,
+      "gamma": 0.01,
+      "kernel": "rbf"
+    }
+  },
+  "final_search_flatness": [
+    {
+      "Model": "Logistic regression",
+      "Best inner score": 0.916830738782478,
+      "5th best inner score": 0.9160611945405335,
+      "Configurations within 0.005 of the best": 14,
+      "Configurations": 22
+    },
+    {
+      "Model": "Naive Bayes",
+      "Best inner score": 0.9032153233830561,
+      "5th best inner score": 0.9020864106169899,
+      "Configurations within 0.005 of the best": 9,
+      "Configurations": 9
+    },
+    {
+      "Model": "Decision tree (pruned)",
+      "Best inner score": 0.9003023065970369,
+      "5th best inner score": 0.8780103538856044,
+      "Configurations within 0.005 of the best": 1,
+      "Configurations": 14
+    },
+    {
+      "Model": "Random forest",
+      "Best inner score": 0.921509809580157,
+      "5th best inner score": 0.9169366565164195,
+      "Configurations within 0.005 of the best": 5,
+      "Configurations": 12
+    },
+    {
+      "Model": "XGBoost",
+      "Best inner score": 0.9186827257739493,
+      "5th best inner score": 0.9158872754278974,
+      "Configurations within 0.005 of the best": 7,
+      "Configurations": 12
+    },
+    {
+      "Model": "SVM",
+      "Best inner score": 0.9109521863701383,
+      "5th best inner score": 0.9007721206723872,
+      "Configurations within 0.005 of the best": 4,
+      "Configurations": 16
+    }
+  ],
+  "confusion_matrices": {
+    "Random forest": [
+      [
+        409,
+        78
+      ],
+      [
+        30,
+        322
+      ]
+    ],
+    "Logistic regression": [
+      [
+        411,
+        76
+      ],
+      [
+        32,
+        320
+      ]
+    ]
+  },
+  "threshold_curve_best": {
+    "threshold": [
+      0.05,
+      0.06,
+      0.07,
+      0.08,
+      0.09,
+      0.09999999999999999,
+      0.10999999999999999,
+      0.12,
+      0.13,
+      0.13999999999999999,
+      0.14999999999999997,
+      0.15999999999999998,
+      0.16999999999999998,
+      0.18,
+      0.19,
+      0.19999999999999996,
+      0.20999999999999996,
+      0.21999999999999997,
+      0.22999999999999998,
+      0.24,
+      0.24999999999999994,
+      0.25999999999999995,
+      0.26999999999999996,
+      0.27999999999999997,
+      0.29,
+      0.3,
+      0.30999999999999994,
+      0.31999999999999995,
+      0.32999999999999996,
+      0.33999999999999997,
+      0.3499999999999999,
+      0.35999999999999993,
+      0.36999999999999994,
+      0.37999999999999995,
+      0.38999999999999996,
+      0.3999999999999999,
+      0.4099999999999999,
+      0.41999999999999993,
+      0.42999999999999994,
+      0.43999999999999995,
+      0.4499999999999999,
+      0.4599999999999999,
+      0.4699999999999999,
+      0.4799999999999999,
+      0.48999999999999994,
+      0.49999999999999994,
+      0.5099999999999999,
+      0.5199999999999999,
+      0.5299999999999999,
+      0.5399999999999999,
+      0.5499999999999999,
+      0.5599999999999999,
+      0.57,
+      0.58,
+      0.59,
+      0.6,
+      0.61,
+      0.62,
+      0.63,
+      0.6399999999999999,
+      0.6499999999999999,
+      0.6599999999999999,
+      0.6699999999999999,
+      0.6799999999999999,
+      0.69,
+      0.7,
+      0.71,
+      0.72,
+      0.73,
+      0.74,
+      0.7499999999999999,
+      0.7599999999999999,
+      0.7699999999999999,
+      0.7799999999999999,
+      0.7899999999999999,
+      0.7999999999999999,
+      0.8099999999999999,
+      0.82,
+      0.83,
+      0.84,
+      0.8499999999999999,
+      0.8599999999999999,
+      0.8699999999999999,
+      0.8799999999999999,
+      0.8899999999999999,
+      0.8999999999999999,
+      0.9099999999999999,
+      0.9199999999999999,
+      0.9299999999999999,
+      0.94,
+      0.95
+    ],
+    "sensitivity": [
+      0.9857954545454546,
+      0.9829545454545454,
+      0.9772727272727273,
+      0.9715909090909091,
+      0.9659090909090909,
+      0.9659090909090909,
+      0.9630681818181818,
+      0.9602272727272727,
+      0.9517045454545454,
+      0.9488636363636364,
+      0.9488636363636364,
+      0.9431818181818182,
+      0.9431818181818182,
+      0.9431818181818182,
+      0.9431818181818182,
+      0.9431818181818182,
+      0.9431818181818182,
+      0.9403409090909091,
+      0.9403409090909091,
+      0.9403409090909091,
+      0.9375,
+      0.9375,
+      0.9375,
+      0.9375,
+      0.9375,
+      0.9375,
+      0.9346590909090909,
+      0.9346590909090909,
+      0.9318181818181818,
+      0.9318181818181818,
+      0.9318181818181818,
+      0.9318181818181818,
+      0.9318181818181818,
+      0.9289772727272727,
+      0.9289772727272727,
+      0.9289772727272727,
+      0.9261363636363636,
+      0.9261363636363636,
+      0.9261363636363636,
+      0.9261363636363636,
+      0.9232954545454546,
+      0.9232954545454546,
+      0.9232954545454546,
+      0.9176136363636364,
+      0.9147727272727273,
+      0.9147727272727273,
+      0.9147727272727273,
+      0.9119318181818182,
+      0.9090909090909091,
+      0.9034090909090909,
+      0.9005681818181818,
+      0.8863636363636364,
+      0.8835227272727273,
+      0.875,
+      0.8693181818181818,
+      0.8607954545454546,
+      0.8607954545454546,
+      0.8551136363636364,
+      0.84375,
+      0.8295454545454546,
+      0.8125,
+      0.8039772727272727,
+      0.7926136363636364,
+      0.7642045454545454,
+      0.7443181818181818,
+      0.7244318181818182,
+      0.6931818181818182,
+      0.6704545454545454,
+      0.6392045454545454,
+      0.6107954545454546,
+      0.5823863636363636,
+      0.5511363636363636,
+      0.5284090909090909,
+      0.4971590909090909,
+      0.46875,
+      0.44886363636363635,
+      0.42045454545454547,
+      0.39204545454545453,
+      0.3693181818181818,
+      0.32670454545454547,
+      0.29829545454545453,
+      0.2727272727272727,
+      0.2585227272727273,
+      0.2159090909090909,
+      0.19318181818181818,
+      0.17897727272727273,
+      0.16761363636363635,
+      0.14204545454545456,
+      0.11079545454545454,
+      0.08806818181818182,
+      0.06534090909090909
+    ],
+    "specificity": [
+      0.324435318275154,
+      0.3860369609856263,
+      0.44969199178644764,
+      0.5133470225872689,
+      0.5852156057494866,
+      0.6180698151950719,
+      0.6550308008213552,
+      0.6776180698151951,
+      0.6919917864476386,
+      0.7084188911704312,
+      0.7227926078028748,
+      0.7330595482546202,
+      0.7453798767967146,
+      0.7515400410677618,
+      0.757700205338809,
+      0.7659137577002053,
+      0.7720739219712526,
+      0.7761806981519507,
+      0.7802874743326489,
+      0.7905544147843943,
+      0.7987679671457906,
+      0.8008213552361396,
+      0.8049281314168378,
+      0.8049281314168378,
+      0.8049281314168378,
+      0.8090349075975359,
+      0.8090349075975359,
+      0.8151950718685832,
+      0.8151950718685832,
+      0.8151950718685832,
+      0.8151950718685832,
+      0.8172484599589322,
+      0.8213552361396304,
+      0.8213552361396304,
+      0.8234086242299795,
+      0.8254620123203286,
+      0.8275154004106776,
+      0.8275154004106776,
+      0.8275154004106776,
+      0.8275154004106776,
+      0.8275154004106776,
+      0.8275154004106776,
+      0.8295687885010267,
+      0.8295687885010267,
+      0.8316221765913757,
+      0.839835728952772,
+      0.839835728952772,
+      0.839835728952772,
+      0.8418891170431212,
+      0.8439425051334702,
+      0.8439425051334702,
+      0.8459958932238193,
+      0.8501026694045175,
+      0.8501026694045175,
+      0.8501026694045175,
+      0.8521560574948666,
+      0.8583162217659137,
+      0.8624229979466119,
+      0.8685831622176592,
+      0.8747433264887063,
+      0.8767967145790554,
+      0.8788501026694046,
+      0.8809034907597536,
+      0.8870636550308009,
+      0.8891170431211499,
+      0.891170431211499,
+      0.8993839835728953,
+      0.9055441478439425,
+      0.9117043121149897,
+      0.919917864476386,
+      0.9281314168377823,
+      0.9342915811088296,
+      0.9404517453798767,
+      0.9507186858316222,
+      0.9609856262833676,
+      0.9650924024640657,
+      0.9691991786447639,
+      0.971252566735113,
+      0.9753593429158111,
+      0.9794661190965093,
+      0.9815195071868583,
+      0.9835728952772074,
+      0.9856262833675564,
+      0.9897330595482546,
+      0.9897330595482546,
+      0.9938398357289527,
+      0.9958932238193019,
+      0.9958932238193019,
+      0.9958932238193019,
+      1.0,
+      1.0
+    ]
+  },
+  "logistic": {
+    "params": {
+      "C": 100.0,
+      "penalty": "l1"
+    },
+    "coefficients": {
+      "IDH1": {
+        "Coefficient (log-odds per SD)": -2.0501758227838867,
+        "Odds ratio per SD": 0.12871227104838837
+      },
+      "NOTCH1": {
+        "Coefficient (log-odds per SD)": -2.0071726087817776,
+        "Odds ratio per SD": 0.13436804913819533
+      },
+      "Age_at_diagnosis": {
+        "Coefficient (log-odds per SD)": 0.61207211996732,
+        "Odds ratio per SD": 1.8442489472748205
+      },
+      "IDH2": {
+        "Coefficient (log-odds per SD)": -0.6031239759271249,
+        "Odds ratio per SD": 0.5470998369561447
+      },
+      "TP53": {
+        "Coefficient (log-odds per SD)": 0.5277942015660286,
+        "Odds ratio per SD": 1.6951889364727808
+      },
+      "GRIN2A": {
+        "Coefficient (log-odds per SD)": 0.3322063324031371,
+        "Odds ratio per SD": 1.3940404545573322
+      },
+      "Race_native": {
+        "Coefficient (log-odds per SD)": -0.3159382912439235,
+        "Odds ratio per SD": 0.7291044409075464
+      },
+      "NF1": {
+        "Coefficient (log-odds per SD)": -0.27197814581325747,
+        "Odds ratio per SD": 0.7618709109770642
+      },
+      "CIC": {
+        "Coefficient (log-odds per SD)": -0.25589721784894764,
+        "Odds ratio per SD": 0.7742215408582447
+      },
+      "PTEN": {
+        "Coefficient (log-odds per SD)": 0.25391482223265727,
+        "Odds ratio per SD": 1.289062000168296
+      },
+      "PIK3R1": {
+        "Coefficient (log-odds per SD)": 0.24107212013186516,
+        "Odds ratio per SD": 1.2726128130025667
+      },
+      "EGFR": {
+        "Coefficient (log-odds per SD)": -0.21425238036534572,
+        "Odds ratio per SD": 0.8071446518525156
+      },
+      "Race_white": {
+        "Coefficient (log-odds per SD)": -0.17063326341354182,
+        "Odds ratio per SD": 0.8431307236633463
+      },
+      "MUC16": {
+        "Coefficient (log-odds per SD)": 0.1634770474344649,
+        "Odds ratio per SD": 1.1775983259744776
+      },
+      "SMARCA4": {
+        "Coefficient (log-odds per SD)": -0.15562805406672064,
+        "Odds ratio per SD": 0.8558774713205398
+      },
+      "CSMD3": {
+        "Coefficient (log-odds per SD)": 0.14329922677464407,
+        "Odds ratio per SD": 1.1540750801690838
+      },
+      "RB1": {
+        "Coefficient (log-odds per SD)": 0.12378243462710124,
+        "Odds ratio per SD": 1.131769610333942
+      },
+      "Gender": {
+        "Coefficient (log-odds per SD)": -0.10515896027399284,
+        "Odds ratio per SD": 0.9001814181277361
+      },
+      "PDGFRA": {
+        "Coefficient (log-odds per SD)": 0.10299637104177439,
+        "Odds ratio per SD": 1.1084873864142892
+      },
+      "ATRX": {
+        "Coefficient (log-odds per SD)": 0.09117892560477106,
+        "Odds ratio per SD": 1.0954649944608388
+      },
+      "FAT4": {
+        "Coefficient (log-odds per SD)": 0.048967616285192285,
+        "Odds ratio per SD": 1.0501863412543841
+      },
+      "BCOR": {
+        "Coefficient (log-odds per SD)": 0.04328374502908264,
+        "Odds ratio per SD": 1.0442341490672904
+      },
+      "PIK3CA": {
+        "Coefficient (log-odds per SD)": 0.036034735397516726,
+        "Odds ratio per SD": 1.0366918557692344
+      },
+      "Race_asian": {
+        "Coefficient (log-odds per SD)": 0.02989750629892407,
+        "Odds ratio per SD": 1.0303489242667978
+      },
+      "FUBP1": {
+        "Coefficient (log-odds per SD)": -0.018506571187683833,
+        "Odds ratio per SD": 0.9816636238746822
+      },
+      "Race_black": {
+        "Coefficient (log-odds per SD)": 0.006578336602083892,
+        "Odds ratio per SD": 1.0066000213821584
+      }
+    },
+    "n_zero": 0,
+    "share_extreme_probabilities": 0.09773539928486293
+  },
+  "naive_bayes": {
+    "params": {
+      "alpha": 0.1,
+      "age__n_bins": 8
+    },
+    "table": {
+      "NOTCH1": {
+        "P(=1 | LGG)": 0.07820197044334974,
+        "P(=1 | GBM)": 0.0002839295854628053,
+        "log ratio GBM/LGG": -5.618323854793119
+      },
+      "CIC": {
+        "P(=1 | LGG)": 0.21982758620689646,
+        "P(=1 | GBM)": 0.011641113003975018,
+        "log ratio GBM/LGG": -2.9383004834098587
+      },
+      "FUBP1": {
+        "P(=1 | LGG)": 0.08846469622331689,
+        "P(=1 | GBM)": 0.0059625212947189135,
+        "log ratio GBM/LGG": -2.6971101320467423
+      },
+      "IDH1": {
+        "P(=1 | LGG)": 0.7822249589490969,
+        "P(=1 | GBM)": 0.06558773424190803,
+        "log ratio GBM/LGG": -2.478753670018485
+      },
+      "Race_native": {
+        "P(=1 | LGG)": 0.0022577996715927745,
+        "P(=1 | GBM)": 0.0002839295854628053,
+        "log ratio GBM/LGG": -2.0734197524647886
+      },
+      "RB1": {
+        "P(=1 | LGG)": 0.012520525451559931,
+        "P(=1 | GBM)": 0.09681998864281662,
+        "log ratio GBM/LGG": 2.0454841334437877
+      },
+      "Age bin 8": {
+        "P(=1 | LGG)": 0.03304597701149425,
+        "P(=1 | GBM)": 0.2529812606473596,
+        "log ratio GBM/LGG": 2.0354155828199287
+      },
+      "IDH2": {
+        "P(=1 | LGG)": 0.0433087027914614,
+        "P(=1 | GBM)": 0.0059625212947189135,
+        "log ratio GBM/LGG": -1.9828601754190611
+      },
+      "Age bin 2": {
+        "P(=1 | LGG)": 0.19519704433497528,
+        "P(=1 | GBM)": 0.02867688813174334,
+        "log ratio GBM/LGG": -1.9179180253705486
+      },
+      "PTEN": {
+        "P(=1 | LGG)": 0.051518883415435146,
+        "P(=1 | GBM)": 0.32964224872231707,
+        "log ratio GBM/LGG": 1.8560595628996897
+      },
+      "Age bin 1": {
+        "P(=1 | LGG)": 0.19109195402298845,
+        "P(=1 | GBM)": 0.034355479840999445,
+        "log ratio GBM/LGG": -1.7159932113467438
+      },
+      "SMARCA4": {
+        "P(=1 | LGG)": 0.047413793103448267,
+        "P(=1 | GBM)": 0.011641113003975018,
+        "log ratio GBM/LGG": -1.4043701234839037
+      },
+      "GRIN2A": {
+        "P(=1 | LGG)": 0.01457307060755336,
+        "P(=1 | GBM)": 0.05706984667802388,
+        "log ratio GBM/LGG": 1.3651005513513428
+      },
+      "ATRX": {
+        "P(=1 | LGG)": 0.37582101806239715,
+        "P(=1 | GBM)": 0.09681998864281662,
+        "log ratio GBM/LGG": -1.3562595470574115
+      },
+      "Age bin 3": {
+        "P(=1 | LGG)": 0.18082922824302133,
+        "P(=1 | GBM)": 0.048551959114139724,
+        "log ratio GBM/LGG": -1.3149185490999376
+      },
+      "PDGFRA": {
+        "P(=1 | LGG)": 0.012520525451559931,
+        "P(=1 | GBM)": 0.045712663259511656,
+        "log ratio GBM/LGG": 1.2950060211447338
+      },
+      "EGFR": {
+        "P(=1 | LGG)": 0.06383415435139572,
+        "P(=1 | GBM)": 0.23026689381033513,
+        "log ratio GBM/LGG": 1.2829506622697608
+      },
+      "Age bin 7": {
+        "P(=1 | LGG)": 0.06178160919540228,
+        "P(=1 | GBM)": 0.2132311186825669,
+        "log ratio GBM/LGG": 1.2387709073488415
+      },
+      "Race_black": {
+        "P(=1 | LGG)": 0.0433087027914614,
+        "P(=1 | GBM)": 0.10817717206132883,
+        "log ratio GBM/LGG": 0.9154167619842166
+      },
+      "PIK3R1": {
+        "P(=1 | LGG)": 0.0433087027914614,
+        "P(=1 | GBM)": 0.09398069278818859,
+        "log ratio GBM/LGG": 0.7747357622345787
+      },
+      "MUC16": {
+        "P(=1 | LGG)": 0.08435960591133006,
+        "P(=1 | GBM)": 0.16212379329926185,
+        "log ratio GBM/LGG": 0.6532715154933575
+      },
+      "NF1": {
+        "P(=1 | LGG)": 0.05972906403940886,
+        "P(=1 | GBM)": 0.10817717206132883,
+        "log ratio GBM/LGG": 0.5939516282887904
+      },
+      "CSMD3": {
+        "P(=1 | LGG)": 0.024835796387520523,
+        "P(=1 | GBM)": 0.042873367404883615,
+        "log ratio GBM/LGG": 0.5459648115517655
+      },
+      "Age bin 6": {
+        "P(=1 | LGG)": 0.09667487684729065,
+        "P(=1 | GBM)": 0.16496308915388994,
+        "log ratio GBM/LGG": 0.5343681831690756
+      },
+      "FAT4": {
+        "P(=1 | LGG)": 0.02278325123152709,
+        "P(=1 | GBM)": 0.034355479840999445,
+        "log ratio GBM/LGG": 0.41073586461798905
+      },
+      "TP53": {
+        "P(=1 | LGG)": 0.48255336617405586,
+        "P(=1 | GBM)": 0.3211243611584329,
+        "log ratio GBM/LGG": -0.40726305209036706
+      },
+      "Age bin 5": {
+        "P(=1 | LGG)": 0.11104269293924462,
+        "P(=1 | GBM)": 0.14508801817149355,
+        "log ratio GBM/LGG": 0.26742583169080536
+      },
+      "PIK3CA": {
+        "P(=1 | LGG)": 0.08025451559934316,
+        "P(=1 | GBM)": 0.09681998864281662,
+        "log ratio GBM/LGG": 0.18765043763173317
+      },
+      "Gender": {
+        "P(=1 | LGG)": 0.4435550082101807,
+        "P(=1 | GBM)": 0.38358886996025,
+        "log ratio GBM/LGG": -0.14525049821310532
+      },
+      "Age bin 4": {
+        "P(=1 | LGG)": 0.13156814449917892,
+        "P(=1 | GBM)": 0.11385576377058493,
+        "log ratio GBM/LGG": -0.14459250928051848
+      },
+      "Race_white": {
+        "P(=1 | LGG)": 0.9382183908045975,
+        "P(=1 | GBM)": 0.874787052810903,
+        "log ratio GBM/LGG": -0.07000225940149463
+      },
+      "Race_asian": {
+        "P(=1 | LGG)": 0.0166256157635468,
+        "P(=1 | GBM)": 0.01731970471323112,
+        "log ratio GBM/LGG": 0.040900229834454294
+      },
+      "BCOR": {
+        "P(=1 | LGG)": 0.035098522167487683,
+        "P(=1 | GBM)": 0.034355479840999445,
+        "log ratio GBM/LGG": -0.021397490572336864
+      }
+    },
+    "share_extreme_probabilities": 0.6579261025029798
+  },
+  "tree": {
+    "params": {
+      "ccp_alpha": 0.01,
+      "criterion": "entropy"
+    },
+    "n_leaves": 6,
+    "depth": 3
+  },
+  "permutation_importance_mean": {
+    "IDH1": {
+      "Logistic regression": 0.26344655004859086,
+      "Random forest": 0.22999547497570455,
+      "XGBoost": 0.30912114984882844,
+      "SVM": 0.24495638295000538
+    },
+    "Age_at_diagnosis": {
+      "Logistic regression": 0.015160798644854775,
+      "Random forest": 0.020203454000647887,
+      "XGBoost": 0.020858652885757476,
+      "SVM": 0.009340179921174824
+    },
+    "TP53": {
+      "Logistic regression": 0.008783932620667331,
+      "Random forest": 0.004755689180434085,
+      "XGBoost": 0.011643687236799469,
+      "SVM": 0.00296122516466904
+    },
+    "IDH2": {
+      "Logistic regression": 0.007756910700788264,
+      "Random forest": 0.0038787860382248156,
+      "XGBoost": 0.0076493527966742456,
+      "SVM": 0.007446030396285494
+    },
+    "NOTCH1": {
+      "Logistic regression": 0.018618244520030247,
+      "Random forest": 0.0007515184645286799,
+      "XGBoost": 0.0017806662347478797,
+      "SVM": 0.0053367886837274656
+    },
+    "CIC": {
+      "Logistic regression": 0.001785251997624446,
+      "Random forest": 0.00451459750566894,
+      "XGBoost": 0.00033471344887162633,
+      "SVM": 0.005190148877011127
+    },
+    "EGFR": {
+      "Logistic regression": 0.0007880864647446327,
+      "Random forest": 0.0031450201112191043,
+      "XGBoost": 0.0015828862298888004,
+      "SVM": 0.005911534256559768
+    },
+    "NF1": {
+      "Logistic regression": 0.0028887404168016335,
+      "Random forest": 0.002409216067379335,
+      "XGBoost": 0.002612369749487098,
+      "SVM": 0.003142212639023852
+    },
+    "PTEN": {
+      "Logistic regression": -0.0005462861731994329,
+      "Random forest": 0.003812489876903144,
+      "XGBoost": 0.00270961727945147,
+      "SVM": 0.0026198540924306382
+    },
+    "ATRX": {
+      "Logistic regression": -0.0001939281665047066,
+      "Random forest": 0.005728528911564628,
+      "XGBoost": 0.00032588442122881146,
+      "SVM": 0.0027263558201058237
+    },
+    "PIK3R1": {
+      "Logistic regression": 0.001714295837382595,
+      "Random forest": -0.00013069424198249523,
+      "XGBoost": 0.0020489283014793356,
+      "SVM": 0.001435603606521978
+    },
+    "GRIN2A": {
+      "Logistic regression": 0.0016144787279991414,
+      "Random forest": 0.0004457536983047161,
+      "XGBoost": 0.0006247013686426905,
+      "SVM": 0.0014046033095777965
+    },
+    "SMARCA4": {
+      "Logistic regression": 0.00037899187452758,
+      "Random forest": 0.0004140414102149014,
+      "XGBoost": 0.00033463415127956363,
+      "SVM": 0.0013056331659647847
+    },
+    "FUBP1": {
+      "Logistic regression": -0.00024826557607170337,
+      "Random forest": 0.00015879089731130942,
+      "XGBoost": -1.1904761904759642e-05,
+      "SVM": 0.0018955161429651095
+    },
+    "RB1": {
+      "Logistic regression": -0.0009307175251052756,
+      "Random forest": 0.0003920894746787541,
+      "XGBoost": -0.0008112346128927606,
+      "SVM": 0.002893147338300389
+    },
+    "MUC16": {
+      "Logistic regression": -0.00015296674225246274,
+      "Random forest": 0.0020525287495950775,
+      "XGBoost": -0.0004698399200950175,
+      "SVM": -0.0025377861462045227
+    },
+    "BCOR": {
+      "Logistic regression": -0.0006461336518734572,
+      "Random forest": -5.373677248676989e-05,
+      "XGBoost": -5.247813411078717e-05,
+      "SVM": -0.0009323034769463546
+    },
+    "PIK3CA": {
+      "Logistic regression": -0.0008662502699492569,
+      "Random forest": -0.00033236826476621404,
+      "XGBoost": -1.7371234207967934e-05,
+      "SVM": -0.0006745188154626991
+    },
+    "CSMD3": {
+      "Logistic regression": -0.0010574080822805432,
+      "Random forest": 0.00010999419609114326,
+      "XGBoost": -0.00045213799805635997,
+      "SVM": -0.0012951321401576566
+    },
+    "PDGFRA": {
+      "Logistic regression": -0.0003802133948817686,
+      "Random forest": -8.698102256775696e-05,
+      "XGBoost": 0.0,
+      "SVM": -0.002403547133138977
+    },
+    "FAT4": {
+      "Logistic regression": -0.0009955829554043915,
+      "Random forest": -0.00011380216769247054,
+      "XGBoost": 1.1102230246251566e-18,
+      "SVM": -0.0021432249487096404
+    },
+    "Gender": {
+      "Logistic regression": -0.00012021514955189226,
+      "Random forest": -0.0011775017546701205,
+      "XGBoost": -0.00043036490389805843,
+      "SVM": -0.0024300898931000976
+    },
+    "Race": {
+      "Logistic regression": -0.002277524700356337,
+      "Random forest": 0.0005246699870424331,
+      "XGBoost": 0.0011925767330741809,
+      "SVM": -0.004496939450383324
+    }
+  },
+  "findings": {
+    "Majority baseline": "AUC 0.496 [0.464, 0.528], accuracy 0.580 [0.580, 0.580]",
+    "Highest AUC": "Random forest: AUC 0.916 [0.896, 0.934], balanced accuracy 0.877 [0.855, 0.899], sensitivity 0.915 [0.886, 0.943], specificity 0.840 [0.807, 0.873]",
+    "Models tied with it (overlapping AUC intervals)": "Logistic regression, Naive Bayes, Decision tree (pruned), XGBoost, SVM",
+    "Paired AUC differences vs the best": "Logistic regression: -0.003 [-0.013, +0.008]; Naive Bayes: -0.016 [-0.028, -0.005]; Decision tree (pruned): -0.026 [-0.042, -0.010]; XGBoost: -0.003 [-0.010, +0.005]; SVM: -0.015 [-0.028, -0.002]",
+    "Logistic regression (final)": "{'C': 100.0, 'penalty': 'l1'}; 0 coefficients set to 0; strongest: IDH1 -2.05, NOTCH1 -2.01, Age_at_diagnosis +0.61",
+    "Pruned tree (final)": "{'ccp_alpha': 0.01, 'criterion': 'entropy'}; depth 3, 6 leaves",
+    "Most important predictors (permutation)": "IDH1 (0.262), Age_at_diagnosis (0.016), TP53 (0.007)",
+    "Extreme probabilities (< 0.02 or > 0.98)": "Naive Bayes 0.66, logistic regression 0.10"
+  },
+  "folds": {
+    "Majority baseline": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "AUC": 0.5,
+        "Accuracy": 0.5833333333333334,
+        "Sensitivity": 0.0,
+        "Specificity": 1.0,
+        "Balanced accuracy": 0.5
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "AUC": 0.5,
+        "Accuracy": 0.5833333333333334,
+        "Sensitivity": 0.0,
+        "Specificity": 1.0,
+        "Balanced accuracy": 0.5
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "AUC": 0.5,
+        "Accuracy": 0.5833333333333334,
+        "Sensitivity": 0.0,
+        "Specificity": 1.0,
+        "Balanced accuracy": 0.5
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "AUC": 0.5,
+        "Accuracy": 0.5833333333333334,
+        "Sensitivity": 0.0,
+        "Specificity": 1.0,
+        "Balanced accuracy": 0.5
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "AUC": 0.5,
+        "Accuracy": 0.5833333333333334,
+        "Sensitivity": 0.0,
+        "Specificity": 1.0,
+        "Balanced accuracy": 0.5
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "AUC": 0.5,
+        "Accuracy": 0.5833333333333334,
+        "Sensitivity": 0.0,
+        "Specificity": 1.0,
+        "Balanced accuracy": 0.5
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "AUC": 0.5,
+        "Accuracy": 0.5833333333333334,
+        "Sensitivity": 0.0,
+        "Specificity": 1.0,
+        "Balanced accuracy": 0.5
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "AUC": 0.5,
+        "Accuracy": 0.5714285714285714,
+        "Sensitivity": 0.0,
+        "Specificity": 1.0,
+        "Balanced accuracy": 0.5
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "AUC": 0.5,
+        "Accuracy": 0.5714285714285714,
+        "Sensitivity": 0.0,
+        "Specificity": 1.0,
+        "Balanced accuracy": 0.5
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": NaN,
+        "AUC": 0.5,
+        "Accuracy": 0.5783132530120482,
+        "Sensitivity": 0.0,
+        "Specificity": 1.0,
+        "Balanced accuracy": 0.5
+      }
+    ],
+    "Logistic regression": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": 0.9209210780030114,
+        "AUC": 0.8862973760932945,
+        "Accuracy": 0.8690476190476191,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.8163265306122449,
+        "Balanced accuracy": 0.8795918367346939,
+        "C": 0.31622776601683794,
+        "penalty": "l1"
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": 0.9092481138229394,
+        "AUC": 0.9533527696793003,
+        "Accuracy": 0.8928571428571429,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.8571428571428571,
+        "Balanced accuracy": 0.8999999999999999,
+        "C": 0.1,
+        "penalty": "l2"
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": 0.9103615634243704,
+        "AUC": 0.9306122448979591,
+        "Accuracy": 0.8571428571428571,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.7959183673469388,
+        "Balanced accuracy": 0.8693877551020408,
+        "C": 1.0,
+        "penalty": "l2"
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": 0.9238267547908282,
+        "AUC": 0.8962099125364431,
+        "Accuracy": 0.8809523809523809,
+        "Sensitivity": 0.8571428571428571,
+        "Specificity": 0.8979591836734694,
+        "Balanced accuracy": 0.8775510204081632,
+        "C": 1.0,
+        "penalty": "l1"
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": 0.9114916286149164,
+        "AUC": 0.9580174927113703,
+        "Accuracy": 0.9404761904761905,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.9387755102040817,
+        "Balanced accuracy": 0.9408163265306122,
+        "C": 0.31622776601683794,
+        "penalty": "l1"
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": 0.9189952081461515,
+        "AUC": 0.8886297376093294,
+        "Accuracy": 0.7976190476190477,
+        "Sensitivity": 0.9142857142857143,
+        "Specificity": 0.7142857142857143,
+        "Balanced accuracy": 0.8142857142857143,
+        "C": 0.1,
+        "penalty": "l1"
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": 0.9194154184461758,
+        "AUC": 0.8892128279883382,
+        "Accuracy": 0.8809523809523809,
+        "Sensitivity": 0.8857142857142857,
+        "Specificity": 0.8775510204081632,
+        "Balanced accuracy": 0.8816326530612244,
+        "C": 0.31622776601683794,
+        "penalty": "l1"
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": 0.9123932660856191,
+        "AUC": 0.9461805555555556,
+        "Accuracy": 0.9047619047619048,
+        "Sensitivity": 0.9444444444444444,
+        "Specificity": 0.875,
+        "Balanced accuracy": 0.9097222222222222,
+        "C": 3.1622776601683795,
+        "penalty": "l1"
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": 0.9129807451458882,
+        "AUC": 0.8917824074074074,
+        "Accuracy": 0.8333333333333334,
+        "Sensitivity": 0.8611111111111112,
+        "Specificity": 0.8125,
+        "Balanced accuracy": 0.8368055555555556,
+        "C": 1.0,
+        "penalty": "l2"
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": 0.9198115984486982,
+        "AUC": 0.9196428571428571,
+        "Accuracy": 0.8554216867469879,
+        "Sensitivity": 0.8571428571428571,
+        "Specificity": 0.8541666666666666,
+        "Balanced accuracy": 0.8556547619047619,
+        "C": 3.1622776601683795,
+        "penalty": "l2"
+      }
+    ],
+    "Naive Bayes": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": 0.9028556248897422,
+        "AUC": 0.9008746355685131,
+        "Accuracy": 0.8690476190476191,
+        "Sensitivity": 0.9142857142857143,
+        "Specificity": 0.8367346938775511,
+        "Balanced accuracy": 0.8755102040816327,
+        "alpha": 0.5,
+        "age__n_bins": 3
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": 0.9010244228646916,
+        "AUC": 0.9078717201166181,
+        "Accuracy": 0.8809523809523809,
+        "Sensitivity": 0.9142857142857143,
+        "Specificity": 0.8571428571428571,
+        "Balanced accuracy": 0.8857142857142857,
+        "alpha": 0.1,
+        "age__n_bins": 8
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": 0.8981272590021621,
+        "AUC": 0.9276967930029154,
+        "Accuracy": 0.8928571428571429,
+        "Sensitivity": 0.9714285714285714,
+        "Specificity": 0.8367346938775511,
+        "Balanced accuracy": 0.9040816326530612,
+        "alpha": 0.5,
+        "age__n_bins": 8
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": 0.9042044620036349,
+        "AUC": 0.8766763848396502,
+        "Accuracy": 0.8809523809523809,
+        "Sensitivity": 0.8857142857142857,
+        "Specificity": 0.8775510204081632,
+        "Balanced accuracy": 0.8816326530612244,
+        "alpha": 0.5,
+        "age__n_bins": 5
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": 0.9005583658465541,
+        "AUC": 0.9673469387755103,
+        "Accuracy": 0.9285714285714286,
+        "Sensitivity": 0.9142857142857143,
+        "Specificity": 0.9387755102040817,
+        "Balanced accuracy": 0.926530612244898,
+        "alpha": 0.1,
+        "age__n_bins": 8
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": 0.9068596741703487,
+        "AUC": 0.880466472303207,
+        "Accuracy": 0.7976190476190477,
+        "Sensitivity": 0.8857142857142857,
+        "Specificity": 0.7346938775510204,
+        "Balanced accuracy": 0.810204081632653,
+        "alpha": 0.1,
+        "age__n_bins": 8
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": 0.9018824847075041,
+        "AUC": 0.9110787172011662,
+        "Accuracy": 0.8452380952380952,
+        "Sensitivity": 0.8285714285714286,
+        "Specificity": 0.8571428571428571,
+        "Balanced accuracy": 0.8428571428571429,
+        "alpha": 0.1,
+        "age__n_bins": 3
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": 0.903478018037494,
+        "AUC": 0.9157986111111112,
+        "Accuracy": 0.8928571428571429,
+        "Sensitivity": 0.9166666666666666,
+        "Specificity": 0.875,
+        "Balanced accuracy": 0.8958333333333333,
+        "alpha": 0.1,
+        "age__n_bins": 8
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": 0.9080441680789288,
+        "AUC": 0.8388310185185185,
+        "Accuracy": 0.8333333333333334,
+        "Sensitivity": 0.8888888888888888,
+        "Specificity": 0.7916666666666666,
+        "Balanced accuracy": 0.8402777777777777,
+        "alpha": 0.1,
+        "age__n_bins": 5
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": 0.9012450004966396,
+        "AUC": 0.9107142857142857,
+        "Accuracy": 0.8674698795180723,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.8125,
+        "Balanced accuracy": 0.8776785714285714,
+        "alpha": 0.5,
+        "age__n_bins": 8
+      }
+    ],
+    "Decision tree (pruned)": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": 0.8973009924224709,
+        "AUC": 0.9116618075801749,
+        "Accuracy": 0.8690476190476191,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.8163265306122449,
+        "Balanced accuracy": 0.8795918367346939,
+        "ccp_alpha": 0.01,
+        "criterion": "entropy"
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": 0.8868712230304374,
+        "AUC": 0.921865889212828,
+        "Accuracy": 0.8809523809523809,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.8367346938775511,
+        "Balanced accuracy": 0.889795918367347,
+        "ccp_alpha": 0.01,
+        "criterion": "entropy"
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": 0.8944761371422008,
+        "AUC": 0.9239067055393586,
+        "Accuracy": 0.8690476190476191,
+        "Sensitivity": 0.9714285714285714,
+        "Specificity": 0.7959183673469388,
+        "Balanced accuracy": 0.883673469387755,
+        "ccp_alpha": 0.01,
+        "criterion": "entropy"
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": 0.9073750651290068,
+        "AUC": 0.89533527696793,
+        "Accuracy": 0.8452380952380952,
+        "Sensitivity": 0.8857142857142857,
+        "Specificity": 0.8163265306122449,
+        "Balanced accuracy": 0.8510204081632653,
+        "ccp_alpha": 0.01,
+        "criterion": "entropy"
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": 0.8796607753121064,
+        "AUC": 0.9545189504373178,
+        "Accuracy": 0.9047619047619048,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.8775510204081632,
+        "Balanced accuracy": 0.9102040816326531,
+        "ccp_alpha": 0.01,
+        "criterion": "entropy"
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": 0.9054368874283582,
+        "AUC": 0.8338192419825073,
+        "Accuracy": 0.7976190476190477,
+        "Sensitivity": 0.9142857142857143,
+        "Specificity": 0.7142857142857143,
+        "Balanced accuracy": 0.8142857142857143,
+        "ccp_alpha": 0.01,
+        "criterion": "entropy"
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": 0.8940409522989,
+        "AUC": 0.8734693877551021,
+        "Accuracy": 0.8809523809523809,
+        "Sensitivity": 0.8857142857142857,
+        "Specificity": 0.8775510204081632,
+        "Balanced accuracy": 0.8816326530612244,
+        "ccp_alpha": 0.02,
+        "criterion": "entropy"
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": 0.885191291661877,
+        "AUC": 0.9210069444444444,
+        "Accuracy": 0.8928571428571429,
+        "Sensitivity": 0.9444444444444444,
+        "Specificity": 0.8541666666666666,
+        "Balanced accuracy": 0.8993055555555556,
+        "ccp_alpha": 0.02,
+        "criterion": "entropy"
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": 0.8987158579087623,
+        "AUC": 0.8292824074074074,
+        "Accuracy": 0.8333333333333334,
+        "Sensitivity": 0.8888888888888888,
+        "Specificity": 0.7916666666666666,
+        "Balanced accuracy": 0.8402777777777777,
+        "ccp_alpha": 0.01,
+        "criterion": "gini"
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": 0.8935196195263133,
+        "AUC": 0.9104166666666667,
+        "Accuracy": 0.8795180722891566,
+        "Sensitivity": 0.9714285714285714,
+        "Specificity": 0.8125,
+        "Balanced accuracy": 0.8919642857142858,
+        "ccp_alpha": 0.02,
+        "criterion": "entropy"
+      }
+    ],
+    "Random forest": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": 0.9200707085625669,
+        "AUC": 0.921865889212828,
+        "Accuracy": 0.8690476190476191,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.8163265306122449,
+        "Balanced accuracy": 0.8795918367346939,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": 0.9115440395163837,
+        "AUC": 0.9405247813411078,
+        "Accuracy": 0.8928571428571429,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.8571428571428571,
+        "Balanced accuracy": 0.8999999999999999,
+        "max_features": "sqrt",
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": 0.906985214176995,
+        "AUC": 0.9475218658892128,
+        "Accuracy": 0.8809523809523809,
+        "Sensitivity": 0.9714285714285714,
+        "Specificity": 0.8163265306122449,
+        "Balanced accuracy": 0.8938775510204082,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": 0.9190844400136206,
+        "AUC": 0.8991253644314868,
+        "Accuracy": 0.8571428571428571,
+        "Sensitivity": 0.8857142857142857,
+        "Specificity": 0.8367346938775511,
+        "Balanced accuracy": 0.8612244897959184,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": 0.9117913246111747,
+        "AUC": 0.9591836734693877,
+        "Accuracy": 0.9404761904761905,
+        "Sensitivity": 0.9142857142857143,
+        "Specificity": 0.9591836734693877,
+        "Balanced accuracy": 0.9367346938775509,
+        "max_features": "sqrt",
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": 0.9232660299408814,
+        "AUC": 0.8775510204081632,
+        "Accuracy": 0.8214285714285714,
+        "Sensitivity": 0.9142857142857143,
+        "Specificity": 0.7551020408163265,
+        "Balanced accuracy": 0.8346938775510204,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": 0.914773822857307,
+        "AUC": 0.9131195335276968,
+        "Accuracy": 0.8452380952380952,
+        "Sensitivity": 0.8285714285714286,
+        "Specificity": 0.8571428571428571,
+        "Balanced accuracy": 0.8428571428571429,
+        "max_features": 0.33,
+        "min_samples_leaf": 10
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": 0.9214459398614192,
+        "AUC": 0.9476273148148148,
+        "Accuracy": 0.8928571428571429,
+        "Sensitivity": 0.9166666666666666,
+        "Specificity": 0.875,
+        "Balanced accuracy": 0.8958333333333333,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": 0.919243051419799,
+        "AUC": 0.8587962962962963,
+        "Accuracy": 0.8452380952380952,
+        "Sensitivity": 0.8888888888888888,
+        "Specificity": 0.8125,
+        "Balanced accuracy": 0.8506944444444444,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": 0.9138224593254369,
+        "AUC": 0.9488095238095238,
+        "Accuracy": 0.8674698795180723,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.8125,
+        "Balanced accuracy": 0.8776785714285714,
+        "max_features": "sqrt",
+        "min_samples_leaf": 5
+      }
+    ],
+    "XGBoost": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": 0.9190926452428133,
+        "AUC": 0.9204081632653062,
+        "Accuracy": 0.8690476190476191,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.8163265306122449,
+        "Balanced accuracy": 0.8795918367346939,
+        "learning_rate": 0.1,
+        "max_depth": 2,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": 0.9086781580901508,
+        "AUC": 0.9209912536443149,
+        "Accuracy": 0.8809523809523809,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.8367346938775511,
+        "Balanced accuracy": 0.889795918367347,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": 0.9051626276425967,
+        "AUC": 0.9446064139941691,
+        "Accuracy": 0.8928571428571429,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.8571428571428571,
+        "Balanced accuracy": 0.8999999999999999,
+        "learning_rate": 0.1,
+        "max_depth": 3,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": 0.9217433445334713,
+        "AUC": 0.9032069970845481,
+        "Accuracy": 0.8571428571428571,
+        "Sensitivity": 0.8857142857142857,
+        "Specificity": 0.8367346938775511,
+        "Balanced accuracy": 0.8612244897959184,
+        "learning_rate": 0.03,
+        "max_depth": 5,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": 0.9083589746745601,
+        "AUC": 0.9568513119533528,
+        "Accuracy": 0.9404761904761905,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.9387755102040817,
+        "Balanced accuracy": 0.9408163265306122,
+        "learning_rate": 0.03,
+        "max_depth": 3,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": 0.9220941180814534,
+        "AUC": 0.849271137026239,
+        "Accuracy": 0.7976190476190477,
+        "Sensitivity": 0.9142857142857143,
+        "Specificity": 0.7142857142857143,
+        "Balanced accuracy": 0.8142857142857143,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": 0.9154819341366253,
+        "AUC": 0.9142857142857143,
+        "Accuracy": 0.8809523809523809,
+        "Sensitivity": 0.8857142857142857,
+        "Specificity": 0.8775510204081632,
+        "Balanced accuracy": 0.8816326530612244,
+        "learning_rate": 0.1,
+        "max_depth": 2,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": 0.9208042930317314,
+        "AUC": 0.9343171296296297,
+        "Accuracy": 0.9047619047619048,
+        "Sensitivity": 0.9444444444444444,
+        "Specificity": 0.875,
+        "Balanced accuracy": 0.9097222222222222,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "n_estimators": 300
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": 0.9151345710614572,
+        "AUC": 0.8778935185185185,
+        "Accuracy": 0.8333333333333334,
+        "Sensitivity": 0.8611111111111112,
+        "Specificity": 0.8125,
+        "Balanced accuracy": 0.8368055555555556,
+        "learning_rate": 0.1,
+        "max_depth": 2,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": 0.9074749847261333,
+        "AUC": 0.9511904761904761,
+        "Accuracy": 0.8674698795180723,
+        "Sensitivity": 0.8857142857142857,
+        "Specificity": 0.8541666666666666,
+        "Balanced accuracy": 0.8699404761904761,
+        "learning_rate": 0.1,
+        "max_depth": 3,
+        "n_estimators": 100
+      }
+    ],
+    "SVM": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": 0.9085539514332485,
+        "AUC": 0.9020408163265307,
+        "Accuracy": 0.8690476190476191,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.8163265306122449,
+        "Balanced accuracy": 0.8795918367346939,
+        "C": 0.01,
+        "kernel": "linear",
+        "gamma": NaN
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": 0.9055537093789873,
+        "AUC": 0.917201166180758,
+        "Accuracy": 0.8928571428571429,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.8571428571428571,
+        "Balanced accuracy": 0.8999999999999999,
+        "C": 1.0,
+        "kernel": "rbf",
+        "gamma": 0.01
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": 0.9073641932003266,
+        "AUC": 0.9189504373177843,
+        "Accuracy": 0.8690476190476191,
+        "Sensitivity": 0.9714285714285714,
+        "Specificity": 0.7959183673469388,
+        "Balanced accuracy": 0.883673469387755,
+        "C": 1.0,
+        "kernel": "rbf",
+        "gamma": 0.01
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": 0.912350510980648,
+        "AUC": 0.8793002915451895,
+        "Accuracy": 0.8690476190476191,
+        "Sensitivity": 0.8857142857142857,
+        "Specificity": 0.8571428571428571,
+        "Balanced accuracy": 0.8714285714285714,
+        "C": 10.0,
+        "kernel": "rbf",
+        "gamma": 0.01
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": 0.9056010945775744,
+        "AUC": 0.9667638483965014,
+        "Accuracy": 0.9404761904761905,
+        "Sensitivity": 0.9428571428571428,
+        "Specificity": 0.9387755102040817,
+        "Balanced accuracy": 0.9408163265306122,
+        "C": 1.0,
+        "kernel": "rbf",
+        "gamma": 0.01
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": 0.9105757199062964,
+        "AUC": 0.8793002915451895,
+        "Accuracy": 0.7976190476190477,
+        "Sensitivity": 0.9142857142857143,
+        "Specificity": 0.7142857142857143,
+        "Balanced accuracy": 0.8142857142857143,
+        "C": 1.0,
+        "kernel": "rbf",
+        "gamma": 0.01
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": 0.9091090351881252,
+        "AUC": 0.8938775510204081,
+        "Accuracy": 0.8809523809523809,
+        "Sensitivity": 0.8857142857142857,
+        "Specificity": 0.8775510204081632,
+        "Balanced accuracy": 0.8816326530612244,
+        "C": 0.01,
+        "kernel": "linear",
+        "gamma": NaN
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": 0.9085907186745351,
+        "AUC": 0.8900462962962963,
+        "Accuracy": 0.8690476190476191,
+        "Sensitivity": 0.8611111111111112,
+        "Specificity": 0.875,
+        "Balanced accuracy": 0.8680555555555556,
+        "C": 10.0,
+        "kernel": "rbf",
+        "gamma": 0.01
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": 0.9160934309353719,
+        "AUC": 0.8697916666666666,
+        "Accuracy": 0.8333333333333334,
+        "Sensitivity": 0.8888888888888888,
+        "Specificity": 0.7916666666666666,
+        "Balanced accuracy": 0.8402777777777777,
+        "C": 0.1,
+        "kernel": "linear",
+        "gamma": NaN
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": 0.9058401430456119,
+        "AUC": 0.9458333333333333,
+        "Accuracy": 0.8674698795180723,
+        "Sensitivity": 0.9142857142857143,
+        "Specificity": 0.8333333333333334,
+        "Balanced accuracy": 0.8738095238095238,
+        "C": 10.0,
+        "kernel": "rbf",
+        "gamma": 0.01
+      }
+    ]
+  }
+}

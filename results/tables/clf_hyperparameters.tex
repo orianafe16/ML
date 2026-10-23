@@ -1,0 +1,20 @@
+\begin{tabular}{llp{7cm}l}
+\toprule
+\textbf{Model} & \textbf{Hyperparameter} & \textbf{Values chosen in the 10 outer folds} & \textbf{Final model (all data)} \\
+\midrule
+Logistic regression & penalty & l1 (6), l2 (4) & l1 \\
+Logistic regression & C & 0.3162 (3), 1 (3), 0.1 (2), 3.162 (2) & 100 \\
+Naive Bayes & age\_\_n\_bins & 8 (6), 3 (2), 5 (2) & 8 \\
+Naive Bayes & alpha & 0.1 (6), 0.5 (4) & 0.1 \\
+Decision tree (pruned) & ccp\_alpha & 0.01 (7), 0.02 (3) & 0.01 \\
+Decision tree (pruned) & criterion & entropy (9), gini (1) & entropy \\
+Random forest & max\_features & 0.33 (7), sqrt (3) & sqrt \\
+Random forest & min\_samples\_leaf & 5 (9), 10 (1) & 5 \\
+XGBoost & n\_estimators & 100 (9), 300 (1) & 100 \\
+XGBoost & learning\_rate & 0.1 (5), 0.03 (5) & 0.03 \\
+XGBoost & max\_depth & 2 (6), 3 (3), 5 (1) & 5 \\
+SVM & kernel & rbf (7), linear (3) & rbf \\
+SVM & C & 1 (4), 10 (3), 0.01 (2), 0.1 (1) & 10 \\
+SVM & gamma & 0.01 (7) & 0.01 \\
+\bottomrule
+\end{tabular}
