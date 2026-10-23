@@ -39,6 +39,10 @@ ML/
 │   ├── config.py        paths, seed, validation settings, variable names
 │   ├── data.py          loading, cleaning, encoding, feature sets
 │   ├── reporting.py     LaTeX tables and JSON summaries in results/
+│   ├── eda.py           statistical tests and effect sizes for the EDA
+│   ├── evaluation.py    AUC, bootstrap confidence intervals (nested CV in later stages)
+│   ├── pipelines.py     preprocessing inside scikit-learn Pipelines
+│   ├── plotting.py      common figure style and class colours
 │   └── check_env.py     environment check
 ├── notebooks/           01_data_preparation … 05_classification (run in order)
 ├── results/             figures/, tables/ (LaTeX) and logs/ (one JSON summary per stage)

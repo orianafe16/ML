@@ -68,3 +68,33 @@ Entry format:
   - The author runs it on her computer; the AI reads `results/logs/01_data_preparation.json`.
 - **Corrections:** none so far.
 - **Bounty candidate:** no.
+
+## Stage 2 — Exploratory data analysis (2026-10-23)
+
+- **Request:** notebook `02_eda` following the structure of the course EDA notebook, adapted to
+  binary mutations (Fisher's exact test), Mann–Whitney for age and multiple-comparison correction.
+- **What the AI produced:** `src/eda.py` (tests, effect sizes, VIF, relevance, conditional
+  probabilities), `src/evaluation.py` (rank-based AUC, bootstrap CI), `src/plotting.py`
+  (style and colours), `src/pipelines.py` (preprocessing inside a Pipeline),
+  `notebooks/02_eda.ipynb`.
+- **Verification:** the AI executed the notebook in a clean copy and inspected every figure
+  before delivering it. The author runs it and the AI compares her `results/logs/02_eda.json`
+  with its own run.
+- **Errors found by the AI in its own first version (fixed before delivery):**
+  1. Crash in the error bars: Wilson intervals for P(GBM) = 0 give a lower bound that is
+     negative by floating-point error (about −1e-17); matplotlib rejects negative error lengths.
+     Fixed by clipping the error lengths at 0.
+  2. `KeyError: 'Feature'` after re-ordering a table: `reset_index()` named the column `index`
+     because the index had lost its name. Fixed with `rename_axis("Feature")`.
+  3. Misleading figures: (a) the ROC curves of single features used the class colours (blue and
+     orange) for features, which suggests a link with LGG/GBM; (b) the bar chart of mutations per
+     patient used a categorical axis that silently skipped empty counts (7, 8, 10…), hiding that
+     a few patients have many mutated genes; (c) legends covered data points. All fixed and checked
+     visually.
+- **Bounty candidate:** 1 and 2 are ordinary bugs. 3(b) is a candidate example of a plausible but
+  misleading visualisation produced by an AI (an axis that hides part of the distribution),
+  detected by visual inspection. Caught by the AI itself, so the author should decide whether
+  it qualifies.
+- **Note for the defense:** the author should be able to explain why Fisher instead of chi-square,
+  why Mann–Whitney instead of t-test, what Bonferroni and BH control, and why no feature is
+  removed after the EDA.

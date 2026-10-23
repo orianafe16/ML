@@ -1,0 +1,14 @@
+\begin{tabular}{lp{12cm}}
+\toprule
+\textbf{Topic} & \textbf{Finding} \\
+\midrule
+Class balance & 487 LGG / 352 GBM; majority baseline accuracy 0.580 \\
+Leakage & Primary\_Diagnosis determines Grade; with it, CV ROC-AUC = 1.000 \\
+Age & median 41.6 (LGG) vs 61.4 (GBM); Cohen d = 1.26; AUC = 0.810; not normal (Shapiro p < 0.05 in both classes: True) \\
+Most relevant features & IDH1 (AUC 0.858), Age\_at\_diagnosis (AUC 0.810), ATRX (AUC 0.640), PTEN (AUC 0.639), CIC (AUC 0.604) \\
+Significant differences & 14 of 23 after Bonferroni, 18 after Benjamini-Hochberg \\
+Redundancy & strongest pair Age\_at\_diagnosis-IDH1 (r = -0.58); maximum VIF = 3.09 \\
+Baseline & logistic regression, all 23 predictors: CV ROC-AUC = 0.918; age + IDH1: 0.901 \\
+Regression target & age mean 50.9, SD 15.7; 11 of 21 features related to age after BH; strongest: IDH1 (median difference -20.8 years) \\
+\bottomrule
+\end{tabular}

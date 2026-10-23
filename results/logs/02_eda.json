@@ -1,0 +1,1464 @@
+{
+  "stage": "02_eda",
+  "timestamp": "2026-10-23T19:47:26",
+  "seed": 42,
+  "quality": {
+    "missing_values": 0,
+    "age_min": 14.42,
+    "age_max": 89.29,
+    "distinct_profiles_without_age": 327,
+    "patients_without_mutations": 67,
+    "patients_without_mutations_by_class": {
+      "GBM": 53,
+      "LGG": 14
+    },
+    "mutations_per_patient": {
+      "count": 839.0,
+      "mean": 2.3,
+      "std": 1.48,
+      "min": 0.0,
+      "25%": 1.0,
+      "50%": 2.0,
+      "75%": 3.0,
+      "max": 17.0
+    },
+    "patients_with_6_or_more_mutations": 7
+  },
+  "class_balance": {
+    "LGG": {
+      "Patients": 487,
+      "Proportion": 0.5804529201430274
+    },
+    "GBM": {
+      "Patients": 352,
+      "Proportion": 0.4195470798569726
+    }
+  },
+  "majority_baseline_accuracy": 0.5804529201430274,
+  "diagnosis_vs_grade": {
+    "Astrocytoma, NOS": {
+      "LGG": 56,
+      "GBM": 0
+    },
+    "Astrocytoma, anaplastic": {
+      "LGG": 127,
+      "GBM": 0
+    },
+    "Glioblastoma": {
+      "LGG": 0,
+      "GBM": 352
+    },
+    "Mixed glioma": {
+      "LGG": 127,
+      "GBM": 0
+    },
+    "Oligodendroglioma, NOS": {
+      "LGG": 104,
+      "GBM": 0
+    },
+    "Oligodendroglioma, anaplastic": {
+      "LGG": 73,
+      "GBM": 0
+    }
+  },
+  "age_by_class": {
+    "LGG": {
+      "count": 487.0,
+      "mean": 43.87492813141684,
+      "std": 13.261725844375139,
+      "min": 14.42,
+      "25%": 33.53,
+      "50%": 41.61,
+      "75%": 53.745000000000005,
+      "max": 87.0,
+      "skewness": 0.37912367810499303
+    },
+    "GBM": {
+      "count": 352.0,
+      "mean": 60.70374999999999,
+      "std": 13.42707984175722,
+      "min": 21.73,
+      "25%": 52.665,
+      "50%": 61.394999999999996,
+      "75%": 69.995,
+      "max": 89.29,
+      "skewness": -0.4613922033318269
+    }
+  },
+  "age_ks": {
+    "statistic": 0.49309898263953705,
+    "p_value": 1.1264387467865017e-45
+  },
+  "gender_race_by_class_percent": {
+    "Female": {
+      "LGG": 44.35,
+      "GBM": 38.35
+    },
+    "Male": {
+      "LGG": 55.65,
+      "GBM": 61.65
+    },
+    "American Indian or Alaska Native": {
+      "LGG": 0.21,
+      "GBM": 0.0
+    },
+    "Asian": {
+      "LGG": 1.64,
+      "GBM": 1.7
+    },
+    "Black or African American": {
+      "LGG": 4.31,
+      "GBM": 10.8
+    },
+    "White": {
+      "LGG": 93.84,
+      "GBM": 87.5
+    }
+  },
+  "age_shapiro": [
+    {
+      "Class": "LGG",
+      "n": 487,
+      "Shapiro-Wilk W": 0.9767192957094374,
+      "p-value": 5.181362660167535e-07
+    },
+    {
+      "Class": "GBM",
+      "n": 352,
+      "Shapiro-Wilk W": 0.9825767597064958,
+      "p-value": 0.00029261981741433634
+    }
+  ],
+  "classification_tests": [
+    {
+      "Feature": "Age_at_diagnosis",
+      "Test": "Mann-Whitney U",
+      "AUC": 0.8104378616763114,
+      "p-value": 2.927771877460193e-53,
+      "Welch t p-value": 1.5454633045354674e-60,
+      "Cohen d": 1.2623524877278436,
+      "Odds ratio": NaN,
+      "OR CI low": NaN,
+      "OR CI high": NaN,
+      "phi": NaN,
+      "Prevalence LGG": NaN,
+      "Prevalence GBM": NaN,
+      "p Bonferroni": 6.733875318158443e-52,
+      "p BH": 3.366937659079222e-52
+    },
+    {
+      "Feature": "Gender (female)",
+      "Test": "Fisher exact",
+      "AUC": 0.46999544987866343,
+      "p-value": 0.08889155700136891,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 0.7812534841124472,
+      "OR CI low": 0.590982077891048,
+      "OR CI high": 1.032784291219,
+      "phi": -0.060032918660489466,
+      "Prevalence LGG": 0.44353182751540043,
+      "Prevalence GBM": 0.3835227272727273,
+      "p Bonferroni": 1.0,
+      "p BH": 0.1076055690016571
+    },
+    {
+      "Feature": "Race (non-white)",
+      "Test": "Fisher exact",
+      "AUC": 0.5316991786447639,
+      "p-value": 0.001892119618952215,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 2.1636952998379253,
+      "OR CI low": 1.3350775030662099,
+      "OR CI high": 3.506595939028835,
+      "phi": 0.11032329896898405,
+      "Prevalence LGG": 0.061601642710472276,
+      "Prevalence GBM": 0.125,
+      "p Bonferroni": 0.043518751235900946,
+      "p BH": 0.0031084822311357816
+    },
+    {
+      "Feature": "IDH1",
+      "Test": "Fisher exact",
+      "AUC": 0.14150002333395556,
+      "p-value": 4.348594637206022e-106,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 0.01990982802888526,
+      "OR CI low": 0.012438869701009617,
+      "OR CI high": 0.03186794794607507,
+      "phi": -0.708140818658888,
+      "Prevalence LGG": 0.7823408624229979,
+      "Prevalence GBM": 0.06534090909090909,
+      "p Bonferroni": 1.000176766557385e-104,
+      "p BH": 1.000176766557385e-104
+    },
+    {
+      "Feature": "TP53",
+      "Test": "Fisher exact",
+      "AUC": 0.4192382630203472,
+      "p-value": 2.7309866701614867e-06,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 0.5081135947590744,
+      "OR CI low": 0.38198435639800404,
+      "OR CI high": 0.6758900485180652,
+      "phi": -0.16178605710154087,
+      "Prevalence LGG": 0.48254620123203285,
+      "Prevalence GBM": 0.3210227272727273,
+      "p Bonferroni": 6.281269341371419e-05,
+      "p BH": 6.28126934137142e-06
+    },
+    {
+      "Feature": "ATRX",
+      "Test": "Fisher exact",
+      "AUC": 0.3604104442785141,
+      "p-value": 2.8704852327845992e-21,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 0.1797466838338773,
+      "OR CI low": 0.12094907967252244,
+      "OR CI high": 0.26712787262833443,
+      "phi": -0.31462532251777087,
+      "Prevalence LGG": 0.3757700205338809,
+      "Prevalence GBM": 0.09659090909090909,
+      "p Bonferroni": 6.602116035404578e-20,
+      "p BH": 1.3204232070809156e-20
+    },
+    {
+      "Feature": "PTEN",
+      "Test": "Fisher exact",
+      "AUC": 0.6391053761433638,
+      "p-value": 1.0033901172984214e-26,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 8.93441943373544,
+      "OR CI low": 5.661317784097468,
+      "OR CI high": 14.099871030404467,
+      "phi": 0.36717445193944404,
+      "Prevalence LGG": 0.0513347022587269,
+      "Prevalence GBM": 0.32954545454545453,
+      "p Bonferroni": 2.3077972697863692e-25,
+      "p BH": 7.692657565954564e-26
+    },
+    {
+      "Feature": "EGFR",
+      "Test": "Fisher exact",
+      "AUC": 0.5832293027814075,
+      "p-value": 3.364350148102975e-12,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 4.350287935923295,
+      "OR CI low": 2.8079762539161575,
+      "OR CI high": 6.739731185064658,
+      "phi": 0.24152708939223416,
+      "Prevalence LGG": 0.06365503080082136,
+      "Prevalence GBM": 0.23011363636363635,
+      "p Bonferroni": 7.738005340636843e-11,
+      "p BH": 1.2896675567728072e-11
+    },
+    {
+      "Feature": "CIC",
+      "Test": "Fisher exact",
+      "AUC": 0.3958255553481426,
+      "p-value": 9.831750451984064e-23,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 0.04570418070801775,
+      "OR CI low": 0.017601479246383042,
+      "OR CI high": 0.11867594222913896,
+      "phi": -0.3034588606395057,
+      "Prevalence LGG": 0.21971252566735114,
+      "Prevalence GBM": 0.011363636363636364,
+      "p Bonferroni": 2.261302603956335e-21,
+      "p BH": 5.653256509890837e-22
+    },
+    {
+      "Feature": "MUC16",
+      "Test": "Fisher exact",
+      "AUC": 0.5388714532387531,
+      "p-value": 0.0006883191296841439,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 2.0935518724644773,
+      "OR CI low": 1.3681351842784568,
+      "OR CI high": 3.20360114487594,
+      "phi": 0.11944677912988295,
+      "Prevalence LGG": 0.08418891170431211,
+      "Prevalence GBM": 0.16193181818181818,
+      "p Bonferroni": 0.01583133998273531,
+      "p BH": 0.00143921272570321
+    },
+    {
+      "Feature": "PIK3CA",
+      "Test": "Fisher exact",
+      "AUC": 0.5082543867836475,
+      "p-value": 0.45671356215673437,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 1.2299147507104107,
+      "OR CI low": 0.7619840976263033,
+      "OR CI high": 1.9851992957954276,
+      "phi": 0.028905122103653955,
+      "Prevalence LGG": 0.08008213552361396,
+      "Prevalence GBM": 0.09659090909090909,
+      "p Bonferroni": 1.0,
+      "p BH": 0.477473269527495
+    },
+    {
+      "Feature": "NF1",
+      "Test": "Fisher exact",
+      "AUC": 0.5242031454172111,
+      "p-value": 0.013775291979272247,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 1.9026434210880872,
+      "OR CI low": 1.1533314106458383,
+      "OR CI high": 3.1387786323990223,
+      "phi": 0.08812346528954909,
+      "Prevalence LGG": 0.059548254620123205,
+      "Prevalence GBM": 0.10795454545454546,
+      "p Bonferroni": 0.31683171552326167,
+      "p BH": 0.017601761973514537
+    },
+    {
+      "Feature": "PIK3R1",
+      "Test": "Fisher exact",
+      "AUC": 0.5253144250513347,
+      "p-value": 0.004087283456685031,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 2.2750300251119118,
+      "OR CI low": 1.2995167271365524,
+      "OR CI high": 3.982835701211286,
+      "phi": 0.10181274992458567,
+      "Prevalence LGG": 0.043121149897330596,
+      "Prevalence GBM": 0.09375,
+      "p Bonferroni": 0.0940075195037557,
+      "p BH": 0.005875469968984731
+    },
+    {
+      "Feature": "FUBP1",
+      "Test": "Fisher exact",
+      "AUC": 0.45869306514840397,
+      "p-value": 8.405905001556313e-09,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 0.07288438519684524,
+      "OR CI low": 0.02021643212916484,
+      "OR CI high": 0.2627631607586518,
+      "phi": -0.1809557007992238,
+      "Prevalence LGG": 0.08829568788501027,
+      "Prevalence GBM": 0.005681818181818182,
+      "p Bonferroni": 1.9333581503579518e-07,
+      "p BH": 2.4166976879474398e-08
+    },
+    {
+      "Feature": "RB1",
+      "Test": "Fisher exact",
+      "AUC": 0.5421352902744073,
+      "p-value": 1.7560403027895117e-08,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 8.024030914140802,
+      "OR CI low": 3.429833743272391,
+      "OR CI high": 18.77206795734003,
+      "phi": 0.19516791065180455,
+      "Prevalence LGG": 0.012320328542094456,
+      "Prevalence GBM": 0.09659090909090909,
+      "p Bonferroni": 4.038892696415877e-07,
+      "p BH": 4.487658551573196e-08
+    },
+    {
+      "Feature": "NOTCH1",
+      "Test": "Fisher exact",
+      "AUC": 0.46098562628336753,
+      "p-value": 1.1631902422814198e-09,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 0.01656074422031869,
+      "OR CI low": 0.0010138997689277337,
+      "OR CI high": 0.2704983840965513,
+      "phi": -0.1851750162342111,
+      "Prevalence LGG": 0.07802874743326489,
+      "Prevalence GBM": 0.0,
+      "p Bonferroni": 2.6753375572472655e-08,
+      "p BH": 3.821910796067522e-09
+    },
+    {
+      "Feature": "BCOR",
+      "Test": "Fisher exact",
+      "AUC": 0.4995916557774874,
+      "p-value": 1.0,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 0.986993916509335,
+      "OR CI low": 0.4713305392618319,
+      "OR CI high": 2.0668234075222442,
+      "phi": -0.002206229640212586,
+      "Prevalence LGG": 0.03490759753593429,
+      "Prevalence GBM": 0.03409090909090909,
+      "p Bonferroni": 1.0,
+      "p BH": 1.0
+    },
+    {
+      "Feature": "CSMD3",
+      "Test": "Fisher exact",
+      "AUC": 0.5089864896397237,
+      "p-value": 0.16702800623502634,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 1.7470222222222223,
+      "OR CI low": 0.8186325196322497,
+      "OR CI high": 3.728274374330189,
+      "phi": 0.05025693388371908,
+      "Prevalence LGG": 0.024640657084188913,
+      "Prevalence GBM": 0.04261363636363636,
+      "p Bonferroni": 1.0,
+      "p BH": 0.1920822071702803
+    },
+    {
+      "Feature": "SMARCA4",
+      "Test": "Fisher exact",
+      "AUC": 0.4820678551428038,
+      "p-value": 0.004554814595697164,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 0.2552275710491773,
+      "OR CI low": 0.09221382027343536,
+      "OR CI high": 0.7064137764871291,
+      "phi": -0.1002855013038319,
+      "Prevalence LGG": 0.04722792607802875,
+      "Prevalence GBM": 0.011363636363636364,
+      "p Bonferroni": 0.10476073570103478,
+      "p BH": 0.006162396217707929
+    },
+    {
+      "Feature": "GRIN2A",
+      "Test": "Fisher exact",
+      "AUC": 0.5212222325928692,
+      "p-value": 0.0010699423993916798,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 3.949974937343359,
+      "OR CI low": 1.6916315576621528,
+      "OR CI high": 9.223227088056438,
+      "phi": 0.11868531351442421,
+      "Prevalence LGG": 0.014373716632443531,
+      "Prevalence GBM": 0.056818181818181816,
+      "p Bonferroni": 0.024608675186008636,
+      "p BH": 0.0018929750143083567
+    },
+    {
+      "Feature": "IDH2",
+      "Test": "Fisher exact",
+      "AUC": 0.4812803341422438,
+      "p-value": 0.0008509406939982266,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 0.15476229970474076,
+      "OR CI low": 0.041467291695924925,
+      "OR CI high": 0.5775966654763166,
+      "phi": -0.11315008981685534,
+      "Prevalence LGG": 0.043121149897330596,
+      "Prevalence GBM": 0.005681818181818182,
+      "p Bonferroni": 0.01957163596195921,
+      "p BH": 0.001630969663496601
+    },
+    {
+      "Feature": "FAT4",
+      "Test": "Fisher exact",
+      "AUC": 0.5057518200485346,
+      "p-value": 0.39220000920871345,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 1.521100683138607,
+      "OR CI low": 0.6747584594127318,
+      "OR CI high": 3.4290007868274515,
+      "phi": 0.03476659038934871,
+      "Prevalence LGG": 0.022587268993839837,
+      "Prevalence GBM": 0.03409090909090909,
+      "p Bonferroni": 1.0,
+      "p BH": 0.42955239103811477
+    },
+    {
+      "Feature": "PDGFRA",
+      "Test": "Fisher exact",
+      "AUC": 0.5165671084562256,
+      "p-value": 0.0038689334948028824,
+      "Welch t p-value": NaN,
+      "Cohen d": NaN,
+      "Odds ratio": 3.632300834381072,
+      "OR CI low": 1.4500604150113456,
+      "OR CI high": 9.098661831508725,
+      "phi": 0.10232697948290426,
+      "Prevalence LGG": 0.012320328542094456,
+      "Prevalence GBM": 0.045454545454545456,
+      "p Bonferroni": 0.0889854703804663,
+      "p BH": 0.005875469968984731
+    }
+  ],
+  "n_significant_bonferroni": 14,
+  "n_significant_bh": 18,
+  "age_outliers": [
+    {
+      "Class": "LGG",
+      "Lower fence": 3.207499999999996,
+      "Upper fence": 84.06750000000001,
+      "n outliers": 1,
+      "Outlier values": "87.0"
+    },
+    {
+      "Class": "GBM",
+      "Lower fence": 26.66999999999999,
+      "Upper fence": 95.99000000000001,
+      "n outliers": 7,
+      "Outlier values": "21.7, 21.8, 23.4, 23.9, 24.2, 24.4, 25.2"
+    }
+  ],
+  "top_correlations": [
+    {
+      "Feature 1": "Age_at_diagnosis",
+      "Feature 2": "IDH1",
+      "r": -0.5765676660183754
+    },
+    {
+      "Feature 1": "TP53",
+      "Feature 2": "ATRX",
+      "r": 0.5469030624463691
+    },
+    {
+      "Feature 1": "IDH1",
+      "Feature 2": "ATRX",
+      "r": 0.4549195046116493
+    },
+    {
+      "Feature 1": "CIC",
+      "Feature 2": "FUBP1",
+      "r": 0.4379219326251058
+    },
+    {
+      "Feature 1": "Age_at_diagnosis",
+      "Feature 2": "ATRX",
+      "r": -0.4233951132763753
+    },
+    {
+      "Feature 1": "IDH1",
+      "Feature 2": "PTEN",
+      "r": -0.3948623664146133
+    },
+    {
+      "Feature 1": "IDH1",
+      "Feature 2": "EGFR",
+      "r": -0.3572165145115592
+    },
+    {
+      "Feature 1": "IDH1",
+      "Feature 2": "TP53",
+      "r": 0.34099523548884936
+    },
+    {
+      "Feature 1": "Age_at_diagnosis",
+      "Feature 2": "TP53",
+      "r": -0.32163360190605533
+    },
+    {
+      "Feature 1": "IDH1",
+      "Feature 2": "CIC",
+      "r": 0.32069641292048734
+    }
+  ],
+  "vif": [
+    {
+      "Feature": "IDH1",
+      "VIF": 3.092947656730341
+    },
+    {
+      "Feature": "ATRX",
+      "VIF": 1.8098994923883729
+    },
+    {
+      "Feature": "TP53",
+      "VIF": 1.7732509847319284
+    },
+    {
+      "Feature": "CIC",
+      "VIF": 1.7723725509667632
+    },
+    {
+      "Feature": "Age_at_diagnosis",
+      "VIF": 1.7071623022847275
+    },
+    {
+      "Feature": "FUBP1",
+      "VIF": 1.3353329415033526
+    },
+    {
+      "Feature": "PTEN",
+      "VIF": 1.2686598739827273
+    },
+    {
+      "Feature": "EGFR",
+      "VIF": 1.2509660454930152
+    },
+    {
+      "Feature": "IDH2",
+      "VIF": 1.2337516293547597
+    },
+    {
+      "Feature": "RB1",
+      "VIF": 1.1574765799458946
+    },
+    {
+      "Feature": "CSMD3",
+      "VIF": 1.127086701421182
+    },
+    {
+      "Feature": "NOTCH1",
+      "VIF": 1.1251677922063053
+    },
+    {
+      "Feature": "NF1",
+      "VIF": 1.1156582731663407
+    },
+    {
+      "Feature": "GRIN2A",
+      "VIF": 1.095218398315371
+    },
+    {
+      "Feature": "FAT4",
+      "VIF": 1.0915725814159003
+    },
+    {
+      "Feature": "PDGFRA",
+      "VIF": 1.0909035342928615
+    },
+    {
+      "Feature": "SMARCA4",
+      "VIF": 1.0747395936252393
+    },
+    {
+      "Feature": "BCOR",
+      "VIF": 1.0734858695836824
+    },
+    {
+      "Feature": "MUC16",
+      "VIF": 1.0634032018511672
+    },
+    {
+      "Feature": "PIK3CA",
+      "VIF": 1.0549554435536161
+    },
+    {
+      "Feature": "PIK3R1",
+      "VIF": 1.0527729516215474
+    },
+    {
+      "Feature": "Race_black",
+      "VIF": 1.0399028117146782
+    },
+    {
+      "Feature": "Gender",
+      "VIF": 1.0295843919727279
+    },
+    {
+      "Feature": "Race_asian",
+      "VIF": 1.0156065603101743
+    },
+    {
+      "Feature": "Race_native",
+      "VIF": 1.0071040873885844
+    }
+  ],
+  "relevance": [
+    {
+      "Feature": "IDH1",
+      "Direction": "lower in GBM",
+      "AUC": 0.8584999766660444,
+      "AUC CI low": 0.8367830642150458,
+      "AUC CI high": 0.8802855055301475,
+      "Mutual information (nats)": 0.2870623595014091
+    },
+    {
+      "Feature": "Age_at_diagnosis",
+      "Direction": "higher in GBM",
+      "AUC": 0.8104378616763114,
+      "AUC CI low": 0.7798878074248646,
+      "AUC CI high": 0.8386202486232965,
+      "Mutual information (nats)": 0.18327526241531444
+    },
+    {
+      "Feature": "ATRX",
+      "Direction": "lower in GBM",
+      "AUC": 0.6395895557214859,
+      "AUC CI low": 0.6123471625910024,
+      "AUC CI high": 0.6665987551334702,
+      "Mutual information (nats)": 0.05417938299249389
+    },
+    {
+      "Feature": "PTEN",
+      "Direction": "higher in GBM",
+      "AUC": 0.6391053761433638,
+      "AUC CI low": 0.6144793027814075,
+      "AUC CI high": 0.6664898876470039,
+      "Mutual information (nats)": 0.06936060328799422
+    },
+    {
+      "Feature": "CIC",
+      "Direction": "lower in GBM",
+      "AUC": 0.6041744446518573,
+      "AUC CI low": 0.5850571536074296,
+      "AUC CI high": 0.6247121902417399,
+      "Mutual information (nats)": 0.05901593238207664
+    },
+    {
+      "Feature": "EGFR",
+      "Direction": "higher in GBM",
+      "AUC": 0.5832293027814075,
+      "AUC CI low": 0.558446527324062,
+      "AUC CI high": 0.6083354722792608,
+      "Mutual information (nats)": 0.029148348851944617
+    },
+    {
+      "Feature": "TP53",
+      "Direction": "lower in GBM",
+      "AUC": 0.5807617369796527,
+      "AUC CI low": 0.547287063071682,
+      "AUC CI high": 0.6146319214345716,
+      "Mutual information (nats)": 0.013241703895696344
+    },
+    {
+      "Feature": "RB1",
+      "Direction": "higher in GBM",
+      "AUC": 0.5421352902744073,
+      "AUC CI low": 0.5265064255880157,
+      "AUC CI high": 0.5587869843195818,
+      "Mutual information (nats)": 0.019848293730284332
+    },
+    {
+      "Feature": "FUBP1",
+      "Direction": "lower in GBM",
+      "AUC": 0.541306934851596,
+      "AUC CI low": 0.5289827416231099,
+      "AUC CI high": 0.5550477179391451,
+      "Mutual information (nats)": 0.02107092947485797
+    },
+    {
+      "Feature": "NOTCH1",
+      "Direction": "lower in GBM",
+      "AUC": 0.5390143737166324,
+      "AUC CI low": 0.5277207392197125,
+      "AUC CI high": 0.5513603696098561,
+      "Mutual information (nats)": 0.025409788771491165
+    },
+    {
+      "Feature": "MUC16",
+      "Direction": "higher in GBM",
+      "AUC": 0.5388714532387531,
+      "AUC CI low": 0.5164533554228112,
+      "AUC CI high": 0.5627117556468173,
+      "Mutual information (nats)": 0.00702868229172765
+    },
+    {
+      "Feature": "Race_nonwhite",
+      "Direction": "higher in GBM",
+      "AUC": 0.5316991786447639,
+      "AUC CI low": 0.511091431188165,
+      "AUC CI high": 0.5518247153257421,
+      "Mutual information (nats)": 0.005992204215263822
+    },
+    {
+      "Feature": "Gender",
+      "Direction": "lower in GBM",
+      "AUC": 0.5300045501213366,
+      "AUC CI low": 0.49598152825742026,
+      "AUC CI high": 0.5653616908950905,
+      "Mutual information (nats)": 0.0018072178868013822
+    },
+    {
+      "Feature": "PIK3R1",
+      "Direction": "higher in GBM",
+      "AUC": 0.5253144250513347,
+      "AUC CI low": 0.5073968639163711,
+      "AUC CI high": 0.5429949277814075,
+      "Mutual information (nats)": 0.00510287486540488
+    },
+    {
+      "Feature": "NF1",
+      "Direction": "higher in GBM",
+      "AUC": 0.5242031454172111,
+      "AUC CI low": 0.5051043027814075,
+      "AUC CI high": 0.5447245572381929,
+      "Mutual information (nats)": 0.003822216799297784
+    },
+    {
+      "Feature": "GRIN2A",
+      "Direction": "higher in GBM",
+      "AUC": 0.5212222325928692,
+      "AUC CI low": 0.5085927291394438,
+      "AUC CI high": 0.5360597115923091,
+      "Mutual information (nats)": 0.007053951666871672
+    },
+    {
+      "Feature": "IDH2",
+      "Direction": "lower in GBM",
+      "AUC": 0.5187196658577562,
+      "AUC CI low": 0.5090856589509054,
+      "AUC CI high": 0.5285967104956132,
+      "Mutual information (nats)": 0.00776147256522724
+    },
+    {
+      "Feature": "SMARCA4",
+      "Direction": "lower in GBM",
+      "AUC": 0.5179321448571962,
+      "AUC CI low": 0.5072714439051709,
+      "AUC CI high": 0.5289866063095016,
+      "Mutual information (nats)": 0.00571459950677506
+    },
+    {
+      "Feature": "PDGFRA",
+      "Direction": "higher in GBM",
+      "AUC": 0.5165671084562256,
+      "AUC CI low": 0.5053580595482546,
+      "AUC CI high": 0.5295903724099309,
+      "Mutual information (nats)": 0.005226924361671024
+    },
+    {
+      "Feature": "CSMD3",
+      "Direction": "higher in GBM",
+      "AUC": 0.5089864896397237,
+      "AUC CI low": 0.4965940445911891,
+      "AUC CI high": 0.5213768200485346,
+      "Mutual information (nats)": 0.0012422188796475317
+    },
+    {
+      "Feature": "PIK3CA",
+      "Direction": "higher in GBM",
+      "AUC": 0.5082543867836475,
+      "AUC CI low": 0.48788967705805486,
+      "AUC CI high": 0.5271260150270674,
+      "Mutual information (nats)": 0.0004145049238664933
+    },
+    {
+      "Feature": "FAT4",
+      "Direction": "higher in GBM",
+      "AUC": 0.5057518200485346,
+      "AUC CI low": 0.4945427711405638,
+      "AUC CI high": 0.5177483899570655,
+      "Mutual information (nats)": 0.0005955146090788344
+    },
+    {
+      "Feature": "BCOR",
+      "Direction": "lower in GBM",
+      "AUC": 0.5004083442225127,
+      "AUC CI low": 0.4877788407690872,
+      "AUC CI high": 0.5128871249066642,
+      "Mutual information (nats)": 2.436757551155244e-06
+    }
+  ],
+  "age_youden": {
+    "threshold": 48.91,
+    "sensitivity": 0.8380681818181818,
+    "specificity": 0.6550308008213552,
+    "youden_J": 0.493098982639537
+  },
+  "conditional_probability_age": [
+    {
+      "Group": "(14.419, 35.18]",
+      "Midpoint": 30.44,
+      "n": 169,
+      "P(GBM)": 0.10059171597633136,
+      "CI low": 0.06375662297226953,
+      "CI high": 0.15518077248185524
+    },
+    {
+      "Group": "(35.18, 46.252]",
+      "Midpoint": 40.17,
+      "n": 167,
+      "P(GBM)": 0.16167664670658682,
+      "CI low": 0.11355701981877925,
+      "CI high": 0.22501102578308696
+    },
+    {
+      "Group": "(46.252, 55.586]",
+      "Midpoint": 51.55,
+      "n": 167,
+      "P(GBM)": 0.4431137724550898,
+      "CI low": 0.3698928772722578,
+      "CI high": 0.518892900306817
+    },
+    {
+      "Group": "(55.586, 65.13]",
+      "Midpoint": 60.355000000000004,
+      "n": 168,
+      "P(GBM)": 0.5952380952380952,
+      "CI low": 0.5196894880523286,
+      "CI high": 0.6665286703572204
+    },
+    {
+      "Group": "(65.13, 89.29]",
+      "Midpoint": 72.53,
+      "n": 168,
+      "P(GBM)": 0.7976190476190477,
+      "CI low": 0.7305273071092123,
+      "CI high": 0.8514044379206284
+    }
+  ],
+  "conditional_probability_genes": [
+    {
+      "Feature": "PTEN",
+      "n mutated": 141,
+      "P(GBM | mutated)": 0.8226950354609929,
+      "CI low (mutated)": 0.7513517892547812,
+      "CI high (mutated)": 0.8769213636182029,
+      "n not mutated": 698,
+      "P(GBM | not mutated)": 0.33810888252148996,
+      "CI low (not mutated)": 0.30398520425481423,
+      "CI high (not mutated)": 0.3740047503714794
+    },
+    {
+      "Feature": "EGFR",
+      "n mutated": 112,
+      "P(GBM | mutated)": 0.7232142857142857,
+      "CI low (mutated)": 0.6340021985730061,
+      "CI high (mutated)": 0.7976222000578225,
+      "n not mutated": 727,
+      "P(GBM | not mutated)": 0.37276478679504815,
+      "CI low (not mutated)": 0.3383706349040496,
+      "CI high (not mutated)": 0.4084964896040194
+    },
+    {
+      "Feature": "RB1",
+      "n mutated": 40,
+      "P(GBM | mutated)": 0.85,
+      "CI low (mutated)": 0.7092767563351029,
+      "CI high (mutated)": 0.9293881228267965,
+      "n not mutated": 799,
+      "P(GBM | not mutated)": 0.3979974968710889,
+      "CI low (not mutated)": 0.3646231696814361,
+      "CI high (not mutated)": 0.432347953061237
+    },
+    {
+      "Feature": "MUC16",
+      "n mutated": 98,
+      "P(GBM | mutated)": 0.5816326530612245,
+      "CI low (mutated)": 0.4826988040017874,
+      "CI high (mutated)": 0.6744081363865095,
+      "n not mutated": 741,
+      "P(GBM | not mutated)": 0.398110661268556,
+      "CI low (not mutated)": 0.36347808627239603,
+      "CI high (not mutated)": 0.43379420810407704
+    },
+    {
+      "Feature": "PIK3R1",
+      "n mutated": 54,
+      "P(GBM | mutated)": 0.6111111111111112,
+      "CI low (mutated)": 0.47788298538207685,
+      "CI high (mutated)": 0.7295806617088351,
+      "n not mutated": 785,
+      "P(GBM | not mutated)": 0.4063694267515924,
+      "CI low (not mutated)": 0.3725477927397786,
+      "CI high (not mutated)": 0.4411029752868377
+    },
+    {
+      "Feature": "NF1",
+      "n mutated": 67,
+      "P(GBM | mutated)": 0.5671641791044776,
+      "CI low (mutated)": 0.44808736490792916,
+      "CI high (mutated)": 0.6789568850245826,
+      "n not mutated": 772,
+      "P(GBM | not mutated)": 0.4067357512953368,
+      "CI low (not mutated)": 0.3726290283841062,
+      "CI high (not mutated)": 0.4417660411718764
+    },
+    {
+      "Feature": "GRIN2A",
+      "n mutated": 27,
+      "P(GBM | mutated)": 0.7407407407407407,
+      "CI low (mutated)": 0.5532142868544692,
+      "CI high (mutated)": 0.8682962543809281,
+      "n not mutated": 812,
+      "P(GBM | not mutated)": 0.4088669950738916,
+      "CI low (not mutated)": 0.3755585194162733,
+      "CI high (not mutated)": 0.4430336857237607
+    },
+    {
+      "Feature": "PDGFRA",
+      "n mutated": 22,
+      "P(GBM | mutated)": 0.7272727272727273,
+      "CI low (mutated)": 0.5184826598759761,
+      "CI high (mutated)": 0.8684923971201054,
+      "n not mutated": 817,
+      "P(GBM | not mutated)": 0.4112607099143207,
+      "CI low (not mutated)": 0.37801154390639224,
+      "CI high (not mutated)": 0.44534045855176574
+    },
+    {
+      "Feature": "CSMD3",
+      "n mutated": 27,
+      "P(GBM | mutated)": 0.5555555555555556,
+      "CI low (mutated)": 0.3731302451322448,
+      "CI high (mutated)": 0.72414141822977,
+      "n not mutated": 812,
+      "P(GBM | not mutated)": 0.41502463054187194,
+      "CI low (not mutated)": 0.38161192841977093,
+      "CI high (not mutated)": 0.44923756015674726
+    },
+    {
+      "Feature": "PIK3CA",
+      "n mutated": 73,
+      "P(GBM | mutated)": 0.4657534246575342,
+      "CI low (mutated)": 0.3559204166394806,
+      "CI high (mutated)": 0.5790105428095419,
+      "n not mutated": 766,
+      "P(GBM | not mutated)": 0.4151436031331593,
+      "CI low (not mutated)": 0.38075708319277385,
+      "CI high (not mutated)": 0.4503769788787277
+    },
+    {
+      "Feature": "FAT4",
+      "n mutated": 23,
+      "P(GBM | mutated)": 0.5217391304347826,
+      "CI low (mutated)": 0.32962737336427406,
+      "CI high (mutated)": 0.7076284258335335,
+      "n not mutated": 816,
+      "P(GBM | not mutated)": 0.4166666666666667,
+      "CI low (not mutated)": 0.38330781660188357,
+      "CI high (not mutated)": 0.4508064520328962
+    },
+    {
+      "Feature": "BCOR",
+      "n mutated": 29,
+      "P(GBM | mutated)": 0.41379310344827586,
+      "CI low (mutated)": 0.2551317734132239,
+      "CI high (mutated)": 0.5926216401212142,
+      "n not mutated": 810,
+      "P(GBM | not mutated)": 0.41975308641975306,
+      "CI low (not mutated)": 0.38622335861275575,
+      "CI high (not mutated)": 0.45404037016265236
+    },
+    {
+      "Feature": "SMARCA4",
+      "n mutated": 27,
+      "P(GBM | mutated)": 0.14814814814814814,
+      "CI low (mutated)": 0.05915927776244331,
+      "CI high (mutated)": 0.3247868542781298,
+      "n not mutated": 812,
+      "P(GBM | not mutated)": 0.42857142857142855,
+      "CI low (not mutated)": 0.3949484279991299,
+      "CI high (not mutated)": 0.46286708413765343
+    },
+    {
+      "Feature": "IDH2",
+      "n mutated": 23,
+      "P(GBM | mutated)": 0.08695652173913043,
+      "CI low (mutated)": 0.024180004484220335,
+      "CI high (mutated)": 0.2679598107574366,
+      "n not mutated": 816,
+      "P(GBM | not mutated)": 0.42892156862745096,
+      "CI low (not mutated)": 0.3953748051060729,
+      "CI high (not mutated)": 0.46313442402359206
+    },
+    {
+      "Feature": "NOTCH1",
+      "n mutated": 38,
+      "P(GBM | mutated)": 0.0,
+      "CI low (mutated)": 6.938893903907228e-18,
+      "CI high (mutated)": 0.09180986822558401,
+      "n not mutated": 801,
+      "P(GBM | not mutated)": 0.4394506866416979,
+      "CI low (not mutated)": 0.40544946000077087,
+      "CI high (not mutated)": 0.4740299095857181
+    },
+    {
+      "Feature": "FUBP1",
+      "n mutated": 45,
+      "P(GBM | mutated)": 0.044444444444444446,
+      "CI low (mutated)": 0.012274126706719846,
+      "CI high (mutated)": 0.14827510769435623,
+      "n not mutated": 794,
+      "P(GBM | not mutated)": 0.44080604534005036,
+      "CI low (not mutated)": 0.40663943255330054,
+      "CI high (not mutated)": 0.47554267397831124
+    },
+    {
+      "Feature": "TP53",
+      "n mutated": 348,
+      "P(GBM | mutated)": 0.32471264367816094,
+      "CI low (mutated)": 0.277659801098761,
+      "CI high (mutated)": 0.3755931145498925,
+      "n not mutated": 491,
+      "P(GBM | not mutated)": 0.48676171079429736,
+      "CI low (not mutated)": 0.44282583322789965,
+      "CI high (not mutated)": 0.5309031262837355
+    },
+    {
+      "Feature": "CIC",
+      "n mutated": 111,
+      "P(GBM | mutated)": 0.036036036036036036,
+      "CI low (mutated)": 0.014101302509231792,
+      "CI high (mutated)": 0.08901005589995212,
+      "n not mutated": 728,
+      "P(GBM | not mutated)": 0.47802197802197804,
+      "CI low (not mutated)": 0.4419470704341954,
+      "CI high (not mutated)": 0.5143276122661186
+    },
+    {
+      "Feature": "ATRX",
+      "n mutated": 217,
+      "P(GBM | mutated)": 0.15668202764976957,
+      "CI low (mutated)": 0.11434174780656141,
+      "CI high (mutated)": 0.21096609612967943,
+      "n not mutated": 622,
+      "P(GBM | not mutated)": 0.5112540192926045,
+      "CI low (not mutated)": 0.47202188575644316,
+      "CI high (not mutated)": 0.5503479969074203
+    },
+    {
+      "Feature": "IDH1",
+      "n mutated": 404,
+      "P(GBM | mutated)": 0.05693069306930693,
+      "CI low (mutated)": 0.03823218040971384,
+      "CI high (mutated)": 0.08397574559372546,
+      "n not mutated": 435,
+      "P(GBM | not mutated)": 0.7563218390804598,
+      "CI low (not mutated)": 0.7138497182684664,
+      "CI high (not mutated)": 0.7943064632356047
+    }
+  ],
+  "lda_top_coefficients": {
+    "IDH1": -1.348310255972199,
+    "IDH2": -0.40163362900648913,
+    "Age_at_diagnosis": 0.27973500749574515,
+    "NF1": -0.17354914845131103,
+    "TP53": 0.16542481218252814,
+    "EGFR": -0.131404091463182,
+    "PTEN": 0.1313383263777993,
+    "GRIN2A": 0.1261664436504004
+  },
+  "baseline": [
+    {
+      "Feature set": "Dummy (prior)",
+      "Predictors": 0,
+      "ROC-AUC mean": 0.5,
+      "ROC-AUC SD": 0.0,
+      "Balanced acc. mean": 0.5,
+      "Balanced acc. SD": 0.0
+    },
+    {
+      "Feature set": "Age only",
+      "Predictors": 1,
+      "ROC-AUC mean": 0.8108769638807903,
+      "ROC-AUC SD": 0.04125647680801746,
+      "Balanced acc. mean": 0.7213775510204081,
+      "Balanced acc. SD": 0.04613336845054639
+    },
+    {
+      "Feature set": "IDH1 only",
+      "Predictors": 1,
+      "ROC-AUC mean": 0.858579931972789,
+      "ROC-AUC SD": 0.041143440033050246,
+      "Balanced acc. mean": 0.858579931972789,
+      "Balanced acc. SD": 0.04114344003305024
+    },
+    {
+      "Feature set": "Age + IDH1",
+      "Predictors": 2,
+      "ROC-AUC mean": 0.9014511796782205,
+      "ROC-AUC SD": 0.03940969701373844,
+      "Balanced acc. mean": 0.8598681972789116,
+      "Balanced acc. SD": 0.03233255289750331
+    },
+    {
+      "Feature set": "20 genes only",
+      "Predictors": 20,
+      "ROC-AUC mean": 0.9117052525375231,
+      "ROC-AUC SD": 0.023558186780252205,
+      "Balanced acc. mean": 0.8734226190476191,
+      "Balanced acc. SD": 0.03436443868747783
+    },
+    {
+      "Feature set": "All 23 predictors",
+      "Predictors": 23,
+      "ROC-AUC mean": 0.9182079081632653,
+      "ROC-AUC SD": 0.02639620855021846,
+      "Balanced acc. mean": 0.871829648526077,
+      "Balanced acc. SD": 0.029085838500609605
+    },
+    {
+      "Feature set": "All 23 + diagnosis (LEAKAGE)",
+      "Predictors": 29,
+      "ROC-AUC mean": 1.0,
+      "ROC-AUC SD": 0.0,
+      "Balanced acc. mean": 1.0,
+      "Balanced acc. SD": 0.0
+    }
+  ],
+  "age_overall": {
+    "count": 839.0,
+    "mean": 50.935,
+    "std": 15.702,
+    "min": 14.42,
+    "25%": 38.055,
+    "50%": 51.55,
+    "75%": 62.8,
+    "max": 89.29,
+    "skewness": 0.07379049829018877,
+    "shapiro_p": 4.6531407836097575e-08
+  },
+  "age_tests": [
+    {
+      "Feature": "IDH1",
+      "n with": 404,
+      "Median age with": 39.485,
+      "Median age without": 60.32,
+      "Median difference": -20.835,
+      "Rank-biserial r": -0.6662171389552749,
+      "p-value": 1.5375390827704404e-62,
+      "p Bonferroni": 3.2288320738179246e-61,
+      "p BH": 3.228832073817925e-61
+    },
+    {
+      "Feature": "ATRX",
+      "n with": 217,
+      "Median age with": 36.97,
+      "Median age without": 55.57,
+      "Median difference": -18.6,
+      "Rank-biserial r": -0.5582408463852297,
+      "p-value": 1.5529024956365463e-34,
+      "p Bonferroni": 3.261095240836747e-33,
+      "p BH": 1.630547620418374e-33
+    },
+    {
+      "Feature": "TP53",
+      "n with": 348,
+      "Median age with": 41.78,
+      "Median age without": 56.28,
+      "Median difference": -14.5,
+      "Rank-biserial r": -0.37690497928225297,
+      "p-value": 1.2713761166958733e-20,
+      "p Bonferroni": 2.669889845061334e-19,
+      "p BH": 8.899632816871114e-20
+    },
+    {
+      "Feature": "PTEN",
+      "n with": 141,
+      "Median age with": 60.29,
+      "Median age without": 48.870000000000005,
+      "Median difference": 11.419999999999995,
+      "Rank-biserial r": 0.3984433741795199,
+      "p-value": 8.026423788017658e-14,
+      "p Bonferroni": 1.6855489954837082e-12,
+      "p BH": 4.213872488709271e-13
+    },
+    {
+      "Feature": "EGFR",
+      "n with": 112,
+      "Median age with": 60.97,
+      "Median age without": 48.94,
+      "Median difference": 12.030000000000001,
+      "Rank-biserial r": 0.405985950088426,
+      "p-value": 4.421313717469363e-12,
+      "p Bonferroni": 9.284758806685663e-11,
+      "p BH": 1.8569517613371326e-11
+    },
+    {
+      "Feature": "IDH2",
+      "n with": 23,
+      "Median age with": 35.25,
+      "Median age without": 52.040000000000006,
+      "Median difference": -16.790000000000006,
+      "Rank-biserial r": -0.44789002557544755,
+      "p-value": 0.00024590742994713965,
+      "p Bonferroni": 0.005164056028889932,
+      "p BH": 0.0008606760048149888
+    },
+    {
+      "Feature": "CIC",
+      "n with": 111,
+      "Median age with": 45.92,
+      "Median age without": 52.405,
+      "Median difference": -6.484999999999999,
+      "Rank-biserial r": -0.20863033363033368,
+      "p-value": 0.00039402794125383244,
+      "p Bonferroni": 0.008274586766330482,
+      "p BH": 0.0011820838237614974
+    },
+    {
+      "Feature": "NF1",
+      "n with": 67,
+      "Median age with": 58.05,
+      "Median age without": 50.57,
+      "Median difference": 7.479999999999997,
+      "Rank-biserial r": 0.2278826076869538,
+      "p-value": 0.0019548817828584173,
+      "p Bonferroni": 0.04105251744002676,
+      "p BH": 0.005131564680003346
+    },
+    {
+      "Feature": "RB1",
+      "n with": 40,
+      "Median age with": 59.36,
+      "Median age without": 51.14,
+      "Median difference": 8.219999999999999,
+      "Rank-biserial r": 0.2790988735919899,
+      "p-value": 0.0028684554166107474,
+      "p Bonferroni": 0.0602375637488257,
+      "p BH": 0.006693062638758411
+    },
+    {
+      "Feature": "MUC16",
+      "n with": 98,
+      "Median age with": 57.905,
+      "Median age without": 50.64,
+      "Median difference": 7.265000000000001,
+      "Rank-biserial r": 0.166611583904817,
+      "p-value": 0.007297584616590695,
+      "p Bonferroni": 0.1532492769484046,
+      "p BH": 0.014475700739327224
+    },
+    {
+      "Feature": "PIK3R1",
+      "n with": 54,
+      "Median age with": 57.09,
+      "Median age without": 51.09,
+      "Median difference": 6.0,
+      "Rank-biserial r": 0.2170323189431469,
+      "p-value": 0.007582509911076165,
+      "p Bonferroni": 0.15923270813259946,
+      "p BH": 0.014475700739327224
+    },
+    {
+      "Feature": "PDGFRA",
+      "n with": 22,
+      "Median age with": 64.685,
+      "Median age without": 51.25,
+      "Median difference": 13.435000000000002,
+      "Rank-biserial r": 0.25536886613998,
+      "p-value": 0.040797524952956216,
+      "p Bonferroni": 0.8567480240120805,
+      "p BH": 0.07139566866767338
+    },
+    {
+      "Feature": "SMARCA4",
+      "n with": 27,
+      "Median age with": 43.87,
+      "Median age without": 51.9,
+      "Median difference": -8.030000000000001,
+      "Rank-biserial r": -0.22245028279511037,
+      "p-value": 0.04906809672119428,
+      "p Bonferroni": 1.0,
+      "p BH": 0.07926384854962153
+    },
+    {
+      "Feature": "NOTCH1",
+      "n with": 38,
+      "Median age with": 49.68,
+      "Median age without": 51.56,
+      "Median difference": -1.8800000000000026,
+      "Rank-biserial r": -0.14166502398317893,
+      "p-value": 0.13975710048807016,
+      "p Bonferroni": 1.0,
+      "p BH": 0.20960725033937483
+    },
+    {
+      "Feature": "PIK3CA",
+      "n with": 73,
+      "Median age with": 54.26,
+      "Median age without": 51.19,
+      "Median difference": 3.0700000000000003,
+      "Rank-biserial r": 0.10195285954433286,
+      "p-value": 0.14971946452812487,
+      "p Bonferroni": 1.0,
+      "p BH": 0.20960725033937483
+    },
+    {
+      "Feature": "FUBP1",
+      "n with": 45,
+      "Median age with": 47.73,
+      "Median age without": 51.875,
+      "Median difference": -4.145000000000003,
+      "Rank-biserial r": -0.11872376154492026,
+      "p-value": 0.17997642895754606,
+      "p Bonferroni": 1.0,
+      "p BH": 0.23621906300677922
+    },
+    {
+      "Feature": "FAT4",
+      "n with": 23,
+      "Median age with": 55.73,
+      "Median age without": 51.275,
+      "Median difference": 4.454999999999998,
+      "Rank-biserial r": 0.14183716965046878,
+      "p-value": 0.24572361438839818,
+      "p Bonferroni": 1.0,
+      "p BH": 0.30354093542096244
+    },
+    {
+      "Feature": "GRIN2A",
+      "n with": 27,
+      "Median age with": 53.64,
+      "Median age without": 51.39,
+      "Median difference": 2.25,
+      "Rank-biserial r": 0.06996898376208716,
+      "p-value": 0.5360921171665307,
+      "p Bonferroni": 1.0,
+      "p BH": 0.6254408033609525
+    },
+    {
+      "Feature": "Gender",
+      "n with": 351,
+      "Median age with": 50.35,
+      "Median age without": 52.125,
+      "Median difference": -1.7749999999999986,
+      "Rank-biserial r": -0.021169025267385955,
+      "p-value": 0.6006690881210831,
+      "p Bonferroni": 1.0,
+      "p BH": 0.6638974131864602
+    },
+    {
+      "Feature": "BCOR",
+      "n with": 29,
+      "Median age with": 50.35,
+      "Median age without": 51.555,
+      "Median difference": -1.2049999999999983,
+      "Rank-biserial r": 0.028309919114516857,
+      "p-value": 0.7957051759245863,
+      "p Bonferroni": 1.0,
+      "p BH": 0.8133461463463858
+    },
+    {
+      "Feature": "CSMD3",
+      "n with": 27,
+      "Median age with": 53.64,
+      "Median age without": 51.51,
+      "Median difference": 2.1300000000000026,
+      "Rank-biserial r": 0.026728699142492207,
+      "p-value": 0.8133461463463858,
+      "p Bonferroni": 1.0,
+      "p BH": 0.8133461463463858
+    }
+  ],
+  "n_age_significant_bh": 11,
+  "age_by_race_kruskal": {
+    "H": 2.5400463631256347,
+    "p_value": 0.46809726133099683,
+    "median_by_race": {
+      "0": 51.47,
+      "1": 53.37,
+      "2": 48.725,
+      "3": 47.45
+    }
+  },
+  "summary": {
+    "Class balance": "487 LGG / 352 GBM; majority baseline accuracy 0.580",
+    "Leakage": "Primary_Diagnosis determines Grade; with it, CV ROC-AUC = 1.000",
+    "Age": "median 41.6 (LGG) vs 61.4 (GBM); Cohen d = 1.26; AUC = 0.810; not normal (Shapiro p < 0.05 in both classes: True)",
+    "Most relevant features": "IDH1 (AUC 0.858), Age_at_diagnosis (AUC 0.810), ATRX (AUC 0.640), PTEN (AUC 0.639), CIC (AUC 0.604)",
+    "Significant differences": "14 of 23 after Bonferroni, 18 after Benjamini-Hochberg",
+    "Redundancy": "strongest pair Age_at_diagnosis-IDH1 (r = -0.58); maximum VIF = 3.09",
+    "Baseline": "logistic regression, all 23 predictors: CV ROC-AUC = 0.918; age + IDH1: 0.901",
+    "Regression target": "age mean 50.9, SD 15.7; 11 of 21 features related to age after BH; strongest: IDH1 (median difference -20.8 years)"
+  }
+}

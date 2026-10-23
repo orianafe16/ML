@@ -28,6 +28,25 @@ can be defended orally. Decisions taken in later stages are appended to the corr
 | Keep all 20 genes, including those mutated in < 5% of patients | Low prevalence does not imply no information; relevance is measured in the EDA | — |
 | Regression predictors exclude `Grade`; classification predictors include age | Decision taken before the project started (see Problem definition) | — |
 
+## Stage 2 — Exploratory data analysis
+
+| Decision | Justification | Source |
+|---|---|---|
+| Structure of the EDA copied from the course notebook and adapted to binary features | Same questions (quality, target and leakage, univariate, normality, tests + effect size, outliers, redundancy, relevance, conditional probability, multivariate view, baseline) | EDA_for_Extreme_OSA_Classification_Opus5_5.ipynb |
+| Mann–Whitney U for age (Welch t-test only for comparison) | Shapiro–Wilk rejects normality of age in both classes and the Q–Q plots deviate in the tails | EDA notebook, section 5 |
+| Fisher's exact test for binary features | Exact for 2×2 tables; several genes have very few mutated patients, where the chi-square approximation is unreliable | — |
+| Race tested as white vs non-white | Three of the four categories have very few patients (one has a single patient) | `results/logs/01_data_preparation.json` |
+| Effect sizes reported with every test (AUC for all features, Cohen's d for age, odds ratio with +0.5 correction for binaries) | A p-value does not measure the size of a difference; the AUC links the EDA to the evaluation metric | EDA notebook, section 6.2 |
+| Bonferroni and Benjamini–Hochberg corrections | 23 simultaneous tests; Bonferroni controls any false positive (conservative), BH the false discovery rate | EDA notebook, section 6.2 (Bonferroni); BH not in the course material |
+| Bootstrap 95% CI (2000 resamples, stratified by class) for single-feature AUCs | Suggested in the course notebook ("Use bootstrap to compute confidence intervals for the AUC of each feature") | EDA notebook, suggestions; Chap5 (bootstrap) |
+| Age outliers kept | They are plausible ages of real patients, not errors | EDA notebook, section 7 (rule: medical extremes are usually kept) |
+| No feature is removed on the basis of the EDA | Selecting features with the labels outside cross-validation leaks information; low VIF values show no problematic collinearity; Lasso/L1 inside the nested CV can select features legitimately | ML_Validacion_y_Seleccion_Variables.md ("Cross-validation: right and wrong"); Chap3 (VIF rule of thumb 5–10) |
+| Correlated mutations (IDH1–ATRX–TP53, CIC–FUBP1) noted for interpretation | They do not inflate VIF above the threshold, but coefficients of linear models must be read jointly | EDA notebook, section 8 |
+| LDA projection shown as visualisation only | Fitted on all patients, so its separation is optimistic | EDA notebook, section 11.3 |
+| Quick baseline with the same 10-fold stratified CV and seed as the models, preprocessing inside a Pipeline | Sanity check of the EDA and demonstration of leakage (adding the diagnosis) | EDA notebook, section 12 |
+| Regression EDA added (age vs each feature, Mann–Whitney + BH, effect sizes) | The course notebook only covers classification; the regression target needs its own exploration | — |
+| Fixed class colours (LGG blue, GBM orange), checked for colour-blind readers; other variables never use the class colours | Same colour = same class in every figure | — |
+
 ## Validation protocol
 
 | Decision | Justification | Source |

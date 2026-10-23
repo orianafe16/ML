@@ -1,0 +1,13 @@
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{Feature set} & \textbf{Predictors} & \textbf{ROC-AUC mean} & \textbf{ROC-AUC SD} & \textbf{Balanced acc. mean} & \textbf{Balanced acc. SD} \\
+\midrule
+Dummy (prior) & 0 & 0.500 & 0.000 & 0.500 & 0.000 \\
+Age only & 1 & 0.811 & 0.041 & 0.721 & 0.046 \\
+IDH1 only & 1 & 0.859 & 0.041 & 0.859 & 0.041 \\
+Age + IDH1 & 2 & 0.901 & 0.039 & 0.860 & 0.032 \\
+20 genes only & 20 & 0.912 & 0.024 & 0.873 & 0.034 \\
+All 23 predictors & 23 & 0.918 & 0.026 & 0.872 & 0.029 \\
+All 23 + diagnosis (LEAKAGE) & 29 & 1.000 & 0.000 & 1.000 & 0.000 \\
+\bottomrule
+\end{tabular}
