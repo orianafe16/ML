@@ -47,6 +47,19 @@ can be defended orally. Decisions taken in later stages are appended to the corr
 | Regression EDA added (age vs each feature, Mann–Whitney + BH, effect sizes) | The course notebook only covers classification; the regression target needs its own exploration | — |
 | Fixed class colours (LGG blue, GBM orange), checked for colour-blind readers; other variables never use the class colours | Same colour = same class in every figure | — |
 
+## Stage 3 — Unsupervised analysis
+
+| Decision | Justification | Source |
+|---|---|---|
+| Input: the 20 gene indicators only; the grade is used only after clustering, to describe the clusters | Unsupervised learning must not see the label | Chap10; weekly summary 23 Oct 2026 |
+| PCA computed both centred and scaled, both reported | Centring is mandatory; scaling 0/1 genes gives a mutation in a 3% gene the same weight as IDH1, which is a modelling choice worth showing | Weekly summary 23 Oct 2026 (centring; variance explained; biplot) |
+| Biplot arrows drawn with one common scale factor for both axes | Separate factors per axis distort the arrow directions (see AI usage log) | — |
+| Jaccard distance for MDS and t-SNE | Ignores shared absences, which dominate sparse mutation data | Weekly summary 23 Oct 2026 ("need for different distance metrics beyond Euclidean") |
+| k-means on unscaled 0/1 profiles, 50 random initialisations | Squared Euclidean distance on 0/1 data = number of differing genes; k-means depends on the random start, so it is repeated and the best WCV kept | Weekly summary 23 Oct 2026 (k-means initialisation) |
+| Number of clusters chosen by the agreement (ARI) between k-means and Ward, fixed before seeing the result; k + 1 also reported as secondary/exploratory | WCV has no clear elbow and silhouette grows slowly with k; two algorithms with different assumptions finding the same partition is evidence of real structure | — |
+| Hierarchical clustering with Jaccard reported as a negative result; Ward on Euclidean used for the comparison with k-means | With Jaccard, the 67 patients without mutations are at distance 1 from all others; complete linkage ties at 1 and gives a single cluster, average/single linkage chain and isolate the 67 | Notebook 03, section 5 |
+| Clusters compared with the grade by ARI and NMI; diagnosis shown only descriptively | ARI is corrected for chance; NMI is a complementary information-based measure | — |
+
 ## Validation protocol
 
 | Decision | Justification | Source |

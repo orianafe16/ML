@@ -82,7 +82,7 @@ Entry format:
   with its own run.
 - **Errors found by the AI in its own first version (fixed before delivery):**
   1. Crash in the error bars: Wilson intervals for P(GBM) = 0 give a lower bound that is
-     negative by floating-point error (about −1e-17); matplotlib rejects negative error lengths.
+     negative by floating-point error (−6.9e-18 for NOTCH1, which has no mutated GBM patient); matplotlib rejects negative error lengths.
      Fixed by clipping the error lengths at 0.
   2. `KeyError: 'Feature'` after re-ordering a table: `reset_index()` named the column `index`
      because the index had lost its name. Fixed with `rename_axis("Feature")`.
@@ -98,3 +98,32 @@ Entry format:
 - **Note for the defense:** the author should be able to explain why Fisher instead of chi-square,
   why Mann–Whitney instead of t-test, what Bonferroni and BH control, and why no feature is
   removed after the EDA.
+
+## Stage 3 — Unsupervised analysis (2026-10-23)
+
+- **Request:** notebook `03_unsupervised`: PCA (scaling, biplot, explained variance), MDS with
+  Jaccard distance, k-means and hierarchical clustering of the mutation profiles, compared with
+  the grade.
+- **What the AI produced:** `src/unsupervised.py`, `notebooks/03_unsupervised.ipynb`; t-SNE added
+  because the course summary presents it as a stronger visualisation than PCA.
+- **Verification:** exploratory runs before writing the notebook (cluster sizes for every
+  distance/linkage pair, k-means stability across seeds); full execution in a clean copy;
+  every figure inspected.
+- **Errors and decisions found by the AI in its own work (fixed before delivery):**
+  1. **Distorted biplot.** The first version scaled the loading arrows with a different factor
+     on each axis. This changes the direction of the arrows, so the plot showed wrong angles
+     between genes and principal components (and some arrows fell outside the axes and were not
+     drawn). Detected by visual inspection (IDH1, ATRX and TP53 arrows missing in the scaled
+     biplot). Fixed with a single common factor. **Bounty candidate:** yes, as an example of a
+     plausible-looking but mathematically wrong visualisation; the author should check that she
+     can explain why a common factor is needed before claiming it.
+  2. `TypeError: Object of type ndarray is not JSON serializable` when saving the summary; fixed
+     in `src/reporting.py`.
+  3. **Risk of choosing k after seeing the result.** The pre-declared rule (highest
+     k-means–Ward agreement) gives k = 2, while k = 3 gives clusters that look more interesting.
+     The AI kept the rule's answer as the main solution and reports k = 3 explicitly as
+     exploratory, instead of switching the rule. Worth mentioning in the defense as a
+     methodological choice (avoiding post-hoc selection).
+- **Negative result reported, not hidden:** hierarchical clustering with Jaccard distance
+  degenerates (one cluster with complete linkage; a cluster of the 67 patients without mutations
+  with average/single linkage).

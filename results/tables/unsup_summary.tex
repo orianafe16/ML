@@ -1,0 +1,15 @@
+\begin{tabular}{lp{12cm}}
+\toprule
+\textbf{Topic} & \textbf{Finding} \\
+\midrule
+PCA & 80\% of the variance needs 10 components (centred) and 14 (scaled) out of 20; PC1 explains 27.1\% (centred) vs 12.0\% (scaled) \\
+PC1 loadings (centred) & IDH1 +0.60, TP53 +0.54, ATRX +0.50, PTEN -0.22 \\
+MDS (Jaccard) & stress-1 = 0.300 \\
+Number of clusters & main k = 2 (highest k-means vs Ward agreement, ARI = 0.849); secondary k = 3 (ARI = 0.804) \\
+Hierarchical with Jaccard & average: largest cluster 92\% of patients; complete: largest cluster 100\% of patients; single: largest cluster 92\% of patients \\
+k-means stability & k = 2: 12 of 20 single-initialisation runs reach the best solution; k = 3: 6 of 20 single-initialisation runs reach the best solution \\
+Clusters vs grade & k-means (k = 2): ARI = 0.496, NMI = 0.424; Ward (k = 2): ARI = 0.434, NMI = 0.385; k-means (k = 3): ARI = 0.329, NMI = 0.369; Ward (k = 3): ARI = 0.271, NMI = 0.318 \\
+Clusters, k = 2 & C1: n = 424, 77\% GBM, median age 61; C2: n = 415, 6\% GBM, median age 39 \\
+Clusters, k = 3 & C1: n = 414, 78\% GBM, median age 61; C2: n = 262, 11\% GBM, median age 37; C3: n = 163, 0\% GBM, median age 45 \\
+\bottomrule
+\end{tabular}

@@ -42,6 +42,7 @@ ML/
 │   ├── eda.py           statistical tests and effect sizes for the EDA
 │   ├── evaluation.py    AUC, bootstrap confidence intervals (nested CV in later stages)
 │   ├── pipelines.py     preprocessing inside scikit-learn Pipelines
+│   ├── unsupervised.py  PCA, Jaccard MDS / t-SNE, k-means, hierarchical clustering
 │   ├── plotting.py      common figure style and class colours
 │   └── check_env.py     environment check
 ├── notebooks/           01_data_preparation … 05_classification (run in order)

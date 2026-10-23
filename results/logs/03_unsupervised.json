@@ -1,0 +1,561 @@
+{
+  "stage": "03_unsupervised",
+  "timestamp": "2026-10-23T19:55:13",
+  "seed": 42,
+  "pca": {
+    "explained_centred": [
+      0.2707468835800596,
+      0.15238725772070374,
+      0.06786653170176864,
+      0.06488857772187863,
+      0.05730995842910579,
+      0.05454630162197407,
+      0.04834650663523565,
+      0.04159399406367095,
+      0.03542137913155602,
+      0.03306998867985837,
+      0.02408012257976305,
+      0.02325217250243304,
+      0.020465935883507112,
+      0.019203313969823214,
+      0.017790727466171722,
+      0.016258122860126956,
+      0.014531653400575802,
+      0.01376921926685422,
+      0.013226824952313023,
+      0.011244527832620529
+    ],
+    "explained_scaled": [
+      0.12040898489043275,
+      0.10024443028873753,
+      0.08649583052983091,
+      0.05816059170456551,
+      0.05690629959538621,
+      0.05578123227524421,
+      0.050348446883252025,
+      0.049537849798859925,
+      0.04867099033783861,
+      0.045590600420699616,
+      0.04323832912693994,
+      0.04150026354235835,
+      0.04048247113793152,
+      0.039748198953265826,
+      0.03766373152382981,
+      0.03397530339624111,
+      0.032340043590800095,
+      0.026760876682873858,
+      0.020008435714275852,
+      0.012137089606636436
+    ],
+    "n_components_80pct_centred": 10,
+    "n_components_80pct_scaled": 14,
+    "loadings": {
+      "IDH1": {
+        "PC1 centred": 0.6009361520564485,
+        "PC2 centred": -0.45971948283170627,
+        "PC1 scaled": 0.5519273710145222,
+        "PC2 scaled": 0.10496946138406674
+      },
+      "TP53": {
+        "PC1 centred": 0.5351243053316046,
+        "PC2 centred": 0.5195121729602945,
+        "PC1 scaled": 0.30680192818684926,
+        "PC2 scaled": -0.37868672512096485
+      },
+      "ATRX": {
+        "PC1 centred": 0.4983015379734844,
+        "PC2 centred": 0.24053041457489885,
+        "PC1 scaled": 0.3872177760264677,
+        "PC2 scaled": -0.2968395569491562
+      },
+      "PTEN": {
+        "PC1 centred": -0.22401282934640596,
+        "PC2 centred": 0.3161418154491825,
+        "PC1 scaled": -0.3517329097279735,
+        "PC2 scaled": -0.12856226919858452
+      },
+      "EGFR": {
+        "PC1 centred": -0.20104342892308252,
+        "PC2 centred": 0.1692103642333469,
+        "PC1 scaled": -0.3414035640983385,
+        "PC2 scaled": -0.061922187163479046
+      },
+      "NF1": {
+        "PC1 centred": -0.07927545027831803,
+        "PC2 centred": 0.06072700133343109,
+        "PC1 scaled": -0.19629687051261202,
+        "PC2 scaled": 0.046632030045817
+      },
+      "PIK3CA": {
+        "PC1 centred": -0.037467274074031276,
+        "PC2 centred": -0.06020626515604566,
+        "PC1 scaled": -0.05676989473064382,
+        "PC2 scaled": 0.18357830378363865
+      },
+      "RB1": {
+        "PC1 centred": -0.03597958944065631,
+        "PC2 centred": 0.10499977789314337,
+        "PC1 scaled": -0.2046607539697951,
+        "PC2 scaled": -0.06327436550526781
+      },
+      "MUC16": {
+        "PC1 centred": -0.03127079157599684,
+        "PC2 centred": 0.09338906741176148,
+        "PC1 scaled": -0.11815684196423533,
+        "PC2 scaled": -0.03982442907483821
+      },
+      "PIK3R1": {
+        "PC1 centred": -0.029027311515359314,
+        "PC2 centred": -0.01381025415989334,
+        "PC1 scaled": -0.07786459187664302,
+        "PC2 scaled": 0.10177352442643692
+      },
+      "SMARCA4": {
+        "PC1 centred": 0.027073516947098898,
+        "PC2 centred": 0.00022858491512804538,
+        "PC1 scaled": 0.04641213634767036,
+        "PC2 scaled": 0.03155510357579598
+      },
+      "GRIN2A": {
+        "PC1 centred": -0.026317114679889526,
+        "PC2 centred": 0.03182278904896142,
+        "PC1 scaled": -0.18175975461979876,
+        "PC2 scaled": 0.03991752911680846
+      },
+      "IDH2": {
+        "PC1 centred": -0.02327709971618471,
+        "PC2 centred": -0.009836333305414913,
+        "PC1 scaled": -0.062286210198386385,
+        "PC2 scaled": 0.128597874220767
+      },
+      "NOTCH1": {
+        "PC1 centred": 0.02103754773498813,
+        "PC2 centred": -0.11902676979761016,
+        "PC1 scaled": 0.11572698134256464,
+        "PC2 scaled": 0.336977178638797
+      },
+      "PDGFRA": {
+        "PC1 centred": -0.014286993289058567,
+        "PC2 centred": 0.020524217582070143,
+        "PC1 scaled": -0.1100991548730072,
+        "PC2 scaled": 0.037306649230385756
+      },
+      "FAT4": {
+        "PC1 centred": -0.0071209955512586,
+        "PC2 centred": 0.014385874967235335,
+        "PC1 scaled": -0.09500127628014361,
+        "PC2 scaled": 0.07790919824001248
+      },
+      "FUBP1": {
+        "PC1 centred": 0.0069985607411775725,
+        "PC2 centred": -0.19968888695510142,
+        "PC1 scaled": 0.08252463888993744,
+        "PC2 scaled": 0.4881978791211925
+      },
+      "BCOR": {
+        "PC1 centred": 0.006355465197463172,
+        "PC2 centred": 0.010157330011903326,
+        "PC1 scaled": -0.02837005171950168,
+        "PC2 scaled": 0.07207519993477263
+      },
+      "CIC": {
+        "PC1 centred": 0.005802915246535824,
+        "PC2 centred": -0.49769720560850306,
+        "PC1 scaled": 0.11968492911501961,
+        "PC2 scaled": 0.5491115841255724
+      },
+      "CSMD3": {
+        "PC1 centred": -0.004677232362646533,
+        "PC2 centred": 0.03868165965049545,
+        "PC1 scaled": -0.10873706147011142,
+        "PC2 scaled": 0.00900490620436422
+      }
+    }
+  },
+  "jaccard": {
+    "share_pairs_distance_0": 0.03735552894257,
+    "share_pairs_distance_1": 0.5933333522974561,
+    "mds_stress1": 0.3001148421314384
+  },
+  "k_selection": [
+    {
+      "k": 2,
+      "WCV (k-means inertia)": 1121.0236928847464,
+      "Silhouette k-means": 0.24942191264502758,
+      "Silhouette Ward": 0.23334367172982814,
+      "ARI k-means vs Ward": 0.8486781863674164
+    },
+    {
+      "k": 3,
+      "WCV (k-means inertia)": 934.9775365599328,
+      "Silhouette k-means": 0.2891618354571233,
+      "Silhouette Ward": 0.26046578531420567,
+      "ARI k-means vs Ward": 0.8039282515159254
+    },
+    {
+      "k": 4,
+      "WCV (k-means inertia)": 839.5543385630069,
+      "Silhouette k-means": 0.3034178284063594,
+      "Silhouette Ward": 0.23842037345558306,
+      "ARI k-means vs Ward": 0.5567933233349701
+    },
+    {
+      "k": 5,
+      "WCV (k-means inertia)": 783.6876068376072,
+      "Silhouette k-means": 0.3050635827757782,
+      "Silhouette Ward": 0.25057034600602934,
+      "ARI k-means vs Ward": 0.5933998716602785
+    },
+    {
+      "k": 6,
+      "WCV (k-means inertia)": 733.4940230370057,
+      "Silhouette k-means": 0.29990643974434933,
+      "Silhouette Ward": 0.26669926880201833,
+      "ARI k-means vs Ward": 0.44825625449631673
+    },
+    {
+      "k": 7,
+      "WCV (k-means inertia)": 684.690492643181,
+      "Silhouette k-means": 0.31470117304437906,
+      "Silhouette Ward": 0.2822428697178336,
+      "ARI k-means vs Ward": 0.47106699598059215
+    },
+    {
+      "k": 8,
+      "WCV (k-means inertia)": 660.8963338293468,
+      "Silhouette k-means": 0.3261180292570973,
+      "Silhouette Ward": 0.27384639007210815,
+      "ARI k-means vs Ward": 0.5014799730760376
+    }
+  ],
+  "k_chosen": 2,
+  "k_secondary": 3,
+  "linkage_comparison": [
+    {
+      "Distance": "Jaccard",
+      "Linkage": "average",
+      "Cophenetic correlation": 0.9131055167883352,
+      "Clusters obtained": 2,
+      "Cluster sizes": "772, 67",
+      "Largest cluster (%)": 92.01430274135876
+    },
+    {
+      "Distance": "Jaccard",
+      "Linkage": "complete",
+      "Cophenetic correlation": 0.7848122164207244,
+      "Clusters obtained": 1,
+      "Cluster sizes": "839",
+      "Largest cluster (%)": 100.0
+    },
+    {
+      "Distance": "Jaccard",
+      "Linkage": "single",
+      "Cophenetic correlation": 0.5385272335312697,
+      "Clusters obtained": 2,
+      "Cluster sizes": "772, 67",
+      "Largest cluster (%)": 92.01430274135876
+    },
+    {
+      "Distance": "Euclidean",
+      "Linkage": "ward",
+      "Cophenetic correlation": 0.5478724330395105,
+      "Clusters obtained": 2,
+      "Cluster sizes": "447, 392",
+      "Largest cluster (%)": 53.277711561382596
+    }
+  ],
+  "k2": {
+    "kmeans_stability_ari": [
+      1.0,
+      0.995232414298036,
+      0.40295016240830916,
+      1.0,
+      1.0,
+      1.0,
+      0.995232414298036,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.995232414298036,
+      0.995232414298036,
+      0.995232414298036,
+      1.0,
+      0.40295016240830916,
+      1.0,
+      0.995232414298036,
+      1.0
+    ],
+    "kmeans_vs_ward_ari": 0.8486781863674164,
+    "profiles": {
+      "C1": {
+        "n": 424,
+        "GBM (%)": 76.88679245283019,
+        "Median age": 60.72
+      },
+      "C2": {
+        "n": 415,
+        "GBM (%)": 6.265060240963856,
+        "Median age": 39.36
+      }
+    },
+    "prevalence": {
+      "C1": {
+        "IDH1": 0.0,
+        "TP53": 23.35,
+        "ATRX": 4.25,
+        "PTEN": 31.84,
+        "EGFR": 25.71,
+        "CIC": 2.83,
+        "MUC16": 14.62,
+        "PIK3CA": 10.38,
+        "NF1": 13.68,
+        "PIK3R1": 8.02,
+        "FUBP1": 0.94,
+        "RB1": 9.2,
+        "NOTCH1": 0.71,
+        "BCOR": 3.54,
+        "CSMD3": 4.01,
+        "SMARCA4": 1.65,
+        "GRIN2A": 5.19,
+        "IDH2": 4.72,
+        "FAT4": 3.54,
+        "PDGFRA": 4.25
+      },
+      "C2": {
+        "IDH1": 97.35,
+        "TP53": 60.0,
+        "ATRX": 47.95,
+        "PTEN": 1.45,
+        "EGFR": 0.72,
+        "CIC": 23.86,
+        "MUC16": 8.67,
+        "PIK3CA": 6.99,
+        "NF1": 2.17,
+        "PIK3R1": 4.82,
+        "FUBP1": 9.88,
+        "RB1": 0.24,
+        "NOTCH1": 8.43,
+        "BCOR": 3.37,
+        "CSMD3": 2.41,
+        "SMARCA4": 4.82,
+        "GRIN2A": 1.2,
+        "IDH2": 0.72,
+        "FAT4": 1.93,
+        "PDGFRA": 0.96
+      }
+    },
+    "vs_grade": {
+      "C1": {
+        "LGG": 98,
+        "GBM": 326
+      },
+      "C2": {
+        "LGG": 389,
+        "GBM": 26
+      }
+    },
+    "vs_diagnosis": {
+      "C1": {
+        "Astrocytoma, NOS": 4,
+        "Astrocytoma, anaplastic": 47,
+        "Glioblastoma": 326,
+        "Mixed glioma": 20,
+        "Oligodendroglioma, NOS": 14,
+        "Oligodendroglioma, anaplastic": 13
+      },
+      "C2": {
+        "Astrocytoma, NOS": 52,
+        "Astrocytoma, anaplastic": 80,
+        "Glioblastoma": 26,
+        "Mixed glioma": 107,
+        "Oligodendroglioma, NOS": 90,
+        "Oligodendroglioma, anaplastic": 60
+      }
+    }
+  },
+  "k3": {
+    "kmeans_stability_ari": [
+      0.5803107380434013,
+      0.6161320818994492,
+      0.9734072833701926,
+      0.8348861990093667,
+      0.5378139869850523,
+      1.0,
+      1.0,
+      0.25135072455625523,
+      1.0,
+      1.0,
+      0.4991002950566141,
+      1.0,
+      0.5213180050513283,
+      0.3465640423619493,
+      0.49563371234367504,
+      0.5039430117603709,
+      0.39631512946311237,
+      0.5724616115826796,
+      0.6043473844651203,
+      1.0
+    ],
+    "kmeans_vs_ward_ari": 0.8039282515159254,
+    "profiles": {
+      "C1": {
+        "n": 414,
+        "GBM (%)": 78.26086956521739,
+        "Median age": 61.004999999999995
+      },
+      "C2": {
+        "n": 262,
+        "GBM (%)": 10.687022900763358,
+        "Median age": 36.974999999999994
+      },
+      "C3": {
+        "n": 163,
+        "GBM (%)": 0.0,
+        "Median age": 45.09
+      }
+    },
+    "prevalence": {
+      "C1": {
+        "IDH1": 0.0,
+        "TP53": 23.43,
+        "ATRX": 3.86,
+        "PTEN": 32.37,
+        "EGFR": 26.33,
+        "CIC": 0.97,
+        "MUC16": 14.73,
+        "PIK3CA": 10.14,
+        "NF1": 13.77,
+        "PIK3R1": 7.97,
+        "FUBP1": 0.72,
+        "RB1": 9.42,
+        "NOTCH1": 0.72,
+        "BCOR": 3.38,
+        "CSMD3": 4.11,
+        "SMARCA4": 1.69,
+        "GRIN2A": 5.07,
+        "IDH2": 2.66,
+        "FAT4": 3.38,
+        "PDGFRA": 4.35
+      },
+      "C2": {
+        "IDH1": 95.04,
+        "TP53": 94.66,
+        "ATRX": 75.57,
+        "PTEN": 1.91,
+        "EGFR": 0.76,
+        "CIC": 0.38,
+        "MUC16": 10.69,
+        "PIK3CA": 2.67,
+        "NF1": 1.53,
+        "PIK3R1": 3.44,
+        "FUBP1": 0.38,
+        "RB1": 0.0,
+        "NOTCH1": 2.67,
+        "BCOR": 2.67,
+        "CSMD3": 3.05,
+        "SMARCA4": 5.34,
+        "GRIN2A": 1.53,
+        "IDH2": 1.53,
+        "FAT4": 2.67,
+        "PDGFRA": 1.15
+      },
+      "C3": {
+        "IDH1": 95.09,
+        "TP53": 1.84,
+        "ATRX": 1.84,
+        "PTEN": 1.23,
+        "EGFR": 0.61,
+        "CIC": 65.03,
+        "MUC16": 5.52,
+        "PIK3CA": 14.72,
+        "NF1": 3.68,
+        "PIK3R1": 7.36,
+        "FUBP1": 25.15,
+        "RB1": 0.61,
+        "NOTCH1": 17.18,
+        "BCOR": 4.91,
+        "CSMD3": 1.23,
+        "SMARCA4": 3.68,
+        "GRIN2A": 1.23,
+        "IDH2": 4.91,
+        "FAT4": 1.23,
+        "PDGFRA": 0.61
+      }
+    },
+    "vs_grade": {
+      "C1": {
+        "LGG": 90,
+        "GBM": 324
+      },
+      "C2": {
+        "LGG": 234,
+        "GBM": 28
+      },
+      "C3": {
+        "LGG": 163,
+        "GBM": 0
+      }
+    },
+    "vs_diagnosis": {
+      "C1": {
+        "Astrocytoma, NOS": 4,
+        "Astrocytoma, anaplastic": 47,
+        "Glioblastoma": 324,
+        "Mixed glioma": 17,
+        "Oligodendroglioma, NOS": 12,
+        "Oligodendroglioma, anaplastic": 10
+      },
+      "C2": {
+        "Astrocytoma, NOS": 49,
+        "Astrocytoma, anaplastic": 73,
+        "Glioblastoma": 28,
+        "Mixed glioma": 73,
+        "Oligodendroglioma, NOS": 27,
+        "Oligodendroglioma, anaplastic": 12
+      },
+      "C3": {
+        "Astrocytoma, NOS": 3,
+        "Astrocytoma, anaplastic": 7,
+        "Glioblastoma": 0,
+        "Mixed glioma": 37,
+        "Oligodendroglioma, NOS": 65,
+        "Oligodendroglioma, anaplastic": 51
+      }
+    }
+  },
+  "agreement_with_grade": [
+    {
+      "Partition": "k-means (k = 2)",
+      "ARI": 0.49560571082772875,
+      "NMI": 0.423935902260586
+    },
+    {
+      "Partition": "Ward (k = 2)",
+      "ARI": 0.43371809983658133,
+      "NMI": 0.38480154090609914
+    },
+    {
+      "Partition": "k-means (k = 3)",
+      "ARI": 0.3289863731524966,
+      "NMI": 0.36906591864388794
+    },
+    {
+      "Partition": "Ward (k = 3)",
+      "ARI": 0.2714754585539628,
+      "NMI": 0.3176161221350011
+    }
+  ],
+  "summary": {
+    "PCA": "80% of the variance needs 10 components (centred) and 14 (scaled) out of 20; PC1 explains 27.1% (centred) vs 12.0% (scaled)",
+    "PC1 loadings (centred)": "IDH1 +0.60, TP53 +0.54, ATRX +0.50, PTEN -0.22",
+    "MDS (Jaccard)": "stress-1 = 0.300",
+    "Number of clusters": "main k = 2 (highest k-means vs Ward agreement, ARI = 0.849); secondary k = 3 (ARI = 0.804)",
+    "Hierarchical with Jaccard": "average: largest cluster 92% of patients; complete: largest cluster 100% of patients; single: largest cluster 92% of patients",
+    "k-means stability": "k = 2: 12 of 20 single-initialisation runs reach the best solution; k = 3: 6 of 20 single-initialisation runs reach the best solution",
+    "Clusters vs grade": "k-means (k = 2): ARI = 0.496, NMI = 0.424; Ward (k = 2): ARI = 0.434, NMI = 0.385; k-means (k = 3): ARI = 0.329, NMI = 0.369; Ward (k = 3): ARI = 0.271, NMI = 0.318",
+    "Clusters, k = 2": "C1: n = 424, 77% GBM, median age 61; C2: n = 415, 6% GBM, median age 39",
+    "Clusters, k = 3": "C1: n = 414, 78% GBM, median age 61; C2: n = 262, 11% GBM, median age 37; C3: n = 163, 0% GBM, median age 45"
+  }
+}

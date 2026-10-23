@@ -20,6 +20,11 @@ CLASS_COLORS = {"LGG": LGG_COLOR, "GBM": GBM_COLOR, 0: LGG_COLOR, 1: GBM_COLOR}
 # Extra categorical colours (clusters, model families), always used in this order
 CATEGORICAL = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948"]
 
+# Cluster colours: deliberately different from the class colours, so that a cluster is never
+# confused with a grade (validated for colour-blind readers; always used with distinct markers)
+CLUSTER_COLORS = ["#008300", "#6250d6", "#eda100", "#e87ba4"]
+CLUSTER_MARKERS = ["o", "s", "^", "D"]
+
 NEUTRAL = "#898781"     # reference lines, "no effect", chance level
 INK = "#0b0b0b"
 INK_SECONDARY = "#52514e"
