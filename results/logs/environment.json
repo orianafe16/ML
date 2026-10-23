@@ -1,0 +1,75 @@
+{
+  "timestamp": "2026-10-23T19:14:28",
+  "python": "3.11.17",
+  "python_ok": true,
+  "platform": "Windows-10-10.0.19045-SP0",
+  "executable": "C:\\Users\\ori\\anaconda3\\envs\\glioma-ml\\python.exe",
+  "packages": {
+    "numpy": {
+      "required": "2.2.6",
+      "installed": "2.2.6",
+      "ok": true
+    },
+    "pandas": {
+      "required": "2.2.3",
+      "installed": "2.2.3",
+      "ok": true
+    },
+    "scipy": {
+      "required": "1.15.3",
+      "installed": "1.15.3",
+      "ok": true
+    },
+    "scikit-learn": {
+      "required": "1.6.1",
+      "installed": "1.6.1",
+      "ok": true
+    },
+    "statsmodels": {
+      "required": "0.14.4",
+      "installed": "0.14.4",
+      "ok": true
+    },
+    "xgboost": {
+      "required": "2.1.4",
+      "installed": "2.1.4",
+      "ok": true
+    },
+    "matplotlib": {
+      "required": "3.10.3",
+      "installed": "3.10.3",
+      "ok": true
+    },
+    "seaborn": {
+      "required": "0.13.2",
+      "installed": "0.13.2",
+      "ok": true
+    },
+    "jinja2": {
+      "required": "3.1.6",
+      "installed": "3.1.6",
+      "ok": true
+    },
+    "ipykernel": {
+      "required": "6.29.5",
+      "installed": "6.29.5",
+      "ok": true
+    },
+    "nbconvert": {
+      "required": "7.16.6",
+      "installed": "7.16.6",
+      "ok": true
+    }
+  },
+  "data_files": {
+    "TCGA_GBM_LGG_Mutations_all.csv": {
+      "exists": true,
+      "n_rows": 862
+    },
+    "TCGA_InfoWithGrade.csv": {
+      "exists": true,
+      "n_rows": 839
+    }
+  },
+  "all_ok": true
+}

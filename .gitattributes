@@ -1,0 +1,11 @@
+# Normalise line endings so that diffs are clean between Windows and Linux
+* text=auto
+*.ipynb text eol=lf
+*.py text eol=lf
+*.tex text eol=lf
+# Raw data is stored byte-for-byte as downloaded (no line-ending conversion)
+data/raw/** -text
+*.png binary
+*.jpeg binary
+*.jpg binary
+*.zip binary

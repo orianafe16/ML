@@ -1,0 +1,14 @@
+# Conda environment for the project.
+# Create it from the repository root with:
+#   conda env create -f environment.yml
+#   conda activate glioma-ml
+# Python comes from conda; all libraries are pinned in requirements.txt and installed with pip,
+# so the same versions can also be installed without conda (python -m venv + pip).
+name: glioma-ml
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - -r requirements.txt
