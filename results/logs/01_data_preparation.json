@@ -1,0 +1,262 @@
+{
+  "stage": "01_data_preparation",
+  "timestamp": "2026-10-23T19:33:55",
+  "seed": 42,
+  "n_raw": 862,
+  "n_clean": 839,
+  "n_removed": 23,
+  "removal_steps": [
+    {
+      "Step": "Original file",
+      "Removed": 0,
+      "Remaining": 862
+    },
+    {
+      "Step": "All clinical fields missing",
+      "Removed": 4,
+      "Remaining": 858
+    },
+    {
+      "Step": "Race not reported",
+      "Removed": 18,
+      "Remaining": 840
+    },
+    {
+      "Step": "Age at diagnosis missing",
+      "Removed": 1,
+      "Remaining": 839
+    }
+  ],
+  "removed_by_grade": {
+    "LGG": 12,
+    "GBM": 11
+  },
+  "removed_case_ids": [
+    "TCGA-R8-A6YH",
+    "TCGA-CS-6290",
+    "TCGA-DB-A64Q",
+    "TCGA-RY-A840",
+    "TCGA-VM-A8CB",
+    "TCGA-VV-A86M",
+    "TCGA-DB-A75P",
+    "TCGA-DB-5279",
+    "TCGA-VM-A8C9",
+    "TCGA-W9-A837",
+    "TCGA-VM-A8CA",
+    "TCGA-DB-A64R",
+    "TCGA-74-6575",
+    "TCGA-14-1034",
+    "TCGA-74-6577",
+    "TCGA-74-6573",
+    "TCGA-74-6581",
+    "TCGA-74-6578",
+    "TCGA-28-2501",
+    "TCGA-28-2510",
+    "TCGA-74-6584",
+    "TCGA-16-1048",
+    "TCGA-76-6193"
+  ],
+  "duplicated_case_ids": 0,
+  "invalid_markers_per_column": {
+    "Gender": {
+      "missing ('--')": 4,
+      "'not reported'": 0,
+      "NaN": 0
+    },
+    "Age_at_diagnosis": {
+      "missing ('--')": 5,
+      "'not reported'": 0,
+      "NaN": 0
+    },
+    "Primary_Diagnosis": {
+      "missing ('--')": 4,
+      "'not reported'": 0,
+      "NaN": 0
+    },
+    "Race": {
+      "missing ('--')": 4,
+      "'not reported'": 18,
+      "NaN": 0
+    }
+  },
+  "project_identical_to_grade": true,
+  "diagnosis_vs_grade": {
+    "--": {
+      "GBM": 3,
+      "LGG": 1
+    },
+    "Astrocytoma, NOS": {
+      "GBM": 0,
+      "LGG": 58
+    },
+    "Astrocytoma, anaplastic": {
+      "GBM": 0,
+      "LGG": 129
+    },
+    "Glioblastoma": {
+      "GBM": 360,
+      "LGG": 0
+    },
+    "Mixed glioma": {
+      "GBM": 0,
+      "LGG": 128
+    },
+    "Oligodendroglioma, NOS": {
+      "GBM": 0,
+      "LGG": 108
+    },
+    "Oligodendroglioma, anaplastic": {
+      "GBM": 0,
+      "LGG": 75
+    }
+  },
+  "uci_checks": {
+    "Same number of patients": true,
+    "Grade identical": true,
+    "Gender identical": true,
+    "Race identical": true,
+    "IDH1 identical": true,
+    "TP53 identical": true,
+    "ATRX identical": true,
+    "PTEN identical": true,
+    "EGFR identical": true,
+    "CIC identical": true,
+    "MUC16 identical": true,
+    "PIK3CA identical": true,
+    "NF1 identical": true,
+    "PIK3R1 identical": true,
+    "FUBP1 identical": true,
+    "RB1 identical": true,
+    "NOTCH1 identical": true,
+    "BCOR identical": true,
+    "CSMD3 identical": true,
+    "SMARCA4 identical": true,
+    "GRIN2A identical": true,
+    "IDH2 identical": true,
+    "FAT4 identical": true,
+    "PDGFRA identical": true,
+    "Age_at_diagnosis identical (2 decimals)": true
+  },
+  "identical_to_uci": true,
+  "grade_counts": {
+    "LGG": 487,
+    "GBM": 352
+  },
+  "grade_gbm_proportion": 0.4195470798569726,
+  "race_counts": {
+    "0": 765,
+    "1": 59,
+    "2": 14,
+    "3": 1
+  },
+  "gender_counts": {
+    "0": 488,
+    "1": 351
+  },
+  "age_summary": {
+    "count": 839.0,
+    "mean": 50.94,
+    "std": 15.7,
+    "min": 14.42,
+    "25%": 38.06,
+    "50%": 51.55,
+    "75%": 62.8,
+    "max": 89.29
+  },
+  "gene_prevalence": {
+    "PDGFRA": 0.0262,
+    "IDH2": 0.0274,
+    "FAT4": 0.0274,
+    "SMARCA4": 0.0322,
+    "GRIN2A": 0.0322,
+    "CSMD3": 0.0322,
+    "BCOR": 0.0346,
+    "NOTCH1": 0.0453,
+    "RB1": 0.0477,
+    "FUBP1": 0.0536,
+    "PIK3R1": 0.0644,
+    "NF1": 0.0799,
+    "PIK3CA": 0.087,
+    "MUC16": 0.1168,
+    "CIC": 0.1323,
+    "EGFR": 0.1335,
+    "PTEN": 0.1681,
+    "ATRX": 0.2586,
+    "TP53": 0.4148,
+    "IDH1": 0.4815
+  },
+  "feature_sets": {
+    "classification": [
+      "Gender",
+      "Age_at_diagnosis",
+      "Race",
+      "IDH1",
+      "TP53",
+      "ATRX",
+      "PTEN",
+      "EGFR",
+      "CIC",
+      "MUC16",
+      "PIK3CA",
+      "NF1",
+      "PIK3R1",
+      "FUBP1",
+      "RB1",
+      "NOTCH1",
+      "BCOR",
+      "CSMD3",
+      "SMARCA4",
+      "GRIN2A",
+      "IDH2",
+      "FAT4",
+      "PDGFRA"
+    ],
+    "regression": [
+      "Gender",
+      "Race",
+      "IDH1",
+      "TP53",
+      "ATRX",
+      "PTEN",
+      "EGFR",
+      "CIC",
+      "MUC16",
+      "PIK3CA",
+      "NF1",
+      "PIK3R1",
+      "FUBP1",
+      "RB1",
+      "NOTCH1",
+      "BCOR",
+      "CSMD3",
+      "SMARCA4",
+      "GRIN2A",
+      "IDH2",
+      "FAT4",
+      "PDGFRA"
+    ],
+    "unsupervised": [
+      "IDH1",
+      "TP53",
+      "ATRX",
+      "PTEN",
+      "EGFR",
+      "CIC",
+      "MUC16",
+      "PIK3CA",
+      "NF1",
+      "PIK3R1",
+      "FUBP1",
+      "RB1",
+      "NOTCH1",
+      "BCOR",
+      "CSMD3",
+      "SMARCA4",
+      "GRIN2A",
+      "IDH2",
+      "FAT4",
+      "PDGFRA"
+    ]
+  },
+  "processed_file": "data\\processed\\glioma_clean.csv"
+}

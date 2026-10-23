@@ -1,0 +1,14 @@
+\begin{tabular}{p{3.2cm}p{2.4cm}p{4.6cm}p{4.2cm}}
+\toprule
+\textbf{Variable} & \textbf{Type} & \textbf{Encoding} & \textbf{Role} \\
+\midrule
+Case\_ID & Identifier & TCGA patient barcode & Identifier (not a predictor) \\
+Primary\_Diagnosis & Nominal (6 classes) & Histological diagnosis (text) & Excluded: determines Grade (leakage) \\
+Project & Nominal (2 classes) & TCGA-LGG / TCGA-GBM & Dropped: identical to Grade \\
+Grade & Binary & 0 = LGG, 1 = GBM & Classification target \\
+Age\_at\_diagnosis & Continuous & Years (years + days/365, 2 decimals) & Regression target; predictor for classification \\
+Gender & Binary & 0 = male, 1 = female & Predictor \\
+Race & Nominal (4 classes) & 0 = white, 1 = black or African American, 2 = Asian, 3 = American Indian or Alaska Native & Predictor (one-hot encoded inside the model pipelines) \\
+20 genes (IDH1, TP53, ATRX, PTEN, EGFR, CIC, MUC16, PIK3CA, NF1, PIK3R1, FUBP1, RB1, NOTCH1, BCOR, CSMD3, SMARCA4, GRIN2A, IDH2, FAT4, PDGFRA) & Binary & 0 = not mutated, 1 = mutated & Predictors; input of the unsupervised analysis \\
+\bottomrule
+\end{tabular}
