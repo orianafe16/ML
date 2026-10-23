@@ -42,3 +42,29 @@ Entry format:
     methodological choice and a course chapter it had not checked; both replaced by sources it had
     actually read (rule: student reports are format references only).
 - **Bounty candidate:** no (minor, caught by the AI itself before delivery).
+
+## Stage 0 (continued) — GitHub push (2026-10-23)
+
+- **Issue:** `git push` returned 403 because Windows had cached the credentials of another GitHub
+  account; after fixing it, the push was rejected (non-fast-forward) because the commit had been
+  amended after an earlier successful push.
+- **AI advice:** put the account name in the remote URL; check the commit author; before
+  overwriting, inspect the remote (`git fetch`, `git log origin/main`) and compare contents
+  (`git diff origin/main main --stat` was empty), then use `--force-with-lease` instead of `--force`.
+- **Verification:** the author ran the commands; `git log` shows the correct author and the remote
+  holds a single commit.
+- **Bounty candidate:** no.
+
+## Stage 1 — Data preparation (2026-10-23)
+
+- **Request:** notebook `01_data_preparation` and `src/data.py`: load, check quality, clean and
+  encode the data, avoiding leakage.
+- **What the AI produced:** `src/data.py`, `src/reporting.py` (LaTeX tables and JSON summaries),
+  `notebooks/01_data_preparation.ipynb`.
+- **Verification:**
+  - The AI reverse-engineered the UCI cleaning (which rows were removed and how age was converted)
+    and the notebook asserts that the rebuilt dataset equals the UCI file in every value.
+  - The AI executed the notebook in a clean copy of the repository before delivering it.
+  - The author runs it on her computer; the AI reads `results/logs/01_data_preparation.json`.
+- **Corrections:** none so far.
+- **Bounty candidate:** no.

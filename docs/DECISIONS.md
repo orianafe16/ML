@@ -13,6 +13,21 @@ can be defended orally. Decisions taken in later stages are appended to the corr
 | Unsupervised analysis (PCA, MDS with Jaccard, k-means, hierarchical) inside the EDA | Clustering may be included as part of the EDA section | PRDL_MLLB_summary_23_10_2026.txt (Chap10, Clustering) |
 | Multiclass `Primary_Diagnosis` and causal analysis postponed to January | Scope of the 1 November draft | Decision of the author |
 
+## Stage 1 — Data preparation
+
+| Decision | Justification | Source |
+|---|---|---|
+| Rebuild the clean dataset from `TCGA_GBM_LGG_Mutations_all.csv` instead of loading the UCI file | Keeps `Case_ID` (traceability) and `Primary_Diagnosis` (leakage demonstration, January multiclass task) | — |
+| Check the rebuilt dataset value by value against `TCGA_InfoWithGrade.csv` (notebook stops if any check fails) | Proves that the cleaning is exactly the published one; 839 patients, same order, every column identical | UCI dataset page (839 instances) |
+| Count `--` and `not reported` explicitly as missing | The TCGA export does not use empty cells, so `isna()` finds nothing | — |
+| Remove the 23 incomplete patients (4 with every clinical field missing, 18 with race not reported, 1 with age missing) | Same exclusion as the UCI version; the removed patients are split almost evenly between classes (12 LGG, 11 GBM), so the removal does not bias the class balance | `results/logs/01_data_preparation.json` |
+| Age = years + days/365, rounded to 2 decimals | Reproduces the UCI ages exactly | Check in notebook 01 |
+| Drop `Project` | Identical to `Grade` for all 862 patients (target under another name) | Check in notebook 01 |
+| Keep `Primary_Diagnosis` only as metadata | Glioblastoma ↔ GBM and every other diagnosis ↔ LGG: it determines the grade | Cross-tabulation in notebook 01 |
+| Keep the UCI integer codes, but treat `Race` as nominal (one-hot encoding inside the model pipelines, unknown categories ignored) | Codes 0–3 have no order; one category has a single patient and may be missing from a training fold | — |
+| Keep all 20 genes, including those mutated in < 5% of patients | Low prevalence does not imply no information; relevance is measured in the EDA | — |
+| Regression predictors exclude `Grade`; classification predictors include age | Decision taken before the project started (see Problem definition) | — |
+
 ## Validation protocol
 
 | Decision | Justification | Source |

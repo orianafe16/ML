@@ -37,6 +37,8 @@ ML/
 ├── data/processed/      cleaned data produced by notebook 01 (not versioned)
 ├── src/                 shared code imported by the notebooks
 │   ├── config.py        paths, seed, validation settings, variable names
+│   ├── data.py          loading, cleaning, encoding, feature sets
+│   ├── reporting.py     LaTeX tables and JSON summaries in results/
 │   └── check_env.py     environment check
 ├── notebooks/           01_data_preparation … 05_classification (run in order)
 ├── results/             figures/, tables/ (LaTeX) and logs/ (one JSON summary per stage)
