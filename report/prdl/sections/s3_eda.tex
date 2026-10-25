@@ -1,0 +1,109 @@
+% =====================================================================
+% 3. EXPLORATORY DATA ANALYSIS (EDA)
+% =====================================================================
+\section{Exploratory Data Analysis (EDA)}\label{sec:prdl-eda}
+
+\subsection{Introduction}
+
+The EDA has a concrete purpose in a supervised problem: to find which variables separate the
+classes or relate to the target, to detect problems (leakage, redundancy, rare categories) before
+modelling, and to set realistic expectations. Its structure follows the course EDA notebook. Because
+almost every predictor here is binary, the techniques were adapted, and an unsupervised analysis of
+the mutation profiles was added. All EDA statistics describe the full dataset; none of them is used
+to select predictors, because selecting variables with the labels outside the validation loop biases
+the error estimate \cite{ambroise2002}.
+
+\subsection{Techniques}
+
+\textbf{Tests and effect sizes.} Age is not normally distributed within either class (Shapiro--Wilk
+test), so the two classes are compared with the Mann--Whitney $U$ test \cite{mann1947} rather than
+a $t$-test. Its statistic has a direct link with classification: $U/(n_1 n_0)$ is the probability
+that a random GBM patient is older than a random LGG patient, which is the area under the ROC curve
+(AUC) of age used alone \cite{hanley1982}. Binary predictors are compared with Fisher's exact test
+\cite{fisher1922}, which, unlike the $\chi^2$ test, remains valid when some cells of the $2\times2$
+table are small, as happens for rarely mutated genes. Since a $p$-value does not measure the size of
+an effect, every test is reported with an effect size (Cohen's $d$, odds ratio, single-feature AUC
+with a bootstrap interval \cite{efron1993}). With \NTests{} simultaneous tests, $p$-values are
+corrected with Bonferroni (control of any false positive) and Benjamini--Hochberg (control of the
+expected proportion of false discoveries, less conservative) \cite{benjamini1995}.
+
+\textbf{Redundancy.} For binary variables the Pearson correlation is the phi coefficient. The
+variance inflation factor, $\mathrm{VIF}_j = 1/(1-R_j^2)$, measures how well a predictor is
+explained by all the others; values above 5--10 signal problematic collinearity \cite{james2021}.
+
+\textbf{Unsupervised techniques.} PCA finds orthogonal directions of maximum variance after
+centring the data; standardising 0/1 variables gives a rare mutation the same weight as a frequent
+one, so both versions are compared. Euclidean geometry treats two patients as similar when they
+share the \emph{absence} of mutations, which dominates sparse data. The Jaccard distance,
+$d_J(A,B) = 1 - |A\cap B|/|A\cup B|$, ignores shared absences; it is used for metric MDS, whose
+fit is measured with Kruskal's stress \cite{kruskal1964}, and for t-SNE, a non-linear map that
+preserves local neighbourhoods \cite{vandermaaten2008}. $k$-means minimises the within-cluster
+variation; on 0/1 data the squared Euclidean distance equals the number of genes in which two
+patients differ. Hierarchical clustering needs a dissimilarity and a linkage; Ward's linkage merges
+the groups that least increase the within-cluster variance \cite{ward1963}. Partitions are compared
+with the silhouette \cite{rousseeuw1987} and the adjusted Rand index (ARI), which is 0 for chance
+agreement and 1 for identical partitions \cite{hubert1985}.
+
+\subsection{Results \& Conclusions}
+
+\textbf{The classes differ strongly in a few variables.} GBM patients are older (median
+\AgeMedianGBM{} vs \AgeMedianLGG{} years; Cohen's $d = \AgeCohenD$; AUC \AUCAge{} \AUCAgeCI), and the
+largest single difference is IDH1, mutated in \PrevIDHOneLGG\% of LGG and \PrevIDHOneGBM\% of GBM
+patients (AUC \AUCIDHOne{} \AUCIDHOneCI; Figure~\ref{fig:prdl-prevalence}). PTEN and EGFR mutations
+are more frequent in GBM, and CIC and NOTCH1 almost exclusive to LGG (NOTCH1:
+\PrevNOTCHLGG\% vs \PrevNOTCHGBM\%), which anticipates the separation problems of logistic
+regression (Section~\ref{sec:prdl-results}). After correction, \NSigBonf{} of \NTests{} differences
+remain significant with Bonferroni and \NSigBH{} with Benjamini--Hochberg; most of the remaining
+genes have AUCs close to 0.5, so statistical significance does not imply usefulness.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.62\textwidth]{eda_mutation_prevalence.png}
+\caption{Percentage of patients with each mutation in LGG and GBM (sorted by the difference).}
+\label{fig:prdl-prevalence}
+\end{figure}
+
+\textbf{The redundancy is moderate and biologically structured.} The strongest correlations are
+age--IDH1 ($r = \CorrAgeIDH$), TP53--ATRX ($r = \CorrTPATRX$) and CIC--FUBP1 ($r = \CorrCICFUBP$),
+and the maximum VIF is \MaxVIFEDA, below the usual thresholds. Correlated mutations do not make linear
+models unstable here, but they violate the independence assumption of naive Bayes.
+
+\textbf{Leakage would make the problem look solved.} A quick cross-validated logistic regression
+reaches an AUC of \BaseAUCAll{} with the 23 legitimate predictors and \BaseAUCAgeIDH{} with only age
+and IDH1, but \BaseAUCLeak{} when the histological diagnosis is added. The last number measures
+the leakage, not the information in the data.
+
+\textbf{The unsupervised structure is the IDH axis.} PCA does not compress the profiles: \NCompCentred{}
+centred (or \NCompScaled{} scaled) components are needed to explain 80\% of the variance, and PC1,
+which explains \PCOneCentred\% of the centred variance, is the contrast between IDH1/TP53/ATRX and
+PTEN/EGFR. With the Jaccard distance, \PctJaccardOne\% of the patient pairs share no mutation at all
+($d_J = 1$), and the MDS map distorts the distances considerably (stress \MDSStress). Hierarchical
+clustering with Jaccard distance fails: the \NNoMutation{} patients without any mutation are at
+distance 1 from everybody, so complete linkage ties at 1 and merges all patients into one cluster,
+while average and single linkage only isolate those \NNoMutation{} patients. This is a property of the
+distance, not a bug, and it illustrates why the dissimilarity must be chosen for the data.
+$k$-means and Ward's method on the 0/1 profiles agree well. The number of clusters was fixed before
+looking at the result by a rule (highest agreement between the two algorithms), which gave
+$k = \KMain$ (ARI \ARIKMWardMain). The two clusters are essentially IDH-wildtype
+(\CluMainAN{} patients, \CluMainAGBM\% GBM, median age \CluMainAAge) and IDH-mutant (\CluMainBN{} patients,
+\CluMainBGBM\% GBM, median age \CluMainBAge), with ARI \ARIGradeMain{} against the grade. As an
+exploratory, secondary solution, $k = \KSecond$ splits the IDH-mutant group into a TP53/ATRX profile
+and a CIC/FUBP1 profile with \CluSecondCGBM\% GBM (Figure~\ref{fig:prdl-clusters}), a structure that
+resembles the astrocytoma/oligodendroglioma distinction of the WHO classification\todoverify{this
+interpretation needs a source on the marker profiles of the two IDH-mutant types}. Because the
+cluster structure was not imposed by the grade, its agreement with the grade supports H3, and its
+lack of perfect agreement is consistent with the outdated labels discussed in Section 2.1.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{unsup_cluster_profiles.png}
+\caption{Mutation prevalence in each $k$-means cluster for the main ($k=\KMain$) and the secondary
+($k=\KSecond$) solution. The grade was not used to build the clusters.}
+\label{fig:prdl-clusters}
+\end{figure}
+
+\textbf{Conclusions for modelling.} (i) Accuracy alone is misleading because the majority class
+already gives \MajorityAcc; AUC, sensitivity and specificity are reported. (ii) Age and IDH1 carry most
+of the signal, so large gains from complex models are not expected. (iii) Rare categories (one patient
+of one race, mutations present in a single class) require penalised models and encoders that tolerate
+unseen categories. (iv) The diagnosis and the project must never be predictors.

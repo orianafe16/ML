@@ -1,12 +1,559 @@
 % Shared bibliography for the PRDL and MLLB reports.
-% Rule: an entry is added only after its existence and content have been checked;
-% the date of the check is written in the `note` field.
+%
+% `note` records how each entry was checked:
+%   - "verified: UCI page" / "verified: DOAJ page": checked by the AI on the publisher/index page.
+%   - "metadata: NotebookLM (file NN.pdf)": title, authors, journal and DOI as printed in the PDF,
+%     extracted by NotebookLM; the DOI is checked with report/check_references.py.
+%   - "metadata: AI knowledge": standard reference written from the AI's knowledge; the DOI must be
+%     confirmed with report/check_references.py before the final version.
+% Only entries cited with \cite appear in the compiled bibliography.
 
+% ---------------------------------------------------------------------------
+% Dataset and cohorts
+% ---------------------------------------------------------------------------
 @misc{tasci2022dataset,
   author       = {Tasci, Erdal and Camphausen, Kevin and Krauze, Andra Valentina and Zhuge, Ying},
   title        = {Glioma Grading Clinical and Mutation Features},
   year         = {2022},
   howpublished = {UCI Machine Learning Repository},
   doi          = {10.24432/C5R62J},
-  note         = {Licensed under CC BY 4.0. Verified on the UCI dataset page, 2026-10-23}
+  note         = {Licensed under CC BY 4.0. verified: UCI page, 2026-10-23}
+}
+
+@article{tasci2022,
+  author  = {Tasci, Erdal and Zhuge, Ying and Kaur, Harpreet and Camphausen, Kevin and Krauze, Andra Valentina},
+  title   = {Hierarchical Voting-Based Feature Selection and Ensemble Learning Model Scheme for Glioma Grading with Clinical and Molecular Characteristics},
+  journal = {International Journal of Molecular Sciences},
+  year    = {2022},
+  volume  = {23},
+  pages   = {14155},
+  doi     = {10.3390/ijms232214155},
+  note    = {metadata: NotebookLM (19.pdf); authors as listed on the UCI page}
+}
+
+@article{tcga2015lgg,
+  author  = {{The Cancer Genome Atlas Research Network}},
+  title   = {Comprehensive, Integrative Genomic Analysis of Diffuse Lower-Grade Gliomas},
+  journal = {The New England Journal of Medicine},
+  year    = {2015},
+  volume  = {372},
+  pages   = {2481--2498},
+  doi     = {10.1056/NEJMoa1402121},
+  note    = {metadata: NotebookLM (09.pdf)}
+}
+
+@article{brennan2013,
+  author  = {Brennan, Cameron W. and others},
+  title   = {The Somatic Genomic Landscape of Glioblastoma},
+  journal = {Cell},
+  year    = {2013},
+  volume  = {155},
+  pages   = {462--477},
+  doi     = {10.1016/j.cell.2013.09.034},
+  note    = {The Cancer Genome Atlas Research Network. metadata: NotebookLM (24.pdf)}
+}
+
+@article{zakharova2023,
+  author  = {Zakharova, Galina and others and Buzdin, Anton},
+  title   = {Reclassification of {TCGA} Diffuse Glioma Profiles Linked to Transcriptomic, Epigenetic, Genomic and Clinical Data, According to the 2021 {WHO} {CNS} Tumor Classification},
+  journal = {International Journal of Molecular Sciences},
+  year    = {2023},
+  volume  = {24},
+  pages   = {157},
+  doi     = {10.3390/ijms24010157},
+  note    = {metadata: NotebookLM (41.pdf)}
+}
+
+% ---------------------------------------------------------------------------
+% Clinical and molecular background
+% ---------------------------------------------------------------------------
+@article{louis2021,
+  author  = {Louis, David N. and others},
+  title   = {The 2021 {WHO} Classification of Tumors of the Central Nervous System: a summary},
+  journal = {Neuro-Oncology},
+  year    = {2021},
+  volume  = {23},
+  number  = {8},
+  pages   = {1231--1251},
+  doi     = {10.1093/neuonc/noab106},
+  note    = {metadata: NotebookLM (01.pdf)}
+}
+
+@article{louis2016,
+  author  = {Louis, David N. and others},
+  title   = {The 2016 World Health Organization Classification of Tumors of the Central Nervous System: a summary},
+  journal = {Acta Neuropathologica},
+  year    = {2016},
+  volume  = {131},
+  pages   = {803--820},
+  doi     = {10.1007/s00401-016-1545-1},
+  note    = {metadata: NotebookLM (07.pdf)}
+}
+
+@article{yan2009,
+  author  = {Yan, Hai and others and Bigner, Darell D.},
+  title   = {{IDH1} and {IDH2} Mutations in Gliomas},
+  journal = {The New England Journal of Medicine},
+  year    = {2009},
+  volume  = {360},
+  pages   = {765--773},
+  doi     = {10.1056/NEJMoa0808710},
+  note    = {metadata: NotebookLM (11.pdf)}
+}
+
+@article{sahm2023,
+  author  = {Sahm, Felix and others and Weller, Michael},
+  title   = {Molecular diagnostic tools for the {World Health Organization (WHO)} 2021 classification of gliomas, glioneuronal and neuronal tumors; an {EANO} guideline},
+  journal = {Neuro-Oncology},
+  year    = {2023},
+  volume  = {25},
+  pages   = {1731--1749},
+  doi     = {10.1093/neuonc/noad108},
+  note    = {metadata: NotebookLM (17.pdf)}
+}
+
+@article{weller2021,
+  author  = {Weller, Michael and others},
+  title   = {{EANO} guidelines on the diagnosis and treatment of diffuse gliomas of adulthood},
+  journal = {Nature Reviews Clinical Oncology},
+  year    = {2021},
+  volume  = {18},
+  pages   = {170--186},
+  doi     = {10.1038/s41571-020-00447-z},
+  note    = {metadata: NotebookLM (05.pdf)}
+}
+
+% ---------------------------------------------------------------------------
+% Previous machine learning work on the same data
+% ---------------------------------------------------------------------------
+@article{sanchezmarques2024,
+  author  = {S{\'a}nchez-Marqu{\'e}s, Raquel and Garc{\'i}a, Vicente and S{\'a}nchez, J. Salvador},
+  title   = {A data-centric machine learning approach to improve prediction of glioma grades using low-imbalance {TCGA} data},
+  journal = {Scientific Reports},
+  year    = {2024},
+  volume  = {14},
+  doi     = {10.1038/s41598-024-68291-0},
+  note    = {verified: DOAJ page, 2026-10-23 (21.pdf; both AI tools had given wrong title and authors)}
+}
+
+% ---------------------------------------------------------------------------
+% Methodology: validation, leakage, reporting
+% ---------------------------------------------------------------------------
+@article{varma2006,
+  author  = {Varma, Sudhir and Simon, Richard},
+  title   = {Bias in error estimation when using cross-validation for model selection},
+  journal = {BMC Bioinformatics},
+  year    = {2006},
+  volume  = {7},
+  pages   = {91},
+  doi     = {10.1186/1471-2105-7-91},
+  note    = {metadata: NotebookLM (28.pdf) gave the title "Estimating Error Rates in Genomic Data Analysis: Nested Cross-Validation Versus Standard Cross-Validation"; title here from AI knowledge, to be checked with the DOI}
+}
+
+@article{cawley2010,
+  author  = {Cawley, Gavin C. and Talbot, Nicola L. C.},
+  title   = {On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation},
+  journal = {Journal of Machine Learning Research},
+  year    = {2010},
+  volume  = {11},
+  pages   = {2079--2107},
+  note    = {metadata: NotebookLM (29.pdf); no DOI}
+}
+
+@article{kaufman2012,
+  author  = {Kaufman, Shachar and Rosset, Saharon and Perlich, Claudia and Stitelman, Ori},
+  title   = {Leakage in Data Mining: Formulation, Detection, and Avoidance},
+  journal = {ACM Transactions on Knowledge Discovery from Data},
+  year    = {2012},
+  volume  = {6},
+  number  = {4},
+  pages   = {15},
+  doi     = {10.1145/2382577.2382579},
+  note    = {metadata: NotebookLM (30.pdf); middle authors from AI knowledge}
+}
+
+@article{ambroise2002,
+  author  = {Ambroise, Christophe and McLachlan, Geoffrey J.},
+  title   = {Selection bias in gene extraction on the basis of microarray gene-expression data},
+  journal = {Proceedings of the National Academy of Sciences},
+  year    = {2002},
+  volume  = {99},
+  pages   = {6562--6566},
+  doi     = {10.1073/pnas.102102699},
+  note    = {metadata: NotebookLM (36.pdf)}
+}
+
+@article{collins2024,
+  author  = {Collins, Gary S. and others},
+  title   = {{TRIPOD+AI} statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods},
+  journal = {BMJ},
+  year    = {2024},
+  volume  = {385},
+  pages   = {e078378},
+  doi     = {10.1136/bmj-2023-078378},
+  note    = {metadata: NotebookLM (39.pdf)}
+}
+
+@article{wolff2019,
+  author  = {Wolff, Robert F. and others and Moons, Karel G. M.},
+  title   = {{PROBAST}: A Tool to Assess the Risk of Bias and Applicability of Prediction Model Studies},
+  journal = {Annals of Internal Medicine},
+  year    = {2019},
+  volume  = {170},
+  pages   = {51--58},
+  doi     = {10.7326/M18-1376},
+  note    = {metadata: NotebookLM (40.pdf)}
+}
+
+% ---------------------------------------------------------------------------
+% Statistics
+% ---------------------------------------------------------------------------
+@article{benjamini1995,
+  author  = {Benjamini, Yoav and Hochberg, Yosef},
+  title   = {Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing},
+  journal = {Journal of the Royal Statistical Society: Series B (Methodological)},
+  year    = {1995},
+  volume  = {57},
+  pages   = {289--300},
+  doi     = {10.1111/j.2517-6161.1995.tb02031.x},
+  note    = {metadata: NotebookLM (31.pdf)}
+}
+
+@article{mann1947,
+  author  = {Mann, H. B. and Whitney, D. R.},
+  title   = {On a Test of Whether one of Two Random Variables is Stochastically Larger than the Other},
+  journal = {The Annals of Mathematical Statistics},
+  year    = {1947},
+  volume  = {18},
+  pages   = {50--60},
+  doi     = {10.1214/aoms/1177730491},
+  note    = {metadata: NotebookLM (33.pdf)}
+}
+
+@article{fisher1922,
+  author  = {Fisher, Ronald A.},
+  title   = {On the Interpretation of $\chi^2$ from Contingency Tables, and the Calculation of {P}},
+  journal = {Journal of the Royal Statistical Society},
+  year    = {1922},
+  volume  = {85},
+  number  = {1},
+  pages   = {87--94},
+  doi     = {10.2307/2340521},
+  note    = {metadata: AI knowledge}
+}
+
+@article{hanley1982,
+  author  = {Hanley, James A. and McNeil, Barbara J.},
+  title   = {The meaning and use of the area under a receiver operating characteristic ({ROC}) curve},
+  journal = {Radiology},
+  year    = {1982},
+  volume  = {143},
+  number  = {1},
+  pages   = {29--36},
+  doi     = {10.1148/radiology.143.1.7063747},
+  note    = {metadata: AI knowledge}
+}
+
+@book{efron1993,
+  author    = {Efron, Bradley and Tibshirani, Robert J.},
+  title     = {An Introduction to the Bootstrap},
+  publisher = {Chapman \& Hall/CRC},
+  year      = {1993},
+  doi       = {10.1201/9780429246593},
+  note      = {metadata: AI knowledge}
+}
+
+@article{albert1984,
+  author  = {Albert, A. and Anderson, J. A.},
+  title   = {On the existence of maximum likelihood estimates in logistic regression models},
+  journal = {Biometrika},
+  year    = {1984},
+  volume  = {71},
+  number  = {1},
+  pages   = {1--10},
+  doi     = {10.1093/biomet/71.1.1},
+  note    = {metadata: AI knowledge}
+}
+
+@article{hand2001,
+  author  = {Hand, David J. and Yu, Keming},
+  title   = {Idiot's {Bayes}---Not So Stupid After All?},
+  journal = {International Statistical Review},
+  year    = {2001},
+  volume  = {69},
+  number  = {3},
+  pages   = {385--398},
+  doi     = {10.1111/j.1751-5823.2001.tb00465.x},
+  note    = {metadata: AI knowledge}
+}
+
+% ---------------------------------------------------------------------------
+% Unsupervised learning
+% ---------------------------------------------------------------------------
+@article{vandermaaten2008,
+  author  = {van der Maaten, Laurens and Hinton, Geoffrey},
+  title   = {Visualizing Data using {t-SNE}},
+  journal = {Journal of Machine Learning Research},
+  year    = {2008},
+  volume  = {9},
+  pages   = {2579--2605},
+  note    = {metadata: NotebookLM (34.pdf); no DOI}
+}
+
+@article{kruskal1964,
+  author  = {Kruskal, Joseph B.},
+  title   = {Multidimensional scaling by optimizing goodness of fit to a nonmetric hypothesis},
+  journal = {Psychometrika},
+  year    = {1964},
+  volume  = {29},
+  pages   = {1--27},
+  doi     = {10.1007/BF02289565},
+  note    = {metadata: AI knowledge}
+}
+
+@article{rousseeuw1987,
+  author  = {Rousseeuw, Peter J.},
+  title   = {Silhouettes: A graphical aid to the interpretation and validation of cluster analysis},
+  journal = {Journal of Computational and Applied Mathematics},
+  year    = {1987},
+  volume  = {20},
+  pages   = {53--65},
+  doi     = {10.1016/0377-0427(87)90125-7},
+  note    = {metadata: AI knowledge}
+}
+
+@article{hubert1985,
+  author  = {Hubert, Lawrence and Arabie, Phipps},
+  title   = {Comparing partitions},
+  journal = {Journal of Classification},
+  year    = {1985},
+  volume  = {2},
+  pages   = {193--218},
+  doi     = {10.1007/BF01908075},
+  note    = {metadata: AI knowledge}
+}
+
+@article{ward1963,
+  author  = {Ward, Joe H.},
+  title   = {Hierarchical Grouping to Optimize an Objective Function},
+  journal = {Journal of the American Statistical Association},
+  year    = {1963},
+  volume  = {58},
+  number  = {301},
+  pages   = {236--244},
+  doi     = {10.1080/01621459.1963.10500845},
+  note    = {metadata: AI knowledge}
+}
+
+% ---------------------------------------------------------------------------
+% Models and textbooks
+% ---------------------------------------------------------------------------
+@book{james2021,
+  author    = {James, Gareth and Witten, Daniela and Hastie, Trevor and Tibshirani, Robert},
+  title     = {An Introduction to Statistical Learning: with Applications in {R}},
+  edition   = {2nd},
+  publisher = {Springer},
+  year      = {2021},
+  doi       = {10.1007/978-1-0716-1418-1},
+  note      = {Course textbook. metadata: AI knowledge}
+}
+
+@article{tibshirani1996,
+  author  = {Tibshirani, Robert},
+  title   = {Regression Shrinkage and Selection via the Lasso},
+  journal = {Journal of the Royal Statistical Society: Series B (Methodological)},
+  year    = {1996},
+  volume  = {58},
+  number  = {1},
+  pages   = {267--288},
+  doi     = {10.1111/j.2517-6161.1996.tb02080.x},
+  note    = {metadata: AI knowledge}
+}
+
+@article{hoerl1970,
+  author  = {Hoerl, Arthur E. and Kennard, Robert W.},
+  title   = {Ridge Regression: Biased Estimation for Nonorthogonal Problems},
+  journal = {Technometrics},
+  year    = {1970},
+  volume  = {12},
+  number  = {1},
+  pages   = {55--67},
+  doi     = {10.1080/00401706.1970.10488634},
+  note    = {metadata: AI knowledge}
+}
+
+@book{breiman1984,
+  author    = {Breiman, Leo and Friedman, Jerome H. and Olshen, Richard A. and Stone, Charles J.},
+  title     = {Classification and Regression Trees},
+  publisher = {Wadsworth},
+  year      = {1984},
+  note      = {metadata: AI knowledge}
+}
+
+@article{cortes1995,
+  author  = {Cortes, Corinna and Vapnik, Vladimir},
+  title   = {Support-vector networks},
+  journal = {Machine Learning},
+  year    = {1995},
+  volume  = {20},
+  pages   = {273--297},
+  doi     = {10.1007/BF00994018},
+  note    = {metadata: AI knowledge}
+}
+
+@incollection{platt1999,
+  author    = {Platt, John C.},
+  title     = {Probabilistic Outputs for Support Vector Machines and Comparisons to Regularized Likelihood Methods},
+  booktitle = {Advances in Large Margin Classifiers},
+  publisher = {MIT Press},
+  year      = {1999},
+  pages     = {61--74},
+  note      = {metadata: AI knowledge}
+}
+
+@inproceedings{chen2016,
+  author    = {Chen, Tianqi and Guestrin, Carlos},
+  title     = {{XGBoost}: A Scalable Tree Boosting System},
+  booktitle = {Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
+  year      = {2016},
+  pages     = {785--794},
+  doi       = {10.1145/2939672.2939785},
+  note      = {metadata: AI knowledge}
+}
+
+% ---------------------------------------------------------------------------
+% Software (each project's recommended citation)
+% ---------------------------------------------------------------------------
+@article{pedregosa2011,
+  author  = {Pedregosa, Fabian and others},
+  title   = {Scikit-learn: Machine Learning in {P}ython},
+  journal = {Journal of Machine Learning Research},
+  year    = {2011},
+  volume  = {12},
+  pages   = {2825--2830},
+  note    = {metadata: AI knowledge; no DOI}
+}
+
+@article{harris2020,
+  author  = {Harris, Charles R. and others},
+  title   = {Array programming with {NumPy}},
+  journal = {Nature},
+  year    = {2020},
+  volume  = {585},
+  pages   = {357--362},
+  doi     = {10.1038/s41586-020-2649-2},
+  note    = {metadata: AI knowledge}
+}
+
+@article{virtanen2020,
+  author  = {Virtanen, Pauli and others},
+  title   = {{SciPy} 1.0: fundamental algorithms for scientific computing in {P}ython},
+  journal = {Nature Methods},
+  year    = {2020},
+  volume  = {17},
+  pages   = {261--272},
+  doi     = {10.1038/s41592-019-0686-2},
+  note    = {metadata: AI knowledge}
+}
+
+@inproceedings{mckinney2010,
+  author    = {McKinney, Wes},
+  title     = {Data Structures for Statistical Computing in {P}ython},
+  booktitle = {Proceedings of the 9th Python in Science Conference},
+  year      = {2010},
+  pages     = {56--61},
+  doi       = {10.25080/Majora-92bf1922-00a},
+  note      = {metadata: AI knowledge}
+}
+
+@inproceedings{seabold2010,
+  author    = {Seabold, Skipper and Perktold, Josef},
+  title     = {statsmodels: Econometric and statistical modeling with {P}ython},
+  booktitle = {Proceedings of the 9th Python in Science Conference},
+  year      = {2010},
+  pages     = {92--96},
+  doi       = {10.25080/Majora-92bf1922-011},
+  note      = {metadata: AI knowledge}
+}
+
+@article{hunter2007,
+  author  = {Hunter, John D.},
+  title   = {Matplotlib: A {2D} Graphics Environment},
+  journal = {Computing in Science \& Engineering},
+  year    = {2007},
+  volume  = {9},
+  number  = {3},
+  pages   = {90--95},
+  doi     = {10.1109/MCSE.2007.55},
+  note    = {metadata: AI knowledge}
+}
+
+@article{waskom2021,
+  author  = {Waskom, Michael L.},
+  title   = {seaborn: statistical data visualization},
+  journal = {Journal of Open Source Software},
+  year    = {2021},
+  volume  = {6},
+  number  = {60},
+  pages   = {3021},
+  doi     = {10.21105/joss.03021},
+  note    = {metadata: AI knowledge}
+}
+
+% ---------------------------------------------------------------------------
+% References of the Ensemble Learning appendices (copied unchanged from the templates)
+% ---------------------------------------------------------------------------
+@article{breiman2001,
+  author  = {Breiman, L.},
+  title   = {Random Forests},
+  journal = {Machine Learning},
+  year    = {2001},
+  volume  = {45},
+  number  = {1},
+  pages   = {5--32}
+}
+
+@article{freund1997,
+  author  = {Freund, Y. and Schapire, R. E.},
+  title   = {A Decision-Theoretic Generalization of On-Line Learning and an Application to Boosting},
+  journal = {Journal of Computer and System Sciences},
+  year    = {1997},
+  volume  = {55},
+  number  = {1},
+  pages   = {119--139}
+}
+
+@book{hastie2009,
+  author    = {Hastie, T. and Tibshirani, R. and Friedman, J.},
+  title     = {The Elements of Statistical Learning: Data Mining, Inference, and Prediction},
+  edition   = {2nd},
+  publisher = {Springer},
+  year      = {2009}
+}
+
+@article{mienye2022,
+  author  = {Mienye, I. D. and Sun, Y.},
+  title   = {A Survey of Ensemble Learning with Machine Learning Algorithms},
+  journal = {IEEE Access},
+  year    = {2022},
+  volume  = {10},
+  pages   = {99563--99581}
+}
+
+@article{mohammed2023,
+  author  = {Mohammed, A. and Kora, R.},
+  title   = {A Comprehensive Review on Ensemble Deep Learning: Opportunities and Challenges},
+  journal = {Journal of King Saud University -- Computer and Information Sciences},
+  year    = {2023},
+  volume  = {35},
+  number  = {2},
+  pages   = {757--774}
+}
+
+@book{sutton2018,
+  author    = {Sutton, R. S. and Barto, A. G.},
+  title     = {Reinforcement Learning: An Introduction},
+  edition   = {2nd},
+  publisher = {MIT Press},
+  year      = {2018}
 }

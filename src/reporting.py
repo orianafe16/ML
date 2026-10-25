@@ -17,8 +17,12 @@ _LATEX_SPECIAL = {
 }
 
 
+_LATEX_SYMBOLS = {"±": r"$\pm$", "²": r"$^2$", "≥": r"$\geq$", "≤": r"$\leq$", "−": "-"}
+
+
 def latex_escape(text):
-    return "".join(_LATEX_SPECIAL.get(ch, ch) for ch in str(text))
+    """Escape LaTeX special characters; a few Unicode symbols are mapped to math commands."""
+    return "".join(_LATEX_SYMBOLS.get(ch, _LATEX_SPECIAL.get(ch, ch)) for ch in str(text))
 
 
 def save_table_tex(df, name, float_format="{:.3f}", index=False, column_format=None):

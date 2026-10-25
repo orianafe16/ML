@@ -189,3 +189,73 @@ Entry format:
      0.5 to "IDH1 <= 0.0", a rule that reads as false (IDH1 takes values 0 or 1, and the split is
      0 vs 1). Detected by reading the figure against `export_text`; fixed with one decimal.
      **Bounty candidate:** a visualisation that silently states a wrong rule.
+
+## Stage 6 — Literature search with Perplexity (2026-10-23)
+
+- **Tool:** Perplexity (AI scientific assistant), used by the author.
+- **Prompts:** (1) WHO 2021 classification, clinical differences LGG/GBM, role and co-occurrence of
+  the markers, limitations of histological grading, molecular testing; (2) the UCI dataset paper,
+  the TCGA LGG/GBM publications and ML studies on glioma grading with clinical/mutation data. Each
+  prompt asked for DOI, open-access status, and the exact claim supported.
+- **Problems detected in the output (to be confirmed by the author against the PDFs):**
+  - Off-topic sources returned as supporting the requested points: a 12/15-lipoxygenase study in
+    glioblastoma cell biology (12.pdf) and, twice, a cardiac epigenetic reprogramming paper
+    (20.pdf, 27.pdf), unrelated to glioma.
+  - Likely wrong attribution: Parsons et al. 2008 (Science) labelled as a TCGA publication
+    (23.pdf); the 2008 TCGA glioblastoma paper is a different article.
+  - Inconsistent metadata: one title given with two different first authors (21.pdf / 25.pdf), and
+    a methylation-classification paper given with mixed authors (02.pdf).
+  - Supplements of the same TCGA LGG paper listed as separate sources (10.pdf, 22.pdf).
+- **Verification method:** comparing each returned title, author list and topic with the requested
+  point; to be completed by reading the PDFs (first page and author list).
+- **Bounty candidate:** yes (PRDL, AI scientific assistant): sources that do not support the
+  claims they were returned for, and misattributed authorship.
+
+## Stage 6 — Source inventory with NotebookLM (2026-10-23)
+
+- **Tool:** NotebookLM, with all downloaded PDFs uploaded. Prompt: one table row per file with the
+  bibliographic data *as printed in the document*, document type, topics covered, duplicates and
+  unrelated files ("not stated" instead of guessing).
+- **Use:** the AI decided which sources to keep from this table only (no PDF was read by the AI, to
+  save tokens). Kept 25 files; removed duplicates (10, 22, 25, 45), off-topic files (12, 20, 27),
+  a conference abstract (35), sources not used by the analysis (02, 03, 06, 15, 16, 32), and
+  files with unreliable metadata (23 as a TCGA paper, 43, 44, 46, 47).
+- **Errors in the NotebookLM output (to be confirmed by the author):**
+  - Flagged a 2025 publication year as "a future publication year" — wrong, the inventory was made
+    in October 2026 (the model's notion of the current date is outdated).
+  - Assigned Parsons et al. 2008 (Science) to the topic "TCGA LGG or GBM project publications",
+    repeating Perplexity's misattribution.
+  - Marked all methods papers (nested CV, leakage, BH, Mann–Whitney, t-SNE, TRIPOD+AI, PROBAST) as
+    "unrelated to glioma": literally true but not useful for the decision; the AI kept them.
+  - Marked 12.pdf as related to glioma while assigning it no topic.
+  - File 42.pdf is missing from the inventory (numbering jumps from 41 to 43).
+- **Bounty candidate:** yes (PRDL): a temporal error ("future" 2025) and a repeated misattribution
+  across two AI tools, detected by cross-checking the table against the current date and the author
+  lists.
+
+## Stage 6 — Drafting the reports (2026-10-25)
+
+- **Request:** full drafts of the PRDL and MLLB reports in LaTeX, from the templates, with results
+  read from `results/` and literature from the NotebookLM extraction (the AI does not read PDFs).
+- **What the AI produced:** `report/prdl/` and `report/mllb/` (main.tex + sections),
+  `report/common/references.bib`, `report/make_numbers.py`, `report/build_zips.py`,
+  `report/check_references.py`.
+- **Verification:** both reports compiled locally (pdflatex + bibtex, no errors, no undefined
+  citations); every page rendered and inspected; numbers come from macros only.
+- **Problems found in the AI tools' literature output and handled in the text:**
+  - NotebookLM statements broader than their quotes (e.g. glioblastoma incidence/survival numbers
+    attributed to a file whose quote only covers lower-grade glioma survival): only the quoted part
+    used, the rest marked `[verify]`.
+  - 21.pdf: title and authors given by Perplexity and NotebookLM ("Machine Learning and Statistical
+    Evaluation of Glioma Datasets", Garbulowski & Komorowski) contradicted by NotebookLM's own
+    extraction (Sánchez-Marqués et al.); the AI checked the DOAJ record, which confirms
+    Sánchez-Marqués, García and Sánchez, Sci Rep 2024, doi:10.1038/s41598-024-68291-0.
+  - 28.pdf: NotebookLM gave the Varma & Simon (2006) title as "Estimating Error Rates in Genomic Data
+    Analysis: Nested Cross-Validation Versus Standard Cross-Validation"; the AI's knowledge gives
+    "Bias in error estimation when using cross-validation for model selection". To be settled with
+    `check_references.py`.
+  - 42.pdf is cited by NotebookLM for the reclassification of TCGA cases (134 changed, 811
+    unchanged) but is missing from the inventory: its bibliographic data are still needed.
+- **Errors of the AI found while compiling (fixed):** generated tables printed `$\pm$` literally
+  (escaping bug in `src/reporting.py`); several wide tables overflowed the margin; long `\texttt`
+  paths ran into the margin.

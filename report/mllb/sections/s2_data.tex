@@ -1,0 +1,46 @@
+% =====================================================================
+% 2. DATA PREPARATION
+% =====================================================================
+\section{Data Preparation}
+
+\textbf{Input files} (\texttt{data/raw/}, never modified): the original TCGA export
+\texttt{TCGA\_GBM\_LGG\_Mutations\_all.csv} (\NRaw{} patients, text labels, with patient identifier,
+TCGA project and diagnosis) and the encoded UCI file \texttt{TCGA\_InfoWithGrade.csv} (\NClean{}
+patients) \cite{tasci2022dataset}. Notebook \texttt{01\_data\_preparation} rebuilds the clean dataset
+from the original export so that the identifier and the diagnosis are kept, in five steps:
+
+\begin{enumerate}
+  \item \textbf{Quality checks.} Missing values are not empty cells but the strings \texttt{--} and
+        \texttt{not reported}, so \texttt{isna()} finds none; they are counted
+        explicitly (function \texttt{count\_invalid\_markers} in \texttt{data.py}). No patient identifier is duplicated, and the gene columns contain only
+        \texttt{MUTATED}/\texttt{NOT\_MUTATED}.
+  \item \textbf{Exclusions} (Table~\ref{tab:mllb-cleaning}): each patient is assigned to the first
+        reason that applies, so the counts add up; the excluded patients are \NRemovedLGG{} LGG and
+        \NRemovedGBM{} GBM.
+  \item \textbf{Encoding} with the UCI codes. Age is converted from ``\textit{X} years \textit{Y}
+        days'' to $X + Y/365$ years, rounded to two decimals; race is kept as a nominal code and
+        one-hot encoded later, inside each model pipeline.
+  \item \textbf{Leakage columns.} \texttt{Project} is identical to the grade for all \NRaw{} patients
+        and is dropped; \texttt{Primary\_Diagnosis} is kept only as metadata.
+  \item \textbf{Check against UCI.} \texttt{data.verify\_against\_uci} compares the rebuilt dataset with
+        the UCI file column by column and row by row (number of patients, order and every value of the
+        24 columns); the notebook stops with an \texttt{assert} if any check fails. All checks pass.
+\end{enumerate}
+
+\begin{table}[H]
+\centering
+\caption{Patients removed at each cleaning step.}
+\label{tab:mllb-cleaning}
+\input{tables/data_cleaning.tex}
+\end{table}
+
+The resulting variables and their role in each task are listed in Table~\ref{tab:mllb-dictionary};
+the predictor sets are defined once in \texttt{data.feature\_columns} and imported by every notebook
+(23 predictors for classification, 22 for regression, the 20 genes for the unsupervised analysis).
+
+\begin{table}[H]
+\centering
+\caption{Data dictionary of the clean dataset.}
+\label{tab:mllb-dictionary}
+\resizebox{\textwidth}{!}{\input{tables/data_dictionary.tex}}
+\end{table}

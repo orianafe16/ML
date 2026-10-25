@@ -1,0 +1,30 @@
+% =====================================================================
+% 6. CONCLUSIONS
+% =====================================================================
+\section{Conclusions}
+
+From the point of view of tools and methodology:
+\begin{itemize}
+  \item \textbf{The pipeline is reproducible end to end.} The rebuilt dataset matches the UCI file in
+        every value; two complete runs give identical results; and the run on a second computer (the
+        author's) reproduced every value of the five JSON summaries. The only reproducibility failure
+        found (an unseeded solver) was detected precisely by this comparison.
+  \item \textbf{Nested cross-validation is affordable at this scale.} With small grids, each notebook
+        runs in a few minutes, and keeping the chosen hyperparameters of every outer fold gives a direct
+        view of the stability of the tuning.
+  \item \textbf{Results.} In classification, all models reach out-of-fold AUCs between \ClfMinAUC{} and
+        \ClfMaxAUC{} (baseline \ClfAUCBase); in regression, MAEs between \RegMinMAE{} and \RegMaxMAE{}
+        years (baseline \RegBaseMAE). Under the comparison rule fixed in advance no model is declared
+        better than the others in either task; the paired comparison separates only small differences
+        in classification. The interpretation of these results is in the PRDL report.
+  \item \textbf{Graphics that check themselves.} Fixing one colour per class across all figures, and
+        inspecting every figure before accepting it, caught errors that no test would have detected: a
+        biplot with distorted arrows, a bar chart whose axis hid part of the data, a tree with inverted
+        class colours and a tree rule printed as ``IDH1 $\leq$ 0.0''.
+  \item \textbf{Generating the reports from the results} (numbers as macros, tables as \texttt{.tex}
+        files, figures copied by a script) means that re-running the notebooks updates both reports
+        without manual editing.
+\end{itemize}
+
+Planned for the final version (January): the multiclass classification of the histological diagnosis,
+the causal analysis, and the AI Error Bounty sheets in the format of the course guideline.

@@ -1,0 +1,139 @@
+% =====================================================================
+% 3. EXPLORATORY DATA ANALYSIS (EDA)
+% =====================================================================
+\section{Exploratory Data Analysis (EDA)}
+
+Notebook \texttt{02\_eda} follows the sections of the course EDA notebook (quality, target and
+leakage, univariate analysis, normality, tests and effect sizes, outliers, correlation and VIF,
+relevance, conditional probability, multivariate view, baseline) and adds an EDA of the regression
+target. Notebook \texttt{03\_unsupervised} contains the PCA, MDS/t-SNE and clustering. The statistics
+are implemented in \texttt{src/eda.py} and \texttt{src/unsupervised.py}; this section presents the
+graphical results, and their interpretation is in the PRDL report.
+
+\subsection*{Target, age and leakage}
+
+The classes are moderately imbalanced (\NLGG{} LGG, \NGBM{} GBM; majority-class accuracy \MajorityAcc).
+Age differs strongly between grades (Figure~\ref{fig:mllb-age}): the empirical cumulative distribution
+functions are separated by a Kolmogorov--Smirnov distance of \AgeKS, and the best single threshold
+(Youden's index) is \YoudenAge{} years, with sensitivity \YoudenSens{} and specificity \YoudenSpec{} on
+the same data (optimistic by construction). Q--Q plots and Shapiro--Wilk tests (in the notebook) show
+non-normal age distributions, which is why the Mann--Whitney test is used.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{eda_age_by_grade.png}
+\caption{Age at diagnosis by grade: histogram, box and violin plot, and ECDF.}
+\label{fig:mllb-age}
+\end{figure}
+
+\subsection*{Relevance and redundancy of the predictors}
+
+Figure~\ref{fig:mllb-relevance} ranks every predictor by its AUC used alone, with 2000-resample
+stratified bootstrap intervals (\texttt{evaluation.bootstrap\_ci} with a rank-based AUC written in
+NumPy so that it can be resampled quickly). The correlation matrix (Figure~\ref{fig:mllb-corr}) is
+drawn with a diverging blue--grey--red scale centred at zero; the maximum VIF is \MaxVIFEDA.
+Figure~\ref{fig:mllb-condprob} shows the empirical $P(\mathrm{GBM})$ by age quintile and with and
+without each mutation, with Wilson 95\% intervals.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{eda_feature_relevance.png}
+\caption{Single-feature AUC with 95\% bootstrap intervals (colour: direction of the effect).}
+\label{fig:mllb-relevance}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{eda_feature_correlation.png}
+\caption{Spearman correlation between predictors (phi coefficient for binary pairs).}
+\label{fig:mllb-corr}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{eda_conditional_probability.png}
+\caption{Empirical probability of GBM by age quintile and with/without each mutation (95\% Wilson
+intervals; dashed line: overall proportion of GBM).}
+\label{fig:mllb-condprob}
+\end{figure}
+
+\subsection*{Quick baseline and leakage check}
+
+A logistic regression in a \texttt{Pipeline} (scaling and one-hot encoding inside the folds), with the
+same stratified 10-fold split used later, checks how much signal the EDA suggests
+(Table~\ref{tab:mllb-baseline}). Adding the one-hot diagnosis gives a perfect but fake result.
+
+\begin{table}[H]
+\centering
+\caption{Quick cross-validated baseline (stratified 10-fold CV, seed 42).}
+\label{tab:mllb-baseline}
+\resizebox{0.9\textwidth}{!}{\input{tables/eda_baseline.tex}}
+\end{table}
+
+\subsection*{Regression target}
+
+Figure~\ref{fig:mllb-agetarget} shows the distribution of age and its relation with the eight
+predictors with the strongest Mann--Whitney effects (\NAgeSigBH{} of \NAgeTests{} are significant after
+Benjamini--Hochberg correction).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{eda_age_regression_target.png}
+\caption{Distribution of age at diagnosis and age with/without the eight most related predictors.}
+\label{fig:mllb-agetarget}
+\end{figure}
+
+\subsection*{Unsupervised analysis of the mutation profiles}
+
+PCA was computed on centred and on standardised genes (Figure~\ref{fig:mllb-pca}); the biplot arrows
+use a single scale factor for both axes so that their directions are not distorted. MDS and t-SNE use
+a precomputed Jaccard distance matrix (Figure~\ref{fig:mllb-mds}). The number of clusters was chosen
+with the criteria of Figure~\ref{fig:mllb-k}; the rule fixed in advance (highest $k$-means--Ward
+agreement) gives $k=\KMain$. Table~\ref{tab:mllb-linkage} and Figure~\ref{fig:mllb-dendro} document why
+Jaccard-based hierarchical clustering was not used for the final comparison, and
+Figure~\ref{fig:mllb-clugrade} compares the clusters with the grade.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{unsup_pca_biplot.png}
+\caption{PCA biplots of the 20 mutation indicators, centred (left) and standardised (right); points
+coloured by grade after the PCA.}
+\label{fig:mllb-pca}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{unsup_mds_tsne_grade.png}
+\caption{Metric MDS (stress-1 = \MDSStress) and t-SNE maps with Jaccard distance, coloured by grade.}
+\label{fig:mllb-mds}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{unsup_k_selection.png}
+\caption{Choice of the number of clusters: within-cluster variation, silhouette, and agreement (ARI)
+between $k$-means and Ward.}
+\label{fig:mllb-k}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Hierarchical clustering cut into $k=\KMain$ clusters for each distance and linkage.}
+\label{tab:mllb-linkage}
+\resizebox{\textwidth}{!}{\input{tables/unsup_linkage_comparison.tex}}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{unsup_dendrograms.png}
+\caption{Dendrograms (last 30 merges) with Jaccard distance and average linkage (left) and Euclidean
+distance and Ward linkage (right).}
+\label{fig:mllb-dendro}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{unsup_clusters_vs_grade.png}
+\caption{Grade within each $k$-means cluster for $k=\KMain$ (main) and $k=\KSecond$ (exploratory).}
+\label{fig:mllb-clugrade}
+\end{figure}

@@ -1,0 +1,38 @@
+% =====================================================================
+% 5. CODE DISTRIBUTION
+% =====================================================================
+\section{Code Distribution}\label{sec:mllb-code}
+
+All code is in the public repository \url{https://github.com/orianafe16/ML}
+\todoverify{confirm that the repository is public and the URL is final}. The raw data are included
+(CC BY 4.0); the course templates and the literature PDFs are excluded with \texttt{.gitignore}.
+
+\begin{lstlisting}[language={}]
+ML/
+  data/raw/          original CSV files (unchanged)
+  data/processed/    clean dataset written by notebook 01 (not versioned)
+  src/               config, data, eda, unsupervised, pipelines, models,
+                     evaluation, plotting, reporting, check_env
+  notebooks/         01_data_preparation ... 05_classification
+  results/           figures/, tables/ (LaTeX), logs/ (JSON per stage,
+                     out-of-fold predictions)
+  report/            PRDL and MLLB sources, references.bib, make_numbers.py,
+                     build_zips.py, check_references.py
+  docs/              DECISIONS.md (justification of every decision),
+                     AI_USAGE_LOG.md
+  environment.yml, requirements.txt, README.md
+\end{lstlisting}
+
+To reproduce every result:
+\begin{lstlisting}[language={}]
+conda env create -f environment.yml
+conda activate glioma-ml
+python -m ipykernel install --user --name glioma-ml
+python -m src.check_env
+# run notebooks/01 ... 05 in order with the "glioma-ml" kernel
+python report/make_numbers.py
+python report/build_zips.py       # Overleaf bundles of both reports
+\end{lstlisting}
+
+\texttt{docs/DECISIONS.md} records every design decision with its justification and the course material
+it is based on, and \texttt{docs/AI\_USAGE\_LOG.md} every interaction with AI assistants.

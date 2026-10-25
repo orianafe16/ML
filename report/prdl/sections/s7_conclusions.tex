@@ -1,0 +1,40 @@
+% =====================================================================
+% 7. CONCLUSIONS
+% =====================================================================
+\section{Conclusions}
+
+\subsection{Conclusions related to the study}
+
+\begin{itemize}
+  \item \textbf{H1 (classification) is supported.} Age and 20 point mutations separate LGG from GBM
+        with out-of-fold AUCs between \ClfMinAUC{} and \ClfMaxAUC{} under nested cross-validation. Penalised logistic
+        regression and XGBoost are statistically indistinguishable from the best random forest;
+        naive Bayes, the SVM and the pruned tree are slightly worse in paired comparisons.
+  \item \textbf{H2 (regression) is supported with a caveat.} Without the grade, the profile
+        explains a share of the variance of age between \RegMinRTwo{} and \RegMaxRTwo{} ($R^2$), with all
+        models equivalent; but the predictions
+        mostly recover the grade through IDH1, IDH2 and ATRX, so the mutations explain age largely
+        through the grade.
+  \item \textbf{H3 (unsupervised) is supported.} Without labels, $k$-means and Ward's method
+        separate an IDH-wildtype and an IDH-mutant group, related to but not identical with the
+        grade; a secondary three-cluster solution separates two IDH-mutant profiles. Jaccard-based
+        hierarchical clustering fails on these data because of patients without any mutation.
+  \item \textbf{The labels limit the study.} The grades come from pre-2021 criteria and several
+        markers of the current classification are missing from the data; the cohort is mostly white
+        and only internally validated. The models describe this cohort, not current clinical
+        practice.
+\end{itemize}
+
+\subsection{Conclusions on what you have learned}
+
+The most useful lessons were methodological. First, a large part of good modelling happens before
+the models: the histological diagnosis would have produced a perfect but meaningless classifier, and
+only checking how the target was defined revealed it. Second, the choice of a distance or a linkage
+is a modelling decision with consequences: the Jaccard distance is the natural choice for sparse
+binary data, but it made hierarchical clustering degenerate. Third, ``which model is best'' often has
+no answer at the available sample size, and saying so with intervals is more honest than ranking
+point estimates; how the comparison is made (marginal intervals or paired differences) must be fixed
+in advance. Fourth, a model can rank patients well while giving unreliable probabilities or
+coefficients (naive Bayes, logistic regression under quasi-separation), so evaluation must match the
+intended use. Finally, the AI assistants used for literature search produced wrong or misattributed
+sources that were only caught by cross-checking (Appendix B).

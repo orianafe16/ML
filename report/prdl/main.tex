@@ -1,0 +1,321 @@
+\documentclass[11pt]{article}
+
+% ---------- Packages ----------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[explicit]{titlesec}
+\usepackage{fancyhdr}
+\usepackage{caption}
+
+% ---------- Colors ----------
+\definecolor{etsitorange}{RGB}{237,125,49}
+\definecolor{etsitblue}{RGB}{31,73,125}
+
+% ---------- Section banners (orange bar, like the template) ----------
+\titleformat{\section}
+  {\bfseries\Large\color{white}}
+  {}{0pt}
+  {\colorbox{etsitorange}{\parbox{\dimexpr\textwidth-4\fboxsep-12pt\relax}{\centering\thesection.\ #1}}}
+\titlespacing*{\section}{0pt}{18pt}{12pt}
+
+% Unnumbered \section* (used internally by \tableofcontents, \listoftables,
+% \listoffigures) gets the same orange banner, without a number.
+\titleformat{name=\section,numberless}
+  {\bfseries\Large\color{white}}
+  {}{0pt}
+  {\colorbox{etsitorange}{\parbox{\dimexpr\textwidth-4\fboxsep-12pt\relax}{\centering#1}}}
+\titlespacing*{name=\section,numberless}{0pt}{18pt}{12pt}
+
+\titleformat{\subsection}
+  {\bfseries\large}
+  {\thesubsection.}{0.5em}{#1}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+
+% Appendix banner (no numbering, e.g. "APPENDIX A: ...")
+\newcommand{\appendixbanner}[1]{%
+  \colorbox{etsitorange}{\parbox{\dimexpr\textwidth-4\fboxsep-12pt\relax}{\centering\bfseries\Large\color{white} #1}}%
+  \vspace{12pt}
+}
+
+\renewcommand{\contentsname}{CONTENTS}
+\renewcommand{\listtablename}{LIST OF TABLES}
+\renewcommand{\listfigurename}{LIST OF FIGURES}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\thepage}
+
+\usepackage{float}
+\usepackage{array}
+\usepackage{cite}
+\hypersetup{hidelinks}
+\graphicspath{{figures/}}
+\setlength{\emergencystretch}{2em}  % avoid long \texttt paths running into the margin
+
+% Numbers quoted in the text, generated from results/logs/*.json by report/make_numbers.py
+\input{numbers}
+
+% Claims still to be checked against a quoted source (redefine as empty for the final version)
+\newcommand{\todoverify}[1]{\textcolor{red}{\,\textsf{\footnotesize[verify: #1]}}}
+
+\begin{document}
+
+% =====================================================================
+% COVER PAGE
+% =====================================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+\includegraphics[width=0.4\textwidth]{figures/etsit_logo.jpeg}\par
+\vspace{1.5cm}
+
+{\color{etsitblue}\bfseries\Large Course:}\par
+\vspace{0.5cm}
+{\bfseries\huge Predictive and Descriptive Learning}\par
+\vspace{1cm}
+{\Large Half-term Activities Report}\par
+{\bfseries\Large Developing Machine Learning models}\par
+\vspace{0.5cm}
+\rule{0.7\textwidth}{0.4pt}\par
+\vspace{3cm}
+
+\large Name: \underline{\hspace{2mm}Oriana Andrea Ferraz De Jesus\hspace{2mm}}\par
+\vspace{0.5cm}
+\hfill Date: \underline{\hspace{2mm}October 2026\hspace{2mm}}\par
+
+\end{titlepage}
+
+% =====================================================================
+% TABLE OF CONTENTS / LIST OF TABLES / LIST OF FIGURES
+% =====================================================================
+\tableofcontents
+\vspace{1cm}
+
+\listoftables
+\vspace{1cm}
+
+\listoffigures
+
+\newpage
+
+\input{sections/s1_problem}
+\input{sections/s2_data}
+\input{sections/s3_eda}
+\input{sections/s4_setup}
+\input{sections/s5_models}
+\input{sections/s6_results}
+\input{sections/s7_conclusions}
+
+% =====================================================================
+% REFERENCES
+% =====================================================================
+\section{References}
+\begingroup
+% thebibliography opens its own \section*{References}; it is swallowed here so that
+% the numbered banner above is the only heading.
+\renewcommand{\section}[2]{}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+\endgroup
+
+\newpage
+
+% =====================================================================
+% APPENDIX A: ENSEMBLE LEARNING
+% =====================================================================
+\appendixbanner{APPENDIX A: ENSEMBLE LEARNING}
+
+\subsection*{Classical learning paradigms}
+
+Supervised learning works from examples that already carry the right answer: each
+training case pairs a set of inputs with a known target, and the model adjusts itself to
+close the gap between its predictions and those targets \cite{hastie2009}. The task is
+regression when the target is a number, such as a price or a glucose level, and
+classification when it is a category, such as spam versus legitimate email. Typical
+algorithms include linear and logistic regression, k-nearest neighbors, decision trees,
+support vector machines, and neural networks trained with backpropagation. Applications
+include recognizing handwritten digits from pixel data, filtering spam by word frequency,
+and predicting heart attack risk from clinical variables \cite{hastie2009}.
+
+Unsupervised learning gets no target at all. Instead of minimizing an error against a
+known answer, it looks for structure already sitting in the data: groups of similar
+points, directions of high variance, or an underlying distribution \cite{hastie2009}.
+Without ground truth to check against, judging an unsupervised model usually comes down
+to internal measures like cluster compactness rather than a clean loss function. The two
+main families are clustering, grouping similar observations with methods like k-means,
+hierarchical clustering, or DBSCAN, and dimensionality reduction, which compresses many
+variables into a few while keeping most of the useful information, typically through PCA
+or its kernel variants. It is used for grouping gene expression profiles, segmenting
+customers for marketing, and flagging anomalies in financial transactions \cite{hastie2009}.
+
+Reinforcement learning is built around trial and error instead of examples. An agent acts
+inside an environment and gets a reward signal telling it how good or bad that action
+was, without ever being told what the right action would have been \cite{sutton2018}.
+That is the key difference from supervised learning: the feedback only evaluates what
+happened, it does not instruct. The agent constantly weighs exploiting what already works
+against exploring something that might work better, formalized through the Markov
+decision process, where the next state depends only on the current one and the action
+taken. Foundational methods include dynamic programming, temporal-difference learning,
+and Q-learning, and pairing these ideas with deep networks produced algorithms like Deep
+Q-Networks \cite{sutton2018}. It is the paradigm behind game-playing systems such as
+AlphaGo, as well as robotic control and autonomous vehicle navigation.
+
+None of this changes with ensemble learning: what changes is not the kind of feedback a
+model receives, but what is done with several trained models once they already exist.
+
+\subsection*{Ensemble learning}
+
+A random forest does not introduce a new kind of training signal: it is still a
+supervised model. Ensemble learning trains several base models, often called weak
+learners, and combines their outputs into a single prediction that in practice tends to
+beat any of the individual models it is built from \cite{mienye2022,mohammed2023}. A high
+score from one ensemble does not by itself prove that its training procedure generalizes
+better than a single model's, and a credible comparison still needs a clearly defined
+objective, a proper train/test separation, and metrics that match the question being
+asked. The logic behind why ensembles tend to help at all is close to
+the wisdom of crowds: if each base model does at least a bit better than random guessing,
+and their mistakes are not all correlated, combining their votes cancels out a good part
+of the individual errors. The bias-variance decomposition gives this a more formal
+footing. A model can go wrong by being too simple for the problem (high bias) or too
+sensitive to the particular training sample it saw (high variance); averaging several
+independently trained models lowers variance without raising bias, while reweighting
+examples so later models correct earlier mistakes instead lowers bias. Formally, if $M$
+predictors have equal error variance $\sigma^2$ and equal pairwise error correlation
+$\rho$, the variance of their average is
+\begin{equation}
+  \mathrm{Var}\left(\frac{1}{M}\sum_{m=1}^{M} \hat{f}_m(x)\right)
+  = \sigma^2 \left(\rho + \frac{1-\rho}{M}\right).
+  \label{eq:ensemble-variance}
+\end{equation}
+More models help most when their errors are weakly correlated; they cannot remove an
+error shared by every model. This is why both individual accuracy and diversity matter in
+a random forest. Breiman's analysis puts an exact number on that trade-off: for a forest
+whose trees have mean pairwise correlation $\bar\rho$ and strength $s$ (roughly, how much
+better than chance each tree predicts on average), the generalization error is bounded by
+\begin{equation}
+  PE^* \;\leq\; \bar\rho\,\frac{1-s^2}{s^2}.
+  \label{eq:breiman-bound}
+\end{equation}
+The bound shrinks as correlation $\bar\rho$ goes down or strength $s$ goes up, so a good
+ensemble needs base models that are both accurate and diverse in their mistakes
+\cite{breiman2001}. Equations~\ref{eq:ensemble-variance} and~\ref{eq:breiman-bound} are
+intuitions under their stated assumptions, not a guarantee that any ensemble will improve
+on a single well-chosen baseline.
+
+Supervised, unsupervised, and reinforcement learning are defined by what kind of feedback
+is available during training: labeled targets, unlabeled structure, or a reward. Ensemble
+learning is defined by something else, by what is done with a set of models once they
+already exist, and it can be applied on top of any of the three \cite{mienye2022}. Most
+ensemble methods were developed for supervised learning, where the overlap is strongest,
+but the same idea shows up elsewhere: cluster ensembles combine several unsupervised
+partitions into one consensus result, and recent work uses multiple value or policy
+estimates together in reinforcement learning to stabilize training \cite{mohammed2023}. It
+makes more sense to think of ensemble learning as something that cuts across the three
+classical paradigms than as a fourth one next to them.
+
+Three strategies cover most of what ensemble learning does, and they also supply its
+representative algorithms, summarized in Table~\ref{tab:strategies}.
+
+\begin{table}[h]
+\centering
+\caption{Core ensemble strategies and their representative algorithms}
+\label{tab:strategies}
+\begin{tabularx}{\textwidth}{l X X}
+\toprule
+\textbf{Strategy} & \textbf{How predictions are combined} & \textbf{Main consideration} \\
+\midrule
+Bagging &
+Train each base model on a different bootstrap sample; combine by voting or averaging.
+Random Forest also samples features at each split \cite{breiman2001}. &
+Trains in parallel; mainly reduces variance, which is why it works well with unstable
+models like deep decision trees. Correlated trees limit the gain. \\
+\addlinespace
+Boosting &
+Fit models sequentially so each one corrects the previous ones' mistakes. AdaBoost
+reweights misclassified cases \cite{freund1997}; gradient boosting, XGBoost, and LightGBM
+fit each new model to the error gradient instead \cite{hastie2009,mienye2022}. &
+Trains sequentially; mainly reduces bias. More exposed to noisy or mislabeled data than
+bagging. \\
+\addlinespace
+Stacking &
+Train diverse base learners and feed their predictions into a second-level model that
+learns how to combine them \cite{mohammed2023}. &
+Can beat a fixed voting rule, but adds complexity; base models' predictions must be
+properly held out to avoid leakage. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Across all three strategies, the relevant hyperparameters (number of estimators, tree
+depth or feature sampling, boosting learning rate, meta-learner complexity) should be
+tuned on training/validation data rather than on the final test set.
+
+These methods show up constantly in applied work. Tree-based ensembles reach over 95\%
+accuracy on standard heart disease datasets, and XGBoost models trained on routine blood
+tests have flagged likely COVID-19 cases with over 99\% accuracy \cite{mienye2022}. Random
+forests combined with feature selection reach similar numbers on credit card fraud
+detection, and gradient-boosted trees are a common choice for real estate valuation and
+fraud detection more broadly \cite{mohammed2023}.
+
+\subsection*{Connection to Deep Learning}
+
+A neural network represents a parametric function $f(x;\theta)$, whose weights and biases
+are learned by backpropagation and gradient-based optimization. Its hidden layers extract
+features, while a final layer maps those features to the output. Sufficiently expressive
+networks can approximate a broad range of functions, but expressiveness alone does not
+ensure successful training or generalization. Ensemble learning can combine independently
+trained networks, for example by averaging their predicted class probabilities; the added
+computation is worthwhile only if it improves the result over well-chosen individual
+models \cite{mohammed2023}. Other learning techniques act at different points in this
+process: transfer learning reuses a trained feature-extraction backbone for a new task,
+and self-supervised learning can train such a backbone with a pretext task that does not
+require manual labels. These methods can be combined with an ensemble, but combining
+models is not the same as learning a transferable representation; their relationship will
+be revisited after the other groups' class presentations, once all the learning
+techniques covered this term can be compared side by side.
+
+\subsection*{A preliminary experiment}
+
+As a first practical check, our group implemented and compared a single decision tree
+against several ensemble methods (random forest, AdaBoost, gradient boosting, and a
+stacking ensemble) on a real classification task, evaluated with accuracy, sensitivity,
+specificity, balanced accuracy, and ROC-AUC. Two questions guided the experiment: whether
+the ensembles actually outperform a single model past a trivial baseline, and whether the
+model ranked best by a single metric is also the model that is easiest to operate safely
+once a decision threshold has to be chosen. The general finding is that a single top
+metric, taken alone, does not tell the whole story: the model with the highest score on
+one criterion is not necessarily the one that reaches a safe operating point with the
+least compromise, which is why the relative cost of a missed positive case versus a false
+alarm has to guide that choice explicitly rather than being left at a default threshold.
+The full experimental setup, results tables, and threshold analysis are reported in the
+companion MLLB report.
+
+\subsection*{Conclusion and notes on sources}
+
+Ensembling is most useful when several reasonable models make different errors. Bagging
+chiefly addresses instability, boosting learns sequential corrections, and stacking
+learns a combination from held-out predictions. None of the three removes the need for a
+sensible baseline, a sound train/test separation, and metrics matched to the application.
+This appendix reflects the group's first assignment on Ensemble Learning; later versions
+of this report will connect it to the learning techniques covered by the other groups and
+to the Deep Learning use case developed in the main sections above.
+
+\medskip
+\noindent\textit{Note on sources.} Breiman's 1996 paper on bagging and Wolpert's 1992
+paper on stacking are foundational to this topic but were not read directly; they are
+known to us through Mienye and Sun's 2022 survey \cite{mienye2022}, which is cited here
+instead wherever those ideas are discussed.
+
+\newpage
+\input{sections/appB_ai}
+
+\end{document}

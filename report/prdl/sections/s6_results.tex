@@ -1,0 +1,116 @@
+% =====================================================================
+% 6. RESULTS
+% =====================================================================
+\section{Results}\label{sec:prdl-results}
+
+\subsection{Evaluation methodology}
+
+All numbers below are out-of-fold estimates from the nested cross-validation of
+Section~\ref{sec:prdl-setup}, with 95\% bootstrap intervals in brackets. The coefficients, trees and
+importances that are interpreted come from the final models fitted on all patients with the same
+tuning procedure; their in-sample fit is not used as evidence of performance.
+
+\subsection{Discussion}
+
+\textbf{Regression: the profile explains part of the variance of age, and every model is
+equivalent.} Predicting the mean age gives a mean absolute error of \RegBaseMAE{} years. All models
+reduce it to between \RegMinMAE{} and \RegMaxMAE{} years and explain between \RegMinRTwo{} and
+\RegMaxRTwo{} of the variance (Table~\ref{tab:prdl-reg}). The paired bootstrap confirms that every
+model improves on the baseline. The \RegBest{} has the best point estimates (MAE \RegBestMAE{}
+\RegBestMAECI{} years, $R^2$ \RegBestRTwo{} \RegBestRTwoCI), but its interval overlaps those of the
+other \RegNTies{} models, and even the paired difference with linear regression includes zero
+(\RegDiffOLSBest{} \RegDiffOLSBestCI{} years). By the rule fixed in advance, no model is declared
+better: the additional flexibility of ensembles and kernels buys nothing that a linear model cannot
+capture, which is expected when the predictors are binary and their effects nearly additive.
+
+\begin{table}[H]
+\centering
+\caption{Regression of age at diagnosis: out-of-fold metrics with 95\% bootstrap intervals, and
+$R^2$ per outer fold (mean $\pm$ SD).}
+\label{tab:prdl-reg}
+\resizebox{\textwidth}{!}{\input{tables/reg_model_comparison.tex}}
+\end{table}
+
+The interpretation is more interesting than the ranking. The multiple linear regression attributes
+the largest effects to IDH1 (\OLSIDHOne{} years, 95\% CI \OLSIDHOneCI), IDH2 (\OLSIDHTwo{} years,
+\OLSIDHTwoCI) and ATRX (\OLSATRX{} years); only \OLSNSigBH{} coefficients remain significant after
+Benjamini--Hochberg correction, the maximum VIF is \OLSMaxVIF{}, and no patient has a Cook's distance
+close to 1. The residual tests reject exact normality and homoscedasticity (Shapiro $p = \OLSShapirop$,
+Breusch--Pagan $p = \OLSBPp$), so the coefficient intervals are approximate. One coefficient shows a
+limitation of the data: the only American Indian or Alaska Native patient has leverage 1, so the model
+fits that patient exactly and the coefficient (\OLSNative{} years, \OLSNativeCI) is meaningless.
+Lasso, with the penalty chosen by cross-validation, sets \LassoNZero{} of \LassoNCoef{} coefficients
+to zero and keeps the same leading predictors.
+
+The out-of-fold predictions explain why the models agree (Figure~\ref{fig:prdl-oof}): they cluster
+around two values, \RegPredLGG{} and \RegPredGBM{} years on average for LGG and GBM patients, and
+their correlation with the grade is \RegCorrGrade. Although the grade was excluded, the models largely
+recover it through IDH1, IDH2 and ATRX and then predict the typical age of each grade. This is not
+leakage, but it changes the reading of H2: the mutation profile explains age mainly \emph{because} it
+encodes the grade, and within a grade it explains little.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{reg_oof_predictions.png}
+\caption{Out-of-fold predictions of the \RegBest{}: observed vs predicted age and residuals, coloured by
+grade (not an input of the model).}
+\label{fig:prdl-oof}
+\end{figure}
+
+\textbf{Classification: all models reach similar AUCs; simple models are as good as
+ensembles.} Against a baseline with AUC \ClfAUCBase{} and accuracy \ClfBaseAcc, the models reach
+AUCs between \ClfMinAUC{} and \ClfMaxAUC{} (Table~\ref{tab:prdl-clf}, Figure~\ref{fig:prdl-roc}). The
+\ClfBest{} has the highest AUC (\ClfBestAUC{} \ClfBestAUCCI), with sensitivity \ClfBestSens{} and
+specificity \ClfBestSpec{} at the default threshold, but the intervals of all \ClfNTies{} other models
+overlap it, so by the pre-specified rule there is no winner. The paired comparison is more
+informative: logistic regression (\ClfDiffLR) and XGBoost (\ClfDiffXGB) are indistinguishable from the
+random forest, while naive Bayes (\ClfDiffNB), the SVM (\ClfDiffSVM) and the pruned tree
+(\ClfDiffTree) are slightly but consistently worse. The two rules answer different questions, and
+both are reported: overlapping marginal intervals say that the differences are small relative to the
+uncertainty of each estimate; the paired test says that some of these small differences are
+systematic. Either way, H1 is supported: a penalised logistic regression on these 23 predictors is as
+good as any ensemble.
+
+\begin{table}[H]
+\centering
+\caption{Classification of LGG vs GBM: out-of-fold metrics with 95\% bootstrap intervals (threshold
+0.5 for sensitivity, specificity and balanced accuracy).}
+\label{tab:prdl-clf}
+\resizebox{\textwidth}{!}{\input{tables/clf_model_comparison.tex}}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{clf_roc_curves.png}
+\caption{Out-of-fold ROC curves of the six classifiers.}
+\label{fig:prdl-roc}
+\end{figure}
+
+Three results deserve a critical reading.
+\emph{(i) What the models learn.} Permutation importance ranks IDH1 far above every other predictor
+(mean AUC drop \ClfPermIDH{}), followed by age; the pruned tree (depth \ClfTreeDepth, \ClfTreeLeaves{}
+leaves) first splits on IDH1 and then on IDH2, TP53 and age. The models reproduce the IDH axis found
+without labels in the EDA, which is consistent with the role of IDH in the WHO classification. The
+\ClfFN{} GBM patients predicted as LGG and the \ClfFP{} LGG patients predicted as GBM by the
+\ClfBest{} cannot be explained from these data alone; part of them may be label noise from the
+pre-2021 diagnoses (Section 2.1).
+\emph{(ii) Separation and the meaning of coefficients.} The final logistic regression chose an
+almost unpenalised L1 model ($C = \LRFinalC$) although the outer folds chose smaller values: the
+inner-CV surface is flat (\LRFlatWithin{} of \LRFlatTotal{} configurations within 0.005 AUC of the
+best), so the choice among them is close to arbitrary. With a weak penalty, NOTCH1, mutated only in
+LGG patients, receives a coefficient (\LRCoefNOTCH{} log-odds per SD) comparable to that of IDH1
+(\LRCoefIDH): a direct consequence of quasi-separation \cite{albert1984}, not evidence that NOTCH1 is
+as important as IDH1. The odds ratio of age, \LRORAge{} per standard deviation, is more stable.
+\emph{(iii) Ranking vs calibration.} Naive Bayes reaches a competitive AUC, but \NBExtreme\% of its
+out-of-fold probabilities are below 0.02 or above 0.98, against \LRExtreme\% for logistic regression.
+Because it counts the evidence of correlated mutations (IDH1, ATRX, TP53) several times, its
+probabilities are over-confident even when its ranking is good \cite{hand2001}. If the probabilities
+were to be used, for example to choose a clinical threshold, this difference would matter more than
+the AUC.
+
+\textbf{Comparison with previous work.} On the same 839 TCGA patients, \cite{tasci2022} reported an
+accuracy of 87.606\% with a voting ensemble and feature selection, and \cite{sanchezmarques2024}
+0.882 with oversampling. The accuracies obtained here (between \ClfMinAcc{} and \ClfMaxAcc, MLLB report) are of the same order with standard models and no resampling. A strict comparison is not
+possible because the validation schemes differ\todoverify{confirm with NotebookLM whether these studies
+tuned hyperparameters inside or outside their cross-validation}; numbers that include hyperparameter
+selection outside an inner loop are optimistic by construction \cite{varma2006,cawley2010}.

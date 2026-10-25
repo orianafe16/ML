@@ -75,6 +75,17 @@ Open the notebooks in `notebooks/` with the `Python (glioma-ml)` kernel and run 
 (01 → 05). All random processes use the seed defined in `src/config.py` (`SEED = 42`).
 Notebooks 04 and 05 run nested cross-validation and take a few minutes each.
 
+## Building the reports
+
+```bash
+python report/make_numbers.py        # numbers.tex from results/logs/*.json
+python report/build_zips.py          # report/dist/PRDL_Overleaf.zip and MLLB_Overleaf.zip
+python report/check_references.py    # checks every DOI of references.bib against Crossref
+```
+
+Upload each zip to its Overleaf project (New Project > Upload Project). Claims still to be checked
+against a source appear in red as `[verify: ...]`.
+
 ## Methodology in brief
 
 - Nested cross-validation on the full dataset: 10 stratified outer folds to estimate

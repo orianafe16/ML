@@ -1,0 +1,226 @@
+\documentclass[11pt]{article}
+
+% ---------- Packages ----------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[explicit]{titlesec}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{listings}
+
+% ---------- Colors ----------
+\definecolor{etsitorange}{RGB}{237,125,49}
+\definecolor{etsitblue}{RGB}{31,73,125}
+\definecolor{codebg}{RGB}{245,245,245}
+
+% ---------- Code listing style ----------
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible,
+  keywordstyle=\color{etsitblue}\bfseries,
+  showstringspaces=false
+}
+
+% ---------- Section banners (orange bar, like the template) ----------
+\titleformat{\section}
+  {\bfseries\Large\color{white}}
+  {}{0pt}
+  {\colorbox{etsitorange}{\parbox{\dimexpr\textwidth-4\fboxsep-12pt\relax}{\centering\thesection.\ #1}}}
+\titlespacing*{\section}{0pt}{18pt}{12pt}
+
+% Unnumbered \section* (used internally by \tableofcontents, \listoftables,
+% \listoffigures) gets the same orange banner, without a number.
+\titleformat{name=\section,numberless}
+  {\bfseries\Large\color{white}}
+  {}{0pt}
+  {\colorbox{etsitorange}{\parbox{\dimexpr\textwidth-4\fboxsep-12pt\relax}{\centering#1}}}
+\titlespacing*{name=\section,numberless}{0pt}{18pt}{12pt}
+
+\titleformat{\subsection}
+  {\bfseries\large}
+  {\thesubsection.}{0.5em}{#1}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+
+\titleformat{\subsubsection}
+  {\bfseries\normalsize}
+  {\thesubsubsection}{0.5em}{#1}
+\titlespacing*{\subsubsection}{0pt}{10pt}{4pt}
+
+% Appendix banner (no numbering, e.g. "APPENDIX: ...")
+\newcommand{\appendixbanner}[1]{%
+  \colorbox{etsitorange}{\parbox{\dimexpr\textwidth-4\fboxsep-12pt\relax}{\centering\bfseries\Large\color{white} #1}}%
+  \vspace{12pt}
+}
+
+\renewcommand{\contentsname}{CONTENTS}
+\renewcommand{\listtablename}{LIST OF TABLES}
+\renewcommand{\listfigurename}{LIST OF FIGURES}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\thepage}
+
+\usepackage{float}
+\usepackage{array}
+\usepackage{cite}
+\hypersetup{hidelinks}
+\graphicspath{{figures/}}
+\setlength{\emergencystretch}{2em}  % avoid long \texttt paths running into the margin
+
+% Numbers quoted in the text, generated from results/logs/*.json by report/make_numbers.py
+\input{numbers}
+
+% Claims still to be checked against a quoted source (redefine as empty for the final version)
+\newcommand{\todoverify}[1]{\textcolor{red}{\,\textsf{\footnotesize[verify: #1]}}}
+
+\begin{document}
+
+% =====================================================================
+% COVER PAGE
+% =====================================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+\includegraphics[width=0.4\textwidth]{figures/etsit_logo.jpeg}\par
+\vspace{1.5cm}
+
+{\color{etsitblue}\bfseries\Large Course:}\par
+\vspace{0.5cm}
+{\bfseries\huge Machine Learning Lab}\par
+\vspace{1cm}
+{\Large Half-term Activities Report}\par
+{\bfseries\Large Developing Machine Learning models}\par
+\vspace{0.5cm}
+\rule{0.7\textwidth}{0.4pt}\par
+\vspace{3cm}
+
+\large Name: \underline{\hspace{2mm}Oriana Andrea Ferraz De Jesus\hspace{2mm}}\par
+\vspace{0.5cm}
+\hfill Date: \underline{\hspace{2mm}October 2026\hspace{2mm}}\par
+
+\end{titlepage}
+
+% =====================================================================
+% TABLE OF CONTENTS / LIST OF TABLES / LIST OF FIGURES
+% =====================================================================
+\tableofcontents
+\vspace{1cm}
+
+\listoftables
+\vspace{1cm}
+
+\listoffigures
+
+\newpage
+
+\input{sections/s1_methodology}
+\input{sections/s2_data}
+\input{sections/s3_eda}
+\input{sections/s4_models}
+\input{sections/s5_code}
+\input{sections/s6_conclusions}
+
+% =====================================================================
+% REFERENCES
+% =====================================================================
+\section{References}
+\begingroup
+% thebibliography opens its own \section*{References}; it is swallowed here so that
+% the numbered banner above is the only heading.
+\renewcommand{\section}[2]{}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+\endgroup
+
+\newpage
+
+% =====================================================================
+% APPENDIX: ENSEMBLE LEARNING EXPERIMENT
+% =====================================================================
+\appendixbanner{APPENDIX A: ENSEMBLE LEARNING EXPERIMENT}
+
+\subsection*{What we did}
+
+As the applied part of our Ensemble Learning topic, we compared a single Decision Tree
+against four ensemble methods (Random Forest, AdaBoost, Gradient Boosting, and a Stacking
+ensemble) on the Breast Cancer Wisconsin dataset (569 patients, 30 features), framed as a
+clinical screening problem where missing a malignant case matters more than a false
+alarm. All five models were trained on a stratified 75/25 split (426 train / 143 test,
+\texttt{random\_state=42}) and evaluated with accuracy, sensitivity, specificity,
+F1-score, balanced accuracy, and ROC-AUC, ranking models by ROC-AUC and balanced accuracy
+together rather than by accuracy alone. We then tuned the decision threshold of the
+top-ranked model to see what it takes to reach full sensitivity.
+
+\subsection*{Results}
+
+All four ensembles clearly beat the single Decision Tree (ROC-AUC 0.938), with Gradient
+Boosting and Random Forest essentially tied for the best ROC-AUC (0.9950 and 0.9949) and
+AdaBoost reaching the best balanced accuracy (0.962) and the only perfect specificity
+(1.000) of the five models.
+
+\begin{table}[h]
+\centering
+\caption{Model comparison at the default 0.5 threshold}
+\label{tab:default-results}
+\begin{tabularx}{\textwidth}{l r r r r}
+\toprule
+\textbf{Model} & \textbf{Sensitivity} & \textbf{Specificity} & \textbf{Balanced acc.} & \textbf{ROC-AUC} \\
+\midrule
+Decision Tree & 0.9245 & 0.9556 & 0.9400 & 0.9384 \\
+Random Forest & 0.9245 & 0.9778 & 0.9512 & 0.9949 \\
+AdaBoost & 0.9245 & 1.0000 & 0.9623 & 0.9897 \\
+Gradient Boosting & 0.9057 & 0.9889 & 0.9473 & 0.9950 \\
+Stacking & 0.9245 & 0.9778 & 0.9512 & 0.9929 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The more useful finding was methodological rather than numerical. Gradient boosting,
+the top-ranked model by ROC-AUC, needed an aggressive threshold of 0.005 to catch every
+malignant case in the test set (10 false positives out of 90 benign cases), while random
+forest, whose ROC-AUC is only 0.0001 lower, reached the same full sensitivity at a much
+gentler threshold of 0.3.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/roc_curves.png}
+\caption{ROC curves for all five models on the held-out test set}
+\label{fig:roc-curves}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/threshold_tradeoff.png}
+\caption{Sensitivity/specificity trade-off as the decision threshold decreases (Gradient Boosting)}
+\label{fig:threshold-tradeoff}
+\end{figure}
+
+\subsection*{Conclusion}
+
+A higher ROC-AUC does not by itself pick the model best suited to a screening task: the
+top-ranked model by that single metric was also the hardest one to operate safely,
+requiring a far more extreme threshold than a near-tied alternative to reach the same
+sensitivity. Ranking by balanced accuracy alongside ROC-AUC, and checking the threshold
+each model actually needs, gives a more honest picture than accuracy or ROC-AUC alone.
+
+\subsection*{Code}
+
+The full, reproducible notebook (\texttt{ensemble\_learning\_experiment.ipynb}) is
+available in our group's repository: \texttt{https://github.com/orianafe16/PRDL-MLLB.git}.
+
+\newpage
+\input{sections/appB_ai}
+
+\end{document}

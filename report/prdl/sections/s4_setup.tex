@@ -1,0 +1,48 @@
+% =====================================================================
+% 4. EXPERIMENTAL SETUP
+% =====================================================================
+\section{Experimental setup}\label{sec:prdl-setup}
+
+\subsection{Introduction}
+
+With \NClean{} patients, setting aside a single test set would waste data and make the estimate
+depend on one random split. The alternative used here is \textbf{nested cross-validation}, the scheme
+of the course example: an outer loop of 10 folds estimates the performance, and inside each outer
+training part an inner loop of 3 folds (\texttt{GridSearchCV}) chooses the hyperparameters. The tuned
+model is refitted on the whole outer training part and predicts the held-out fold, which played no
+role in any decision. This matters because the inner cross-validation score of the selected
+configuration is optimistically biased: it is the maximum over many noisy estimates. Varma and Simon
+showed that ``a nested CV procedure provides an almost unbiased estimate of the true error''
+\cite{varma2006}, and Cawley and Talbot that ``model selection must be treated as an integral part of
+the model fitting process and performed afresh every time a model is fitted'' \cite{cawley2010}.
+The choice of $k = 10$ outer folds follows the usual bias--variance compromise of $k$-fold
+cross-validation \cite{james2021}.
+
+Four further decisions complete the protocol:
+\begin{itemize}
+  \item \textbf{Everything that learns from data is inside the loop.} Standardisation and one-hot
+        encoding are steps of a pipeline that is refitted on each training part, so the statistics of
+        a test fold never influence its own preprocessing.
+  \item \textbf{Stratified folds for classification}, so that each fold keeps the
+        \PctLGG\%/\PctGBM\% class proportions; plain shuffled folds for regression.
+  \item \textbf{Metrics with a reference point.} Classification: ROC-AUC (threshold-free; also the
+        inner selection criterion), and at the default threshold 0.5, sensitivity (share of GBM
+        detected), specificity (share of LGG correctly identified), balanced accuracy and accuracy,
+        all compared with a model that predicts the class proportions. Regression: MAE and RMSE (in
+        years) and $R^2$, compared with predicting the mean age; RMSE is the inner criterion because
+        it matches the squared-error loss minimised by most of the models.
+  \item \textbf{Uncertainty and comparison rule.} Every patient receives one out-of-fold prediction.
+        Metrics are computed on these predictions with 95\% percentile bootstrap intervals (2000
+        resamples of patients, the same for every model) \cite{efron1993}. A model is \emph{not}
+        declared better than another when their intervals overlap; because two models are evaluated
+        on the same patients, a paired bootstrap of the difference is reported as a more sensitive
+        complement.
+\end{itemize}
+
+Nested cross-validation estimates how well the \emph{procedure} (model family plus tuning)
+generalises, not the performance of one fitted model. The models interpreted in
+Section~\ref{sec:prdl-results} are therefore obtained by applying the same procedure once to all
+patients. Even with these precautions, the evaluation is internal: the reporting guidance TRIPOD+AI
+requires evaluation data ``distinct from the data used to train the model, tune hyperparameters, or
+do model selection'' \cite{collins2024}, which nested cross-validation satisfies within the cohort,
+but it cannot replace validation on an external cohort.

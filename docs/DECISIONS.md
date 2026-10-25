@@ -98,6 +98,18 @@ can be defended orally. Decisions taken in later stages are appended to the corr
 | Flatness of the final inner-CV surface reported | Explains why the final hyperparameters may differ from those chosen in the outer folds | — |
 | Tree nodes recoloured with the project colours | sklearn's default paints class 0 (LGG) orange, the opposite of the project convention | — |
 
+## Stage 6 — Reports
+
+| Decision | Justification | Source |
+|---|---|---|
+| Reports written in LaTeX from the Overleaf templates; cover, structure and Ensemble Learning appendices kept | Course templates; the author's previous work is preserved | Templates |
+| Every number in the text is a macro generated from `results/logs/*.json` by `report/make_numbers.py` | No number typed by hand; re-running the notebooks updates both reports | Project instructions |
+| Tables are `\input` from `results/tables/`; figures copied from `results/figures/` by `report/build_zips.py` | Same principle; one zip per report for Overleaf Free (no Git sync) | Project instructions |
+| PRDL = theory, hypotheses and critical analysis; MLLB = tools, implementation and graphics; figures and text not duplicated | Course FAQ on PRDL vs MLLB | Curso_Marco_y_Evaluacion.md (Presentation III) |
+| Literature claims written only from the part of a NotebookLM statement supported by its verbatim quote; anything else marked `\todoverify{}` (red in the PDF) | Extracted statements were often broader than their quotes | AI usage log, stage 6 |
+| Bibliography in BibTeX (IEEEtran style); each entry's `note` says how it was checked; DOIs checked against Crossref with `report/check_references.py` | Traceability of every reference | — |
+| AI use reported as Appendix B in both reports (scientific assistants in PRDL, code assistant in MLLB) | Graded item (0.5 points); Appendix A is the Ensemble Learning work of the templates | bounty-guideline-example.md |
+
 ## Validation protocol
 
 | Decision | Justification | Source |

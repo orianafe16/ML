@@ -1,0 +1,61 @@
+% =====================================================================
+% 1. DEVELOPING MACHINE LEARNING MODELS
+% =====================================================================
+\section{Developing Machine Learning models}
+
+\subsection{Problem description}
+
+Diffuse gliomas are primary tumours of the central nervous system whose grade guides prognosis
+and treatment\todoverify{add a source, e.g. the EANO guideline (05.pdf)}. For decades they were
+graded from histology alone, but the histological classification of
+lower-grade gliomas ``suffers from high intraobserver and interobserver variability and does not
+adequately predict clinical outcomes'' \cite{tcga2015lgg}. The 2016 and 2021 World Health
+Organization (WHO) classifications therefore integrate molecular markers with histology
+\cite{louis2016,louis2021}: in the 2021 scheme, adult-type diffuse gliomas are divided into
+astrocytoma, IDH-mutant (CNS WHO grades 2--4), oligodendroglioma, IDH-mutant and
+1p/19q-codeleted, and glioblastoma, IDH-wildtype (grade 4) \cite{louis2021}%
+\todoverify{confirm this sentence against 01.pdf (NotebookLM quoted it from 42.pdf)}.
+The grade matters because prognosis differs widely: in the TCGA lower-grade glioma cohort,
+patients with an IDH mutation and 1p/19q codeletion had a median survival of 8.0 years, and those
+with an IDH mutation without codeletion of 6.3 years \cite{tcga2015lgg}, whereas glioblastoma is the
+most aggressive form\todoverify{add incidence and survival of glioblastoma with a quoted source,
+e.g. the CBTRUS report}.
+
+The molecular markers relevant to this project are point mutations. Gliomas without IDH1 or
+IDH2 mutations tend to carry other alterations: among anaplastic astrocytomas and glioblastomas
+with wild-type IDH genes, \cite{yan2009} found few TP53 mutations (18\%) and frequent alterations
+of PTEN, EGFR, CDKN2A or CDKN2B (74\%). In routine practice these alterations are detected with
+immunohistochemistry, sequencing and copy-number assays; for example, fluorescence \emph{in situ}
+hybridisation detects gains of chromosome 7 and losses of chromosome 10, the 1p/19q codeletion,
+homozygous deletions such as CDKN2A/B, and gene amplifications \cite{sahm2023}.
+
+This motivates the questions of this project, stated as hypotheses before any model was trained:
+\begin{enumerate}[label=\textbf{H\arabic*.}, leftmargin=*]
+  \item The mutation status of 20 genes, together with age, sex and race, contains enough
+        information to separate lower-grade glioma (LGG) from glioblastoma (GBM) well above a trivial
+        classifier, and simple interpretable models perform close to complex ones.
+  \item Without using the grade, the same profile explains part of the variability of the age at
+        diagnosis, mostly through the markers that also define the grade.
+  \item Without any label, the mutation profiles form groups that are related to, but not
+        identical with, the grade.
+\end{enumerate}
+The objective is not to beat published accuracies but to apply and critically compare the
+models of the course under a validation protocol that gives honest estimates.
+
+\subsection{Machine Learning approach}
+
+The three hypotheses map onto the three learning tasks required in the course:
+\begin{itemize}
+  \item \textbf{Classification} (H1): target \texttt{Grade} (LGG = 0, GBM = 1), predictors age,
+        sex, race and 20 mutations. Models: penalised logistic regression, naive Bayes, a pruned
+        classification tree, random forest, gradient boosting (XGBoost) and support vector machines.
+  \item \textbf{Regression} (H2): target \texttt{Age\_at\_diagnosis} (years), predictors sex, race
+        and 20 mutations, deliberately \emph{without} the grade. Models: multiple linear regression,
+        Ridge, Lasso, a regression tree, random forest, XGBoost and support vector regression.
+  \item \textbf{Unsupervised learning} (H3): PCA, multidimensional scaling and t-SNE with a
+        Jaccard distance, and $k$-means and hierarchical clustering of the 20 mutation indicators;
+        the grade is used only afterwards, to describe the clusters.
+\end{itemize}
+Every supervised model is evaluated with the same nested cross-validation and compared with a
+trivial baseline (Section~\ref{sec:prdl-setup}); the tools and the implementation are described
+in the companion MLLB report.

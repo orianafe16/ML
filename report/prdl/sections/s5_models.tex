@@ -1,0 +1,51 @@
+% =====================================================================
+% 5. MACHINE LEARNING MODELS
+% =====================================================================
+\section{Machine Learning models}
+
+\subsection{Model selection}
+
+The models were chosen to span the course from the most constrained to the most flexible, so that
+the comparison answers a question (how much flexibility does this problem need?) rather than
+searching for the highest score. For each family, the hyperparameters searched are those that control
+its bias--variance trade-off \cite{james2021,hastie2009}.
+
+\textbf{Linear and penalised linear models.} Multiple linear regression estimates
+$y = \beta_0 + \sum_j \beta_j x_j + \varepsilon$ by least squares; with 0/1 predictors each
+$\beta_j$ is the difference in mean age between patients with and without mutation $j$, holding the
+others fixed. Its inference assumes independent, homoscedastic, normal errors, which are checked with
+residual diagnostics. Ridge \cite{hoerl1970} and Lasso \cite{tibshirani1996} add the penalties
+$\lambda\sum_j\beta_j^2$ and $\lambda\sum_j|\beta_j|$; Ridge shrinks all coefficients, while the
+corners of the L1 constraint set some exactly to zero, i.e.\ Lasso selects variables. The penalty
+$\lambda$ (\texttt{alpha}) is tuned, and inputs are standardised so that the penalty treats all
+coefficients alike. Logistic regression models the log-odds of GBM as a linear function, with an L1
+or L2 penalty and $C = 1/\lambda$ tuned. The penalty is also needed for a second reason: when a
+predictor occurs in only one class, maximum-likelihood estimates do not exist (complete or
+quasi-complete separation) \cite{albert1984}; NOTCH1 is such a predictor here.
+
+\textbf{Naive Bayes} applies Bayes' rule assuming the predictors are independent given the class.
+Age is discretised into quantile bins so that every column is Bernoulli; the number of bins and the
+Laplace smoothing are tuned. The independence assumption is false for correlated mutations, which
+often leaves the ranking of patients (and hence the AUC) reasonable while making the probabilities
+over-confident \cite{hand2001}.
+
+\textbf{Trees and ensembles.} A tree partitions the predictor space into boxes by recursive binary
+splits chosen to reduce impurity (Gini index or entropy/deviance for classification, squared error for
+regression) \cite{breiman1984}. A large tree overfits, so it must be pruned. The regression tree is
+limited in advance by maximum depth and minimum leaf size; the classification tree is grown and then
+pruned by cost-complexity pruning, which minimises impurity $+\ \alpha\cdot$(number of leaves) with
+$\alpha$ (\texttt{ccp\_alpha}) tuned. Random forests average many trees grown on bootstrap samples,
+trying a random subset of predictors (\texttt{max\_features}) at each split to decorrelate them
+\cite{breiman2001}; averaging reduces variance, so the trees need no pruning, and the minimum leaf size
+is tuned. Gradient boosting fits small trees sequentially to the gradient of the loss of the current
+ensemble; XGBoost \cite{chen2016} is the implementation used, with the number of trees, the shrinkage
+(learning rate) and the depth tuned.
+
+\textbf{Support vector machines} find the maximum-margin hyperplane allowing violations penalised by
+$C$, and the kernel trick gives non-linear boundaries; linear and RBF kernels are compared, with $C$
+and the RBF reach $\gamma$ tuned \cite{cortes1995}. Probabilities for the AUC are obtained by Platt
+scaling \cite{platt1999}. Support vector regression fits a function within an $\varepsilon$-tube,
+ignoring errors smaller than $\varepsilon$ years.
+
+\textbf{Baselines.} The mean age and the class proportions give the reference that any useful model
+must beat.

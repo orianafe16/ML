@@ -1,0 +1,58 @@
+% =====================================================================
+% 2. DATA DESCRIPTION
+% =====================================================================
+\section{Data description}
+
+\subsection{Data bases}
+
+The data are the \emph{Glioma Grading Clinical and Mutation Features} dataset of the UCI Machine
+Learning Repository \cite{tasci2022dataset}, built from the TCGA lower-grade glioma and
+glioblastoma projects \cite{tcga2015lgg,brennan2013} and introduced in \cite{tasci2022}. The original
+export contains \NRaw{} patients; the encoded UCI version contains \NClean{}. Each patient is
+described by age at diagnosis, sex, race, the somatic mutation status (mutated or not) of 20 genes,
+the TCGA project (TCGA-LGG or TCGA-GBM), the histological diagnosis and the grade. The final dataset
+has \NLGG{} LGG and \NGBM{} GBM patients (\PctGBM\% GBM).
+
+Three properties of these data limit what any model can learn, and they shape the critical analysis
+of Section~\ref{sec:prdl-results}:
+\begin{itemize}
+  \item \textbf{Labels from older criteria.} The cohorts were collected over many years
+        (TCGA-GBM between 1989 and 2011, with 76\% of patients diagnosed in or after 2002
+        \cite{zakharova2023}) and graded before the 2021 WHO classification. When TCGA glioma
+        profiles were reclassified with the 2021 criteria, 134 cases changed class while 811
+        kept it\todoverify{identify 42.pdf and cite it here; the figures were quoted from that file}.
+        The grade used here as ground truth is therefore partly outdated: some tumours labelled LGG
+        would now be glioblastomas, and vice versa.
+  \item \textbf{Point mutations only.} Several markers that the 2021 classification uses to define
+        the grade, such as the 1p/19q codeletion, CDKN2A/B homozygous deletion, EGFR amplification
+        or the +7/$-$10 signature \cite{sahm2023}\todoverify{quote from 01.pdf that WHO 2021 uses these markers for grading}, are copy-number or promoter alterations that are
+        not in the dataset. A model can only approximate them through correlated mutations (for
+        example CIC and FUBP1 for 1p/19q\todoverify{source for the link of CIC/FUBP1 with 1p/19q, e.g. 37.pdf or  09.pdf}).
+  \item \textbf{A homogeneous cohort.} \PctWhite\% of the patients are white (\NWhite{} of
+        \NClean); only \NBlack{} are Black or African American, \NAsian{} Asian and \NNative{}
+        American Indian or Alaska Native. Any conclusion about race, and the transfer of the models
+        to other populations, is unsupported.
+\end{itemize}
+
+\subsection{Data preparation}
+
+The preparation followed three principles, each of which can be justified from theory.
+
+\textbf{Reproducibility of the published cleaning.} Rather than loading the UCI file, the clean
+dataset was rebuilt from the original export, keeping the patient identifier and the diagnosis,
+and checked value by value against the UCI file. The \NRemoved{} excluded patients
+(\NRemovedAllMissing{} with every clinical field missing, \NRemovedRace{} with race not reported and
+\NRemovedAge{} with missing age) are split almost evenly between classes (\NRemovedLGG{} LGG,
+\NRemovedGBM{} GBM), so complete-case analysis does not distort the class balance.
+
+\textbf{No target leakage.} Leakage occurs when information that would not be available at
+prediction time, or that encodes the target, enters the model \cite{kaufman2012}. Two columns do
+exactly that: the TCGA project coincides with the grade for all \NProjectGrade{} patients, and the
+histological diagnosis determines it (every glioblastoma is GBM and every other diagnosis is LGG).
+Both are excluded from all models. The EDA (Section~\ref{sec:prdl-eda}) quantifies the effect of
+ignoring this rule.
+
+\textbf{Correct variable types.} Race is a nominal variable whose integer codes have no order, so
+it is one-hot encoded; treating the codes as a number would impose an arbitrary linear effect.
+Mutations are binary and are kept as 0/1 indicators. All transformations that learn from data
+(standardisation, encoding) are fitted inside the cross-validation (Section~\ref{sec:prdl-setup}).

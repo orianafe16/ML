@@ -1,0 +1,189 @@
+% =====================================================================
+% 4. DEVELOPING MACHINE LEARNING MODELS
+% =====================================================================
+\section{Developing Machine Learning models}
+
+\subsection{Model Selection}
+
+Each model is defined in \texttt{src/models.py} as a \texttt{Pipeline} with two steps,
+\texttt{prep} (a \texttt{ColumnTransformer} from \texttt{src/pipelines.py}) and \texttt{model}.
+Linear models and support vector machines receive standardised inputs and one-hot encoded race
+(\texttt{handle\_unknown="ignore"}, needed because one race category has a single patient and may be
+absent from a training fold); trees and ensembles receive unscaled inputs. Naive Bayes has its own
+preprocessing: age is discretised into quantile bins (\texttt{KBinsDiscretizer}) so that a
+\texttt{BernoulliNB} can model every column. Tables~\ref{tab:mllb-reg-grids} and~\ref{tab:mllb-clf-grids}
+list the models and the grids searched; the grids are small (at most 27 configurations) because
+nested cross-validation multiplies the number of fits by 30.
+
+\begin{table}[H]
+\centering
+\caption{Regression models and hyperparameter grids.}
+\label{tab:mllb-reg-grids}
+\resizebox{\textwidth}{!}{\input{tables/reg_models_grids.tex}}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Classification models and hyperparameter grids (the SVM grid is a list of two sub-grids,
+linear and RBF).}
+\label{tab:mllb-clf-grids}
+\resizebox{\textwidth}{!}{\input{tables/clf_models_grids.tex}}
+\end{table}
+
+\subsection{Model Tuning}
+
+Tuning is done by \texttt{GridSearchCV} with 3 inner folds (stratified for classification,
+\texttt{n\_jobs=-1}), scoring \texttt{roc\_auc} for classification and
+\texttt{neg\_root\_mean\_squared\_error} for regression, inside each of the 10 outer folds
+(\texttt{evaluation.nested\_cv}). Because each outer fold runs its own search, the chosen values can
+be compared across folds: a value chosen in most folds indicates a stable choice
+(Tables~\ref{tab:mllb-reg-hp} and~\ref{tab:mllb-clf-hp}). The final models used for interpretation are
+obtained by \texttt{evaluation.fit\_final}, which runs the same search once on all patients; its result
+is the last column. For logistic regression the final search chose $C=\LRFinalC$ although the folds
+chose smaller values; Table~\ref{tab:mllb-flat} shows why: \LRFlatWithin{} of the \LRFlatTotal{}
+configurations are within 0.005 AUC of the best one.
+
+\begin{table}[H]
+\centering
+\caption{Regression: hyperparameters chosen in the 10 outer folds (count in brackets) and in the final
+model.}
+\label{tab:mllb-reg-hp}
+\resizebox{\textwidth}{!}{\input{tables/reg_hyperparameters.tex}}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Classification: hyperparameters chosen in the 10 outer folds and in the final model.}
+\label{tab:mllb-clf-hp}
+\resizebox{\textwidth}{!}{\input{tables/clf_hyperparameters.tex}}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Flatness of the inner-CV surface of the final classification searches.}
+\label{tab:mllb-flat}
+\resizebox{\textwidth}{!}{\input{tables/clf_search_flatness.tex}}
+\end{table}
+
+A reproducibility problem was found at this stage: two runs of the classification notebook chose
+different hyperparameters for logistic regression, because the \texttt{liblinear} solver shuffles the
+data and its \texttt{random\_state} had not been fixed. After fixing it, two complete runs give
+identical out-of-fold probabilities, and the author's run reproduces every value of the JSON summaries
+(Appendix B).
+
+\subsection{Model Evaluation}
+
+\textbf{Regression.} Figure~\ref{fig:mllb-reg-comp} shows the out-of-fold MAE and $R^2$ of every model
+with bootstrap intervals (all models between \RegMinMAE{} and \RegMaxMAE{} years of MAE, against
+\RegBaseMAE{} for the mean baseline), and Table~\ref{tab:mllb-reg-paired} the paired differences. The
+multiple linear regression was refitted with statsmodels for its diagnostics
+(Figure~\ref{fig:mllb-ols}); one patient with leverage 1 (the only patient in one race category) is
+excluded from the plots because its residual is zero by construction. Figure~\ref{fig:mllb-lasso} shows
+the Lasso coefficient path with the chosen penalty ($\alpha=\LassoAlpha$, \LassoNZero{} of
+\LassoNCoef{} coefficients set to zero), Figure~\ref{fig:mllb-regtree} the final regression tree
+(depth \RegTreeDepth, \RegTreeLeaves{} leaves) and Figure~\ref{fig:mllb-regimp} the permutation
+importance computed on the outer test folds.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{reg_model_comparison.png}
+\caption{Regression: out-of-fold MAE and $R^2$ with 95\% bootstrap intervals.}
+\label{fig:mllb-reg-comp}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Regression: paired bootstrap of the MAE difference (years) against the mean baseline and
+against the model with the lowest MAE.}
+\label{tab:mllb-reg-paired}
+\small
+\input{tables/reg_paired_differences.tex}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{reg_ols_diagnostics.png}
+\caption{Residual diagnostics of the multiple linear regression (all patients).}
+\label{fig:mllb-ols}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{reg_lasso_path.png}
+\caption{Lasso path (dotted line: chosen $\alpha$).}
+\label{fig:mllb-lasso}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{reg_permutation_importance.png}
+\caption{Regression: permutation importance on the outer test folds.}
+\label{fig:mllb-regimp}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{reg_decision_tree.png}
+\caption{Final regression tree (node colour: darker = older predicted age).}
+\label{fig:mllb-regtree}
+\end{figure}
+
+\textbf{Classification.} Figure~\ref{fig:mllb-clf-comp} shows the out-of-fold AUC and balanced
+accuracy, Table~\ref{tab:mllb-clf-acc} the accuracy and the per-fold AUC, and
+Table~\ref{tab:mllb-clf-paired} the paired AUC differences with the best model. The confusion matrices
+and the sensitivity--specificity trade-off as the threshold moves are in Figure~\ref{fig:mllb-confusion};
+the threshold is left at 0.5, because tuning it on the same predictions would bias the reported
+metrics. Figure~\ref{fig:mllb-clftree} shows the final pruned tree (\texttt{ccp\_alpha} $=\ClfTreeAlpha$,
+\ClfTreeCriterion{} criterion), recoloured with the project colours (sklearn's default paints LGG in
+orange), and Figures~\ref{fig:mllb-logit}--\ref{fig:mllb-clfimp} the logistic coefficients and the
+permutation importance.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{clf_model_comparison.png}
+\caption{Classification: out-of-fold AUC and balanced accuracy with 95\% bootstrap intervals.}
+\label{fig:mllb-clf-comp}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{minipage}[t]{0.52\textwidth}\centering
+\caption{Accuracy (95\% CI) and AUC per outer fold (mean $\pm$ SD).}
+\label{tab:mllb-clf-acc}
+\resizebox{\textwidth}{!}{\input{tables/clf_accuracy_folds.tex}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.45\textwidth}\centering
+\caption{Paired bootstrap of the AUC difference with the best model.}
+\label{tab:mllb-clf-paired}
+\resizebox{\textwidth}{!}{\input{tables/clf_paired_differences.tex}}
+\end{minipage}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{clf_confusion_threshold.png}
+\caption{Out-of-fold confusion matrices at threshold 0.5 and sensitivity/specificity as a function of
+the threshold for the model with the highest AUC.}
+\label{fig:mllb-confusion}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{clf_decision_tree.png}
+\caption{Final pruned classification tree (blue = LGG, orange = GBM; darker = purer node).}
+\label{fig:mllb-clftree}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{clf_logistic_coefficients.png}
+\caption{Final logistic regression: coefficients on standardised inputs.}
+\label{fig:mllb-logit}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{clf_permutation_importance.png}
+\caption{Classification: permutation importance on the outer test folds.}
+\label{fig:mllb-clfimp}
+\end{minipage}
+\end{figure}
