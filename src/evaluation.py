@@ -101,6 +101,44 @@ def classification_metrics(y_true, proba, threshold=THRESHOLD):
             "Balanced accuracy": float((sens + spec) / 2)}
 
 
+MULTICLASS_SCORING = "roc_auc_ovo"             # inner-loop criterion: macro one-vs-one AUC
+
+
+def multiclass_auc(y_true, proba):
+    """Macro one-vs-one AUC of Hand and Till: for every pair of classes (i, j), the AUC of
+    P(class i) separating i from j and the AUC of P(class j) separating j from i are averaged;
+    the result is the mean over all pairs. It does not depend on the class proportions.
+    Same value as sklearn's roc_auc_score(multi_class="ovo", average="macro"), but fast enough
+    to be bootstrapped (it reuses auc_score).
+    """
+    y_true, proba = np.asarray(y_true), np.asarray(proba, dtype=float)
+    classes = np.arange(proba.shape[1])
+    pair_aucs = []
+    for a in classes:
+        for b in classes[a + 1:]:
+            mask = (y_true == a) | (y_true == b)
+            if not mask.any():
+                continue
+            ya = (y_true[mask] == a).astype(int)
+            pair_aucs.append((auc_score(ya, proba[mask, a]) + auc_score(1 - ya, proba[mask, b])) / 2)
+    return float(np.mean(pair_aucs))
+
+
+def multiclass_metrics(y_true, proba):
+    """Macro AUC (Hand-Till), accuracy, balanced accuracy (mean recall over classes) and macro F1
+    of the class with the highest predicted probability."""
+    y_true, proba = np.asarray(y_true), np.asarray(proba, dtype=float)
+    k = proba.shape[1]
+    pred = proba.argmax(axis=1)
+    cm = np.bincount(k * y_true + pred, minlength=k * k).reshape(k, k)   # rows: true, columns: predicted
+    tp = np.diag(cm).astype(float)
+    recall = np.divide(tp, cm.sum(axis=1), out=np.full(k, np.nan), where=cm.sum(axis=1) > 0)
+    precision = np.divide(tp, cm.sum(axis=0), out=np.zeros(k), where=cm.sum(axis=0) > 0)
+    f1 = np.divide(2 * precision * recall, precision + recall, out=np.zeros(k), where=(precision + recall) > 0)
+    return {"Macro AUC": multiclass_auc(y_true, proba), "Accuracy": float(tp.sum() / len(y_true)),
+            "Balanced accuracy": float(np.nanmean(recall)), "Macro F1": float(np.mean(f1))}
+
+
 def _clean_params(params):
     """'model__alpha' -> 'alpha', numpy scalars -> Python scalars."""
     out = {}
@@ -113,7 +151,7 @@ def _clean_params(params):
 def make_cv(task, n_splits, seed=config.SEED):
     """Stratified folds for classification (same class proportions in every fold), plain
     shuffled folds for regression."""
-    if task == "classification":
+    if task in ("classification", "multiclass"):
         return StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=seed)
     return KFold(n_splits=n_splits, shuffle=True, random_state=seed)
 
@@ -134,14 +172,16 @@ def nested_cv(pipeline, grid, X, y, task, scoring, metric_fn, n_outer=config.N_O
     -------
     dict with
       oof        : out-of-fold prediction for every patient (probability of class 1 for
-                   classification), each made by a model that did not see that patient;
+                   classification, an n x K matrix of class probabilities for multiclass), each
+                   made by a model that did not see that patient;
       folds      : one row per outer fold (test metrics, inner CV score, chosen hyperparameters);
       importance : permutation importance of each original column on each outer test fold
                    (drop in the score when that column is shuffled), or None.
     """
     y = np.asarray(y)
     outer = make_cv(task, n_outer)
-    oof = np.full(len(y), np.nan)
+    # multiclass: one column of predicted probability per class (classes 0..K-1)
+    oof = np.full((len(y), len(np.unique(y))), np.nan) if task == "multiclass" else np.full(len(y), np.nan)
     rows, importances = [], []
     for k, (tr, te) in enumerate(outer.split(X, y)):
         X_tr, X_te, y_tr, y_te = X.iloc[tr], X.iloc[te], y[tr], y[te]
@@ -152,7 +192,12 @@ def nested_cv(pipeline, grid, X, y, task, scoring, metric_fn, n_outer=config.N_O
             model, params, inner_score = search.best_estimator_, _clean_params(search.best_params_), search.best_score_
         else:
             model, params, inner_score = clone(pipeline).fit(X_tr, y_tr), {}, np.nan
-        pred = model.predict_proba(X_te)[:, 1] if task == "classification" else model.predict(X_te)
+        if task == "classification":
+            pred = model.predict_proba(X_te)[:, 1]
+        elif task == "multiclass":
+            pred = model.predict_proba(X_te)
+        else:
+            pred = model.predict(X_te)
         oof[te] = pred
         rows.append({"Fold": k + 1, "n test": len(te), "Inner CV score": inner_score,
                      **metric_fn(y_te, pred), **params})

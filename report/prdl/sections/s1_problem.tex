@@ -39,6 +39,14 @@ This motivates the questions of this project, stated as hypotheses before any mo
   \item Without any label, the mutation profiles form groups that are related to, but not
         identical with, the grade.
 \end{enumerate}
+After the analysis of H1--H3, two complementary questions were added, and they are reported as such
+rather than as hypotheses fixed in advance:
+\begin{enumerate}[label=\textbf{Q\arabic*.}, leftmargin=*, start=4]
+  \item Can the same profile go beyond the grade and recognise the histological family
+        (astrocytoma, oligodendroglioma, mixed glioma, glioblastoma)?
+  \item Under explicit causal assumptions, how much of the association between an IDH mutation and a
+        younger age at diagnosis goes through the grade?
+\end{enumerate}
 The objective is not to beat published accuracies but to apply and critically compare the
 models of the course under a validation protocol that gives honest estimates.
 
@@ -49,9 +57,15 @@ The three hypotheses map onto the three learning tasks required in the course:
   \item \textbf{Classification} (H1): target \texttt{Grade} (LGG = 0, GBM = 1), predictors age,
         sex, race and 20 mutations. Models: penalised logistic regression, naive Bayes, a pruned
         classification tree, random forest, gradient boosting (XGBoost) and support vector machines.
-  \item \textbf{Regression} (H2): target \texttt{Age\_at\_diagnosis} (years), predictors sex, race
+  \item \textbf{Regression} (H2): target \texttt{Age\_\allowbreak{}at\_\allowbreak{}diagnosis} (years), predictors sex, race
         and 20 mutations, deliberately \emph{without} the grade. Models: multiple linear regression,
         Ridge, Lasso, a regression tree, random forest, XGBoost and support vector regression.
+  \item \textbf{Multiclass classification} (Q4): target the histological family derived from the
+        diagnosis (four classes), same predictors as H1 and \emph{without} the grade. Models:
+        multinomial logistic regression, a pruned tree, random forest and XGBoost. The winning models of
+        both classification tasks are then explained with SHAP values.
+  \item \textbf{Causal analysis} (Q5): a causal diagram and a mediation decomposition with linear
+        regression, with the grade as mediator between IDH and the age at diagnosis.
   \item \textbf{Unsupervised learning} (H3): PCA, multidimensional scaling and t-SNE with a
         Jaccard distance, and $k$-means and hierarchical clustering of the 20 mutation indicators;
         the grade is used only afterwards, to describe the clusters.

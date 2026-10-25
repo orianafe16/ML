@@ -1,0 +1,149 @@
+% =====================================================================
+% APPENDIX A: USE OF AI SCIENTIFIC ASSISTANTS
+% =====================================================================
+\appendixbanner{APPENDIX A: USE OF AI SCIENTIFIC ASSISTANTS}
+\addcontentsline{toc}{section}{Appendix A: Use of AI scientific assistants}
+
+\subsection*{Workflow}
+
+Three AI assistants were used for the theoretical part, each with a defined role and a verification
+step (the full log is \texttt{docs/\allowbreak{}AI\_\allowbreak{}USAGE\_\allowbreak{}LOG.\allowbreak{}md} in the repository):
+\begin{enumerate}
+  \item \textbf{Perplexity} searched the literature with structured prompts that asked, for every
+        source, the full reference, the DOI, open access and the exact claim it supports.
+  \item \textbf{NotebookLM}, restricted to the downloaded PDFs, produced (a) an inventory of every file
+        with the bibliographic data as printed in the document, and (b) for each topic of the report,
+        short statements with the file, the page and a verbatim quote of at most 30 words.
+  \item \textbf{Claude} decided which sources to keep from the inventory, wrote the text using only the
+        quote-supported part of each statement, marked every claim still lacking a quote with a
+        visible \texttt{[verify]} tag, and drafted the interpretation of the results, which the author
+        checked against the notebooks.
+\end{enumerate}
+The author checks each tagged claim against the PDF before the final version.
+
+\subsection*{Errors detected (candidates for the AI Error Bounty)}
+
+\begin{enumerate}
+  \item \textbf{Off-topic sources.} For a request on glioma classification, Perplexity returned a
+        cardiac epigenetic reprogramming paper (twice) and a study on lipid metabolism in glioblastoma
+        cell lines, neither supporting any requested point. Detected by comparing title and topic with
+        the request; removed.
+  \item \textbf{Wrong title and authors, repeated by two tools.} Perplexity and then NotebookLM gave
+        one of the downloaded files as ``Machine Learning and Statistical Evaluation of Glioma
+        Datasets'' by Garbulowski and Komorowski; the extraction step later attributed its content to
+        Sánchez-Marqués et al., and the DOAJ record confirms the latter title and authors
+        \cite{sanchezmarques2024}. Two independent AI tools agreeing is therefore not a verification.
+  \item \textbf{Misattribution.} Parsons et al.\ (2008, \emph{Science}) was presented as a TCGA
+        publication by both tools; it was removed from the TCGA sources.
+  \item \textbf{Outdated notion of time.} NotebookLM flagged a 2025 publication year as ``a future
+        publication year'', although the inventory was made in October 2026.
+  \item \textbf{Wrong DOI.} NotebookLM gave 10.1093/neuonc/noad108 for the EANO guideline on molecular
+        diagnostic tools; a Crossref check of all DOIs (script \texttt{report/\allowbreak{}check\_\allowbreak{}references.\allowbreak{}py})
+        showed that it belongs to an unrelated article on CAR-T cells, and the correct DOI
+        (noad100) was confirmed on the EANO website \cite{sahm2023}. The same check corrected the title
+        that NotebookLM gave for \cite{varma2006}.
+  \item \textbf{One paper, two identities.} Two uploaded files shared the same DOI; the inventory gave
+        one of them a different title and garbled authors, so it was discarded as unreliable, while
+        the other was correctly identified later \cite{leiriademendonca2025}.
+  \item \textbf{Statements broader than their quotes.} Several extracted statements contained numbers
+        or claims absent from the supporting quote (for example, glioblastoma incidence and survival
+        figures attributed to a file whose quote only gave lower-grade glioma survival). Only the
+        quoted part was used. Two claims of this kind were resolved with a second, targeted query
+        that asked for the exact quote: an extracted statement that one study had not tuned its
+        models inside the cross-validation was supported only by a quote on feature selection, and the
+        targeted query showed that the classifiers used default hyperparameters \cite{tasci2022}; a
+        count of reclassified cases, presented as a change from the original TCGA labels, compared
+        two re-annotation pipelines instead \cite{leiriademendonca2025}.
+  \item \textbf{A plausible but wrong interpretation (Claude).} When drafting the regression results,
+        the assistant read the two groups of out-of-fold predictions as the grade (``the models recover
+        the grade and predict the typical age of each grade''), supported only by a correlation of
+        \RegCorrGrade{} with the grade, and wrote the conclusion of H2 accordingly. \emph{Detection}: the
+        causal analysis estimated that only \CsPropPct\% of the IDH--age association goes through the
+        grade, which contradicted that reading; checking the alternative explanation showed a stronger
+        correlation with the IDH status (\RegCorrIDH) and the same split of predictions within each
+        grade (Table~\ref{tab:prdl-reg-idh}). \emph{Correction}: the text, the conclusion of H2 and the
+        regression notebook (which now reports both correlations) were rewritten. A correlation between
+        a prediction and a variable that was not an input does not show that the model uses that
+        variable when it is correlated with another one.
+\end{enumerate}
+
+\subsection*{AI Error Bounty sheets}
+
+The strongest errors are documented below in the format of the course guideline. They were found in
+the verification loop described above, in which every output of the assistants was checked against its
+source, the data or a second run; each check is reproduced by the author from the steps in
+\texttt{docs/\allowbreak{}BOUNTY\_\allowbreak{}CHECKS.\allowbreak{}md}.
+
+\subsubsection*{Sheet P1. A wrong DOI pointing to another paper (NotebookLM)}
+\begin{description}[style=nextline, leftmargin=1.2em]
+  \item[Prompt] Inventory of the uploaded PDFs: one row per file with the bibliographic data ``as printed
+        in the document'', writing ``not stated'' instead of guessing.
+  \item[Faulty response] For the EANO guideline on molecular diagnostic tools (Sahm et al., 2023) the
+        DOI 10.1093/neuonc/noad108.
+  \item[Proof] The script \texttt{report/\allowbreak{}check\_\allowbreak{}references.\allowbreak{}py} compares the title and year of every DOI
+        with the bibliography. The DOI resolved to an unrelated article on CAR-T cells in
+        glioblastoma; the EANO page gives 10.1093/neuonc/noad100.
+  \item[Correction] DOI replaced \cite{sahm2023}; every DOI of the bibliography is now checked with the
+        script.
+  \item[Reproduction] \todoverify{author: open both DOIs and record the titles}
+  \item[Reflection] A DOI looks like hard data, but here it was generated, not read: the metadata of a
+        source need the same verification as its claims.
+\end{description}
+
+\subsubsection*{Sheet P2. The same wrong authors from two tools (Perplexity and NotebookLM)}
+\begin{description}[style=nextline, leftmargin=1.2em]
+  \item[Prompt] Perplexity: machine-learning studies on glioma grading with clinical and mutation data,
+        with full reference and DOI. NotebookLM: the inventory prompt of Sheet P1.
+  \item[Faulty response] Both tools gave one of the downloaded papers as ``Machine Learning and
+        Statistical Evaluation of Glioma Datasets'' by Garbulowski and Komorowski.
+  \item[Proof] The claim-extraction step of NotebookLM attributed the content of the same file to
+        Sánchez-Marqués et al.; the DOAJ record of its DOI confirms that title and authors. The two outputs of the same tool contradicted each other.
+  \item[Correction] Reference corrected \cite{sanchezmarques2024}; agreement between AI tools is no
+        longer treated as verification.
+  \item[Reproduction] \todoverify{author: read the first page of 21.pdf}
+  \item[Reflection] Two assistants agreeing is not two independent sources: the second may simply have
+        repeated the first.
+\end{description}
+
+\subsubsection*{Sheet P3. Statements broader than their supporting quotes (NotebookLM)}
+\begin{description}[style=nextline, leftmargin=1.2em]
+  \item[Prompt] For each topic of the report: short statements, each with file, page and a verbatim
+        quote of at most 30 words.
+  \item[Faulty response] (a) ``Neither paper performed nested CV'' for Tasci et al., supported by a quote
+        about feature selection; (b) ``811 samples maintained consistent classification, 134 changed''
+        presented as the change from the original TCGA labels to the 2021 classification.
+  \item[Proof] Each statement was compared with its own quote, and the quotes did not contain the
+        claims. A second, targeted query showed that (a) Tasci et al.\
+        used ``default values'' for the hyperparameters \cite{tasci2022}, and (b) the two compared
+        classifications were two re-annotation pipelines, neither of them the original label
+        \cite{leiriademendonca2025}.
+  \item[Correction] Only the quoted content is used in Sections~2 and~6, with the caveats.
+  \item[Reproduction] \todoverify{author: read 19.pdf p.~5 and 42.pdf p.~3}
+  \item[Reflection] Asking for a quote is useful only if the quote is then read against the statement;
+        the summary around a correct quote can still be wrong.
+\end{description}
+
+\subsubsection*{Sheet P4. A plausible but wrong interpretation of a figure (Claude)}
+\begin{description}[style=nextline, leftmargin=1.2em]
+  \item[Prompt] Regression notebook with the out-of-fold predictions and their interpretation; later,
+        drafting of the results section of this report.
+  \item[Faulty response] ``The models recover the grade through IDH1, IDH2 and ATRX and predict the
+        typical age of each grade'', based on a correlation of \RegCorrGrade{} between the predictions
+        and the grade; the conclusion of H2 said that the mutations explain age ``largely through the
+        grade''.
+  \item[Proof] The causal analysis estimated that only \CsPropPct\% of the
+        IDH--age association goes through the grade. Testing the alternative explanation:
+        the predictions correlate \RegCorrIDH{} with the IDH status, and within GBM the IDH-mutant
+        patients are predicted at \RegPredGBMIDHmut{} years against \RegPredGBMIDHwt{} for IDH-wildtype
+        (Table~\ref{tab:prdl-reg-idh}).
+  \item[Correction] Notebook 04 reports both correlations and the grade $\times$ IDH table; the
+        discussion and the conclusion of H2 were rewritten.
+  \item[Reproduction] \todoverify{author: run notebook 04, section 6, and compare}
+  \item[Reflection] A correlation between a prediction and a variable that was not an input does not
+        show that the model uses that variable when another variable is correlated with both.
+\end{description}
+
+\subsection*{Reflection}
+
+The verification loop changed how the sources were used: the bibliography records, for every entry,
+how its metadata were checked, and no claim enters the text on the authority of an assistant alone.

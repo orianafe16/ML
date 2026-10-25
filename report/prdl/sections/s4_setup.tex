@@ -24,13 +24,16 @@ Four further decisions complete the protocol:
         encoding are steps of a pipeline that is refitted on each training part, so the statistics of
         a test fold never influence its own preprocessing.
   \item \textbf{Stratified folds for classification}, so that each fold keeps the
-        \PctLGG\%/\PctGBM\% class proportions; plain shuffled folds for regression.
+        \PctLGG\%/\PctGBM\% class proportions (and the proportions of the four families in the
+        multiclass task); plain shuffled folds for regression.
   \item \textbf{Metrics with a reference point.} Classification: ROC-AUC (threshold-free; also the
         inner selection criterion), and at the default threshold 0.5, sensitivity (share of GBM
         detected), specificity (share of LGG correctly identified), balanced accuracy and accuracy,
         all compared with a model that predicts the class proportions. Regression: MAE and RMSE (in
         years) and $R^2$, compared with predicting the mean age; RMSE is the inner criterion because
-        it matches the squared-error loss minimised by most of the models.
+        it matches the squared-error loss minimised by most of the models. Multiclass: the macro AUC of
+        Hand and Till (also the inner criterion), balanced accuracy and macro F1, compared with a model
+        that predicts the proportions of the four families.
   \item \textbf{Uncertainty and comparison rule.} Every patient receives one out-of-fold prediction.
         Metrics are computed on these predictions with 95\% percentile bootstrap intervals (2000
         resamples of patients, the same for every model) \cite{efron1993}. A model is \emph{not}

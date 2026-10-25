@@ -7,7 +7,7 @@ Notebook \texttt{02\_eda} follows the sections of the course EDA notebook (quali
 leakage, univariate analysis, normality, tests and effect sizes, outliers, correlation and VIF,
 relevance, conditional probability, multivariate view, baseline) and adds an EDA of the regression
 target. Notebook \texttt{03\_unsupervised} contains the PCA, MDS/t-SNE and clustering. The statistics
-are implemented in \texttt{src/eda.py} and \texttt{src/unsupervised.py}; this section presents the
+are implemented in \texttt{src/eda.py} and \texttt{src/\allowbreak{}unsupervised.\allowbreak{}py}; this section presents the
 graphical results, and their interpretation is in the PRDL report.
 
 \subsection*{Target, age and leakage}
@@ -29,7 +29,7 @@ non-normal age distributions, which is why the Mann--Whitney test is used.
 \subsection*{Relevance and redundancy of the predictors}
 
 Figure~\ref{fig:mllb-relevance} ranks every predictor by its AUC used alone, with 2000-resample
-stratified bootstrap intervals (\texttt{evaluation.bootstrap\_ci} with a rank-based AUC written in
+stratified bootstrap intervals (\texttt{evaluation.\allowbreak{}bootstrap\_\allowbreak{}ci} with a rank-based AUC written in
 NumPy so that it can be resampled quickly). The correlation matrix (Figure~\ref{fig:mllb-corr}) is
 drawn with a diverging blue--grey--red scale centred at zero; the maximum VIF is \MaxVIFEDA.
 Figure~\ref{fig:mllb-condprob} shows the empirical $P(\mathrm{GBM})$ by age quintile and with and

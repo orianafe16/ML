@@ -1,0 +1,1068 @@
+{
+  "stage": "06_multiclass",
+  "timestamp": "2026-10-25T17:28:10",
+  "seed": 42,
+  "features": [
+    "Gender",
+    "Age_at_diagnosis",
+    "Race",
+    "IDH1",
+    "TP53",
+    "ATRX",
+    "PTEN",
+    "EGFR",
+    "CIC",
+    "MUC16",
+    "PIK3CA",
+    "NF1",
+    "PIK3R1",
+    "FUBP1",
+    "RB1",
+    "NOTCH1",
+    "BCOR",
+    "CSMD3",
+    "SMARCA4",
+    "GRIN2A",
+    "IDH2",
+    "FAT4",
+    "PDGFRA"
+  ],
+  "n": 839,
+  "class_sizes": {
+    "Astrocytoma": 183,
+    "Mixed glioma": 127,
+    "Oligodendroglioma": 177,
+    "Glioblastoma": 352
+  },
+  "diagnosis_to_family": {
+    "Astrocytoma, NOS": "Astrocytoma",
+    "Astrocytoma, anaplastic": "Astrocytoma",
+    "Mixed glioma": "Mixed glioma",
+    "Oligodendroglioma, NOS": "Oligodendroglioma",
+    "Oligodendroglioma, anaplastic": "Oligodendroglioma",
+    "Glioblastoma": "Glioblastoma"
+  },
+  "summary": [
+    {
+      "Model": "Prior baseline",
+      "Macro AUC": 0.4923617265085764,
+      "Macro AUC CI low": 0.4702019270567693,
+      "Macro AUC CI high": 0.5155352502265083,
+      "Macro AUC fold mean": 0.5,
+      "Macro AUC fold SD": 0.0,
+      "Balanced accuracy": 0.25,
+      "Balanced accuracy CI low": 0.25,
+      "Balanced accuracy CI high": 0.25,
+      "Balanced accuracy fold mean": 0.25,
+      "Balanced accuracy fold SD": 0.0,
+      "Macro F1": 0.14777497900923592,
+      "Macro F1 CI low": 0.14777497900923592,
+      "Macro F1 CI high": 0.14777497900923592,
+      "Macro F1 fold mean": 0.14777168494516452,
+      "Macro F1 fold SD": 0.0012370435679462265,
+      "Accuracy": 0.4195470798569726,
+      "Accuracy CI low": 0.4195470798569726,
+      "Accuracy CI high": 0.4195470798569726,
+      "Accuracy fold mean": 0.4195496270797475,
+      "Accuracy fold SD": 0.005005922170749115
+    },
+    {
+      "Model": "Logistic regression",
+      "Macro AUC": 0.7785561996899854,
+      "Macro AUC CI low": 0.7598435736162161,
+      "Macro AUC CI high": 0.7987442869738717,
+      "Macro AUC fold mean": 0.7773219727612144,
+      "Macro AUC fold SD": 0.028561779239663635,
+      "Balanced accuracy": 0.5544410278248438,
+      "Balanced accuracy CI low": 0.5282052385132234,
+      "Balanced accuracy CI high": 0.5814809092482218,
+      "Balanced accuracy fold mean": 0.5541341901132922,
+      "Balanced accuracy fold SD": 0.04466829422554177,
+      "Macro F1": 0.5226311169802058,
+      "Macro F1 CI low": 0.49795348841276565,
+      "Macro F1 CI high": 0.5466501039478732,
+      "Macro F1 fold mean": 0.5213815279774712,
+      "Macro F1 fold SD": 0.03840781821011435,
+      "Accuracy": 0.66507747318236,
+      "Accuracy CI low": 0.6400476758045291,
+      "Accuracy CI high": 0.6901072705601907,
+      "Accuracy fold mean": 0.6650172117039588,
+      "Accuracy fold SD": 0.04274695701170061
+    },
+    {
+      "Model": "Decision tree (pruned)",
+      "Macro AUC": 0.7600577774679821,
+      "Macro AUC CI low": 0.7413299034864164,
+      "Macro AUC CI high": 0.7803309157661277,
+      "Macro AUC fold mean": 0.7782108187904542,
+      "Macro AUC fold SD": 0.021185254944193325,
+      "Balanced accuracy": 0.5662646283865603,
+      "Balanced accuracy CI low": 0.5415718884042146,
+      "Balanced accuracy CI high": 0.591627133163332,
+      "Balanced accuracy fold mean": 0.5663082338198436,
+      "Balanced accuracy fold SD": 0.039697304037413186,
+      "Macro F1": 0.5266087889594155,
+      "Macro F1 CI low": 0.5037363148462387,
+      "Macro F1 CI high": 0.5504733922872953,
+      "Macro F1 fold mean": 0.5266004646072359,
+      "Macro F1 fold SD": 0.03517178143275063,
+      "Accuracy": 0.6746126340882003,
+      "Accuracy CI low": 0.6507747318235996,
+      "Accuracy CI high": 0.698450536352801,
+      "Accuracy fold mean": 0.6745553643144004,
+      "Accuracy fold SD": 0.03908063423046793
+    },
+    {
+      "Model": "Random forest",
+      "Macro AUC": 0.7792145490576766,
+      "Macro AUC CI low": 0.761213879975743,
+      "Macro AUC CI high": 0.7985235124310812,
+      "Macro AUC fold mean": 0.7829220694500623,
+      "Macro AUC fold SD": 0.023851328714314928,
+      "Balanced accuracy": 0.5671753175334899,
+      "Balanced accuracy CI low": 0.5435114552022027,
+      "Balanced accuracy CI high": 0.5924803511681486,
+      "Balanced accuracy fold mean": 0.5670423608039707,
+      "Balanced accuracy fold SD": 0.0290827812289501,
+      "Macro F1": 0.5246852145977647,
+      "Macro F1 CI low": 0.503939948084088,
+      "Macro F1 CI high": 0.5471448566693811,
+      "Macro F1 fold mean": 0.5247950358822614,
+      "Macro F1 fold SD": 0.026141816412751383,
+      "Accuracy": 0.6769964243146603,
+      "Accuracy CI low": 0.6531585220500596,
+      "Accuracy CI high": 0.700834326579261,
+      "Accuracy fold mean": 0.6769506597819851,
+      "Accuracy fold SD": 0.029989595777884813
+    },
+    {
+      "Model": "XGBoost",
+      "Macro AUC": 0.7739683375764245,
+      "Macro AUC CI low": 0.7555441484146335,
+      "Macro AUC CI high": 0.793543321503266,
+      "Macro AUC fold mean": 0.7750692010072384,
+      "Macro AUC fold SD": 0.02502441493246176,
+      "Balanced accuracy": 0.5601851868541454,
+      "Balanced accuracy CI low": 0.5335868591117441,
+      "Balanced accuracy CI high": 0.5885199787359285,
+      "Balanced accuracy fold mean": 0.5597909649689835,
+      "Balanced accuracy fold SD": 0.045083058701773725,
+      "Macro F1": 0.5379693215030876,
+      "Macro F1 CI low": 0.5103814748787704,
+      "Macro F1 CI high": 0.567093318033441,
+      "Macro F1 fold mean": 0.5375563298550547,
+      "Macro F1 fold SD": 0.045921707667725034,
+      "Accuracy": 0.6674612634088201,
+      "Accuracy CI low": 0.6436233611442194,
+      "Accuracy CI high": 0.6924910607866508,
+      "Accuracy fold mean": 0.6674125071715433,
+      "Accuracy fold SD": 0.04111333469534277
+    }
+  ],
+  "best": "Random forest",
+  "ties": [
+    "Logistic regression",
+    "Decision tree (pruned)",
+    "XGBoost"
+  ],
+  "best_bacc": "Random forest",
+  "ties_bacc": [
+    "Logistic regression",
+    "Decision tree (pruned)",
+    "XGBoost"
+  ],
+  "paired_differences": [
+    {
+      "Model": "Logistic regression",
+      "Macro AUC - Random forest": -0.0006583493676912688,
+      "CI low": -0.010751711888223848,
+      "CI high": 0.0091867122302412
+    },
+    {
+      "Model": "Decision tree (pruned)",
+      "Macro AUC - Random forest": -0.019156771589694532,
+      "CI low": -0.031197516441493094,
+      "CI high": -0.006281244120569277
+    },
+    {
+      "Model": "XGBoost",
+      "Macro AUC - Random forest": -0.00524621148125215,
+      "CI low": -0.014726000218060155,
+      "CI high": 0.004515683579471175
+    }
+  ],
+  "confusion_matrix_best": {
+    "Astrocytoma": {
+      "Astrocytoma": 118,
+      "Mixed glioma": 0,
+      "Oligodendroglioma": 11,
+      "Glioblastoma": 54
+    },
+    "Mixed glioma": {
+      "Astrocytoma": 71,
+      "Mixed glioma": 0,
+      "Oligodendroglioma": 40,
+      "Glioblastoma": 16
+    },
+    "Oligodendroglioma": {
+      "Astrocytoma": 33,
+      "Mixed glioma": 1,
+      "Oligodendroglioma": 123,
+      "Glioblastoma": 20
+    },
+    "Glioblastoma": {
+      "Astrocytoma": 23,
+      "Mixed glioma": 0,
+      "Oligodendroglioma": 2,
+      "Glioblastoma": 327
+    }
+  },
+  "per_class_best": {
+    "Astrocytoma": {
+      "Patients": 183,
+      "Recall": 0.644808743169399,
+      "Precision": 0.4816326530612245,
+      "One-vs-rest AUC": 0.7628448620551779,
+      "One-vs-rest AUC CI": "[0.726, 0.797]"
+    },
+    "Mixed glioma": {
+      "Patients": 127,
+      "Recall": 0.0,
+      "Precision": 0.0,
+      "One-vs-rest AUC": 0.7217829337344068,
+      "One-vs-rest AUC CI": "[0.683, 0.760]"
+    },
+    "Oligodendroglioma": {
+      "Patients": 177,
+      "Recall": 0.6949152542372882,
+      "Precision": 0.6988636363636364,
+      "One-vs-rest AUC": 0.8611893423455715,
+      "One-vs-rest AUC CI": "[0.827, 0.896]"
+    },
+    "Glioblastoma": {
+      "Patients": 352,
+      "Recall": 0.9289772727272727,
+      "Precision": 0.7841726618705036,
+      "One-vs-rest AUC": 0.9168115316408437,
+      "One-vs-rest AUC CI": "[0.896, 0.936]"
+    }
+  },
+  "mixed_predicted_as": {
+    "Astrocytoma": 0.5590551181102362,
+    "Mixed glioma": 0.0,
+    "Oligodendroglioma": 0.31496062992125984,
+    "Glioblastoma": 0.12598425196850394
+  },
+  "astro_as_gbm": {
+    "n": 54,
+    "idh_wildtype": 53,
+    "astro_idh_wildtype_total": 53
+  },
+  "mean_probability_by_family": {
+    "Astrocytoma": {
+      "Astrocytoma": 0.3395927531315082,
+      "Mixed glioma": 0.21858289370421677,
+      "Oligodendroglioma": 0.1675707573535382,
+      "Glioblastoma": 0.2742535958107368
+    },
+    "Mixed glioma": {
+      "Astrocytoma": 0.31641917418467524,
+      "Mixed glioma": 0.22767295002312662,
+      "Oligodendroglioma": 0.297150555890347,
+      "Glioblastoma": 0.1587573199018511
+    },
+    "Oligodendroglioma": {
+      "Astrocytoma": 0.17261733817330652,
+      "Mixed glioma": 0.2122284271215072,
+      "Oligodendroglioma": 0.48036576507508094,
+      "Glioblastoma": 0.13478846963010527
+    },
+    "Glioblastoma": {
+      "Astrocytoma": 0.14490965052945023,
+      "Mixed glioma": 0.058860846413456215,
+      "Oligodendroglioma": 0.06486504417915966,
+      "Glioblastoma": 0.7313644588779339
+    }
+  },
+  "grade_auc_from_multiclass": {
+    "Logistic regression": {
+      "AUC for the grade": 0.9090617416464439,
+      "CI low": 0.8883793984506254,
+      "CI high": 0.9285574073641963
+    },
+    "Decision tree (pruned)": {
+      "AUC for the grade": 0.8891899617323129,
+      "CI low": 0.867333337222326,
+      "CI high": 0.9110655450812022
+    },
+    "Random forest": {
+      "AUC for the grade": 0.9168115316408437,
+      "CI low": 0.8970268165484413,
+      "CI high": 0.93525469012507
+    },
+    "XGBoost": {
+      "AUC for the grade": 0.9104413617696472,
+      "CI low": 0.890546247899944,
+      "CI high": 0.9294151489873064
+    }
+  },
+  "clusters_vs_family": {
+    "table": {
+      "C1": {
+        "Astrocytoma": 51,
+        "Mixed glioma": 17,
+        "Oligodendroglioma": 22,
+        "Glioblastoma": 324
+      },
+      "C2": {
+        "Astrocytoma": 122,
+        "Mixed glioma": 73,
+        "Oligodendroglioma": 39,
+        "Glioblastoma": 28
+      },
+      "C3": {
+        "Astrocytoma": 10,
+        "Mixed glioma": 37,
+        "Oligodendroglioma": 116,
+        "Glioblastoma": 0
+      }
+    },
+    "ARI family": 0.4299595421250004,
+    "ARI grade": 0.3289863731524966,
+    "ARI family LGG only": 0.1709652452532746,
+    "cluster sizes": {
+      "C1": 414,
+      "C2": 262,
+      "C3": 163
+    }
+  },
+  "final_hyperparameters": {
+    "Prior baseline": {},
+    "Logistic regression": {
+      "C": 0.31622776601683794,
+      "penalty": "l2"
+    },
+    "Decision tree (pruned)": {
+      "ccp_alpha": 0.02,
+      "criterion": "entropy"
+    },
+    "Random forest": {
+      "max_features": "sqrt",
+      "min_samples_leaf": 5
+    },
+    "XGBoost": {
+      "learning_rate": 0.03,
+      "max_depth": 2,
+      "n_estimators": 300
+    }
+  },
+  "final_search_flatness": [
+    {
+      "Model": "Logistic regression",
+      "Best inner score": 0.7864302613462036,
+      "5th best inner score": 0.7857299518219172,
+      "Configurations within 0.005 of the best": 16,
+      "Configurations": 22
+    },
+    {
+      "Model": "Decision tree (pruned)",
+      "Best inner score": 0.7731569550645014,
+      "5th best inner score": 0.7586200276778229,
+      "Configurations within 0.005 of the best": 1,
+      "Configurations": 14
+    },
+    {
+      "Model": "Random forest",
+      "Best inner score": 0.7917381202260612,
+      "5th best inner score": 0.7844922943195031,
+      "Configurations within 0.005 of the best": 3,
+      "Configurations": 12
+    },
+    {
+      "Model": "XGBoost",
+      "Best inner score": 0.7835250430954895,
+      "5th best inner score": 0.7787203741096106,
+      "Configurations within 0.005 of the best": 5,
+      "Configurations": 12
+    }
+  ],
+  "permutation_importance_mean": {
+    "IDH1": {
+      "Logistic regression": 0.10838712910565336,
+      "Random forest": 0.11414956732055548,
+      "XGBoost": 0.14474899116191686
+    },
+    "CIC": {
+      "Logistic regression": 0.024763118727772968,
+      "Random forest": 0.021564942781231056,
+      "XGBoost": 0.028466316078588166
+    },
+    "Age_at_diagnosis": {
+      "Logistic regression": 0.011341275599058516,
+      "Random forest": 0.010087400445383334,
+      "XGBoost": 0.018284024602243553
+    },
+    "IDH2": {
+      "Logistic regression": 0.009751652852874,
+      "Random forest": 0.009919724980010506,
+      "XGBoost": 0.011467389897429441
+    },
+    "TP53": {
+      "Logistic regression": 0.005078261386525886,
+      "Random forest": 0.0156462290544248,
+      "XGBoost": 0.009817657044824221
+    },
+    "PTEN": {
+      "Logistic regression": 0.002647308438545067,
+      "Random forest": 0.0029041409036249144,
+      "XGBoost": 0.004439035509490446
+    },
+    "NOTCH1": {
+      "Logistic regression": 0.004640458428835583,
+      "Random forest": 0.0008480869318287787,
+      "XGBoost": 0.0025401043808336568
+    },
+    "ATRX": {
+      "Logistic regression": 0.0008327561193917854,
+      "Random forest": 0.004413425215390312,
+      "XGBoost": -5.438529812884843e-05
+    },
+    "FAT4": {
+      "Logistic regression": 0.0028432555783346643,
+      "Random forest": -6.764538923980546e-05,
+      "XGBoost": 0.0019113469511861194
+    },
+    "PIK3CA": {
+      "Logistic regression": 0.0013694284468922866,
+      "Random forest": 0.0010189910684621775,
+      "XGBoost": 0.001664453033175084
+    },
+    "NF1": {
+      "Logistic regression": 0.0032109697967755866,
+      "Random forest": 0.001188445791171996,
+      "XGBoost": -0.0005930587022133372
+    },
+    "FUBP1": {
+      "Logistic regression": 0.000985381350770892,
+      "Random forest": 0.0010736633372297334,
+      "XGBoost": -0.00014886734670875308
+    },
+    "PIK3R1": {
+      "Logistic regression": 0.0019270679194354438,
+      "Random forest": -9.64036011765601e-05,
+      "XGBoost": -0.00016965432021761928
+    },
+    "GRIN2A": {
+      "Logistic regression": 0.000329652802541498,
+      "Random forest": 0.00010874507997831294,
+      "XGBoost": 0.00024527997833810323
+    },
+    "MUC16": {
+      "Logistic regression": 5.167650355964999e-06,
+      "Random forest": 0.0008737556788597443,
+      "XGBoost": -0.0003456377890287364
+    },
+    "PDGFRA": {
+      "Logistic regression": 0.0003321774003748301,
+      "Random forest": -5.715287814523891e-06,
+      "XGBoost": -0.00013813160841885555
+    },
+    "EGFR": {
+      "Logistic regression": 0.00032064921360153923,
+      "Random forest": 0.0001374404550144192,
+      "XGBoost": -0.000712160880246544
+    },
+    "RB1": {
+      "Logistic regression": -0.0006608563490873654,
+      "Random forest": -6.787981349384296e-05,
+      "XGBoost": 0.00031033977043607114
+    },
+    "CSMD3": {
+      "Logistic regression": -0.0010738573432072173,
+      "Random forest": 3.3872108347513534e-05,
+      "XGBoost": -0.0005815290366158976
+    },
+    "BCOR": {
+      "Logistic regression": -0.0008775317206905196,
+      "Random forest": -0.00022822305435394544,
+      "XGBoost": -0.0007991229942769374
+    },
+    "Race": {
+      "Logistic regression": -0.0008445162715458807,
+      "Random forest": -4.122165435372918e-05,
+      "XGBoost": -0.0012009313196963676
+    },
+    "SMARCA4": {
+      "Logistic regression": -0.0019247431728727324,
+      "Random forest": -0.0004329920714724533,
+      "XGBoost": -0.0014294129932674992
+    },
+    "Gender": {
+      "Logistic regression": -0.002673423711714945,
+      "Random forest": -0.0016672951406783356,
+      "XGBoost": 0.0002471156891306558
+    }
+  },
+  "findings": {
+    "Classes": "Astrocytoma (183), Mixed glioma (127), Oligodendroglioma (177), Glioblastoma (352)",
+    "Prior baseline": "macro AUC 0.492 [0.470, 0.516], balanced accuracy 0.250 [0.250, 0.250]",
+    "Highest macro AUC": "Random forest: macro AUC 0.779 [0.761, 0.799], balanced accuracy 0.567 [0.544, 0.592], macro F1 0.525 [0.504, 0.547]",
+    "Models tied with it (overlapping intervals)": "Logistic regression, Decision tree (pruned), XGBoost",
+    "Recall per family (best model)": "Astrocytoma 0.64, Mixed glioma 0.00, Oligodendroglioma 0.69, Glioblastoma 0.93",
+    "Mixed glioma predicted as": "Astrocytoma 0.56, Mixed glioma 0.00, Oligodendroglioma 0.31, Glioblastoma 0.13",
+    "Clusters (k = 3) vs family": "ARI 0.430; among LGG only 0.171",
+    "Most important predictors (permutation)": "IDH1 (0.122), CIC (0.025), Age_at_diagnosis (0.013), IDH2 (0.010)"
+  },
+  "folds": {
+    "Prior baseline": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "Macro AUC": 0.5,
+        "Accuracy": 0.4166666666666667,
+        "Balanced accuracy": 0.25,
+        "Macro F1": 0.14705882352941177
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "Macro AUC": 0.5,
+        "Accuracy": 0.4166666666666667,
+        "Balanced accuracy": 0.25,
+        "Macro F1": 0.14705882352941177
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "Macro AUC": 0.5,
+        "Accuracy": 0.4166666666666667,
+        "Balanced accuracy": 0.25,
+        "Macro F1": 0.14705882352941177
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "Macro AUC": 0.5,
+        "Accuracy": 0.4166666666666667,
+        "Balanced accuracy": 0.25,
+        "Macro F1": 0.14705882352941177
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "Macro AUC": 0.5,
+        "Accuracy": 0.4166666666666667,
+        "Balanced accuracy": 0.25,
+        "Macro F1": 0.14705882352941177
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "Macro AUC": 0.5,
+        "Accuracy": 0.4166666666666667,
+        "Balanced accuracy": 0.25,
+        "Macro F1": 0.14705882352941177
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "Macro AUC": 0.5,
+        "Accuracy": 0.4166666666666667,
+        "Balanced accuracy": 0.25,
+        "Macro F1": 0.14705882352941177
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "Macro AUC": 0.5,
+        "Accuracy": 0.42857142857142855,
+        "Balanced accuracy": 0.25,
+        "Macro F1": 0.15
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": NaN,
+        "Macro AUC": 0.5,
+        "Accuracy": 0.42857142857142855,
+        "Balanced accuracy": 0.25,
+        "Macro F1": 0.15
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": NaN,
+        "Macro AUC": 0.5,
+        "Accuracy": 0.42168674698795183,
+        "Balanced accuracy": 0.25,
+        "Macro F1": 0.14830508474576273
+      }
+    ],
+    "Logistic regression": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": 0.784437199921639,
+        "Macro AUC": 0.7862722154388821,
+        "Accuracy": 0.6904761904761905,
+        "Balanced accuracy": 0.5896825396825397,
+        "Macro F1": 0.5404010025062655,
+        "C": 0.1,
+        "penalty": "l1"
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": 0.7799837655691021,
+        "Macro AUC": 0.8108985664541221,
+        "Accuracy": 0.6785714285714286,
+        "Balanced accuracy": 0.5676434676434676,
+        "Macro F1": 0.553961776097999,
+        "C": 0.31622776601683794,
+        "penalty": "l1"
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": 0.7847110390128602,
+        "Macro AUC": 0.7541361416361417,
+        "Accuracy": 0.6785714285714286,
+        "Balanced accuracy": 0.569047619047619,
+        "Macro F1": 0.5304419560748674,
+        "C": 0.1,
+        "penalty": "l1"
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": 0.7856904535873919,
+        "Macro AUC": 0.8155660697327365,
+        "Accuracy": 0.7023809523809523,
+        "Balanced accuracy": 0.5900793650793651,
+        "Macro F1": 0.5498931623931624,
+        "C": 0.03162277660168379,
+        "penalty": "l2"
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": 0.7934955926567199,
+        "Macro AUC": 0.7429650515176832,
+        "Accuracy": 0.6309523809523809,
+        "Balanced accuracy": 0.5136591478696741,
+        "Macro F1": 0.47413836163836165,
+        "C": 0.03162277660168379,
+        "penalty": "l2"
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": 0.7907417150416435,
+        "Macro AUC": 0.7414920402859,
+        "Accuracy": 0.5952380952380952,
+        "Balanced accuracy": 0.4907685881370092,
+        "Macro F1": 0.46825396825396826,
+        "C": 0.03162277660168379,
+        "penalty": "l2"
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": 0.7810037796580115,
+        "Macro AUC": 0.7661915204678361,
+        "Accuracy": 0.6666666666666666,
+        "Balanced accuracy": 0.5598788638262322,
+        "Macro F1": 0.5402440339275446,
+        "C": 0.31622776601683794,
+        "penalty": "l1"
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": 0.7838979950752227,
+        "Macro AUC": 0.8116184151723367,
+        "Accuracy": 0.7380952380952381,
+        "Balanced accuracy": 0.6270424836601307,
+        "Macro F1": 0.5682539682539682,
+        "C": 0.03162277660168379,
+        "penalty": "l2"
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": 0.7747844281756979,
+        "Macro AUC": 0.7845732547529933,
+        "Accuracy": 0.6547619047619048,
+        "Balanced accuracy": 0.5412895927601811,
+        "Macro F1": 0.5246410929299167,
+        "C": 0.1,
+        "penalty": "l2"
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": 0.7806889253448906,
+        "Macro AUC": 0.7595064521535108,
+        "Accuracy": 0.6144578313253012,
+        "Balanced accuracy": 0.492250233426704,
+        "Macro F1": 0.4635859576986574,
+        "C": 0.01,
+        "penalty": "l2"
+      }
+    ],
+    "Decision tree (pruned)": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": 0.774862432789959,
+        "Macro AUC": 0.7527517749739973,
+        "Accuracy": 0.6666666666666666,
+        "Balanced accuracy": 0.5619047619047619,
+        "Macro F1": 0.5140852130325815,
+        "ccp_alpha": 0.02,
+        "criterion": "entropy"
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": 0.7801697650804141,
+        "Macro AUC": 0.7949085379640936,
+        "Accuracy": 0.7023809523809523,
+        "Balanced accuracy": 0.5900793650793651,
+        "Macro F1": 0.5494820828667414,
+        "ccp_alpha": 0.005,
+        "criterion": "gini"
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": 0.783348655462116,
+        "Macro AUC": 0.7707790666124,
+        "Accuracy": 0.6666666666666666,
+        "Balanced accuracy": 0.5753968253968255,
+        "Macro F1": 0.5307017543859649,
+        "ccp_alpha": 0.005,
+        "criterion": "gini"
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": 0.7705829710328409,
+        "Macro AUC": 0.8020420680142902,
+        "Accuracy": 0.7261904761904762,
+        "Balanced accuracy": 0.6178571428571429,
+        "Macro F1": 0.5785758956490663,
+        "ccp_alpha": 0.005,
+        "criterion": "gini"
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": 0.7803350780717565,
+        "Macro AUC": 0.7465799916457811,
+        "Accuracy": 0.6309523809523809,
+        "Balanced accuracy": 0.5061821219715956,
+        "Macro F1": 0.469453672942045,
+        "ccp_alpha": 0.02,
+        "criterion": "entropy"
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": 0.7806949015773972,
+        "Macro AUC": 0.7597953216374269,
+        "Accuracy": 0.6309523809523809,
+        "Balanced accuracy": 0.5386487050960735,
+        "Macro F1": 0.5204646683519923,
+        "ccp_alpha": 0.005,
+        "criterion": "gini"
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": 0.7705756149975146,
+        "Macro AUC": 0.7899169219344658,
+        "Accuracy": 0.6785714285714286,
+        "Balanced accuracy": 0.5730367585630743,
+        "Macro F1": 0.5390530303030303,
+        "ccp_alpha": 0.02,
+        "criterion": "entropy"
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": 0.7712254116527211,
+        "Macro AUC": 0.8097993827160493,
+        "Accuracy": 0.7380952380952381,
+        "Balanced accuracy": 0.6270424836601307,
+        "Macro F1": 0.5690110826939472,
+        "ccp_alpha": 0.02,
+        "criterion": "entropy"
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": 0.7737529344213053,
+        "Macro AUC": 0.7804411531944213,
+        "Accuracy": 0.6785714285714286,
+        "Balanced accuracy": 0.5584150326797386,
+        "Macro F1": 0.5175199709513436,
+        "ccp_alpha": 0.02,
+        "criterion": "entropy"
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": 0.7740531004832936,
+        "Macro AUC": 0.7750939692116162,
+        "Accuracy": 0.6265060240963856,
+        "Balanced accuracy": 0.5145191409897292,
+        "Macro F1": 0.47765727489564697,
+        "ccp_alpha": 0.02,
+        "criterion": "entropy"
+      }
+    ],
+    "Random forest": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": 0.7784966780405784,
+        "Macro AUC": 0.8183811558811559,
+        "Accuracy": 0.6904761904761905,
+        "Balanced accuracy": 0.5896825396825397,
+        "Macro F1": 0.5404010025062655,
+        "max_features": "sqrt",
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": 0.7843905060323152,
+        "Macro AUC": 0.7930849500293945,
+        "Accuracy": 0.7023809523809523,
+        "Balanced accuracy": 0.5900793650793651,
+        "Macro F1": 0.5510822510822511,
+        "max_features": "sqrt",
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": 0.7882765249468608,
+        "Macro AUC": 0.7650143580699137,
+        "Accuracy": 0.6785714285714286,
+        "Balanced accuracy": 0.5757936507936507,
+        "Macro F1": 0.5314790139906729,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": 0.7830692759791428,
+        "Macro AUC": 0.8152625152625154,
+        "Accuracy": 0.7023809523809523,
+        "Balanced accuracy": 0.5900793650793651,
+        "Macro F1": 0.5500179340028695,
+        "max_features": "sqrt",
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": 0.7918811482450391,
+        "Macro AUC": 0.7571167502088555,
+        "Accuracy": 0.6547619047619048,
+        "Balanced accuracy": 0.5339598997493734,
+        "Macro F1": 0.49313186813186816,
+        "max_features": "sqrt",
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": 0.7898352828776272,
+        "Macro AUC": 0.750376520003713,
+        "Accuracy": 0.6309523809523809,
+        "Balanced accuracy": 0.5317042606516291,
+        "Macro F1": 0.4900375939849624,
+        "max_features": "sqrt",
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": 0.7880890683065814,
+        "Macro AUC": 0.7788678873108698,
+        "Accuracy": 0.6666666666666666,
+        "Balanced accuracy": 0.5591478696741854,
+        "Macro F1": 0.5297452407614782,
+        "max_features": 0.33,
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": 0.7863063909937159,
+        "Macro AUC": 0.7972186144163268,
+        "Accuracy": 0.7261904761904762,
+        "Balanced accuracy": 0.6123366013071896,
+        "Macro F1": 0.5556913528881492,
+        "max_features": "sqrt",
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": 0.786284818098761,
+        "Macro AUC": 0.7906500800700148,
+        "Accuracy": 0.6785714285714286,
+        "Balanced accuracy": 0.5584150326797386,
+        "Macro F1": 0.5175199709513436,
+        "max_features": "sqrt",
+        "min_samples_leaf": 5
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": 0.7916965455892288,
+        "Macro AUC": 0.7632478632478632,
+        "Accuracy": 0.6385542168674698,
+        "Balanced accuracy": 0.5292250233426704,
+        "Macro F1": 0.48884413052275316,
+        "max_features": 0.66,
+        "min_samples_leaf": 10
+      }
+    ],
+    "XGBoost": [
+      {
+        "Fold": 1,
+        "n test": 84,
+        "Inner CV score": 0.771929605447574,
+        "Macro AUC": 0.8060739157961381,
+        "Accuracy": 0.6785714285714286,
+        "Balanced accuracy": 0.5811355311355311,
+        "Macro F1": 0.5559698417930125,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "n_estimators": 300
+      },
+      {
+        "Fold": 2,
+        "n test": 84,
+        "Inner CV score": 0.778723164842031,
+        "Macro AUC": 0.7580139510695066,
+        "Accuracy": 0.6904761904761905,
+        "Balanced accuracy": 0.5761904761904763,
+        "Macro F1": 0.5398606811145511,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 3,
+        "n test": 84,
+        "Inner CV score": 0.7820768012064784,
+        "Macro AUC": 0.7673274770496993,
+        "Accuracy": 0.6904761904761905,
+        "Balanced accuracy": 0.6003663003663003,
+        "Macro F1": 0.5950091575091575,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 4,
+        "n test": 84,
+        "Inner CV score": 0.7921177653085899,
+        "Macro AUC": 0.797311536200425,
+        "Accuracy": 0.7023809523809523,
+        "Balanced accuracy": 0.5954212454212454,
+        "Macro F1": 0.5752221097615834,
+        "learning_rate": 0.1,
+        "max_depth": 3,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 5,
+        "n test": 84,
+        "Inner CV score": 0.7880602319508538,
+        "Macro AUC": 0.7338485101642997,
+        "Accuracy": 0.6190476190476191,
+        "Balanced accuracy": 0.49302422723475353,
+        "Macro F1": 0.4725274725274725,
+        "learning_rate": 0.03,
+        "max_depth": 3,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 6,
+        "n test": 84,
+        "Inner CV score": 0.7790726315246115,
+        "Macro AUC": 0.7467592592592592,
+        "Accuracy": 0.6071428571428571,
+        "Balanced accuracy": 0.5053884711779448,
+        "Macro F1": 0.4703947368421052,
+        "learning_rate": 0.03,
+        "max_depth": 3,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 7,
+        "n test": 84,
+        "Inner CV score": 0.7898767349717963,
+        "Macro AUC": 0.7680497540146662,
+        "Accuracy": 0.6547619047619048,
+        "Balanced accuracy": 0.5467209690893902,
+        "Macro F1": 0.529356884057971,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "n_estimators": 300
+      },
+      {
+        "Fold": 8,
+        "n test": 84,
+        "Inner CV score": 0.7843418021287817,
+        "Macro AUC": 0.8010958419455152,
+        "Accuracy": 0.7380952380952381,
+        "Balanced accuracy": 0.6323843640020111,
+        "Macro F1": 0.6007666438668491,
+        "learning_rate": 0.03,
+        "max_depth": 3,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 9,
+        "n test": 84,
+        "Inner CV score": 0.7819299633823128,
+        "Macro AUC": 0.7994903683220677,
+        "Accuracy": 0.6666666666666666,
+        "Balanced accuracy": 0.5482340372046255,
+        "Macro F1": 0.5317545109211776,
+        "learning_rate": 0.03,
+        "max_depth": 5,
+        "n_estimators": 100
+      },
+      {
+        "Fold": 10,
+        "n test": 83,
+        "Inner CV score": 0.7748807541750424,
+        "Macro AUC": 0.772721396250808,
+        "Accuracy": 0.6265060240963856,
+        "Balanced accuracy": 0.5190440278675572,
+        "Macro F1": 0.504701260156668,
+        "learning_rate": 0.1,
+        "max_depth": 2,
+        "n_estimators": 100
+      }
+    ]
+  }
+}

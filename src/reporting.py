@@ -17,7 +17,8 @@ _LATEX_SPECIAL = {
 }
 
 
-_LATEX_SYMBOLS = {"±": r"$\pm$", "²": r"$^2$", "≥": r"$\geq$", "≤": r"$\leq$", "−": "-"}
+_LATEX_SYMBOLS = {"±": r"$\pm$", "²": r"$^2$", "≥": r"$\geq$", "≤": r"$\leq$", "−": "-",
+                  "→": r"$\rightarrow$", "·": r"$\cdot$", "×": r"$\times$"}
 
 
 def latex_escape(text):

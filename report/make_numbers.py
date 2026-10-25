@@ -191,6 +191,13 @@ pd_ = {p["Model"]: p for p in r["paired_mae_differences"]}
 num("RegDiffOLSBest", pd_["Linear regression"][f"MAE - {r['best_mae']}"], "{:+.2f}")
 num("RegDiffOLSBestCI", f"[{pd_['Linear regression']['CI low (best)']:+.2f}, {pd_['Linear regression']['CI high (best)']:+.2f}]")
 num("RegCorrGrade", r["corr_prediction_grade"], "{:.2f}")
+num("RegCorrIDH", r["corr_prediction_idh"], "{:.2f}")
+gi = r["oof_by_grade_idh_best_model"]
+num("RegPredGBMIDHmut", gi["GBM | IDH mutant"]["Predicted"], "{:.1f}")
+num("RegPredGBMIDHwt", gi["GBM | IDH wildtype"]["Predicted"], "{:.1f}")
+num("RegPredLGGIDHmut", gi["LGG | IDH mutant"]["Predicted"], "{:.1f}")
+num("RegPredLGGIDHwt", gi["LGG | IDH wildtype"]["Predicted"], "{:.1f}")
+num("RegNGBMIDHmut", gi["GBM | IDH mutant"]["n"], "{:.0f}")
 ob = r["oof_by_grade_best_model"]
 num("RegPredLGG", ob["LGG"]["Predicted"], "{:.1f}")
 num("RegPredGBM", ob["GBM"]["Predicted"], "{:.1f}")
@@ -269,6 +276,112 @@ num("ClfFN", cm[1][0], "{}")
 num("ClfFP", cm[0][1], "{}")
 pi = c["permutation_importance_mean"]["IDH1"]
 num("ClfPermIDH", sum(pi.values()) / len(pi))
+
+# ---------------------------------------------------------------------------
+# 06 Multiclass classification
+# ---------------------------------------------------------------------------
+m6 = load("06_multiclass")
+ms = {x["Model"]: x for x in m6["summary"]}
+mbest = m6["best"]
+sz = m6["class_sizes"]
+num("McNAstro", sz["Astrocytoma"], "{}")
+num("McNMixed", sz["Mixed glioma"], "{}")
+num("McNOligo", sz["Oligodendroglioma"], "{}")
+num("McNGBM", sz["Glioblastoma"], "{}")
+num("McBest", mbest)
+num("McNTies", len(m6["ties"]), "{}")
+num("McBestAUC", ci(ms[mbest], "Macro AUC"))
+num("McBestBAcc", ci(ms[mbest], "Balanced accuracy"))
+num("McBestFOne", ci(ms[mbest], "Macro F1"))
+num("McBestAcc", ci(ms[mbest], "Accuracy"))
+num("McBaseAUC", ms["Prior baseline"]["Macro AUC"])
+mmods = [x for x in ms if x != "Prior baseline"]
+num("McMinAUC", min(ms[x]["Macro AUC"] for x in mmods))
+num("McMaxAUC", max(ms[x]["Macro AUC"] for x in mmods))
+pdm = {x["Model"]: x for x in m6["paired_differences"]}
+num("McNWorse", sum(x["CI high"] < 0 for x in m6["paired_differences"]), "{}")
+num("McWorse", ", ".join(x["Model"].replace("Decision tree (pruned)", "pruned tree") for x in m6["paired_differences"] if x["CI high"] < 0) or "none")
+pcb = m6["per_class_best"]
+for fam, tag in (("Astrocytoma", "Astro"), ("Mixed glioma", "Mixed"), ("Oligodendroglioma", "Oligo"), ("Glioblastoma", "GBM")):
+    num(f"McRecall{tag}", pcb[fam]["Recall"], "{:.2f}")
+    num(f"McAUC{tag}", pcb[fam]["One-vs-rest AUC"])
+mx = m6["mixed_predicted_as"]
+num("McMixedAsAstro", pct(mx["Astrocytoma"], 0))
+num("McMixedAsOligo", pct(mx["Oligodendroglioma"], 0))
+num("McMixedAsGBM", pct(mx["Glioblastoma"], 0))
+cmb = m6["confusion_matrix_best"]
+num("McAstroAsGBM", cmb["Astrocytoma"]["Glioblastoma"], "{}")
+num("McAstroGBMwt", m6["astro_as_gbm"]["idh_wildtype"], "{}")
+num("McAstroWtTotal", m6["astro_as_gbm"]["astro_idh_wildtype_total"], "{}")
+ga = m6["grade_auc_from_multiclass"][mbest]
+num("McGradeAUC", f"{ga['AUC for the grade']:.3f} [{ga['CI low']:.3f}, {ga['CI high']:.3f}]")
+cvf = m6["clusters_vs_family"]
+num("McARIFamily", cvf["ARI family"], "{:.2f}")
+num("McARIGrade", cvf["ARI grade"], "{:.2f}")
+t3 = cvf["table"]
+num("McCThreeOligo", pct(t3["C3"]["Oligodendroglioma"] / sum(t3["C3"].values()), 0))
+num("McCThreeMixed", t3["C3"]["Mixed glioma"], "{}")
+num("McCTwoAstro", pct(t3["C2"]["Astrocytoma"] / sum(t3["C2"].values()), 0))
+num("McCTwoMixed", t3["C2"]["Mixed glioma"], "{}")
+mpi = m6["permutation_importance_mean"]
+num("McPermIDH", sum(mpi["IDH1"].values()) / len(mpi["IDH1"]))
+num("McPermCIC", sum(mpi["CIC"].values()) / len(mpi["CIC"]))
+
+# ---------------------------------------------------------------------------
+# 07 SHAP
+# ---------------------------------------------------------------------------
+k7 = load("07_shap")
+agr = {x["Model"]: x for x in k7["binary_agreement"]}
+num("ShapRhoRF", agr["Random forest"]["Spearman rho (SHAP vs permutation)"], "{:.2f}")
+num("ShapRhoLR", agr["Logistic regression"]["Spearman rho (SHAP vs permutation)"], "{:.2f}")
+num("ShapRhoXGB", agr["XGBoost"]["Spearman rho (SHAP vs permutation)"], "{:.2f}")
+sh = k7["binary_shap_share"]
+num("ShapIDHRF", pct(sh["IDH1"]["Random forest"], 0))
+num("ShapIDHXGB", pct(sh["IDH1"]["XGBoost"], 0))
+num("ShapIDHLR", pct(sh["IDH1"]["Logistic regression"], 0))
+num("ShapNOTCHLR", pct(sh["NOTCH1"]["Logistic regression"], 0))
+num("ShapNOTCHRF", pct(sh["NOTCH1"]["Random forest"], 1))
+ad = k7["age_dependence"]
+num("ShapAgeRF", ad["Random forest"]["age where contribution becomes positive"], "{:.0f}")
+num("ShapAgeXGB", ad["XGBoost"]["age where contribution becomes positive"], "{:.0f}")
+num("ShapAgeLR", ad["Logistic regression"]["age where contribution becomes positive"], "{:.0f}")
+num("ShapMcModel", k7["multiclass"]["model"])
+sbc = k7["multiclass"]["share_by_class"]
+num("ShapCICOligo", pct(sbc["CIC"]["Oligodendroglioma"], 0))
+num("ShapCICAstro", pct(sbc["CIC"]["Astrocytoma"], 0))
+num("ShapTPAstro", pct(sbc["TP53"]["Astrocytoma"], 0))
+num("ShapATRXAstro", pct(sbc["ATRX"]["Astrocytoma"], 0))
+num("ShapATRXOligo", pct(sbc["ATRX"]["Oligodendroglioma"], 0))
+num("ShapAgeOligo", pct(sbc["Age_at_diagnosis"]["Oligodendroglioma"], 0))
+num("ShapAgeAstro", pct(sbc["Age_at_diagnosis"]["Astrocytoma"], 0))
+
+# ---------------------------------------------------------------------------
+# 08 Causal analysis
+# ---------------------------------------------------------------------------
+k8 = load("08_causal")
+med = k8["mediation"]
+def eci(key, fmt="{:+.1f}"):
+    v = med[key]
+    return f"{fmt.format(v['Estimate'])} [{fmt.format(v['CI low'])}, {fmt.format(v['CI high'])}]"
+num("CsNIDH", k8["n_idh_mut"], "{}")
+num("CsTotal", eci("total (c)"))
+num("CsDirect", eci("direct (c')"))
+num("CsIndirect", eci("indirect (a*b)"))
+num("CsA", eci("IDH -> grade (a)", "{:+.2f}"))
+num("CsB", eci("grade -> age (b)"))
+num("CsProp", eci("proportion mediated", "{:.2f}"))
+num("CsPropPct", pct(med["proportion mediated"]["Estimate"], 0))
+aset = {x["Adjustment set"]: x for x in k8["adjustment_sets"]}
+num("CsFamily", aset["+ histological family"]["IDH coefficient (years)"], "{:+.1f}")
+num("CsGenes", aset["+ grade + 18 other mutations"]["IDH coefficient (years)"], "{:+.1f}")
+ag = k8["age_by_idh_grade"]
+num("CsAgeLGGwt", ag["LGG | IDH wildtype"]["mean"], "{:.1f}")
+num("CsAgeLGGmut", ag["LGG | IDH mutant"]["mean"], "{:.1f}")
+num("CsAgeGBMwt", ag["GBM | IDH wildtype"]["mean"], "{:.1f}")
+num("CsAgeGBMmut", ag["GBM | IDH mutant"]["mean"], "{:.1f}")
+num("CsNGBMmut", ag["GBM | IDH mutant"]["count"], "{:.0f}")
+it = k8["interaction"]["table"]["IDH_x_Grade"]
+num("CsInter", f"{it['Coefficient']:+.1f} [{it['CI low']:+.1f}, {it['CI high']:+.1f}]")
 
 lines = ["% Generated by report/make_numbers.py from results/logs/*.json -- do not edit by hand."]
 lines += [f"\\newcommand{{\\{k}}}{{{v}}}" for k, v in macros.items()]

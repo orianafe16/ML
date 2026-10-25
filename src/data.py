@@ -182,6 +182,19 @@ def feature_columns(task):
     raise ValueError(f"Unknown task: {task}")
 
 
+def diagnosis_family(df):
+    """Multiclass target: histological family (0-3, see config.MULTICLASS_LABELS) from Primary_Diagnosis.
+
+    Raises an error if a diagnosis is not in config.DIAGNOSIS_FAMILY, so a new label can never be
+    silently dropped.
+    """
+    family = df[config.MULTICLASS_TARGET].map(config.DIAGNOSIS_FAMILY)
+    if family.isna().any():
+        raise ValueError(f"Unmapped diagnoses: {sorted(df.loc[family.isna(), config.MULTICLASS_TARGET].unique())}")
+    codes = {name: code for code, name in config.MULTICLASS_LABELS.items()}
+    return family.map(codes).astype(int).values
+
+
 def data_dictionary():
     """Description of every variable of the clean dataset, with its role in the project."""
     genes = ", ".join(config.GENE_COLS)

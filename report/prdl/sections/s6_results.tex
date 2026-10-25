@@ -43,11 +43,23 @@ Lasso, with the penalty chosen by cross-validation, sets \LassoNZero{} of \Lasso
 to zero and keeps the same leading predictors.
 
 The out-of-fold predictions explain why the models agree (Figure~\ref{fig:prdl-oof}): they cluster
-around two values, \RegPredLGG{} and \RegPredGBM{} years on average for LGG and GBM patients, and
-their correlation with the grade is \RegCorrGrade. Although the grade was excluded, the models largely
-recover it through IDH1, IDH2 and ATRX and then predict the typical age of each grade. This is not
-leakage, but it changes the reading of H2: the mutation profile explains age mainly \emph{because} it
-encodes the grade, and within a grade it explains little.
+around two values. Their correlation with the grade is \RegCorrGrade, but with the IDH status (IDH1 or
+IDH2 mutated) it is stronger, \RegCorrIDH{} (IDH-mutant patients are predicted younger), and Table~\ref{tab:prdl-reg-idh} separates the two: within GBM, the
+\RegNGBMIDHmut{} IDH-mutant patients are predicted at \RegPredGBMIDHmut{} years on average, against
+\RegPredGBMIDHwt{} for IDH-wildtype GBM, and within LGG the split is \RegPredLGGIDHmut{} vs
+\RegPredLGGIDHwt{} years. The models predict the age from the IDH status, not from the grade; the
+predictions correlate with the grade only because the grade is associated with IDH. A first draft of
+this report read the two groups as the grade (Appendix~A); the causal analysis below quantifies how
+much of the IDH--age association actually goes through the grade.
+
+\begin{table}[H]
+\centering
+\caption{Mean observed and out-of-fold predicted age (years) of the \RegBest{} by grade and IDH status
+(neither was an input of the model).}
+\label{tab:prdl-reg-idh}
+\small
+\input{tables/reg_pred_by_grade_idh.tex}
+\end{table}
 
 \begin{figure}[H]
 \centering
@@ -120,3 +132,155 @@ corresponding parameter values for the utilized classifiers'', so their estimate
 hyperparameter selection, but their classifiers were not tuned either. The nested cross-validation
 used here tunes every model while keeping the evaluation folds out of the tuning, at the cost of
 slightly lower but honest numbers.
+
+\textbf{Multiclass: the mutations recognise the families, except the mixed gliomas.} Against a baseline
+macro AUC of \McBaseAUC, the four models reach between \McMinAUC{} and \McMaxAUC{}
+(Table~\ref{tab:prdl-mc}). The \McBest{} has the highest value (\McBestAUC; balanced accuracy
+\McBestBAcc, macro F1 \McBestFOne), the intervals of the \McNTies{} other models overlap it, and in the
+paired comparison only the \McWorse{} is worse. The probability of glioblastoma ranks the grade almost as
+well as the binary models (AUC \McGradeAUC), so the three extra classes cost nothing for the grade. The
+confusion matrix (Figure~\ref{fig:prdl-mc}) shows where the information lies:
+\begin{itemize}
+  \item \textbf{Glioblastoma} is recognised best (recall \McRecallGBM, one-vs-rest AUC \McAUCGBM),
+        followed by \textbf{oligodendroglioma} (\McRecallOligo, \McAUCOligo) and \textbf{astrocytoma}
+        (\McRecallAstro, \McAUCAstro).
+  \item \McAstroAsGBM{} astrocytomas are predicted as glioblastoma; \McAstroGBMwt{} of them are
+        IDH-wildtype, and they are all the IDH-wildtype astrocytomas (\McAstroWtTotal) of the cohort.
+        In the 2021 classification, for an IDH-wildtype diffuse astrocytic glioma the ``presence of 1 or
+        more of 3 genetic parameters (TERT promoter mutation, EGFR gene amplification, combined gain of
+        entire chromosome 7 and loss of entire chromosome 10 [+7/$-$10]) appears sufficient to assign''
+        the diagnosis of glioblastoma, IDH-wildtype \cite{louis2021}. These markers are not in the data,
+        so how many of the \McAstroGBMwt{} patients would be reclassified cannot be checked, but these
+        ``errors'' are at least partly the outdated labels of Section~2.1.
+  \item No patient is predicted as \textbf{mixed glioma} (recall \McRecallMixed): \McMixedAsAstro\% are
+        predicted as astrocytoma, \McMixedAsOligo\% as oligodendroglioma and \McMixedAsGBM\% as
+        glioblastoma, and their mean predicted probability is split between the two pure families
+        (Figure~\ref{fig:prdl-mc}, right). Their mutation profile is that of one of the two pure
+        families. This is what the 2016 WHO classification anticipated: ``the diagnosis of
+        oligoastrocytoma is strongly discouraged. Nearly all tumors with histological features suggesting
+        both an astrocytic and an oligodendroglial component can be classified as either astrocytoma or
+        oligodendroglioma using genetic testing'' \cite{louis2016}. Here, point mutations alone already
+        push most of them towards one of the two families.
+\end{itemize}
+The unsupervised analysis of Section~\ref{sec:prdl-eda} anticipated this structure without labels: the
+CIC/FUBP1 cluster is \McCThreeOligo\% oligodendrogliomas but also contains \McCThreeMixed{} mixed
+gliomas, and the TP53/ATRX cluster is \McCTwoAstro\% astrocytomas with \McCTwoMixed{} mixed gliomas.
+
+\begin{table}[H]
+\centering
+\caption{Multiclass classification of the histological family: out-of-fold metrics with 95\% bootstrap
+intervals (\McNAstro{} astrocytomas, \McNMixed{} mixed gliomas, \McNOligo{} oligodendrogliomas, \McNGBM{}
+glioblastomas).}
+\label{tab:prdl-mc}
+\resizebox{\textwidth}{!}{\input{tables/mc_model_comparison.tex}}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{mc_confusion.png}
+\caption{\McBest: out-of-fold confusion matrix (colour: share of each true family) and mean predicted
+probability of each family by true family.}
+\label{fig:prdl-mc}
+\end{figure}
+
+\textbf{What the winning models use: SHAP.} SHAP values were computed for the three binary models
+that the paired comparison could not separate, and for the multiclass \ShapMcModel{}
+(Figures~\ref{fig:prdl-shap} and~\ref{fig:prdl-shap-mc}). Their global ranking agrees with the
+permutation importance (Spearman $\rho$ = \ShapRhoRF{} for the random forest, \ShapRhoLR{} for logistic
+regression and \ShapRhoXGB{} for XGBoost), and IDH1 takes \ShapIDHRF\% of the total mean $|$SHAP$|$ of
+the random forest and \ShapIDHXGB\% of XGBoost. SHAP adds three things that the permutation importance
+could not show:
+\begin{itemize}
+  \item \textbf{The direction and size of each effect, patient by patient.} NOTCH1 is the second input of
+        logistic regression (\ShapNOTCHLR\% of its total) but negligible in the random forest
+        (\ShapNOTCHRF\%): the few NOTCH1-mutated patients receive a very large contribution towards LGG,
+        the quasi-separation effect discussed above made visible.
+  \item \textbf{The shape of the effect of age.} In logistic regression it is a straight line by
+        construction; the tree ensembles learn a curve that is almost flat for young patients and rises
+        steeply in middle age, changing sign at about \ShapAgeRF{} years in the random forest and
+        \ShapAgeXGB{} in XGBoost.
+  \item \textbf{What separates the families.} In the multiclass forest, CIC weighs most for
+        oligodendroglioma (\ShapCICOligo\% of that class's total, against \ShapCICAstro\% for
+        astrocytoma), and ATRX and age more for astrocytoma (\ShapATRXAstro\% and \ShapAgeAstro\%, against
+        \ShapATRXOligo\% and \ShapAgeOligo\%), the molecular split described for the TCGA lower-grade
+        gliomas \cite{tcga2015lgg}.
+\end{itemize}
+The ranking agrees with the previous explainability analysis of these data among the sources reviewed:
+on the same patients, Sánchez-Marqués et al.\ combined four feature-ranking methods, permutation
+importance and SHAP values, and report that the ``IDH1 biomarker was the most important attribute
+contributing to the target variable (i.e., glioma grade), regardless of the model used. The second
+most important feature was Age at diagnosis'' \cite{sanchezmarques2024}. The same order appears here in
+the random forest and XGBoost; logistic regression is the exception, for the quasi-separation reason
+above. Tasci et al.\ used feature selection but do not report a ranking of the features
+\cite{tasci2022}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{shap_binary_summary.png}
+\caption{SHAP summary of the three tied binary models: one dot per patient, contribution towards GBM
+(colour: value of the input, grey = 0 or young, violet = 1 or old). Units: probability for the random
+forest, log-odds for logistic regression and XGBoost.}
+\label{fig:prdl-shap}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{shap_multiclass.png}
+\caption{Multiclass \ShapMcModel: share of mean $|$SHAP$|$ of each input per family, and contributions
+towards astrocytoma and oligodendroglioma.}
+\label{fig:prdl-shap-mc}
+\end{figure}
+
+\subsection{Causal analysis}\label{sec:prdl-causal}
+
+Figure~\ref{fig:prdl-dag} shows the diagram assumed for Q5. IDH-mutant patients are younger within both
+grades (LGG: \CsAgeLGGmut{} vs \CsAgeLGGwt{} years; GBM: \CsAgeGBMmut{} vs \CsAgeGBMwt{} years, with
+only \CsNGBMmut{} IDH-mutant GBM), which already suggests that the grade does not carry the whole
+association. Adjusted for sex and race, the total effect of an IDH mutation on the age at diagnosis is
+\CsTotal{} years (OLS with HC3 standard errors \cite{hayes2007}; bootstrap intervals). Adjusting also
+for the grade leaves a direct effect of \CsDirect{} years; the indirect effect through the grade is
+\CsIndirect{} years, \CsPropPct\% of the total (Table~\ref{tab:prdl-med}). The identity
+$c = c' + ab$ holds exactly, so the result rests on the assumptions, not on the arithmetic.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.47\textwidth}\centering
+\includegraphics[width=\textwidth]{causal_dag.png}
+\caption{Assumed causal diagram (dashed: unmeasured).}
+\label{fig:prdl-dag}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.5\textwidth}\centering
+\includegraphics[width=\textwidth]{causal_adjustment_sets.png}
+\caption{Coefficient of IDH on age for different adjustment sets.}
+\label{fig:prdl-adj}
+\end{minipage}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Mediation decomposition of the IDH--age association (adjusted for sex and race; 95\% bootstrap
+intervals, 2000 resamples).}
+\label{tab:prdl-med}
+\small
+\input{tables/causal_mediation.tex}
+\end{table}
+
+Three readings follow:
+\begin{itemize}
+  \item \textbf{It corrects H2.} Under the diagram, most of the association between IDH and age does
+        not go through the binary grade, in agreement with the regression predictions above.
+  \item \textbf{What is adjusted for changes the answer} (Figure~\ref{fig:prdl-adj}). Adjusting for the
+        histological family instead of the grade gives \CsFamily{} years, and adding the 18 other
+        mutations \CsGenes{} years. The family is itself a consequence of IDH, so adjusting for it is
+        over-adjustment for the total effect; whether the other mutations are confounders or mediators
+        the diagram does not settle. Adding variables is not ``more control'': the diagram decides
+        \cite{huntingtonklein2021,pearl2009}. For the prediction models above the same question does
+        not arise, because there any variable that carries information is useful.
+  \item \textbf{The direct effect is the fragile part.} If an unmeasured variable affects both the grade
+        and the age at diagnosis (U in Figure~\ref{fig:prdl-dag}, for example the copy-number markers
+        missing from the data), adjusting for the grade opens the path IDH $\to$ grade $\leftarrow$ U
+        $\to$ age, and $c'$ is biased; the total effect does not need that assumption. The decomposition
+        also assumes that the effect of IDH is the same in both grades, but the IDH $\times$ grade
+        interaction is \CsInter{} years, so it is probably larger in GBM, although that estimate rests
+        on \CsNGBMmut{} patients.
+\end{itemize}

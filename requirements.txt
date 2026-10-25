@@ -10,3 +10,9 @@ seaborn==0.13.2
 jinja2==3.1.6
 ipykernel==6.29.5
 nbconvert==7.16.6
+# SHAP values (notebook 07); numba/llvmlite pinned to versions compatible with numpy 2.2
+shap==0.48.0
+numba==0.61.2
+llvmlite==0.44.0
+slicer==0.0.8
+tqdm==4.67.1

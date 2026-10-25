@@ -44,7 +44,18 @@ CI_LEVEL = 0.95
 ID_COL = "Case_ID"
 CLASSIFICATION_TARGET = "Grade"            # LGG (0) vs GBM (1)
 REGRESSION_TARGET = "Age_at_diagnosis"     # years
-MULTICLASS_TARGET = "Primary_Diagnosis"    # reserved for the January version
+MULTICLASS_TARGET = "Primary_Diagnosis"    # histological diagnosis, grouped into families
+
+# Multiclass task (notebook 06): the six TCGA diagnoses grouped into four histological families.
+# NOS ("not otherwise specified") and anaplastic tumours of the same family differ in grade (2 vs 3),
+# which point mutations cannot resolve; the family is what the mutations can inform.
+DIAGNOSIS_FAMILY = {
+    "Astrocytoma, NOS": "Astrocytoma", "Astrocytoma, anaplastic": "Astrocytoma",
+    "Mixed glioma": "Mixed glioma",
+    "Oligodendroglioma, NOS": "Oligodendroglioma", "Oligodendroglioma, anaplastic": "Oligodendroglioma",
+    "Glioblastoma": "Glioblastoma",
+}
+MULTICLASS_LABELS = {0: "Astrocytoma", 1: "Mixed glioma", 2: "Oligodendroglioma", 3: "Glioblastoma"}
 
 # Columns that must never be used as predictors because they encode the
 # classification target (Project = TCGA-LGG / TCGA-GBM is the same as Grade,

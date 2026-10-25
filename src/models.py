@@ -125,3 +125,39 @@ CLASSIFICATION_GRID_NOTES = {
     "XGBoost": "n_estimators x learning_rate (shrinkage); max_depth of each tree",
     "SVM": "kernel: linear or RBF; C: penalty of margin violations; gamma: reach of each support vector (RBF)",
 }
+
+
+# ---------------------------------------------------------------------------
+# Multiclass classification (notebook 06): histological family
+# ---------------------------------------------------------------------------
+
+
+def multiclass_models(columns):
+    """name -> (pipeline, parameter grid) for the four histological families.
+
+    The same model families and grids as the binary task where they extend directly to K classes:
+    multinomial logistic regression (one coefficient vector per class, softmax link), a pruned
+    tree, a random forest and XGBoost (one tree per class and boosting round). Naive Bayes and the
+    SVM are left out: Naive Bayes was the worst-calibrated binary model, and a multiclass SVM with
+    Platt probabilities needs one model per pair of classes, which multiplies the cost of the
+    nested CV without a model of a new kind.
+    """
+    seed = config.SEED
+    return {
+        "Prior baseline": (_pipe(columns, DummyClassifier(strategy="prior"), scale=False), {}),
+        "Logistic regression": (_pipe(columns, LogisticRegression(solver="saga", max_iter=20_000, random_state=seed),
+                                      scale=True),
+                                {"model__penalty": ["l1", "l2"], "model__C": np.logspace(-3, 2, 11)}),
+        "Decision tree (pruned)": (_pipe(columns, DecisionTreeClassifier(random_state=seed), scale=False),
+                                   {"model__ccp_alpha": [0.0, 0.001, 0.002, 0.005, 0.01, 0.02, 0.05],
+                                    "model__criterion": ["gini", "entropy"]}),
+        "Random forest": (_pipe(columns, RandomForestClassifier(n_estimators=300, random_state=seed, n_jobs=1),
+                                scale=False),
+                          {"model__max_features": ["sqrt", 0.33, 0.66],
+                           "model__min_samples_leaf": [1, 5, 10, 20]}),
+        "XGBoost": (_pipe(columns, XGBClassifier(random_state=seed, n_jobs=1, tree_method="hist",
+                                                 objective="multi:softprob", eval_metric="mlogloss"), scale=False),
+                    {"model__n_estimators": [100, 300],
+                     "model__learning_rate": [0.03, 0.1],
+                     "model__max_depth": [2, 3, 5]}),
+    }

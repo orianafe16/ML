@@ -1,6 +1,6 @@
 {
   "stage": "04_regression",
-  "timestamp": "2026-10-23T20:37:22",
+  "timestamp": "2026-10-25T17:24:29",
   "seed": 42,
   "features": [
     "Gender",
@@ -371,6 +371,29 @@
     }
   },
   "corr_prediction_grade": 0.7052486843099834,
+  "corr_prediction_idh": -0.9309437583821782,
+  "oof_by_grade_idh_best_model": {
+    "LGG | IDH wildtype": {
+      "n": 85.0,
+      "Observed": 54.65894117647059,
+      "Predicted": 59.01604176428779
+    },
+    "LGG | IDH mutant": {
+      "n": 402.0,
+      "Observed": 41.59472636815921,
+      "Predicted": 42.083483977644875
+    },
+    "GBM | IDH wildtype": {
+      "n": 327.0,
+      "Observed": 62.2237614678899,
+      "Predicted": 60.37423418967346
+    },
+    "GBM | IDH mutant": {
+      "n": 25.0,
+      "Observed": 40.821999999999996,
+      "Predicted": 40.23560170042248
+    }
+  },
   "ols": {
     "r2_in_sample": 0.41423261358238694,
     "adj_r2_in_sample": 0.3969618306904671,
@@ -932,7 +955,7 @@
     "Lasso": "alpha = 0.316; 11 of 25 coefficients set to 0",
     "Decision tree": "depth 3, 8 leaves",
     "Most important predictor (permutation)": "IDH1 (mean increase in RMSE 3.63 years)",
-    "Link with the grade": "correlation between predicted age (Random forest) and grade = 0.705"
+    "Link with the grade and IDH": "correlation between predicted age (Random forest) and grade = 0.705, and IDH status = -0.931"
   },
   "folds": {
     "Mean baseline": [

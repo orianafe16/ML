@@ -49,3 +49,42 @@ ignoring errors smaller than $\varepsilon$ years.
 
 \textbf{Baselines.} The mean age and the class proportions give the reference that any useful model
 must beat.
+
+\subsection{Complementary analyses}
+
+\textbf{Multiclass classification.} Logistic regression extends to $K$ classes by giving every class
+$k$ its own linear score $z_k = \beta_{k0} + \boldsymbol\beta_k^\top\mathbf x$ and turning the scores
+into probabilities with the softmax function, $P(Y=k\mid\mathbf x) = e^{z_k}/\sum_{j} e^{z_j}$
+(multinomial regression) \cite{james2021}. Trees and random forests handle several classes directly,
+with the Gini index or the entropy computed over the $K$ class proportions of each node, and XGBoost
+fits one tree per class at every boosting round on the softmax loss \cite{chen2016}. The main metric is
+the multiclass AUC of Hand and Till, the mean over all pairs of classes $(i,j)$ of the AUC of
+$P(Y=i)$ separating class $i$ from class $j$, averaged with the reverse comparison; like the binary AUC
+it needs no threshold and does not depend on the class proportions \cite{handtill2001}. Balanced
+accuracy (mean recall over the classes; 0.25 for a constant prediction with four classes) and the macro
+F1 score describe the predicted class.
+
+\textbf{SHAP values.} Permutation importance says how much performance is lost without a predictor,
+but not in which direction a predictor pushes each prediction. SHAP values \cite{lundberg2017} split one
+prediction $f(\mathbf x)$ into additive contributions, $f(\mathbf x) = \phi_0 + \sum_j \phi_j$, where
+$\phi_0$ is the average prediction and $\phi_j$ is the Shapley value of predictor $j$
+\cite{shapley1953}: the average change in the prediction when $j$ is added to every possible subset of
+the other predictors. For trees and tree ensembles the values are computed exactly by TreeSHAP
+\cite{lundberg2020}; for a linear model with independent predictors they reduce to
+$\phi_j = \beta_j(x_j - \bar x_j)$. SHAP values describe the fitted model, not the disease: correlated
+predictors share the credit in a way that depends on the algorithm, and a large value is not evidence of
+a causal effect.
+
+\textbf{Causal analysis.} A prediction model may use any variable that carries information; a causal
+question requires deciding \emph{which} variables to adjust for, and that decision comes from a causal
+diagram (a directed acyclic graph, DAG) rather than from the fit of the model
+\cite{pearl2009,huntingtonklein2021}. On a path from an exposure to an outcome, a \emph{confounder} is a
+common cause and must be adjusted for; a \emph{mediator} lies on the causal path, and adjusting for it
+removes the part of the effect that goes through it; a \emph{collider} is a common effect, and adjusting
+for it creates a spurious association. With an exposure $E$, a mediator $M$, an outcome $Y$ and the same
+covariates, three least-squares regressions give the total effect $c$ ($Y$ on $E$), the effect $a$ of
+$E$ on $M$, and the direct effect $c'$ and the effect $b$ of $M$ ($Y$ on $E$ and $M$); for ordinary
+least squares on the same patients the total effect splits exactly as $c = c' + ab$, where $ab$ is the
+indirect effect through the mediator \cite{baron1986,mackinnon1995}. The split is causal only under the
+assumptions of the diagram, in particular that no unmeasured variable affects both the mediator and the
+outcome.

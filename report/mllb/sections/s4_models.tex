@@ -6,9 +6,9 @@
 \subsection{Model Selection}
 
 Each model is defined in \texttt{src/models.py} as a \texttt{Pipeline} with two steps,
-\texttt{prep} (a \texttt{ColumnTransformer} from \texttt{src/pipelines.py}) and \texttt{model}.
+\texttt{prep} (a \texttt{Column\allowbreak{}Transformer} from \texttt{src/\allowbreak{}pipelines.\allowbreak{}py}) and \texttt{model}.
 Linear models and support vector machines receive standardised inputs and one-hot encoded race
-(\texttt{handle\_unknown="ignore"}, needed because one race category has a single patient and may be
+(\texttt{handle\_\allowbreak{}unknown="ignore"}, needed because one race category has a single patient and may be
 absent from a training fold); trees and ensembles receive unscaled inputs. Naive Bayes has its own
 preprocessing: age is discretised into quantile bins (\texttt{KBinsDiscretizer}) so that a
 \texttt{BernoulliNB} can model every column. Tables~\ref{tab:mllb-reg-grids} and~\ref{tab:mllb-clf-grids}
@@ -34,11 +34,11 @@ linear and RBF).}
 
 Tuning is done by \texttt{GridSearchCV} with 3 inner folds (stratified for classification,
 \texttt{n\_jobs=-1}), scoring \texttt{roc\_auc} for classification and
-\texttt{neg\_root\_mean\_squared\_error} for regression, inside each of the 10 outer folds
-(\texttt{evaluation.nested\_cv}). Because each outer fold runs its own search, the chosen values can
+\texttt{neg\_\allowbreak{}root\_\allowbreak{}mean\_\allowbreak{}squared\_\allowbreak{}error} for regression, inside each of the 10 outer folds
+(\texttt{evaluation.\allowbreak{}nested\_\allowbreak{}cv}). Because each outer fold runs its own search, the chosen values can
 be compared across folds: a value chosen in most folds indicates a stable choice
 (Tables~\ref{tab:mllb-reg-hp} and~\ref{tab:mllb-clf-hp}). The final models used for interpretation are
-obtained by \texttt{evaluation.fit\_final}, which runs the same search once on all patients; its result
+obtained by \texttt{evaluation.\allowbreak{}fit\_\allowbreak{}final}, which runs the same search once on all patients; its result
 is the last column. For logistic regression the final search chose $C=\LRFinalC$ although the folds
 chose smaller values; Table~\ref{tab:mllb-flat} shows why: \LRFlatWithin{} of the \LRFlatTotal{}
 configurations are within 0.005 AUC of the best one.
@@ -69,7 +69,7 @@ A reproducibility problem was found at this stage: two runs of the classificatio
 different hyperparameters for logistic regression, because the \texttt{liblinear} solver shuffles the
 data and its \texttt{random\_state} had not been fixed. After fixing it, two complete runs give
 identical out-of-fold probabilities, and the author's run reproduces every value of the JSON summaries
-(Appendix B).
+(Appendix A).
 
 \subsection{Model Evaluation}
 
@@ -187,3 +187,122 @@ the threshold for the model with the highest AUC.}
 \label{fig:mllb-clfimp}
 \end{minipage}
 \end{figure}
+
+\textbf{Multiclass classification (notebook 06).} The target is built by \texttt{data.\allowbreak{}diagnosis\_\allowbreak{}family},
+which maps the six TCGA diagnoses to four families with the dictionary \texttt{config.\allowbreak{}DIAGNOSIS\_\allowbreak{}FAMILY}
+and raises an error if a diagnosis is not mapped (Table~\ref{tab:mllb-mc-classes}). The same
+\texttt{nested\_cv} function is used with \texttt{task="multiclass"}: the folds are stratified by family,
+and the out-of-fold prediction of every patient is a row of four probabilities. The inner criterion is
+sklearn's \texttt{roc\_auc\_ovo} (Hand--Till macro AUC); for the 2000 bootstrap resamples the same
+metric is recomputed by \texttt{evaluation.\allowbreak{}multiclass\_\allowbreak{}auc}, written with the rank-based binary AUC of the
+project and checked to give exactly the value of \texttt{roc\_\allowbreak{}auc\_\allowbreak{}score(multi\_\allowbreak{}class="ovo")}. The
+multinomial logistic regression uses the \texttt{saga} solver, the only one in scikit-learn~1.6 that
+supports both penalties for the multinomial model. Table~\ref{tab:mllb-mc-grids} lists the models,
+Table~\ref{tab:mllb-mc-hp} the chosen hyperparameters and Table~\ref{tab:mllb-mc-paired} the paired
+comparison; Figures~\ref{fig:mllb-mc-comp} and~\ref{fig:mllb-mc-imp} show the metrics and the
+permutation importance (drop in macro AUC).
+
+\begin{table}[H]
+\centering
+\caption{Multiclass target: TCGA diagnoses grouped into histological families.}
+\label{tab:mllb-mc-classes}
+\small
+\input{tables/mc_classes.tex}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Multiclass models and hyperparameter grids.}
+\label{tab:mllb-mc-grids}
+\resizebox{\textwidth}{!}{\input{tables/mc_models_grids.tex}}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Multiclass: hyperparameters chosen in the 10 outer folds and in the final model.}
+\label{tab:mllb-mc-hp}
+\resizebox{\textwidth}{!}{\input{tables/mc_hyperparameters.tex}}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{mc_model_comparison.png}
+\caption{Multiclass: out-of-fold macro AUC and balanced accuracy with 95\% bootstrap intervals.}
+\label{fig:mllb-mc-comp}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Multiclass: paired bootstrap of the macro-AUC difference with the best model.}
+\label{tab:mllb-mc-paired}
+\small
+\input{tables/mc_paired_differences.tex}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Per-family performance of the best multiclass model (out-of-fold; one-vs-rest AUC with 95\%
+bootstrap interval).}
+\label{tab:mllb-mc-perclass}
+\footnotesize
+\input{tables/mc_per_class.tex}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{mc_permutation_importance.png}
+\caption{Multiclass: permutation importance on the outer test folds.}
+\label{fig:mllb-mc-imp}
+\end{figure}
+
+\textbf{SHAP values (notebook 07).} The notebook reads the JSON summaries of notebooks 05 and 06 to find
+the winning models (the best one and those whose paired difference with it includes zero), refits them
+with \texttt{fit\_final} and asserts that the hyperparameters are the ones saved by those notebooks.
+\texttt{explain.\allowbreak{}shap\_\allowbreak{}values} applies the pipeline's preprocessing and chooses the explainer by model
+type (\texttt{TreeExplainer} for forests, trees and XGBoost; \texttt{LinearExplainer} with all patients
+as background for logistic regression); it returns the values, the base value, the units and the raw
+model output, and \texttt{explain.\allowbreak{}additivity\_\allowbreak{}error} checks that base value plus contributions reproduces
+every prediction. The summary plots (\texttt{explain.\allowbreak{}beeswarm}) are drawn with Matplotlib rather than
+with the library's own plots, to keep the project style. Table~\ref{tab:mllb-shap-agree} compares the
+SHAP ranking with the permutation importance, and Figure~\ref{fig:mllb-shap-age} shows the dependence of
+the age contribution.
+
+\begin{table}[H]
+\centering
+\caption{Agreement between SHAP (share of mean $|$SHAP$|$, race columns summed) and permutation importance.}
+\label{tab:mllb-shap-agree}
+\resizebox{\textwidth}{!}{\input{tables/shap_binary_agreement.tex}}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{shap_binary_age.png}
+\caption{SHAP dependence of age for the three tied binary models (colour: IDH1 status).}
+\label{fig:mllb-shap-age}
+\end{figure}
+
+\textbf{Causal analysis (notebook 08).} \texttt{causal.\allowbreak{}mediation\_\allowbreak{}decomposition} fits the three least-squares
+regressions with \texttt{numpy.\allowbreak{}linalg.\allowbreak{}lstsq} (fast enough for 2000 bootstrap resamples) and returns the
+identity check $c-(c'+ab)$, which the notebook asserts to be below $10^{-8}$;
+\texttt{causal.\allowbreak{}ols\_\allowbreak{}table} refits the models with statsmodels and HC3 standard errors for the reported
+intervals, because the residuals of age are heteroscedastic (Figure~\ref{fig:mllb-ols}). Race enters as a single
+white/non-white indicator: with the four categories, the patient alone in one category has leverage 1,
+and the HC3 correction divides by $1-h_{ii}$. Table~\ref{tab:mllb-causal-adj} lists the four adjustment
+sets and Table~\ref{tab:mllb-causal-int} the interaction model.
+
+\begin{table}[H]
+\centering
+\caption{Coefficient of IDH mutation on age at diagnosis (years) for different adjustment sets (HC3
+intervals).}
+\label{tab:mllb-causal-adj}
+\small
+\input{tables/causal_adjustment_sets.tex}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Age at diagnosis with an IDH $\times$ grade interaction (OLS, HC3 intervals).}
+\label{tab:mllb-causal-int}
+\small
+\input{tables/causal_interaction.tex}
+\end{table}

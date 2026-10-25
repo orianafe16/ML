@@ -1,7 +1,7 @@
 {
-  "n_entries": 51,
-  "n_with_doi": 40,
-  "n_ok": 33,
+  "n_entries": 60,
+  "n_with_doi": 48,
+  "n_ok": 39,
   "to_check": [
     {
       "key": "tasci2022dataset",
@@ -81,6 +81,30 @@
       "year_matches": true,
       "first_author_matches": true,
       "ok": false
+    },
+    {
+      "key": "huntingtonklein2021",
+      "doi": "10.1201/9781003226055",
+      "found": true,
+      "crossref_title": "The Effect",
+      "crossref_year": 2021,
+      "crossref_first_author": "Huntington-Klein",
+      "title_similarity": 0.286,
+      "year_matches": true,
+      "first_author_matches": true,
+      "ok": false
+    },
+    {
+      "key": "pearl2009",
+      "doi": "10.1017/CBO9780511803161",
+      "found": true,
+      "crossref_title": "Causality",
+      "crossref_year": 2009,
+      "crossref_first_author": "Pearl",
+      "title_similarity": 0.346,
+      "year_matches": true,
+      "first_author_matches": true,
+      "ok": false
     }
   ],
   "without_doi": [
@@ -94,7 +118,8 @@
     "hastie2009",
     "mienye2022",
     "mohammed2023",
-    "sutton2018"
+    "sutton2018",
+    "lundberg2017"
   ],
   "results": [
     {
@@ -567,6 +592,102 @@
       "crossref_title": "seaborn: statistical data visualization",
       "crossref_year": 2021,
       "crossref_first_author": "Waskom",
+      "title_similarity": 1.0,
+      "year_matches": true,
+      "first_author_matches": true,
+      "ok": true
+    },
+    {
+      "key": "handtill2001",
+      "doi": "10.1023/A:1010920819831",
+      "found": true,
+      "crossref_title": "A Simple Generalisation of the Area Under the ROC Curve for Multiple Class Classification Problems",
+      "crossref_year": 2001,
+      "crossref_first_author": "Hand",
+      "title_similarity": 1.0,
+      "year_matches": true,
+      "first_author_matches": true,
+      "ok": true
+    },
+    {
+      "key": "shapley1953",
+      "doi": "10.1515/9781400881970-018",
+      "found": true,
+      "crossref_title": "17. A Value for n-Person Games",
+      "crossref_year": 1953,
+      "crossref_first_author": "Shapley",
+      "title_similarity": 0.929,
+      "year_matches": true,
+      "first_author_matches": true,
+      "ok": true
+    },
+    {
+      "key": "lundberg2020",
+      "doi": "10.1038/s42256-019-0138-9",
+      "found": true,
+      "crossref_title": "From local explanations to global understanding with explainable AI for trees",
+      "crossref_year": 2020,
+      "crossref_first_author": "Lundberg",
+      "title_similarity": 1.0,
+      "year_matches": true,
+      "first_author_matches": true,
+      "ok": true
+    },
+    {
+      "key": "huntingtonklein2021",
+      "doi": "10.1201/9781003226055",
+      "found": true,
+      "crossref_title": "The Effect",
+      "crossref_year": 2021,
+      "crossref_first_author": "Huntington-Klein",
+      "title_similarity": 0.286,
+      "year_matches": true,
+      "first_author_matches": true,
+      "ok": false
+    },
+    {
+      "key": "pearl2009",
+      "doi": "10.1017/CBO9780511803161",
+      "found": true,
+      "crossref_title": "Causality",
+      "crossref_year": 2009,
+      "crossref_first_author": "Pearl",
+      "title_similarity": 0.346,
+      "year_matches": true,
+      "first_author_matches": true,
+      "ok": false
+    },
+    {
+      "key": "baron1986",
+      "doi": "10.1037/0022-3514.51.6.1173",
+      "found": true,
+      "crossref_title": "The moderator–mediator variable distinction in social psychological research: Conceptual, strategic, and statistical considerations.",
+      "crossref_year": 1986,
+      "crossref_first_author": "Baron",
+      "title_similarity": 0.985,
+      "year_matches": true,
+      "first_author_matches": true,
+      "ok": true
+    },
+    {
+      "key": "mackinnon1995",
+      "doi": "10.1207/s15327906mbr3001_3",
+      "found": true,
+      "crossref_title": "A Simulation Study of Mediated Effect Measures",
+      "crossref_year": 1995,
+      "crossref_first_author": "MacKinnon",
+      "title_similarity": 1.0,
+      "year_matches": true,
+      "first_author_matches": true,
+      "ok": true
+    },
+    {
+      "key": "hayes2007",
+      "doi": "10.3758/BF03192961",
+      "found": true,
+      "crossref_title": "Using heteroskedasticity-consistent standard error estimators in OLS regression: An introduction and software implementation",
+      "crossref_year": 2007,
+      "crossref_first_author": "Hayes",
       "title_similarity": 1.0,
       "year_matches": true,
       "first_author_matches": true,

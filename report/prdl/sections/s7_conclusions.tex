@@ -10,15 +10,26 @@
         with out-of-fold AUCs between \ClfMinAUC{} and \ClfMaxAUC{} under nested cross-validation. Penalised logistic
         regression and XGBoost are statistically indistinguishable from the best random forest;
         naive Bayes, the SVM and the pruned tree are slightly worse in paired comparisons.
-  \item \textbf{H2 (regression) is supported with a caveat.} Without the grade, the profile
-        explains a share of the variance of age between \RegMinRTwo{} and \RegMaxRTwo{} ($R^2$), with all
-        models equivalent; but the predictions
-        mostly recover the grade through IDH1, IDH2 and ATRX, so the mutations explain age largely
-        through the grade.
+  \item \textbf{H2 (regression) is partly supported.} Without the grade, the profile explains a share
+        of the variance of age between \RegMinRTwo{} and \RegMaxRTwo{} ($R^2$), with all models
+        equivalent. The second half of H2 is not supported: the predictions follow the IDH status
+        rather than the grade, and under the causal diagram only \CsPropPct\% of the IDH--age
+        association goes through the grade (Q5).
   \item \textbf{H3 (unsupervised) is supported.} Without labels, $k$-means and Ward's method
         separate an IDH-wildtype and an IDH-mutant group, related to but not identical with the
         grade; a secondary three-cluster solution separates two IDH-mutant profiles. Jaccard-based
         hierarchical clustering fails on these data because of patients without any mutation.
+  \item \textbf{Q4 (multiclass).} The same profile recognises the histological family well above chance
+        (macro AUC \McBestAUC{} for the \McBest), with glioblastoma and oligodendroglioma recognised
+        best. Mixed gliomas are never predicted as such and split between the two pure families, and
+        the astrocytomas predicted as glioblastoma are the IDH-wildtype ones: the main ``errors''
+        point at the labels rather than at the models.
+  \item \textbf{SHAP} confirms the ranking of the permutation importance and shows what it could not:
+        a non-linear effect of age in the tree ensembles, the inflated role of NOTCH1 in logistic
+        regression, and CIC versus ATRX as the inputs that separate the two lower-grade families.
+  \item \textbf{Q5 (causal).} The IDH--age association is mostly direct (\CsDirect{} years out of a
+        total of \CsTotal), but the split depends on assumptions that these data cannot check, and the
+        choice of adjustment variables changes the estimate.
   \item \textbf{The labels limit the study.} The grades come from pre-2021 criteria and several
         markers of the current classification are missing from the data; the cohort is mostly white
         and only internally validated. The models describe this cohort, not current clinical
@@ -36,5 +47,8 @@ no answer at the available sample size, and saying so with intervals is more hon
 point estimates; how the comparison is made (marginal intervals or paired differences) must be fixed
 in advance. Fourth, a model can rank patients well while giving unreliable probabilities or
 coefficients (naive Bayes, logistic regression under quasi-separation), so evaluation must match the
-intended use. Finally, the AI assistants used for literature search produced wrong or misattributed
-sources that were only caught by cross-checking (Appendix B).
+intended use. Fifth, an interpretation that looks obvious in a figure can be wrong: the regression
+predictions seemed to follow the grade, and only checking the alternative explanation (IDH) and
+drawing the causal diagram showed otherwise; for a causal question, which variables to adjust for is
+decided by the diagram, not by the fit. Finally, the AI assistants used for literature search produced wrong or misattributed
+sources that were only caught by cross-checking (Appendix A).

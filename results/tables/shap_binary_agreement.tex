@@ -1,0 +1,9 @@
+\begin{tabular}{lrll}
+\toprule
+\textbf{Model} & \textbf{Spearman rho (SHAP vs permutation)} & \textbf{Top 3 SHAP} & \textbf{Top 3 permutation} \\
+\midrule
+Random forest & 0.847 & IDH1, Age\_at\_diagnosis, PTEN & IDH1, Age\_at\_diagnosis, ATRX \\
+Logistic regression & 0.789 & IDH1, NOTCH1, TP53 & IDH1, NOTCH1, Age\_at\_diagnosis \\
+XGBoost & 0.678 & IDH1, Age\_at\_diagnosis, TP53 & IDH1, Age\_at\_diagnosis, TP53 \\
+\bottomrule
+\end{tabular}

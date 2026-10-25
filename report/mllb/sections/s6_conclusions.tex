@@ -7,7 +7,7 @@ From the point of view of tools and methodology:
 \begin{itemize}
   \item \textbf{The pipeline is reproducible end to end.} The rebuilt dataset matches the UCI file in
         every value; two complete runs give identical results; and the run on a second computer (the
-        author's) reproduced every value of the five JSON summaries. The only reproducibility failure
+        author's) reproduced every value of the JSON summaries. The only reproducibility failure
         found (an unseeded solver) was detected precisely by this comparison.
   \item \textbf{Nested cross-validation is affordable at this scale.} With small grids, each notebook
         runs in a few minutes, and keeping the chosen hyperparameters of every outer fold gives a direct
@@ -16,7 +16,12 @@ From the point of view of tools and methodology:
         \ClfMaxAUC{} (baseline \ClfAUCBase); in regression, MAEs between \RegMinMAE{} and \RegMaxMAE{}
         years (baseline \RegBaseMAE). Under the comparison rule fixed in advance no model is declared
         better than the others in either task; the paired comparison separates only small differences
-        in classification. The interpretation of these results is in the PRDL report.
+        in classification. The multiclass task reaches a macro AUC of \McBestAUC{} for the \McBest{}
+        (baseline \McBaseAUC). The interpretation of these results is in the PRDL report.
+  \item \textbf{Reusing the same machinery.} The multiclass task needed only a new metric function and
+        a new branch in \texttt{nested\_cv}; the SHAP notebook re-fits the final models with
+        \texttt{fit\_final} and asserts that it obtains the hyperparameters saved by notebooks 05 and 06,
+        and every SHAP explanation is checked for additivity before it is plotted.
   \item \textbf{Graphics that check themselves.} Fixing one colour per class across all figures, and
         inspecting every figure before accepting it, caught errors that no test would have detected: a
         biplot with distorted arrows, a bar chart whose axis hid part of the data, a tree with inverted
@@ -26,5 +31,3 @@ From the point of view of tools and methodology:
         without manual editing.
 \end{itemize}
 
-Planned for the final version (January): the multiclass classification of the histological diagnosis,
-the causal analysis, and the AI Error Bounty sheets in the format of the course guideline.

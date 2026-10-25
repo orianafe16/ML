@@ -135,6 +135,7 @@
 % =====================================================================
 % REFERENCES
 % =====================================================================
+\clearpage
 \section{References}
 \begingroup
 % thebibliography opens its own \section*{References}; it is swallowed here so that
@@ -145,11 +146,15 @@
 \endgroup
 
 \newpage
+\input{sections/appA_ai}
+
+\newpage
 
 % =====================================================================
-% APPENDIX: ENSEMBLE LEARNING EXPERIMENT
+% APPENDIX B: ENSEMBLE LEARNING EXPERIMENT
 % =====================================================================
-\appendixbanner{APPENDIX A: ENSEMBLE LEARNING EXPERIMENT}
+\appendixbanner{APPENDIX B: ENSEMBLE LEARNING EXPERIMENT}
+\addcontentsline{toc}{section}{Appendix B: Ensemble learning experiment}
 
 \subsection*{What we did}
 
@@ -219,8 +224,5 @@ each model actually needs, gives a more honest picture than accuracy or ROC-AUC 
 
 The full, reproducible notebook (\texttt{ensemble\_learning\_experiment.ipynb}) is
 available in our group's repository: \texttt{https://github.com/orianafe16/PRDL-MLLB.git}.
-
-\newpage
-\input{sections/appB_ai}
 
 \end{document}

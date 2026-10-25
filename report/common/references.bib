@@ -73,7 +73,7 @@
   journal = {Scientific Data},
   year    = {2025},
   doi     = {10.1038/s41597-025-05117-2},
-  comment    = {metadata: NotebookLM (42.pdf, title page); same DOI as the garbled inventory entry of 43.pdf; DOI to be checked with check_references.py}
+  comment    = {metadata: NotebookLM (42.pdf, title page); same DOI as the garbled inventory entry of 43.pdf; DOI checked: Crossref, 2026-10-25}
 }
 
 % ---------------------------------------------------------------------------
@@ -88,7 +88,7 @@
   number  = {Supplement 3},
   pages   = {iii1--iii105},
   doi     = {10.1093/neuonc/noab200},
-  comment    = {metadata: NotebookLM (04.pdf); DOI to be checked with check_references.py}
+  comment    = {metadata: NotebookLM (04.pdf); DOI checked: Crossref, 2026-10-25}
 }
 @article{louis2021,
   author  = {Louis, David N. and others},
@@ -579,4 +579,109 @@
   edition   = {2nd},
   publisher = {MIT Press},
   year      = {2018}
+}
+
+% ---------------------------------------------------------------------
+% Multiclass AUC, SHAP and causal analysis (added for notebooks 06-08)
+% ---------------------------------------------------------------------
+@article{handtill2001,
+  author  = {Hand, David J. and Till, Robert J.},
+  title   = {A Simple Generalisation of the Area Under the {ROC} Curve for Multiple Class Classification Problems},
+  journal = {Machine Learning},
+  year    = {2001},
+  volume  = {45},
+  number  = {2},
+  pages   = {171--186},
+  doi     = {10.1023/A:1010920819831},
+  comment = {metadata: AI knowledge; DOI checked: Crossref, 2026-10-25}
+}
+
+@incollection{shapley1953,
+  author    = {Shapley, Lloyd S.},
+  title     = {A Value for n-Person Games},
+  booktitle = {Contributions to the Theory of Games, Volume {II}},
+  editor    = {Kuhn, Harold W. and Tucker, Albert W.},
+  series    = {Annals of Mathematics Studies},
+  number    = {28},
+  publisher = {Princeton University Press},
+  year      = {1953},
+  pages     = {307--317},
+  doi       = {10.1515/9781400881970-018},
+  comment   = {metadata: AI knowledge; DOI checked: Crossref, 2026-10-25}
+}
+
+@inproceedings{lundberg2017,
+  author    = {Lundberg, Scott M. and Lee, Su-In},
+  title     = {A Unified Approach to Interpreting Model Predictions},
+  booktitle = {Advances in Neural Information Processing Systems 30 (NeurIPS 2017)},
+  year      = {2017},
+  pages     = {4765--4774},
+  comment   = {metadata: AI knowledge; no DOI (arXiv:1705.07874)}
+}
+
+@article{lundberg2020,
+  author  = {Lundberg, Scott M. and Erion, Gabriel and Chen, Hugh and DeGrave, Alex and Prutkin, Jordan M. and Nair, Bala and Katz, Ronit and Himmelfarb, Jonathan and Bansal, Nisha and Lee, Su-In},
+  title   = {From Local Explanations to Global Understanding with Explainable {AI} for Trees},
+  journal = {Nature Machine Intelligence},
+  year    = {2020},
+  volume  = {2},
+  number  = {1},
+  pages   = {56--67},
+  doi     = {10.1038/s42256-019-0138-9},
+  comment = {metadata: AI knowledge; DOI checked: Crossref, 2026-10-25}
+}
+
+@book{huntingtonklein2021,
+  author    = {Huntington-Klein, Nick},
+  title     = {The Effect: An Introduction to Research Design and Causality},
+  publisher = {Chapman and Hall/CRC},
+  year      = {2021},
+  doi       = {10.1201/9781003226055},
+  comment   = {Recommended in the course weekly summary of 25 September 2026 (chapters 6 and 13). metadata: AI knowledge; DOI checked: Crossref, 2026-10-25 (title differs only in the subtitle)}
+}
+
+@book{pearl2009,
+  author    = {Pearl, Judea},
+  title     = {Causality: Models, Reasoning, and Inference},
+  edition   = {2nd},
+  publisher = {Cambridge University Press},
+  year      = {2009},
+  doi       = {10.1017/CBO9780511803161},
+  comment   = {metadata: AI knowledge; DOI checked: Crossref, 2026-10-25 (title differs only in the subtitle)}
+}
+
+@article{baron1986,
+  author  = {Baron, Reuben M. and Kenny, David A.},
+  title   = {The Moderator--Mediator Variable Distinction in Social Psychological Research: Conceptual, Strategic, and Statistical Considerations},
+  journal = {Journal of Personality and Social Psychology},
+  year    = {1986},
+  volume  = {51},
+  number  = {6},
+  pages   = {1173--1182},
+  doi     = {10.1037/0022-3514.51.6.1173},
+  comment = {metadata: AI knowledge}
+}
+
+@article{mackinnon1995,
+  author  = {MacKinnon, David P. and Warsi, Ghulam and Dwyer, James H.},
+  title   = {A Simulation Study of Mediated Effect Measures},
+  journal = {Multivariate Behavioral Research},
+  year    = {1995},
+  volume  = {30},
+  number  = {1},
+  pages   = {41--62},
+  doi     = {10.1207/s15327906mbr3001_3},
+  comment = {Shows that c - c' = ab for OLS with the same sample. metadata: AI knowledge; DOI checked: Crossref, 2026-10-25}
+}
+
+@article{hayes2007,
+  author  = {Hayes, Andrew F. and Cai, Li},
+  title   = {Using Heteroskedasticity-Consistent Standard Error Estimators in {OLS} Regression: An Introduction and Software Implementation},
+  journal = {Behavior Research Methods},
+  year    = {2007},
+  volume  = {39},
+  number  = {4},
+  pages   = {709--722},
+  doi     = {10.3758/BF03192961},
+  comment = {Justifies HC3. metadata: AI knowledge; DOI checked: Crossref, 2026-10-25}
 }

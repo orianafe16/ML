@@ -315,3 +315,39 @@ Entry format:
   the 811/134 count had been presented as a change from the original labels, and "no nested CV" had
   been supported by a feature-selection quote. The targeted query corrected both.
 - **Human check pending:** the author reads the two quoted pages in the PDFs.
+
+## Stage 7 — Multiclass task, SHAP and causal analysis (2026-10-25)
+
+- **Request of the author:** include the multiclass classification, a SHAP analysis of the winning
+  model(s) with a short discussion with the literature, and the causal analysis in this version, so
+  that it is the complete work; notebooks may be changed and re-run.
+- **Decisions asked to the author** (multiple choice): four histological families (chosen over three
+  classes without mixed gliomas, or the six original diagnoses); SHAP on the winning models; a bounded
+  causal analysis (diagram + mediation through the grade).
+- **What the assistant built:** `src/explain.py`, `src/causal.py`, multiclass support in
+  `src/evaluation.py` (`multiclass_auc`, `multiclass_metrics`, `task="multiclass"` in `nested_cv`) and
+  `src/models.py` (`multiclass_models`); notebooks 06_multiclass, 07_shap and 08_causal; new macros in
+  `report/make_numbers.py`; new text in both reports.
+- **Verification:** `multiclass_metrics` compared with sklearn on random data (identical values);
+  SHAP additivity checked for every model (maximum error ≤ 2e-6); the identity c = c' + ab checked
+  (error < 1e-8); notebook 07 asserts that the refitted models have the hyperparameters saved by 05
+  and 06; notebook 04 re-run: all previous values identical.
+- **Error of the assistant (Bounty candidate) — interpretation of the regression.** In stage 4 the
+  assistant had written that the regression predictions "mostly recover the grade through IDH1, IDH2
+  and ATRX", based on a correlation of 0.71 between predicted age and grade, and the PRDL conclusion of
+  H2 said that "the mutations explain age largely through the grade". The causal analysis estimated
+  that only about a fifth of the IDH–age association goes through the grade, which contradicted that
+  reading. Checking the alternative explanation: the correlation of the predictions with IDH status is
+  −0.93, and within GBM the IDH-mutant patients are predicted about 20 years younger than the
+  IDH-wildtype ones. **Correction:** notebook 04 now reports both correlations and the mean prediction
+  by grade × IDH; the PRDL regression discussion, the conclusion of H2 and DECISIONS.md were rewritten.
+  Lesson: a correlation between a prediction and a variable that was not an input does not show that
+  the model uses that variable, when that variable is correlated with another one.
+- **Errors of the assistant in figures (fixed before delivery):** the SHAP summary plots used the
+  project's sequential palette, whose lowest value is almost white, so non-mutated patients were
+  invisible; a long label overlapped the next panel; a plot title was lower-cased ("macro auc").
+- **Dependency:** `shap` installed without pins pulled the newest numba; pinned shap 0.48.0 with numba
+  0.61.2 and llvmlite 0.44.0, tested with numpy 2.2.6.
+- **Literature still to be checked with NotebookLM:** WHO 2016 on oligoastrocytoma; WHO 2021 on
+  IDH-wildtype diffuse astrocytic gliomas with glioblastoma features; previous feature-importance or
+  SHAP results on these data. Marked `[verify]` in PRDL Section 6.

@@ -118,6 +118,7 @@
 % =====================================================================
 % REFERENCES
 % =====================================================================
+\clearpage
 \section{References}
 \begingroup
 % thebibliography opens its own \section*{References}; it is swallowed here so that
@@ -128,11 +129,15 @@
 \endgroup
 
 \newpage
+\input{sections/appA_ai}
+
+\newpage
 
 % =====================================================================
-% APPENDIX A: ENSEMBLE LEARNING
+% APPENDIX B: ENSEMBLE LEARNING
 % =====================================================================
-\appendixbanner{APPENDIX A: ENSEMBLE LEARNING}
+\appendixbanner{APPENDIX B: ENSEMBLE LEARNING}
+\addcontentsline{toc}{section}{Appendix B: Ensemble learning}
 
 \subsection*{Classical learning paradigms}
 
@@ -314,8 +319,5 @@ to the Deep Learning use case developed in the main sections above.
 paper on stacking are foundational to this topic but were not read directly; they are
 known to us through Mienye and Sun's 2022 survey \cite{mienye2022}, which is cited here
 instead wherever those ideas are discussed.
-
-\newpage
-\input{sections/appB_ai}
 
 \end{document}

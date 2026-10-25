@@ -1,0 +1,187 @@
+{
+  "stage": "08_causal",
+  "timestamp": "2026-10-25T17:28:36",
+  "seed": 42,
+  "n": 839,
+  "n_idh_mut": 427,
+  "n_idh2_only": 23,
+  "covariates": [
+    "Gender",
+    "White"
+  ],
+  "age_by_idh_grade": {
+    "LGG | IDH wildtype": {
+      "count": 85.0,
+      "mean": 54.65894117647059,
+      "std": 12.588740436211566
+    },
+    "LGG | IDH mutant": {
+      "count": 402.0,
+      "mean": 41.59472636815921,
+      "std": 12.251240073616946
+    },
+    "GBM | IDH wildtype": {
+      "count": 327.0,
+      "mean": 62.2237614678899,
+      "std": 12.260946739508446
+    },
+    "GBM | IDH mutant": {
+      "count": 25.0,
+      "mean": 40.821999999999996,
+      "std": 12.307001056309373
+    }
+  },
+  "mean_age_by_idh": {
+    "wildtype": 60.663058252427184,
+    "mutant": 41.54948477751757,
+    "difference": -19.113573474909614
+  },
+  "adjustment_sets": [
+    {
+      "Adjustment set": "Sex, race (total effect)",
+      "IDH coefficient (years)": -19.245035170923632,
+      "CI low": -20.947241429726855,
+      "CI high": -17.54282891212041,
+      "R2": 0.371942631969312,
+      "Predictors": 3
+    },
+    {
+      "Adjustment set": "+ grade (direct effect)",
+      "IDH coefficient (years)": -15.213975422502346,
+      "CI low": -17.839429663839333,
+      "CI high": -12.58852118116536,
+      "R2": 0.385303867145534,
+      "Predictors": 4
+    },
+    {
+      "Adjustment set": "+ histological family",
+      "IDH coefficient (years)": -16.36310617264121,
+      "CI low": -18.96917915212959,
+      "CI high": -13.75703319315283,
+      "R2": 0.40520993637480973,
+      "Predictors": 6
+    },
+    {
+      "Adjustment set": "+ grade + 18 other mutations",
+      "IDH coefficient (years)": -12.627560591140506,
+      "CI low": -16.216757229386232,
+      "CI high": -9.03836395289478,
+      "R2": 0.42767300783741347,
+      "Predictors": 22
+    }
+  ],
+  "direct_model": {
+    "const": {
+      "Coefficient": 54.280011806249405,
+      "CI low": 50.6419783353406,
+      "CI high": 57.91804527715821,
+      "p-value": 5.5181289259978234e-188
+    },
+    "IDH_mut": {
+      "Coefficient": -15.213975422502346,
+      "CI low": -17.839429663839333,
+      "CI high": -12.58852118116536,
+      "p-value": 6.79912724985636e-30
+    },
+    "Gender": {
+      "Coefficient": 0.6683807061568835,
+      "CI low": -1.0611636220952678,
+      "CI high": 2.3979250344090346,
+      "p-value": 0.44879459085286255
+    },
+    "White": {
+      "Coefficient": 1.9789324675549405,
+      "CI low": -0.984241764258249,
+      "CI high": 4.94210669936813,
+      "p-value": 0.190552493838423
+    },
+    "Grade": {
+      "Coefficient": 5.516371120524716,
+      "CI low": 2.8637702424943594,
+      "CI high": 8.168971998555072,
+      "p-value": 4.5825368025533e-05
+    }
+  },
+  "mediation": {
+    "total (c)": {
+      "Estimate": -19.245035170923565,
+      "CI low": -20.957768372620833,
+      "CI high": -17.453830495706434
+    },
+    "IDH -> grade (a)": {
+      "Estimate": -0.7307448430042998,
+      "CI low": -0.7773821123690202,
+      "CI high": -0.6846818626329834
+    },
+    "grade -> age (b)": {
+      "Estimate": 5.5163711205247195,
+      "CI low": 2.8939274240254558,
+      "CI high": 8.340632975367395
+    },
+    "direct (c')": {
+      "Estimate": -15.213975422502346,
+      "CI low": -17.796608086650295,
+      "CI high": -12.374015329376649
+    },
+    "indirect (a*b)": {
+      "Estimate": -4.031059748421289,
+      "CI low": -6.161131658930821,
+      "CI high": -2.0939814858432637
+    },
+    "proportion mediated": {
+      "Estimate": 0.2094597236440301,
+      "CI low": 0.11059914803458339,
+      "CI high": 0.3259268434497371
+    }
+  },
+  "mediation_identity_error": 7.105427357601002e-14,
+  "interaction": {
+    "table": {
+      "const": {
+        "Coefficient": 52.93489699353474,
+        "CI low": 49.23942692252492,
+        "CI high": 56.630367064544565,
+        "p-value": 1.9762172298614998e-173
+      },
+      "IDH_mut": {
+        "Coefficient": -13.201102623373629,
+        "CI low": -16.190113658810567,
+        "CI high": -10.212091587936692,
+        "p-value": 4.874544205363872e-18
+      },
+      "Grade": {
+        "Coefficient": 7.583946008434511,
+        "CI low": 4.556332021509391,
+        "CI high": 10.611559995359631,
+        "p-value": 9.127966038643332e-07
+      },
+      "IDH_x_Grade": {
+        "Coefficient": -8.050588560085668,
+        "CI low": -14.02245292209147,
+        "CI high": -2.0787241980798665,
+        "p-value": 0.008236925314847541
+      },
+      "Gender": {
+        "Coefficient": 0.6213908278777012,
+        "CI low": -1.0986912449460553,
+        "CI high": 2.341472900701458,
+        "p-value": 0.4789143772113804
+      },
+      "White": {
+        "Coefficient": 1.663934354317727,
+        "CI low": -1.3153768508816346,
+        "CI high": 4.643245559517089,
+        "p-value": 0.2736775927126097
+      }
+    },
+    "n_idh_mutant_gbm": 25
+  },
+  "findings": {
+    "Total effect of IDH on age (sex, race adjusted)": "-19.2 years [-21.0, -17.5]",
+    "Direct effect (grade adjusted)": "-15.2 years [-17.8, -12.4]",
+    "Indirect effect through the grade": "-4.0 years [-6.2, -2.1]",
+    "Proportion mediated": "0.21 [0.11, 0.33]",
+    "Adjusting also for the histological family": "-16.4 years",
+    "IDH x grade interaction": "-8.1 years [-14.0, -2.1], 25 IDH-mutant GBM"
+  }
+}

@@ -11,7 +11,7 @@ can be defended orally. Decisions taken in later stages are appended to the corr
 | `Project` and `Primary_Diagnosis` excluded as predictors of `Grade` | `Project` (TCGA-LGG / TCGA-GBM) is the target under another name, and the histological diagnosis determines the grade: using them is target leakage | Leakage example in EDA_for_Extreme_OSA_Classification_Opus5_5.ipynb (section 12, `IAH` added as a predictor of `OSA`) |
 | Regression target: `Age_at_diagnosis`; `Grade` not used as a predictor | Age is the only continuous variable; excluding `Grade` keeps the regression a question about clinical and mutation features only | Decision of the author |
 | Unsupervised analysis (PCA, MDS with Jaccard, k-means, hierarchical) inside the EDA | Clustering may be included as part of the EDA section | PRDL_MLLB_summary_23_10_2026.txt (Chap10, Clustering) |
-| Multiclass `Primary_Diagnosis` and causal analysis postponed to January | Scope of the 1 November draft | Decision of the author |
+| Multiclass task, SHAP and causal analysis included in the 1 November version | The draft is meant to be the complete work, changed afterwards only with the instructors' feedback | Decision of the author (25 October) |
 
 ## Stage 1 — Data preparation
 
@@ -78,7 +78,7 @@ can be defended orally. Decisions taken in later stages are appended to the corr
 | Residual diagnostics: residuals vs fitted, Q–Q, scale-location, Cook's distance, Breusch–Pagan, Shapiro | The six "potential problems" of Chapter 3 | Chap3 |
 | One patient with leverage 1 (the only American Indian / Alaska Native) reported and excluded from the diagnostic plots | Its fit is exact, so Cook's distance is undefined (0/0); keeping the category keeps the same predictors as the CV models | Chap3 (high-leverage points) |
 | Permutation importance on the outer test folds | Importance on unseen patients, comparable between models | — |
-| Out-of-fold predictions coloured by grade (not an input) | Shows that the models mostly recover the grade through IDH1/IDH2/ATRX | — |
+| Out-of-fold predictions coloured by grade (not an input), with their correlation with both the grade and the IDH status | The predictions follow the IDH status much more closely than the grade; a first reading that attributed them to the grade was corrected (AI_USAGE_LOG, stage 7) | — |
 
 ## Stage 5 — Classification (LGG vs GBM)
 
@@ -97,6 +97,35 @@ can be defended orally. Decisions taken in later stages are appended to the corr
 | Logistic coefficients read from the penalised final model, no unpenalised p-values | Mutations present only in LGG (e.g. NOTCH1) cause quasi-complete separation, with infinite maximum-likelihood coefficients | Notebook 02, section 4.2 |
 | Flatness of the final inner-CV surface reported | Explains why the final hyperparameters may differ from those chosen in the outer folds | — |
 | Tree nodes recoloured with the project colours | sklearn's default paints class 0 (LGG) orange, the opposite of the project convention | — |
+
+## Stage 5b — Multiclass classification (histological family)
+
+| Decision | Justification | Source |
+|---|---|---|
+| Four classes: Astrocytoma (NOS + anaplastic), Mixed glioma, Oligodendroglioma (NOS + anaplastic), Glioblastoma | NOS and anaplastic differ in grade (2 vs 3), which point mutations can hardly resolve; the family is what mutations can inform. Mixed glioma kept as a class to test whether it is separable | Decision of the author (25 October) |
+| `Grade` and `Project` excluded as predictors | Glioblastoma = GBM and every other family = LGG: the grade would give one class away | Same leakage reasoning as stage 5 |
+| Macro one-vs-one AUC (Hand–Till) as inner criterion and main metric; balanced accuracy and macro F1 as secondary | Threshold-free and insensitive to class proportions (Glioblastoma is 42% of the patients); balanced accuracy gives each family the same weight | Hand and Till (2001); Chap4 (multiclass logistic regression, softmax) |
+| Models: multinomial logistic regression (saga, L1/L2), pruned tree, random forest, XGBoost; same grids as stage 5 | Direct multiclass extensions; Naive Bayes (worst calibrated) and SVM (one model per pair of classes with Platt scaling, costly in nested CV) not repeated | Chap4 (multinomial regression), Chap8 |
+| Recompute the k = 3 clusters of notebook 03 and cross-tabulate them with the families | Tests whether the unsupervised structure corresponds to the histological families | Notebook 03 |
+
+## Stage 5c — SHAP values
+
+| Decision | Justification | Source |
+|---|---|---|
+| Explain the winning models only (best + those whose paired AUC difference includes 0) | Explaining models that perform worse adds nothing; the tied models may use the data differently | Decision of the author ("winning models, with a short discussion with the literature") |
+| TreeSHAP (random forest, tree, XGBoost) and linear SHAP (logistic regression), via the `shap` library | Exact values for these model types; the additivity of every explanation is checked in the notebook | Lundberg and Lee (2017); Lundberg et al. (2020) |
+| Compare models by the share of mean \|SHAP\| and by ranking, not raw values | Units differ (probability for forests, log-odds for XGBoost and logistic regression) | — |
+| SHAP computed on the final models (all patients), compared with permutation importance computed on held-out folds | SHAP describes how the model uses the inputs; performance claims stay with the held-out estimates | — |
+
+## Stage 5d — Causal analysis
+
+| Decision | Justification | Source |
+|---|---|---|
+| Question: how much of the IDH–age association goes through the grade (mediation) | Turns the reading of the regression (H2) into an explicit causal question | PRDL_MLLB_summary_25_9_2026.txt ("link these ideas with a causal analysis"; *The Effect*, chapters 6 and 13) |
+| Exposure IDH mutation = IDH1 or IDH2 | The WHO classification uses IDH-mutant status (either gene) | WHO 2021 (louis2021) |
+| Covariates sex and race (white vs other) | Fixed before the tumour arises, so they can only be confounders; the small race categories would give leverage-1 patients | Notebook 04 (leverage problem) |
+| Product-of-coefficients decomposition with OLS, HC3 intervals and 2000 bootstrap resamples | Exact identity c = c' + ab for OLS; residuals are heteroscedastic (notebook 04) | Baron and Kenny (1986); MacKinnon et al. (1995); Hayes and Cai (2007) |
+| Report several adjustment sets and the IDH × grade interaction | Shows that the estimate depends on what is adjusted for, and tests the no-interaction assumption | *The Effect*, chapter 13 |
 
 ## Stage 6 — Reports
 

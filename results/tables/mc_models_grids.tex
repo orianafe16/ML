@@ -1,0 +1,11 @@
+\begin{tabular}{lp{10.5cm}r}
+\toprule
+\textbf{Model} & \textbf{Hyperparameters searched} & \textbf{Configurations} \\
+\midrule
+Prior baseline & none & 1 \\
+Logistic regression & penalty in [l1, l2], C in [0.001, 0.003162, 0.01, 0.03162, 0.1, 0.3162, 1, 3.162, 10, 31.62, 100] & 22 \\
+Decision tree (pruned) & ccp\_alpha in [0, 0.001, 0.002, 0.005, 0.01, 0.02, 0.05], criterion in [gini, entropy] & 14 \\
+Random forest & max\_features in [sqrt, 0.33, 0.66], min\_samples\_leaf in [1, 5, 10, 20] & 12 \\
+XGBoost & n\_estimators in [100, 300], learning\_rate in [0.03, 0.1], max\_depth in [2, 3, 5] & 12 \\
+\bottomrule
+\end{tabular}

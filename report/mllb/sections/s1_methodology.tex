@@ -16,14 +16,14 @@ guidelines, each enforced by the code rather than by convention:
         previous stages, fixes the seed (42) for every random process, and writes its results to
         \texttt{results/}: figures, \LaTeX{} tables and a JSON summary per stage. Both reports are built
         from these files: every number in the text is a macro generated from the JSON summaries by
-        \texttt{report/make\_numbers.py}, so no number is typed by hand.
+        \texttt{report/\allowbreak{}make\_\allowbreak{}numbers.\allowbreak{}py}, so no number is typed by hand.
   \item \textbf{Leakage prevention by construction.} Columns that encode the target (TCGA project,
         histological diagnosis) are excluded from the predictor lists in \texttt{src/data.py}, and the
         classification notebook stops if one of them appears. All preprocessing that learns from the
         data (standardisation, one-hot encoding, discretisation) is a step of a scikit-learn
         \texttt{Pipeline}, so it is refitted on every training fold \cite{kaufman2012}.
   \item \textbf{Nested cross-validation for every supervised model} (scheme of the course notebook
-        \texttt{Example\_ExtrOSA\_ModelTuning\_NestedLoop}): 10 outer folds for evaluation and 3 inner
+        \texttt{Example\_\allowbreak{}ExtrOSA\_\allowbreak{}ModelTuning\_\allowbreak{}NestedLoop}): 10 outer folds for evaluation and 3 inner
         folds for \texttt{GridSearchCV}, stratified for classification
         (Figure~\ref{fig:mllb-nested}).
   \item \textbf{Evaluation against a baseline, with uncertainty.} Out-of-fold predictions for every
@@ -31,7 +31,7 @@ guidelines, each enforced by the code rather than by convention:
         overlap, and a paired bootstrap of the difference complements the comparison.
   \item \textbf{Verification of AI-generated code.} Every notebook was executed in a clean copy of
         the repository before delivery, every figure was inspected, and the run on the author's
-        computer was compared value by value with that run (Appendix B).
+        computer was compared value by value with that run (Appendix A).
 \end{enumerate}
 
 \begin{figure}[H]
@@ -49,7 +49,7 @@ metrics and bootstrap intervals on the \NClean{} out-of-fold predictions\\
 final model for interpretation: the same grid search applied once to all patients\\
 \hline
 \end{tabular}
-\caption{Nested cross-validation as implemented in \texttt{src/evaluation.py} (\texttt{nested\_cv},
+\caption{Nested cross-validation as implemented in \texttt{src/\allowbreak{}evaluation.\allowbreak{}py} (\texttt{nested\_cv},
 \texttt{fit\_final}).}
 \label{fig:mllb-nested}
 \end{figure}
@@ -57,7 +57,7 @@ final model for interpretation: the same grid search applied once to all patient
 \subsection{Tools to develop Machine Learning models}
 
 Table~\ref{tab:mllb-tools} lists the software. The environment is created with Anaconda from
-\texttt{environment.yml} (Python 3.11); all libraries are pinned in \texttt{requirements.txt} with
+\texttt{environment.yml} (Python 3.11); all libraries are pinned in \texttt{requirements.\allowbreak{}txt} with
 exact versions that were installed and tested together; the script \texttt{check\_env.py} verifies them
 and writes the result to the
 \texttt{results/logs/} folder. Notebooks were run in Visual Studio Code with a
@@ -66,7 +66,7 @@ dedicated Jupyter kernel; the code is versioned with git and published on GitHub
 
 \begin{table}[H]
 \centering
-\caption{Software used. Versions are those pinned in \texttt{requirements.txt}.}
+\caption{Software used. Versions are those pinned in \texttt{requirements.\allowbreak{}txt}.}
 \label{tab:mllb-tools}
 \begin{tabularx}{\textwidth}{l l X}
 \toprule
@@ -79,10 +79,11 @@ SciPy \cite{virtanen2020} & 1.15.3 & Statistical tests, hierarchical clustering 
 scikit-learn \cite{pedregosa2011} & 1.6.1 & Pipelines, models, cross-validation, PCA, MDS, t-SNE, $k$-means \\
 XGBoost \cite{chen2016} & 2.1.4 & Gradient boosting \\
 statsmodels \cite{seabold2010} & 0.14.4 & OLS inference, VIF, influence measures, multiple testing \\
+SHAP \cite{lundberg2017} & 0.48.0 & SHAP values of the winning models (TreeSHAP, linear) \\
 Matplotlib \cite{hunter2007} / seaborn \cite{waskom2021} & 3.10.3 / 0.13.2 & Figures \\
 Jupyter (ipykernel, nbconvert) & 6.29.5 / 7.16.6 & Notebooks and their execution \\
 Anaconda, VS Code, git/GitHub & -- & Environment, editor, version control \\
-Claude (Anthropic) & -- & AI code assistant (Appendix B) \\
+Claude (Anthropic) & -- & AI code assistant (Appendix A) \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -92,5 +93,6 @@ is used everywhere and can be read on its own during the defense:
 \texttt{config.py} (paths, seed, validation settings), \texttt{data.py} (cleaning, encoding, feature
 sets), \texttt{eda.py} (tests and effect sizes), \texttt{unsupervised.py}, \texttt{pipelines.py}
 (preprocessing), \texttt{models.py} (pipelines and grids), \texttt{evaluation.py} (nested CV, metrics,
-bootstrap, comparisons), \texttt{plotting.py} (style and fixed colours: LGG blue, GBM orange in every
+bootstrap, comparisons), \texttt{explain.py} (SHAP values and plots), \texttt{causal.py} (mediation
+decomposition, robust OLS, causal diagram), \texttt{plotting.py} (style and fixed colours: LGG blue, GBM orange in every
 figure) and \texttt{reporting.py} (\LaTeX{} tables and JSON summaries).

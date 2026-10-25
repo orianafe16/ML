@@ -1,0 +1,300 @@
+{
+  "stage": "07_shap",
+  "timestamp": "2026-10-25T17:28:31",
+  "seed": 42,
+  "winners_binary": [
+    "Random forest",
+    "Logistic regression",
+    "XGBoost"
+  ],
+  "winners_multiclass": [
+    "Random forest",
+    "Logistic regression",
+    "XGBoost"
+  ],
+  "binary_check": [
+    {
+      "Model": "Random forest",
+      "Hyperparameters": "{'max_features': 'sqrt', 'min_samples_leaf': 5}",
+      "Units": "probability",
+      "Base value": 0.42214938418752496,
+      "Max additivity error": 1.2836953722228372e-15
+    },
+    {
+      "Model": "Logistic regression",
+      "Hyperparameters": "{'C': 100.0, 'penalty': 'l1'}",
+      "Units": "log-odds",
+      "Base value": -1.1421612861752202,
+      "Max additivity error": 3.552713678800501e-15
+    },
+    {
+      "Model": "XGBoost",
+      "Hyperparameters": "{'learning_rate': 0.03, 'max_depth': 5, 'n_estimators': 100}",
+      "Units": "log-odds",
+      "Base value": -0.3289616107940674,
+      "Max additivity error": 1.6689300537109375e-06
+    }
+  ],
+  "binary_shap_share": {
+    "Gender": {
+      "Random forest": 0.007836840048954446,
+      "Logistic regression": 0.018478920132463748,
+      "XGBoost": 0.004507069941610098
+    },
+    "Age_at_diagnosis": {
+      "Random forest": 0.1705262775021641,
+      "Logistic regression": 0.09062509889611862,
+      "XGBoost": 0.11548358201980591
+    },
+    "Race": {
+      "Random forest": 0.017528605555239,
+      "Logistic regression": 0.01987480331982337,
+      "XGBoost": 0.01906849630177021
+    },
+    "IDH1": {
+      "Random forest": 0.4623922832946065,
+      "Logistic regression": 0.360113301784628,
+      "XGBoost": 0.5957889556884766
+    },
+    "TP53": {
+      "Random forest": 0.01719406676575058,
+      "Logistic regression": 0.09120236834623721,
+      "XGBoost": 0.10629968345165253
+    },
+    "ATRX": {
+      "Random forest": 0.05641473553017472,
+      "Logistic regression": 0.014050836162801344,
+      "XGBoost": 0.011075885035097599
+    },
+    "PTEN": {
+      "Random forest": 0.08646475326909688,
+      "Logistic regression": 0.030341566891620226,
+      "XGBoost": 0.024244319647550583
+    },
+    "EGFR": {
+      "Random forest": 0.019421361373444978,
+      "Logistic regression": 0.021261158714235354,
+      "XGBoost": 0.020832041278481483
+    },
+    "CIC": {
+      "Random forest": 0.06004210225364648,
+      "Logistic regression": 0.02926014392650517,
+      "XGBoost": 0.00045921129640191793
+    },
+    "MUC16": {
+      "Random forest": 0.016081109105592514,
+      "Logistic regression": 0.019350804495742314,
+      "XGBoost": 0.01425215508788824
+    },
+    "PIK3CA": {
+      "Random forest": 0.003201127423057985,
+      "Logistic regression": 0.003809104397687131,
+      "XGBoost": 0.007027896121144295
+    },
+    "NF1": {
+      "Random forest": 0.010787095052329453,
+      "Logistic regression": 0.024441440480861484,
+      "XGBoost": 0.02581755630671978
+    },
+    "PIK3R1": {
+      "Random forest": 0.006125459021798569,
+      "Logistic regression": 0.023134655664092296,
+      "XGBoost": 0.0082161920145154
+    },
+    "FUBP1": {
+      "Random forest": 0.013103263966737196,
+      "Logistic regression": 0.0012891738424284606,
+      "XGBoost": 0.0
+    },
+    "RB1": {
+      "Random forest": 0.01271651500901779,
+      "Logistic regression": 0.008557638151876715,
+      "XGBoost": 0.002311678836122155
+    },
+    "NOTCH1": {
+      "Random forest": 0.009547738264578203,
+      "Logistic regression": 0.1384734372946699,
+      "XGBoost": 0.0
+    },
+    "BCOR": {
+      "Random forest": 0.0006230707531156435,
+      "Logistic regression": 0.002988413832734315,
+      "XGBoost": 9.599579789210111e-05
+    },
+    "CSMD3": {
+      "Random forest": 0.0010329149601063339,
+      "Logistic regression": 0.01259721702335967,
+      "XGBoost": 0.0
+    },
+    "SMARCA4": {
+      "Random forest": 0.0024735042598543976,
+      "Logistic regression": 0.012231686068766517,
+      "XGBoost": 0.0002320548373972997
+    },
+    "GRIN2A": {
+      "Random forest": 0.0034868943480521877,
+      "Logistic regression": 0.01992239850155804,
+      "XGBoost": 0.0040141199715435505
+    },
+    "IDH2": {
+      "Random forest": 0.020608723617432843,
+      "Logistic regression": 0.04844970357980675,
+      "XGBoost": 0.04027308151125908
+    },
+    "FAT4": {
+      "Random forest": 0.0006158174121475819,
+      "Logistic regression": 0.004431533871422236,
+      "XGBoost": 0.0
+    },
+    "PDGFRA": {
+      "Random forest": 0.0017757412131015314,
+      "Logistic regression": 0.005114594620561012,
+      "XGBoost": 0.0
+    }
+  },
+  "binary_agreement": [
+    {
+      "Model": "Random forest",
+      "Spearman rho (SHAP vs permutation)": 0.8468379446640316,
+      "Top 3 SHAP": "IDH1, Age_at_diagnosis, PTEN",
+      "Top 3 permutation": "IDH1, Age_at_diagnosis, ATRX"
+    },
+    {
+      "Model": "Logistic regression",
+      "Spearman rho (SHAP vs permutation)": 0.7885375494071146,
+      "Top 3 SHAP": "IDH1, NOTCH1, TP53",
+      "Top 3 permutation": "IDH1, NOTCH1, Age_at_diagnosis"
+    },
+    {
+      "Model": "XGBoost",
+      "Spearman rho (SHAP vs permutation)": 0.6782605952076238,
+      "Top 3 SHAP": "IDH1, Age_at_diagnosis, TP53",
+      "Top 3 permutation": "IDH1, Age_at_diagnosis, TP53"
+    }
+  ],
+  "age_dependence": {
+    "Random forest": {
+      "age where contribution becomes positive": 50.04,
+      "range of the contribution": [
+        -0.18552729089029585,
+        0.1901400487873549
+      ]
+    },
+    "Logistic regression": {
+      "age where contribution becomes positive": 52.53,
+      "range of the contribution": [
+        -1.487326016969309,
+        1.4328233231286138
+      ]
+    },
+    "XGBoost": {
+      "age where contribution becomes positive": 52.43,
+      "range of the contribution": [
+        -1.0696067810058594,
+        1.7569546699523926
+      ]
+    }
+  },
+  "multiclass": {
+    "model": "Random forest",
+    "params": {
+      "max_features": "sqrt",
+      "min_samples_leaf": 5
+    },
+    "units": "probability",
+    "additivity_error": 2.55351295663786e-15,
+    "share_by_class": {
+      "IDH1": {
+        "Astrocytoma": 0.21416232139262717,
+        "Mixed glioma": 0.43035833610743457,
+        "Oligodendroglioma": 0.3215036700717246,
+        "Glioblastoma": 0.45886783655117447
+      },
+      "Age_at_diagnosis": {
+        "Astrocytoma": 0.1966496044538146,
+        "Mixed glioma": 0.1695042893990467,
+        "Oligodendroglioma": 0.04645718251513536,
+        "Glioblastoma": 0.17055462806627308
+      },
+      "CIC": {
+        "Astrocytoma": 0.12399785851664857,
+        "Mixed glioma": 0.03383884721945622,
+        "Oligodendroglioma": 0.2015596375806389,
+        "Glioblastoma": 0.0739384515455256
+      },
+      "ATRX": {
+        "Astrocytoma": 0.12579826535570024,
+        "Mixed glioma": 0.12326370896240087,
+        "Oligodendroglioma": 0.061044255193016594,
+        "Glioblastoma": 0.06448350106647237
+      },
+      "TP53": {
+        "Astrocytoma": 0.15282665268109105,
+        "Mixed glioma": 0.018191960426766813,
+        "Oligodendroglioma": 0.13594795845251706,
+        "Glioblastoma": 0.01503286896181316
+      },
+      "PTEN": {
+        "Astrocytoma": 0.03018823742165168,
+        "Mixed glioma": 0.07066293888019479,
+        "Oligodendroglioma": 0.06260692221573994,
+        "Glioblastoma": 0.0783159363144739
+      },
+      "IDH2": {
+        "Astrocytoma": 0.011010334837111554,
+        "Mixed glioma": 0.01636625277775656,
+        "Oligodendroglioma": 0.033011272756928584,
+        "Glioblastoma": 0.021430319996272824
+      },
+      "FUBP1": {
+        "Astrocytoma": 0.021515899403583044,
+        "Mixed glioma": 0.005584252926336956,
+        "Oligodendroglioma": 0.03941433516133313,
+        "Glioblastoma": 0.015442241404389344
+      },
+      "EGFR": {
+        "Astrocytoma": 0.020373502919975507,
+        "Mixed glioma": 0.01758093111000864,
+        "Oligodendroglioma": 0.016466541576642773,
+        "Glioblastoma": 0.016418576075538614
+      },
+      "MUC16": {
+        "Astrocytoma": 0.01428597311744877,
+        "Mixed glioma": 0.013722628122561056,
+        "Oligodendroglioma": 0.007628759605709247,
+        "Glioblastoma": 0.01577708072693553
+      }
+    },
+    "top_by_class": {
+      "Astrocytoma": [
+        "IDH1",
+        "Age_at_diagnosis",
+        "TP53"
+      ],
+      "Mixed glioma": [
+        "IDH1",
+        "Age_at_diagnosis",
+        "ATRX"
+      ],
+      "Oligodendroglioma": [
+        "IDH1",
+        "CIC",
+        "TP53"
+      ],
+      "Glioblastoma": [
+        "IDH1",
+        "Age_at_diagnosis",
+        "PTEN"
+      ]
+    }
+  },
+  "findings": {
+    "Binary winners explained": "Random forest, Logistic regression, XGBoost",
+    "Additivity (max error)": "Random forest: 1.3e-15, Logistic regression: 3.6e-15, XGBoost: 1.7e-06",
+    "Agreement SHAP vs permutation (Spearman rho)": "Random forest: 0.85, Logistic regression: 0.79, XGBoost: 0.68",
+    "Top 3 inputs by SHAP": "Random forest: IDH1, Age_at_diagnosis, PTEN; Logistic regression: IDH1, NOTCH1, TP53; XGBoost: IDH1, Age_at_diagnosis, TP53",
+    "Age: contribution becomes positive at": "Random forest: 50.0 y, Logistic regression: 52.5 y, XGBoost: 52.4 y",
+    "Multiclass model explained": "Random forest (probability)",
+    "Top 3 inputs per family": "Astrocytoma: IDH1, Age_at_diagnosis, TP53; Mixed glioma: IDH1, Age_at_diagnosis, ATRX; Oligodendroglioma: IDH1, CIC, TP53; Glioblastoma: IDH1, Age_at_diagnosis, PTEN"
+  }
+}
