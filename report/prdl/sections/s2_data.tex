@@ -18,16 +18,20 @@ of Section~\ref{sec:prdl-results}:
 \begin{itemize}
   \item \textbf{Labels from older criteria.} The cohorts were collected over many years
         (TCGA-GBM between 1989 and 2011, with 76\% of patients diagnosed in or after 2002
-        \cite{zakharova2023}) and graded before the 2021 WHO classification. When TCGA glioma
-        profiles were reclassified with the 2021 criteria, 134 cases changed class while 811
-        kept it\todoverify{identify 42.pdf and cite it here; the figures were quoted from that file}.
-        The grade used here as ground truth is therefore partly outdated: some tumours labelled LGG
-        would now be glioblastomas, and vice versa.
-  \item \textbf{Point mutations only.} Several markers that the 2021 classification uses to define
-        the grade, such as the 1p/19q codeletion, CDKN2A/B homozygous deletion, EGFR amplification
-        or the +7/$-$10 signature \cite{sahm2023}\todoverify{quote from 01.pdf that WHO 2021 uses these markers for grading}, are copy-number or promoter alterations that are
-        not in the dataset. A model can only approximate them through correlated mutations (for
-        example CIC and FUBP1 for 1p/19q\todoverify{source for the link of CIC/FUBP1 with 1p/19q, e.g. 37.pdf or  09.pdf}).
+        \cite{zakharova2023}) and graded before the 2021 WHO classification. TCGA glioma profiles
+        have since been re-annotated following the 2021 criteria \cite{zakharova2023,leiriademendonca2025}%
+        \todoverify{quote from 41.pdf or 42.pdf stating how many TCGA cases change category when the
+        original labels are replaced by WHO 2021 labels}.
+        The grade used here as ground truth is therefore partly outdated: under the current criteria,
+        some tumours labelled LGG would be classified differently.
+  \item \textbf{Point mutations only.} Several markers that now define the type or the grade are
+        copy-number or promoter alterations absent from the dataset: the 1p/19q codeletion
+        (oligodendroglioma) \cite{louis2021}; the homozygous deletion of CDKN2A/B, ``a molecular marker
+        of WHO grade 4 in IDH-mutant astrocytomas''; and the TERT promoter mutation, EGFR amplification
+        or the +7/$-$10 signature, which define glioblastoma \cite{weller2021}. These alterations are
+        detected with copy-number assays such as FISH \cite{sahm2023}. A model can only approximate them
+        through correlated point mutations: in the TCGA lower-grade gliomas, the 1p/19q-codeleted tumours
+        ``harbored mutations in CIC, FUBP1, NOTCH1, and the TERT promoter'' \cite{tcga2015lgg}.
   \item \textbf{A homogeneous cohort.} \PctWhite\% of the patients are white (\NWhite{} of
         \NClean); only \NBlack{} are Black or African American, \NAsian{} Asian and \NNative{}
         American Indian or Alaska Native. Any conclusion about race, and the transfer of the models

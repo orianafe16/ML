@@ -1,7 +1,7 @@
 {
-  "n_entries": 49,
-  "n_with_doi": 38,
-  "n_ok": 29,
+  "n_entries": 51,
+  "n_with_doi": 40,
+  "n_ok": 33,
   "to_check": [
     {
       "key": "tasci2022dataset",
@@ -35,18 +35,6 @@
       "ok": false
     },
     {
-      "key": "sahm2023",
-      "doi": "10.1093/neuonc/noad108",
-      "found": true,
-      "crossref_title": "Chimeric antigen receptor T cell-based targeting of CD317 as a novel immunotherapeutic strategy against glioblastoma",
-      "crossref_year": 2023,
-      "crossref_first_author": "Hänsch",
-      "title_similarity": 0.218,
-      "year_matches": true,
-      "first_author_matches": false,
-      "ok": false
-    },
-    {
       "key": "weller2021",
       "doi": "10.1038/s41571-020-00447-z",
       "found": true,
@@ -67,18 +55,6 @@
       "crossref_first_author": "Kaufman",
       "title_similarity": 0.53,
       "year_matches": true,
-      "first_author_matches": true,
-      "ok": false
-    },
-    {
-      "key": "efron1993",
-      "doi": "10.1201/9780429246593",
-      "found": true,
-      "crossref_title": "An Introduction to the Bootstrap",
-      "crossref_year": 1994,
-      "crossref_first_author": "Efron",
-      "title_similarity": 1.0,
-      "year_matches": false,
       "first_author_matches": true,
       "ok": false
     },
@@ -177,6 +153,30 @@
       "ok": false
     },
     {
+      "key": "leiriademendonca2025",
+      "doi": "10.1038/s41597-025-05117-2",
+      "found": true,
+      "crossref_title": "Updating TCGA glioma classification through integration of molecular data following the latest WHO guidelines",
+      "crossref_year": 2025,
+      "crossref_first_author": "de Mendonça",
+      "title_similarity": 1.0,
+      "year_matches": true,
+      "first_author_matches": false,
+      "ok": true
+    },
+    {
+      "key": "ostrom2021",
+      "doi": "10.1093/neuonc/noab200",
+      "found": true,
+      "crossref_title": "CBTRUS Statistical Report: Primary Brain and Other Central Nervous System Tumors Diagnosed in the United States in 2014–2018",
+      "crossref_year": 2021,
+      "crossref_first_author": "Ostrom",
+      "title_similarity": 0.988,
+      "year_matches": true,
+      "first_author_matches": true,
+      "ok": true
+    },
+    {
       "key": "louis2021",
       "doi": "10.1093/neuonc/noab106",
       "found": true,
@@ -214,15 +214,15 @@
     },
     {
       "key": "sahm2023",
-      "doi": "10.1093/neuonc/noad108",
+      "doi": "10.1093/neuonc/noad100",
       "found": true,
-      "crossref_title": "Chimeric antigen receptor T cell-based targeting of CD317 as a novel immunotherapeutic strategy against glioblastoma",
+      "crossref_title": "Molecular diagnostic tools for the World Health Organization (WHO) 2021 classification of gliomas, glioneuronal and neuronal tumors; an EANO guideline",
       "crossref_year": 2023,
-      "crossref_first_author": "Hänsch",
-      "title_similarity": 0.218,
+      "crossref_first_author": "Sahm",
+      "title_similarity": 1.0,
       "year_matches": true,
-      "first_author_matches": false,
-      "ok": false
+      "first_author_matches": true,
+      "ok": true
     },
     {
       "key": "weller2021",
@@ -364,9 +364,9 @@
       "crossref_year": 1994,
       "crossref_first_author": "Efron",
       "title_similarity": 1.0,
-      "year_matches": false,
+      "year_matches": true,
       "first_author_matches": true,
-      "ok": false
+      "ok": true
     },
     {
       "key": "albert1984",

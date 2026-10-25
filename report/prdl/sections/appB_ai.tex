@@ -36,6 +36,14 @@ The author checks each tagged claim against the PDF before the final version.
         publication by both tools; it was removed from the TCGA sources.
   \item \textbf{Outdated notion of time.} NotebookLM flagged a 2025 publication year as ``a future
         publication year'', although the inventory was made in October 2026.
+  \item \textbf{Wrong DOI.} NotebookLM gave 10.1093/neuonc/noad108 for the EANO guideline on molecular
+        diagnostic tools; a Crossref check of all DOIs (script \texttt{report/check\_references.py})
+        showed that it belongs to an unrelated article on CAR-T cells, and the correct DOI
+        (noad100) was confirmed on the EANO website \cite{sahm2023}. The same check corrected the title
+        that NotebookLM gave for \cite{varma2006}.
+  \item \textbf{One paper, two identities.} Two uploaded files shared the same DOI; the inventory gave
+        one of them a different title and garbled authors, so it was discarded as unreliable, while
+        the other was correctly identified later \cite{leiriademendonca2025}.
   \item \textbf{Statements broader than their quotes.} Several extracted statements contained numbers
         or claims absent from the supporting quote (for example, glioblastoma incidence and survival
         figures attributed to a file whose quote only gave lower-grade glioma survival). Only the

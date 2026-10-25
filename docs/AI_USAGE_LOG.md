@@ -259,3 +259,39 @@ Entry format:
 - **Errors of the AI found while compiling (fixed):** generated tables printed `$\pm$` literally
   (escaping bug in `src/reporting.py`); several wide tables overflowed the margin; long `\texttt`
   paths ran into the margin.
+
+## Stage 6 — Reference check with Crossref (2026-10-25)
+
+- **Tool:** `report/check_references.py` (written by the AI, run by the author: the AI's
+  environment cannot reach the Crossref API).
+- **Result:** 29 of 38 DOIs matched title and year. Of the 9 flagged: tasci2022dataset is a DataCite
+  DOI (404 in Crossref, verified on the UCI page); zakharova2023, weller2021 and efron1993 differ only
+  in the year (online vs print / reprint; efron1993 changed to 1994 to match its DOI); yan2009,
+  kaufman2012, james2021 and chen2016 differ only in title formatting (italics, subtitle).
+- **Real errors found:**
+  1. **sahm2023 had a wrong DOI** (10.1093/neuonc/noad108, given by NotebookLM from 17.pdf): Crossref
+     resolves it to an unrelated article on CAR-T cells targeting CD317 in glioblastoma. Correct DOI
+     10.1093/neuonc/noad100, verified on the EANO guideline page. **Bounty candidate:** strong — a
+     wrong DOI would have pointed every reader to another paper.
+  2. **varma2006 title:** NotebookLM gave "Estimating Error Rates in Genomic Data Analysis: Nested
+     Cross-Validation Versus Standard Cross-Validation"; Crossref confirms "Bias in error estimation
+     when using cross-validation for model selection".
+
+## Stage 6 — Closing [verify] items with NotebookLM quotes (2026-10-25)
+
+- **Prompt:** one item per open claim; file, page and verbatim quote (max 30 words) or "no source".
+- **Used as quoted:** WHO 2021 three adult-type diffuse glioma types and grades (01.pdf); grade-4
+  markers CDKN2A/B, TERT, EGFR amplification, +7/−10 (05.pdf, EANO 2021); glioblastoma 14.3 % of
+  primary CNS tumours, median age 65, 5-year survival 6.8 % (04.pdf, CBTRUS 2014–2018, US data);
+  treatment "predicated on tumor grade" (19.pdf); CIC/FUBP1/NOTCH1 in codeleted and TP53 (94 %) /
+  ATRX (86 %) in non-codeleted IDH-mutant gliomas (09.pdf); hyperparameters of 21.pdf tuned on an
+  80–20 stratified holdout (21.pdf).
+- **Not used as stated by NotebookLM:**
+  - 42.pdf: the quote "811 samples ... maintained consistent classification across both methods,
+    while 134 cases ... changed" compares two methods; it is not clear that it compares the original
+    TCGA labels with WHO 2021 labels, so the numbers were removed from the text (still [verify]).
+  - "Neither paper performed nested CV" for 19.pdf: the supporting quote is about feature selection,
+    not hyperparameters; left as [verify].
+- **New finding:** 42.pdf (Leiria de Mendonça et al., Sci Data 2025) has the same DOI that the
+  inventory attributed to 43.pdf with a different title ("MONET") and garbled authors: 43.pdf was
+  probably a second copy whose metadata NotebookLM misread.

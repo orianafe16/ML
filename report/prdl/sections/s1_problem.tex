@@ -5,21 +5,21 @@
 
 \subsection{Problem description}
 
-Diffuse gliomas are primary tumours of the central nervous system whose grade guides prognosis
-and treatment\todoverify{add a source, e.g. the EANO guideline (05.pdf)}. For decades they were
-graded from histology alone, but the histological classification of
+Diffuse gliomas are primary tumours of the central nervous system, and their standard-of-care
+treatment ``is predicated on tumor grade'' \cite{tasci2022}. For decades they were graded from
+histology alone, but the histological classification of
 lower-grade gliomas ``suffers from high intraobserver and interobserver variability and does not
 adequately predict clinical outcomes'' \cite{tcga2015lgg}. The 2016 and 2021 World Health
 Organization (WHO) classifications therefore integrate molecular markers with histology
-\cite{louis2016,louis2021}: in the 2021 scheme, adult-type diffuse gliomas are divided into
+\cite{louis2016,louis2021}: in the 2021 scheme, the common adult-type diffuse gliomas comprise ``only 3 types'':
 astrocytoma, IDH-mutant (CNS WHO grades 2--4), oligodendroglioma, IDH-mutant and
-1p/19q-codeleted, and glioblastoma, IDH-wildtype (grade 4) \cite{louis2021}%
-\todoverify{confirm this sentence against 01.pdf (NotebookLM quoted it from 42.pdf)}.
+1p/19q-codeleted (grades 2--3), and glioblastoma, IDH-wildtype (grade 4) \cite{louis2021}.
 The grade matters because prognosis differs widely: in the TCGA lower-grade glioma cohort,
 patients with an IDH mutation and 1p/19q codeletion had a median survival of 8.0 years, and those
-with an IDH mutation without codeletion of 6.3 years \cite{tcga2015lgg}, whereas glioblastoma is the
-most aggressive form\todoverify{add incidence and survival of glioblastoma with a quoted source,
-e.g. the CBTRUS report}.
+with an IDH mutation without codeletion of 6.3 years \cite{tcga2015lgg}, whereas glioblastoma,
+which accounts for 14.3\% of all primary brain and other CNS tumours in the United States and is
+diagnosed at a median age of 65 years, has a five-year relative survival of only 6.8\%
+\cite{ostrom2021}.
 
 The molecular markers relevant to this project are point mutations. Gliomas without IDH1 or
 IDH2 mutations tend to carry other alterations: among anaplastic astrocytomas and glioblastomas

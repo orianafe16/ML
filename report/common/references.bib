@@ -1,12 +1,15 @@
 % Shared bibliography for the PRDL and MLLB reports.
 %
-% `note` records how each entry was checked:
+% `comment` (ignored by BibTeX styles, so it is not printed) records how each entry was checked:
 %   - "verified: UCI page" / "verified: DOAJ page": checked by the AI on the publisher/index page.
 %   - "metadata: NotebookLM (file NN.pdf)": title, authors, journal and DOI as printed in the PDF,
 %     extracted by NotebookLM; the DOI is checked with report/check_references.py.
 %   - "metadata: AI knowledge": standard reference written from the AI's knowledge; the DOI must be
 %     confirmed with report/check_references.py before the final version.
 % Only entries cited with \cite appear in the compiled bibliography.
+% DOI check (report/check_references.py, 2026-10-25): every DOI resolves to the intended work after
+% the corrections noted in sahm2023 and efron1993; tasci2022dataset is a DataCite DOI (not in
+% Crossref, checked on the UCI page).
 
 % ---------------------------------------------------------------------------
 % Dataset and cohorts
@@ -17,7 +20,7 @@
   year         = {2022},
   howpublished = {UCI Machine Learning Repository},
   doi          = {10.24432/C5R62J},
-  note         = {Licensed under CC BY 4.0. verified: UCI page, 2026-10-23}
+  comment         = {Licensed under CC BY 4.0. verified: UCI page, 2026-10-23}
 }
 
 @article{tasci2022,
@@ -28,7 +31,7 @@
   volume  = {23},
   pages   = {14155},
   doi     = {10.3390/ijms232214155},
-  note    = {metadata: NotebookLM (19.pdf); authors as listed on the UCI page}
+  comment    = {metadata: NotebookLM (19.pdf); authors as listed on the UCI page}
 }
 
 @article{tcga2015lgg,
@@ -39,7 +42,7 @@
   volume  = {372},
   pages   = {2481--2498},
   doi     = {10.1056/NEJMoa1402121},
-  note    = {metadata: NotebookLM (09.pdf)}
+  comment    = {metadata: NotebookLM (09.pdf)}
 }
 
 @article{brennan2013,
@@ -50,23 +53,43 @@
   volume  = {155},
   pages   = {462--477},
   doi     = {10.1016/j.cell.2013.09.034},
-  note    = {The Cancer Genome Atlas Research Network. metadata: NotebookLM (24.pdf)}
+  comment    = {The Cancer Genome Atlas Research Network. metadata: NotebookLM (24.pdf)}
 }
 
 @article{zakharova2023,
-  author  = {Zakharova, Galina and others and Buzdin, Anton},
+  author  = {Zakharova, Galina and others},
   title   = {Reclassification of {TCGA} Diffuse Glioma Profiles Linked to Transcriptomic, Epigenetic, Genomic and Clinical Data, According to the 2021 {WHO} {CNS} Tumor Classification},
   journal = {International Journal of Molecular Sciences},
   year    = {2023},
   volume  = {24},
   pages   = {157},
   doi     = {10.3390/ijms24010157},
-  note    = {metadata: NotebookLM (41.pdf)}
+  comment    = {metadata: NotebookLM (41.pdf)}
+}
+
+@article{leiriademendonca2025,
+  author  = {Leiria de Mendon{\c{c}}a, M{\'o}nica and Coletti, Roberta and Gon{\c{c}}alves, C{\'e}line S. and Martins, Eduarda P. and Costa, Bruno M. and Vinga, Susana and Lopes, Marta B.},
+  title   = {Updating {TCGA} glioma classification through integration of molecular data following the latest {WHO} guidelines},
+  journal = {Scientific Data},
+  year    = {2025},
+  doi     = {10.1038/s41597-025-05117-2},
+  comment    = {metadata: NotebookLM (42.pdf, title page); same DOI as the garbled inventory entry of 43.pdf; DOI to be checked with check_references.py}
 }
 
 % ---------------------------------------------------------------------------
 % Clinical and molecular background
 % ---------------------------------------------------------------------------
+@article{ostrom2021,
+  author  = {Ostrom, Quinn T. and others},
+  title   = {{CBTRUS} Statistical Report: Primary Brain and Other Central Nervous System Tumors Diagnosed in the {United States} in 2014--2018},
+  journal = {Neuro-Oncology},
+  year    = {2021},
+  volume  = {23},
+  number  = {Supplement 3},
+  pages   = {iii1--iii105},
+  doi     = {10.1093/neuonc/noab200},
+  comment    = {metadata: NotebookLM (04.pdf); DOI to be checked with check_references.py}
+}
 @article{louis2021,
   author  = {Louis, David N. and others},
   title   = {The 2021 {WHO} Classification of Tumors of the Central Nervous System: a summary},
@@ -76,7 +99,7 @@
   number  = {8},
   pages   = {1231--1251},
   doi     = {10.1093/neuonc/noab106},
-  note    = {metadata: NotebookLM (01.pdf)}
+  comment    = {metadata: NotebookLM (01.pdf)}
 }
 
 @article{louis2016,
@@ -87,29 +110,29 @@
   volume  = {131},
   pages   = {803--820},
   doi     = {10.1007/s00401-016-1545-1},
-  note    = {metadata: NotebookLM (07.pdf)}
+  comment    = {metadata: NotebookLM (07.pdf)}
 }
 
 @article{yan2009,
-  author  = {Yan, Hai and others and Bigner, Darell D.},
+  author  = {Yan, Hai and others},
   title   = {{IDH1} and {IDH2} Mutations in Gliomas},
   journal = {The New England Journal of Medicine},
   year    = {2009},
   volume  = {360},
   pages   = {765--773},
   doi     = {10.1056/NEJMoa0808710},
-  note    = {metadata: NotebookLM (11.pdf)}
+  comment    = {metadata: NotebookLM (11.pdf)}
 }
 
 @article{sahm2023,
-  author  = {Sahm, Felix and others and Weller, Michael},
+  author  = {Sahm, Felix and others},
   title   = {Molecular diagnostic tools for the {World Health Organization (WHO)} 2021 classification of gliomas, glioneuronal and neuronal tumors; an {EANO} guideline},
   journal = {Neuro-Oncology},
   year    = {2023},
   volume  = {25},
   pages   = {1731--1749},
-  doi     = {10.1093/neuonc/noad108},
-  note    = {metadata: NotebookLM (17.pdf)}
+  doi     = {10.1093/neuonc/noad100},
+  comment    = {DOI corrected: NotebookLM gave 10.1093/neuonc/noad108, which Crossref resolves to an unrelated article; noad100 verified on the EANO guideline page, 2026-10-25. Volume/pages from NotebookLM (17.pdf)}
 }
 
 @article{weller2021,
@@ -120,7 +143,7 @@
   volume  = {18},
   pages   = {170--186},
   doi     = {10.1038/s41571-020-00447-z},
-  note    = {metadata: NotebookLM (05.pdf)}
+  comment    = {metadata: NotebookLM (05.pdf)}
 }
 
 % ---------------------------------------------------------------------------
@@ -133,7 +156,7 @@
   year    = {2024},
   volume  = {14},
   doi     = {10.1038/s41598-024-68291-0},
-  note    = {verified: DOAJ page, 2026-10-23 (21.pdf; both AI tools had given wrong title and authors)}
+  comment    = {verified: DOAJ page, 2026-10-23 (21.pdf; both AI tools had given wrong title and authors)}
 }
 
 % ---------------------------------------------------------------------------
@@ -147,7 +170,7 @@
   volume  = {7},
   pages   = {91},
   doi     = {10.1186/1471-2105-7-91},
-  note    = {metadata: NotebookLM (28.pdf) gave the title "Estimating Error Rates in Genomic Data Analysis: Nested Cross-Validation Versus Standard Cross-Validation"; title here from AI knowledge, to be checked with the DOI}
+  comment    = {Title confirmed by Crossref, 2026-10-25; NotebookLM (28.pdf) had given a wrong title ("Estimating Error Rates in Genomic Data Analysis: Nested Cross-Validation Versus Standard Cross-Validation")}
 }
 
 @article{cawley2010,
@@ -157,7 +180,7 @@
   year    = {2010},
   volume  = {11},
   pages   = {2079--2107},
-  note    = {metadata: NotebookLM (29.pdf); no DOI}
+  comment    = {metadata: NotebookLM (29.pdf); no DOI}
 }
 
 @article{kaufman2012,
@@ -169,7 +192,7 @@
   number  = {4},
   pages   = {15},
   doi     = {10.1145/2382577.2382579},
-  note    = {metadata: NotebookLM (30.pdf); middle authors from AI knowledge}
+  comment    = {metadata: NotebookLM (30.pdf); middle authors from AI knowledge}
 }
 
 @article{ambroise2002,
@@ -180,7 +203,7 @@
   volume  = {99},
   pages   = {6562--6566},
   doi     = {10.1073/pnas.102102699},
-  note    = {metadata: NotebookLM (36.pdf)}
+  comment    = {metadata: NotebookLM (36.pdf)}
 }
 
 @article{collins2024,
@@ -191,18 +214,18 @@
   volume  = {385},
   pages   = {e078378},
   doi     = {10.1136/bmj-2023-078378},
-  note    = {metadata: NotebookLM (39.pdf)}
+  comment    = {metadata: NotebookLM (39.pdf)}
 }
 
 @article{wolff2019,
-  author  = {Wolff, Robert F. and others and Moons, Karel G. M.},
+  author  = {Wolff, Robert F. and others},
   title   = {{PROBAST}: A Tool to Assess the Risk of Bias and Applicability of Prediction Model Studies},
   journal = {Annals of Internal Medicine},
   year    = {2019},
   volume  = {170},
   pages   = {51--58},
   doi     = {10.7326/M18-1376},
-  note    = {metadata: NotebookLM (40.pdf)}
+  comment    = {metadata: NotebookLM (40.pdf)}
 }
 
 % ---------------------------------------------------------------------------
@@ -216,7 +239,7 @@
   volume  = {57},
   pages   = {289--300},
   doi     = {10.1111/j.2517-6161.1995.tb02031.x},
-  note    = {metadata: NotebookLM (31.pdf)}
+  comment    = {metadata: NotebookLM (31.pdf)}
 }
 
 @article{mann1947,
@@ -227,7 +250,7 @@
   volume  = {18},
   pages   = {50--60},
   doi     = {10.1214/aoms/1177730491},
-  note    = {metadata: NotebookLM (33.pdf)}
+  comment    = {metadata: NotebookLM (33.pdf)}
 }
 
 @article{fisher1922,
@@ -239,7 +262,7 @@
   number  = {1},
   pages   = {87--94},
   doi     = {10.2307/2340521},
-  note    = {metadata: AI knowledge}
+  comment    = {metadata: AI knowledge}
 }
 
 @article{hanley1982,
@@ -251,16 +274,16 @@
   number  = {1},
   pages   = {29--36},
   doi     = {10.1148/radiology.143.1.7063747},
-  note    = {metadata: AI knowledge}
+  comment    = {metadata: AI knowledge}
 }
 
 @book{efron1993,
   author    = {Efron, Bradley and Tibshirani, Robert J.},
   title     = {An Introduction to the Bootstrap},
   publisher = {Chapman \& Hall/CRC},
-  year      = {1993},
+  year      = {1994},
   doi       = {10.1201/9780429246593},
-  note      = {metadata: AI knowledge}
+  comment      = {Crossref record of this DOI gives 1994 (the first edition is from 1993). checked: Crossref, 2026-10-25}
 }
 
 @article{albert1984,
@@ -272,7 +295,7 @@
   number  = {1},
   pages   = {1--10},
   doi     = {10.1093/biomet/71.1.1},
-  note    = {metadata: AI knowledge}
+  comment    = {metadata: AI knowledge}
 }
 
 @article{hand2001,
@@ -284,7 +307,7 @@
   number  = {3},
   pages   = {385--398},
   doi     = {10.1111/j.1751-5823.2001.tb00465.x},
-  note    = {metadata: AI knowledge}
+  comment    = {metadata: AI knowledge}
 }
 
 % ---------------------------------------------------------------------------
@@ -297,7 +320,7 @@
   year    = {2008},
   volume  = {9},
   pages   = {2579--2605},
-  note    = {metadata: NotebookLM (34.pdf); no DOI}
+  comment    = {metadata: NotebookLM (34.pdf); no DOI}
 }
 
 @article{kruskal1964,
@@ -308,7 +331,7 @@
   volume  = {29},
   pages   = {1--27},
   doi     = {10.1007/BF02289565},
-  note    = {metadata: AI knowledge}
+  comment    = {metadata: AI knowledge}
 }
 
 @article{rousseeuw1987,
@@ -319,7 +342,7 @@
   volume  = {20},
   pages   = {53--65},
   doi     = {10.1016/0377-0427(87)90125-7},
-  note    = {metadata: AI knowledge}
+  comment    = {metadata: AI knowledge}
 }
 
 @article{hubert1985,
@@ -330,7 +353,7 @@
   volume  = {2},
   pages   = {193--218},
   doi     = {10.1007/BF01908075},
-  note    = {metadata: AI knowledge}
+  comment    = {metadata: AI knowledge}
 }
 
 @article{ward1963,
@@ -342,7 +365,7 @@
   number  = {301},
   pages   = {236--244},
   doi     = {10.1080/01621459.1963.10500845},
-  note    = {metadata: AI knowledge}
+  comment    = {metadata: AI knowledge}
 }
 
 % ---------------------------------------------------------------------------
@@ -355,7 +378,7 @@
   publisher = {Springer},
   year      = {2021},
   doi       = {10.1007/978-1-0716-1418-1},
-  note      = {Course textbook. metadata: AI knowledge}
+  comment      = {Course textbook. metadata: AI knowledge}
 }
 
 @article{tibshirani1996,
@@ -367,7 +390,7 @@
   number  = {1},
   pages   = {267--288},
   doi     = {10.1111/j.2517-6161.1996.tb02080.x},
-  note    = {metadata: AI knowledge}
+  comment    = {metadata: AI knowledge}
 }
 
 @article{hoerl1970,
@@ -379,7 +402,7 @@
   number  = {1},
   pages   = {55--67},
   doi     = {10.1080/00401706.1970.10488634},
-  note    = {metadata: AI knowledge}
+  comment    = {metadata: AI knowledge}
 }
 
 @book{breiman1984,
@@ -387,7 +410,7 @@
   title     = {Classification and Regression Trees},
   publisher = {Wadsworth},
   year      = {1984},
-  note      = {metadata: AI knowledge}
+  comment      = {metadata: AI knowledge}
 }
 
 @article{cortes1995,
@@ -398,7 +421,7 @@
   volume  = {20},
   pages   = {273--297},
   doi     = {10.1007/BF00994018},
-  note    = {metadata: AI knowledge}
+  comment    = {metadata: AI knowledge}
 }
 
 @incollection{platt1999,
@@ -408,7 +431,7 @@
   publisher = {MIT Press},
   year      = {1999},
   pages     = {61--74},
-  note      = {metadata: AI knowledge}
+  comment      = {metadata: AI knowledge}
 }
 
 @inproceedings{chen2016,
@@ -418,7 +441,7 @@
   year      = {2016},
   pages     = {785--794},
   doi       = {10.1145/2939672.2939785},
-  note      = {metadata: AI knowledge}
+  comment      = {metadata: AI knowledge}
 }
 
 % ---------------------------------------------------------------------------
@@ -431,7 +454,7 @@
   year    = {2011},
   volume  = {12},
   pages   = {2825--2830},
-  note    = {metadata: AI knowledge; no DOI}
+  comment    = {metadata: AI knowledge; no DOI}
 }
 
 @article{harris2020,
@@ -442,7 +465,7 @@
   volume  = {585},
   pages   = {357--362},
   doi     = {10.1038/s41586-020-2649-2},
-  note    = {metadata: AI knowledge}
+  comment    = {metadata: AI knowledge}
 }
 
 @article{virtanen2020,
@@ -453,7 +476,7 @@
   volume  = {17},
   pages   = {261--272},
   doi     = {10.1038/s41592-019-0686-2},
-  note    = {metadata: AI knowledge}
+  comment    = {metadata: AI knowledge}
 }
 
 @inproceedings{mckinney2010,
@@ -463,7 +486,7 @@
   year      = {2010},
   pages     = {56--61},
   doi       = {10.25080/Majora-92bf1922-00a},
-  note      = {metadata: AI knowledge}
+  comment      = {metadata: AI knowledge}
 }
 
 @inproceedings{seabold2010,
@@ -473,7 +496,7 @@
   year      = {2010},
   pages     = {92--96},
   doi       = {10.25080/Majora-92bf1922-011},
-  note      = {metadata: AI knowledge}
+  comment      = {metadata: AI knowledge}
 }
 
 @article{hunter2007,
@@ -485,7 +508,7 @@
   number  = {3},
   pages   = {90--95},
   doi     = {10.1109/MCSE.2007.55},
-  note    = {metadata: AI knowledge}
+  comment    = {metadata: AI knowledge}
 }
 
 @article{waskom2021,
@@ -497,7 +520,7 @@
   number  = {60},
   pages   = {3021},
   doi     = {10.21105/joss.03021},
-  note    = {metadata: AI knowledge}
+  comment    = {metadata: AI knowledge}
 }
 
 % ---------------------------------------------------------------------------

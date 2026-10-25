@@ -98,7 +98,7 @@ pre-2021 diagnoses (Section 2.1).
 almost unpenalised L1 model ($C = \LRFinalC$) although the outer folds chose smaller values: the
 inner-CV surface is flat (\LRFlatWithin{} of \LRFlatTotal{} configurations within 0.005 AUC of the
 best), so the choice among them is close to arbitrary. With a weak penalty, NOTCH1, mutated only in
-LGG patients, receives a coefficient (\LRCoefNOTCH{} log-odds per SD) comparable to that of IDH1
+LGG patients (in TCGA, a mutation of 1p/19q-codeleted gliomas \cite{tcga2015lgg}), receives a coefficient (\LRCoefNOTCH{} log-odds per SD) comparable to that of IDH1
 (\LRCoefIDH): a direct consequence of quasi-separation \cite{albert1984}, not evidence that NOTCH1 is
 as important as IDH1. The odds ratio of age, \LRORAge{} per standard deviation, is more stable.
 \emph{(iii) Ranking vs calibration.} Naive Bayes reaches a competitive AUC, but \NBExtreme\% of its
@@ -111,6 +111,11 @@ the AUC.
 \textbf{Comparison with previous work.} On the same 839 TCGA patients, \cite{tasci2022} reported an
 accuracy of 87.606\% with a voting ensemble and feature selection, and \cite{sanchezmarques2024}
 0.882 with oversampling. The accuracies obtained here (between \ClfMinAcc{} and \ClfMaxAcc, MLLB report) are of the same order with standard models and no resampling. A strict comparison is not
-possible because the validation schemes differ\todoverify{confirm with NotebookLM whether these studies
-tuned hyperparameters inside or outside their cross-validation}; numbers that include hyperparameter
-selection outside an inner loop are optimistic by construction \cite{varma2006,cawley2010}.
+possible because the validation schemes differ. In \cite{sanchezmarques2024} the hyperparameters were
+``fine-tuned [...] using an 80-20 stratified holdout setting'' and performance was then evaluated with
+10-fold cross-validation; if the tuning split is drawn from the same patients, the tuned values have
+seen the evaluation folds, and the estimate is optimistic \cite{varma2006,cawley2010}. The validation
+of the hyperparameters in \cite{tasci2022} is not described in the extracted text%
+\todoverify{check in 19.pdf how the hyperparameters of the ensemble were chosen}. The nested
+cross-validation used here avoids this source of optimism at the cost of slightly lower but honest
+numbers.
