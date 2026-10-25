@@ -19,10 +19,13 @@ of Section~\ref{sec:prdl-results}:
   \item \textbf{Labels from older criteria.} The cohorts were collected over many years
         (TCGA-GBM between 1989 and 2011, with 76\% of patients diagnosed in or after 2002
         \cite{zakharova2023}) and graded before the 2021 WHO classification. TCGA glioma profiles
-        have since been re-annotated following the 2021 criteria \cite{zakharova2023,leiriademendonca2025}%
-        \todoverify{quote from 41.pdf or 42.pdf stating how many TCGA cases change category when the
-        original labels are replaced by WHO 2021 labels}.
-        The grade used here as ground truth is therefore partly outdated: under the current criteria,
+        have since been re-annotated following the 2021 criteria \cite{zakharova2023,leiriademendonca2025}.
+        The criteria matter: when the same samples were re-annotated with a 2016-based and with a
+        2021-based pipeline, ``811 samples [...] maintained consistent classification across both
+        methods, while 134 cases [...] have changed to a different class'' \cite{leiriademendonca2025}.
+        Neither pipeline is the original TCGA label, so this count does not measure the error of the
+        labels used here, but it shows that the class of a glioma depends on the edition of the
+        classification. The grade used here as ground truth is therefore partly outdated: under the current criteria,
         some tumours labelled LGG would be classified differently.
   \item \textbf{Point mutations only.} Several markers that now define the type or the grade are
         copy-number or promoter alterations absent from the dataset: the 1p/19q codeletion

@@ -295,3 +295,23 @@ Entry format:
 - **New finding:** 42.pdf (Leiria de Mendonça et al., Sci Data 2025) has the same DOI that the
   inventory attributed to 43.pdf with a different title ("MONET") and garbled authors: 43.pdf was
   probably a second copy whose metadata NotebookLM misread.
+- **Errors of the AI in the bibliography (fixed):** (1) the checking notes were stored in the BibTeX
+  `note` field, which the styles print in the reference list (and an underscore in one note broke
+  the compilation); renamed to `comment`, which is not printed. (2) Author lists written as
+  "First and others and Last" printed "First, others, and Last"; BibTeX requires `others` at the end.
+  The first preview PDFs sent to the author contained both problems.
+
+## Stage 6 — Second targeted query to NotebookLM (2026-10-25)
+
+- **Prompt:** for 42.pdf, what exactly are the "two methods" of the 811/134 result and whether one is
+  the original TCGA label; for 19.pdf, how the classifier hyperparameters were chosen.
+- **42.pdf (p. 3, Results / Table 1):** the two methods are the authors' own 2016-based and
+  2021-based re-annotation pipelines; neither is the original TCGA label. The numbers are now quoted
+  in PRDL Section 2 with that caveat, not as an error rate of the TCGA labels.
+- **19.pdf (p. 5, Section 2.1):** "The default values were assigned as the corresponding parameter
+  values for the utilized classifiers". PRDL Section 6 now states that Tasci et al. did not tune
+  hyperparameters.
+- **Confirmed AI errors (Bounty):** both earlier extracted statements went beyond their quotes —
+  the 811/134 count had been presented as a change from the original labels, and "no nested CV" had
+  been supported by a feature-selection quote. The targeted query corrected both.
+- **Human check pending:** the author reads the two quoted pages in the PDFs.

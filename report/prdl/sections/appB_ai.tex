@@ -47,7 +47,12 @@ The author checks each tagged claim against the PDF before the final version.
   \item \textbf{Statements broader than their quotes.} Several extracted statements contained numbers
         or claims absent from the supporting quote (for example, glioblastoma incidence and survival
         figures attributed to a file whose quote only gave lower-grade glioma survival). Only the
-        quoted part was used; the rest is marked \texttt{[verify]}.
+        quoted part was used. Two claims of this kind were resolved with a second, targeted query
+        that asked for the exact quote: an extracted statement that one study had not tuned its
+        models inside the cross-validation was supported only by a quote on feature selection, and the
+        targeted query showed that the classifiers used default hyperparameters \cite{tasci2022}; a
+        count of reclassified cases, presented as a change from the original TCGA labels, compared
+        two re-annotation pipelines instead \cite{leiriademendonca2025}.
 \end{enumerate}
 
 \subsection*{Reflection}

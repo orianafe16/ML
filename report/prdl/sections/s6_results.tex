@@ -114,8 +114,9 @@ accuracy of 87.606\% with a voting ensemble and feature selection, and \cite{san
 possible because the validation schemes differ. In \cite{sanchezmarques2024} the hyperparameters were
 ``fine-tuned [...] using an 80-20 stratified holdout setting'' and performance was then evaluated with
 10-fold cross-validation; if the tuning split is drawn from the same patients, the tuned values have
-seen the evaluation folds, and the estimate is optimistic \cite{varma2006,cawley2010}. The validation
-of the hyperparameters in \cite{tasci2022} is not described in the extracted text%
-\todoverify{check in 19.pdf how the hyperparameters of the ensemble were chosen}. The nested
-cross-validation used here avoids this source of optimism at the cost of slightly lower but honest
-numbers.
+seen the evaluation folds, and the estimate is optimistic \cite{varma2006,cawley2010}.
+In \cite{tasci2022}, instead, no tuning was done: ``the default values were assigned as the
+corresponding parameter values for the utilized classifiers'', so their estimate is not inflated by
+hyperparameter selection, but their classifiers were not tuned either. The nested cross-validation
+used here tunes every model while keeping the evaluation folds out of the tuning, at the cost of
+slightly lower but honest numbers.
