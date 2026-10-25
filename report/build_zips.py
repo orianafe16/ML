@@ -1,8 +1,8 @@
 """Build one Overleaf-ready zip per report in report/dist/.
 
-Each zip contains: main.tex, sections/, numbers.tex, references.bib, figures/ (the course logo and
-the template figures of the Ensemble Learning appendix, taken from the template zips, plus only the
-result figures that the report uses) and tables/ (only the tables it uses).
+Each zip contains: main.tex, sections/, numbers.tex, references.bib, figures/ (the course logo, taken
+from the template zip, plus only the result figures that the report uses) and tables/ (only the
+tables it uses).
 
 Run from the repository root, after the notebooks and report/make_numbers.py:
     python report/build_zips.py
@@ -46,15 +46,15 @@ def build(name):
             z.write(s, f"sections/{s.name}")
         z.write(REPORT / "common" / "numbers.tex", "numbers.tex")
         z.write(REPORT / "common" / "references.bib", "references.bib")
-        with zipfile.ZipFile(TEMPLATES[name]) as tz:          # logo + appendix figures
+        with zipfile.ZipFile(TEMPLATES[name]) as tz:          # template figures that are used (logo)
             for item in tz.namelist():
-                if item.startswith("figures/") and not item.endswith("/"):
+                if item.startswith("figures/") and not item.endswith("/") and item in figures:
                     z.writestr(item, tz.read(item))
         for fig in sorted(figures):
             path = RESULTS / "figures" / fig
             if path.exists():
                 z.write(path, f"figures/{fig}")
-            elif not fig.startswith(("figures/", "etsit", "roc_curves", "threshold_tradeoff")):
+            elif not fig.startswith("figures/"):
                 missing.append(fig)
         for tab in sorted(tables):
             path = RESULTS / "tables" / f"{tab}.tex"

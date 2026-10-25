@@ -131,13 +131,13 @@ can be defended orally. Decisions taken in later stages are appended to the corr
 
 | Decision | Justification | Source |
 |---|---|---|
-| Reports written in LaTeX from the Overleaf templates; cover, structure and Ensemble Learning appendices kept | Course templates; the author's previous work is preserved | Templates |
+| Reports written in LaTeX from the Overleaf templates; cover and structure kept. The Ensemble Learning appendices of the templates were removed and will go to the Deep Learning reports | Course templates; ensemble learning fits the Deep Learning reports better | Templates; decision of the author (25 October) |
 | Every number in the text is a macro generated from `results/logs/*.json` by `report/make_numbers.py` | No number typed by hand; re-running the notebooks updates both reports | Project instructions |
 | Tables are `\input` from `results/tables/`; figures copied from `results/figures/` by `report/build_zips.py` | Same principle; one zip per report for Overleaf Free (no Git sync) | Project instructions |
 | PRDL = theory, hypotheses and critical analysis; MLLB = tools, implementation and graphics; figures and text not duplicated | Course FAQ on PRDL vs MLLB | Curso_Marco_y_Evaluacion.md (Presentation III) |
 | Literature claims written only from the part of a NotebookLM statement supported by its verbatim quote; anything else marked `\todoverify{}` (red in the PDF) | Extracted statements were often broader than their quotes | AI usage log, stage 6 |
 | Bibliography in BibTeX (IEEEtran style); each entry's `note` says how it was checked; DOIs checked against Crossref with `report/check_references.py` | Traceability of every reference | — |
-| AI use reported as Appendix B in both reports (scientific assistants in PRDL, code assistant in MLLB) | Graded item (0.5 points); Appendix A is the Ensemble Learning work of the templates | bounty-guideline-example.md |
+| AI use and Bounty sheets reported as Appendix A in both reports (scientific assistants in PRDL, code assistant in MLLB) | Graded item (0.5 points); the guideline places the Bounty sheets in Appendix A | bounty-guideline-example.md |
 
 ## Validation protocol
 
